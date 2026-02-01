@@ -1,45 +1,54 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EduNet19 - La piattaforma educativa che connette scuole per condividere progetti didattici e metodologie innovative">
-    <meta name="keywords" content="educazione, scuole, progetti didattici, collaborazione, istituti scolastici, rete educativa">
+    <meta name="description"
+        content="EduNet19 - La piattaforma educativa che connette scuole per condividere progetti didattici e metodologie innovative">
+    <meta name="keywords"
+        content="educazione, scuole, progetti didattici, collaborazione, istituti scolastici, rete educativa">
     <meta name="author" content="EduNet19">
-    
+
     <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co;">
-    
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://cdn.jsdelivr.net;">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://edunet19.it/">
     <meta property="og:title" content="EduNet19 - Piattaforma Educativa per Scuole">
-    <meta property="og:description" content="Connetti la tua scuola al futuro dell'educazione. Condividi progetti, metodologie e collabora con istituti educativi.">
-    
+    <meta property="og:description"
+        content="Connetti la tua scuola al futuro dell'educazione. Condividi progetti, metodologie e collabora con istituti educativi.">
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://edunet19.it/">
     <meta property="twitter:title" content="EduNet19 - Piattaforma Educativa per Scuole">
-    <meta property="twitter:description" content="Connetti la tua scuola al futuro dell'educazione. Condividi progetti, metodologie e collabora con istituti educativi.">
-    
+    <meta property="twitter:description"
+        content="Connetti la tua scuola al futuro dell'educazione. Condividi progetti, metodologie e collabora con istituti educativi.">
+
     <title>EduNet19 - Piattaforma Educativa per Scuole</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
-    
+
     <!-- Preconnect per performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
+
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="css/components/institute-autocomplete.css">
@@ -49,53 +58,53 @@
     <link rel="stylesheet" href="css/components/auth-modal-dark-theme.css">
     <link rel="stylesheet" href="css/components/auth-notifications.css">
     <link rel="stylesheet" href="css/components/landing-enhanced.css">
-    
+
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-    
+
     <!-- Core Scripts -->
-  <script src="js/utils/console-optimizer.js"></script>
-  <script src="js/utils/logger.js" defer></script>
-  <script src="js/utils/rate-limiter.js" defer></script>
-  <script src="js/utils/sanitizer.js" defer></script>
-  <script src="js/utils/network-utils.js" defer></script>
-  <script src="js/utils/event-manager.js" defer></script>
-  <script src="config.js" defer></script>
-  <script src="js/utils/error-handling.js" defer></script>
-  <script src="js/utils/supabase-error-handler.js" defer></script>
-  <script src="supabase-client.js" defer></script>
-  <script src="js/auth/validation.js" defer></script>
-  <script src="js/auth/age-verification.js" defer></script>
-  <script src="js/utils/codice-fiscale-validator.js" defer></script>
-  <script src="js/auth/cf-form-validation.js" defer></script>
-  <script src="js/utils/miur-autocomplete.js" defer></script>
-  <script src="js/auth/registration-miur.js" defer></script>
-  <script src="js/auth/auth.js?v=final" defer></script>
-  <script src="js/auth/password-reset.js" defer></script>
-  <script src="js/profile/profile-management.js" defer></script>
-  <script src="js/utils/institute-autocomplete.js" defer></script>
-  <script src="script.js" defer></script>
-  
-  <!-- Service Worker Registration -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js')
-          .then(function(registration) {
-            console.log('✅ Service Worker registrato:', registration.scope);
-          })
-          .catch(function(error) {
-            console.log('⚠️ Service Worker non registrato:', error);
-          });
-      });
-    }
-  </script>
+    <script src="js/utils/console-optimizer.js"></script>
+    <script src="js/utils/logger.js" defer></script>
+    <script src="js/utils/rate-limiter.js" defer></script>
+    <script src="js/utils/sanitizer.js" defer></script>
+    <script src="js/utils/network-utils.js" defer></script>
+    <script src="js/utils/event-manager.js" defer></script>
+    <script src="config.js" defer></script>
+    <script src="js/utils/error-handling.js" defer></script>
+    <script src="js/utils/supabase-error-handler.js" defer></script>
+    <script src="supabase-client.js" defer></script>
+    <script src="js/auth/validation.js" defer></script>
+    <script src="js/auth/age-verification.js" defer></script>
+    <script src="js/utils/codice-fiscale-validator.js" defer></script>
+    <script src="js/auth/cf-form-validation.js" defer></script>
+    <script src="js/utils/miur-autocomplete.js" defer></script>
+    <script src="js/auth/registration-miur.js" defer></script>
+    <script src="js/auth/auth.js?v=final" defer></script>
+    <script src="js/auth/password-reset.js" defer></script>
+    <script src="js/profile/profile-management.js" defer></script>
+    <script src="js/utils/institute-autocomplete.js" defer></script>
+    <script src="script.js" defer></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(function (registration) {
+                        console.log('✅ Service Worker registrato:', registration.scope);
+                    })
+                    .catch(function (error) {
+                        console.log('⚠️ Service Worker non registrato:', error);
+                    });
+            });
+        }
+    </script>
 </head>
 
 <body>
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
-    
+
     <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen" aria-hidden="true">
         <div class="loading-content">
@@ -118,13 +127,14 @@
                         <span>EduNet19</span>
                     </a>
                 </div>
-                
+
                 <div class="nav-actions">
                     <button class="btn btn-outline" onclick="openModal('login')" aria-label="Accedi al tuo account">
                         <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
                         <span>Accedi</span>
                     </button>
-                    <button class="btn btn-primary" onclick="openModal('register')" aria-label="Registra un nuovo account">
+                    <button class="btn btn-primary" onclick="openModal('register')"
+                        aria-label="Registra un nuovo account">
                         <i class="fas fa-user-plus" aria-hidden="true"></i>
                         <span>Registrati</span>
                     </button>
@@ -146,36 +156,38 @@
                     <div class="shape shape-3"></div>
                 </div>
             </div>
-            
+
             <div class="hero-container">
                 <div class="hero-content">
                     <div class="hero-badge">
                         <i class="fas fa-sparkles" aria-hidden="true"></i>
                         <span>La Rete Educativa Italiana</span>
                     </div>
-                    
+
                     <h1 id="hero-title" class="hero-title">
-                        Connetti la tua scuola al 
+                        Connetti la tua scuola al
                         <span class="hero-highlight">futuro dell'educazione</span>
                     </h1>
-                    
+
                     <p class="hero-subtitle">
-                        EduNet19 è la piattaforma digitale che unisce scuole di ogni ordine e grado 
-                        per condividere progetti didattici innovativi, metodologie educative efficaci 
+                        EduNet19 è la piattaforma digitale che unisce scuole di ogni ordine e grado
+                        per condividere progetti didattici innovativi, metodologie educative efficaci
                         e creare collaborazioni significative tra istituti.
                     </p>
-                    
+
                     <div class="hero-actions">
-                        <button class="btn btn-primary btn-large btn-glow" onclick="openModal('register')" aria-label="Registrati gratuitamente">
+                        <button class="btn btn-primary btn-large btn-glow" onclick="openModal('register')"
+                            aria-label="Registrati gratuitamente">
                             <i class="fas fa-rocket" aria-hidden="true"></i>
                             <span>Inizia Gratuitamente</span>
                         </button>
-                        <button class="btn btn-secondary btn-large" onclick="scrollToSection('how-it-works')" aria-label="Scopri come funziona">
+                        <button class="btn btn-secondary btn-large" onclick="scrollToSection('how-it-works')"
+                            aria-label="Scopri come funziona">
                             <i class="fas fa-play-circle" aria-hidden="true"></i>
                             <span>Scopri Come Funziona</span>
                         </button>
                     </div>
-                    
+
                     <div class="hero-trust">
                         <span class="trust-label">Pensato per:</span>
                         <div class="trust-badges">
@@ -186,7 +198,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="hero-visual" aria-hidden="true">
                     <div class="hero-illustration">
                         <div class="illustration-card card-1">
@@ -253,7 +265,7 @@
                         Unisciti alla rete educativa più innovativa d'Italia in pochi minuti
                     </p>
                 </div>
-                
+
                 <div class="steps-container">
                     <div class="step-card">
                         <div class="step-number">1</div>
@@ -262,15 +274,15 @@
                         </div>
                         <h3 class="step-title">Registrati</h3>
                         <p class="step-description">
-                            Crea il tuo account come istituto scolastico o utente privato. 
+                            Crea il tuo account come istituto scolastico o utente privato.
                             Per le scuole, basta il codice meccanografico MIUR per compilare automaticamente i dati.
                         </p>
                     </div>
-                    
+
                     <div class="step-connector" aria-hidden="true">
                         <i class="fas fa-arrow-right"></i>
                     </div>
-                    
+
                     <div class="step-card">
                         <div class="step-number">2</div>
                         <div class="step-icon">
@@ -278,15 +290,15 @@
                         </div>
                         <h3 class="step-title">Condividi</h3>
                         <p class="step-description">
-                            Pubblica i tuoi progetti didattici, metodologie innovative ed esperienze educative. 
+                            Pubblica i tuoi progetti didattici, metodologie innovative ed esperienze educative.
                             Ispira e lasciati ispirare dalla community.
                         </p>
                     </div>
-                    
+
                     <div class="step-connector" aria-hidden="true">
                         <i class="fas fa-arrow-right"></i>
                     </div>
-                    
+
                     <div class="step-card">
                         <div class="step-number">3</div>
                         <div class="step-icon">
@@ -294,7 +306,7 @@
                         </div>
                         <h3 class="step-title">Collabora</h3>
                         <p class="step-description">
-                            Trova istituti con interessi simili grazie a EduMatch, il nostro algoritmo intelligente. 
+                            Trova istituti con interessi simili grazie a EduMatch, il nostro algoritmo intelligente.
                             Avvia collaborazioni e progetti congiunti.
                         </p>
                     </div>
@@ -314,7 +326,7 @@
                         Scopri tutti gli strumenti che EduNet19 mette a disposizione per trasformare l'educazione
                     </p>
                 </div>
-                
+
                 <div class="features-grid">
                     <article class="feature-card feature-card-large" tabindex="0">
                         <div class="feature-icon feature-icon-primary">
@@ -323,17 +335,19 @@
                         <div class="feature-badge">Per Istituti</div>
                         <h3 class="feature-title">Gestione Completa per Scuole</h3>
                         <p class="feature-description">
-                            Pubblica progetti innovativi, condividi metodologie didattiche efficaci e collabora 
+                            Pubblica progetti innovativi, condividi metodologie didattiche efficaci e collabora
                             con altre scuole per creare una rete educativa integrata e dinamica.
                         </p>
                         <ul class="feature-list">
-                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Pubblicazione progetti didattici</li>
+                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Pubblicazione progetti didattici
+                            </li>
                             <li><i class="fas fa-check-circle" aria-hidden="true"></i> Condivisione metodologie</li>
-                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Gestione multi-amministratore</li>
+                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Gestione multi-amministratore
+                            </li>
                             <li><i class="fas fa-check-circle" aria-hidden="true"></i> Statistiche e analytics</li>
                         </ul>
                     </article>
-                    
+
                     <article class="feature-card feature-card-large" tabindex="0">
                         <div class="feature-icon feature-icon-secondary">
                             <i class="fas fa-users" aria-hidden="true"></i>
@@ -341,18 +355,21 @@
                         <div class="feature-badge">Per Utenti</div>
                         <h3 class="feature-title">Esplora e Partecipa</h3>
                         <p class="feature-description">
-                            Segui gli istituti di tuo interesse, valuta i contenuti educativi e resta sempre 
+                            Segui gli istituti di tuo interesse, valuta i contenuti educativi e resta sempre
                             aggiornato sulle innovazioni nel mondo della scuola italiana.
                         </p>
                         <ul class="feature-list">
                             <li><i class="fas fa-check-circle" aria-hidden="true"></i> Seguire scuole preferite</li>
-                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Valutare e commentare progetti</li>
-                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Ricevere aggiornamenti personalizzati</li>
-                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Salvare contenuti interessanti</li>
+                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Valutare e commentare progetti
+                            </li>
+                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Ricevere aggiornamenti
+                                personalizzati</li>
+                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Salvare contenuti interessanti
+                            </li>
                         </ul>
                     </article>
                 </div>
-                
+
                 <div class="features-secondary-grid">
                     <article class="feature-card-mini" tabindex="0">
                         <div class="feature-mini-icon">
@@ -361,7 +378,7 @@
                         <h4 class="feature-mini-title">EduMatch</h4>
                         <p class="feature-mini-desc">Algoritmo intelligente per trovare scuole compatibili</p>
                     </article>
-                    
+
                     <article class="feature-card-mini" tabindex="0">
                         <div class="feature-mini-icon">
                             <i class="fas fa-shield-alt" aria-hidden="true"></i>
@@ -369,7 +386,7 @@
                         <h4 class="feature-mini-title">Sicurezza GDPR</h4>
                         <p class="feature-mini-desc">Dati protetti secondo le normative europee</p>
                     </article>
-                    
+
                     <article class="feature-card-mini" tabindex="0">
                         <div class="feature-mini-icon">
                             <i class="fas fa-mobile-alt" aria-hidden="true"></i>
@@ -377,7 +394,7 @@
                         <h4 class="feature-mini-title">Responsive</h4>
                         <p class="feature-mini-desc">Accessibile da qualsiasi dispositivo</p>
                     </article>
-                    
+
                     <article class="feature-card-mini" tabindex="0">
                         <div class="feature-mini-icon">
                             <i class="fas fa-database" aria-hidden="true"></i>
@@ -399,10 +416,10 @@
                             La piattaforma pensata per l'eccellenza educativa
                         </h2>
                         <p class="section-subtitle">
-                            Progettata con e per gli educatori italiani, EduNet19 offre tutto ciò che serve 
+                            Progettata con e per gli educatori italiani, EduNet19 offre tutto ciò che serve
                             per innovare la didattica e creare connessioni significative.
                         </p>
-                        
+
                         <div class="benefits-list">
                             <div class="benefit-item">
                                 <div class="benefit-icon">
@@ -410,40 +427,41 @@
                                 </div>
                                 <div class="benefit-content">
                                     <h3>Sicurezza e Privacy</h3>
-                                    <p>Dati protetti secondo le normative GDPR, con crittografia avanzata, 
-                                    verifica dell'età e controlli di accesso rigorosi per la tutela dei minori.</p>
+                                    <p>Dati protetti secondo le normative GDPR, con crittografia avanzata,
+                                        verifica dell'età e controlli di accesso rigorosi per la tutela dei minori.</p>
                                 </div>
                             </div>
-                            
+
                             <div class="benefit-item">
                                 <div class="benefit-icon">
                                     <i class="fas fa-bolt" aria-hidden="true"></i>
                                 </div>
                                 <div class="benefit-content">
                                     <h3>Veloce e Intuitivo</h3>
-                                    <p>Interfaccia moderna e reattiva, progettata per essere usata senza 
-                                    alcuna competenza tecnica. Registrazione in meno di 2 minuti.</p>
+                                    <p>Interfaccia moderna e reattiva, progettata per essere usata senza
+                                        alcuna competenza tecnica. Registrazione in meno di 2 minuti.</p>
                                 </div>
                             </div>
-                            
+
                             <div class="benefit-item">
                                 <div class="benefit-icon">
                                     <i class="fas fa-heart" aria-hidden="true"></i>
                                 </div>
                                 <div class="benefit-content">
                                     <h3>100% Gratuito</h3>
-                                    <p>Nessun costo nascosto, nessun abbonamento. EduNet19 è completamente 
-                                    gratuito per tutte le scuole e gli utenti privati.</p>
+                                    <p>Nessun costo nascosto, nessun abbonamento. EduNet19 è completamente
+                                        gratuito per tutte le scuole e gli utenti privati.</p>
                                 </div>
                             </div>
                         </div>
-                        
-                        <button class="btn btn-primary btn-large" onclick="openModal('register')" style="margin-top: 2rem;">
+
+                        <button class="btn btn-primary btn-large" onclick="openModal('register')"
+                            style="margin-top: 2rem;">
                             <i class="fas fa-arrow-right" aria-hidden="true"></i>
                             <span>Unisciti Ora</span>
                         </button>
                     </div>
-                    
+
                     <div class="benefits-visual" aria-hidden="true">
                         <div class="benefits-graphic">
                             <div class="graphic-ring ring-1"></div>
@@ -478,7 +496,7 @@
                         Pronto a trasformare l'educazione?
                     </h2>
                     <p class="cta-subtitle">
-                        Unisciti a EduNet19 oggi stesso e inizia a condividere, collaborare e innovare 
+                        Unisciti a EduNet19 oggi stesso e inizia a condividere, collaborare e innovare
                         insieme a migliaia di educatori in tutta Italia.
                     </p>
                     <div class="cta-actions">
@@ -514,55 +532,40 @@
                         <i class="fas fa-times" aria-hidden="true"></i>
                     </button>
                 </header>
-                
+
                 <div class="modal-body">
                     <form id="loginForm" class="auth-form" novalidate>
                         <div class="form-group">
                             <label for="loginEmail" class="form-label">Email</label>
                             <div class="input-group">
                                 <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
-                                <input 
-                                    type="email" 
-                                    id="loginEmail" 
-                                    name="email" 
-                                    class="form-input"
-                                    placeholder="inserisci@tuaemail.com"
-                                    autocomplete="email" 
-                                    data-validate="email" 
-                                    required
-                                    aria-describedby="loginEmail-error"
-                                >
+                                <input type="email" id="loginEmail" name="email" class="form-input"
+                                    placeholder="inserisci@tuaemail.com" autocomplete="email" data-validate="email"
+                                    required aria-describedby="loginEmail-error">
                             </div>
                             <div id="loginEmail-error" class="form-error" role="alert"></div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="loginPassword" class="form-label">Password</label>
                             <div class="input-group">
                                 <i class="fas fa-lock input-icon" aria-hidden="true"></i>
-                                <input 
-                                    type="password" 
-                                    id="loginPassword" 
-                                    name="password" 
-                                    class="form-input"
-                                    placeholder="Inserisci la tua password"
-                                    autocomplete="current-password" 
-                                    data-validate="password" 
-                                    required
-                                    aria-describedby="loginPassword-error"
-                                >
-                                <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')" aria-label="Mostra/nascondi password">
+                                <input type="password" id="loginPassword" name="password" class="form-input"
+                                    placeholder="Inserisci la tua password" autocomplete="current-password"
+                                    data-validate="password" required aria-describedby="loginPassword-error">
+                                <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')"
+                                    aria-label="Mostra/nascondi password">
                                     <i class="fas fa-eye" aria-hidden="true"></i>
                                 </button>
                             </div>
                             <div id="loginPassword-error" class="form-error" role="alert"></div>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary btn-full btn-large">
                             <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
                             <span>Accedi</span>
                         </button>
-                        
+
                         <div class="form-links">
                             <a href="#" id="forgotPasswordLink" class="link-secondary">
                                 <i class="fas fa-key" aria-hidden="true"></i>
@@ -571,10 +574,10 @@
                         </div>
                     </form>
                 </div>
-                
+
                 <footer class="modal-footer">
                     <p class="modal-switch">
-                        Non hai un account? 
+                        Non hai un account?
                         <a href="#" onclick="switchModal('login', 'register')" class="link-primary">
                             Registrati qui
                         </a>
@@ -594,30 +597,35 @@
                         <i class="fas fa-user-plus" aria-hidden="true"></i>
                         Registrati su EduNet19
                     </h2>
-                    <button class="modal-close" onclick="closeModal('register')" aria-label="Chiudi finestra di registrazione">
+                    <button class="modal-close" onclick="closeModal('register')"
+                        aria-label="Chiudi finestra di registrazione">
                         <i class="fas fa-times" aria-hidden="true"></i>
                     </button>
                 </header>
-                
+
                 <div class="modal-body">
                     <!-- User Type Selection -->
                     <div class="user-type-selection">
                         <h3 class="selection-title">Seleziona il tipo di account:</h3>
                         <div class="user-type-grid">
-                            <button type="button" class="user-type-card" onclick="selectUserType('institute')" aria-describedby="institute-desc">
+                            <button type="button" class="user-type-card" onclick="selectUserType('institute')"
+                                aria-describedby="institute-desc">
                                 <div class="user-type-icon">
                                     <i class="fas fa-school" aria-hidden="true"></i>
                                 </div>
                                 <h4 class="user-type-title">Istituto Scolastico</h4>
-                                <p id="institute-desc" class="user-type-desc">Scuole dell'Infanzia, Primarie, Secondarie (Medie e Superiori), Università e ITS</p>
+                                <p id="institute-desc" class="user-type-desc">Scuole dell'Infanzia, Primarie, Secondarie
+                                    (Medie e Superiori), Università e ITS</p>
                             </button>
-                            
-                            <button type="button" class="user-type-card" onclick="selectUserType('private')" aria-describedby="private-desc">
+
+                            <button type="button" class="user-type-card" onclick="selectUserType('private')"
+                                aria-describedby="private-desc">
                                 <div class="user-type-icon">
                                     <i class="fas fa-user" aria-hidden="true"></i>
                                 </div>
                                 <h4 class="user-type-title">Utente Privato</h4>
-                                <p id="private-desc" class="user-type-desc">Persona fisica interessata all'educazione</p>
+                                <p id="private-desc" class="user-type-desc">Persona fisica interessata all'educazione
+                                </p>
                             </button>
                         </div>
                     </div>
@@ -630,29 +638,23 @@
                                 Registrazione Istituto
                             </h3>
                         </div>
-                        
+
                         <!-- Codice Meccanografico MIUR -->
                         <div class="form-info-box" style="background: #e3f2fd; border-color: #2196f3;">
                             <i class="fas fa-info-circle" style="color: #2196f3;"></i>
-                            <p>Inserisci il <strong>Codice Meccanografico</strong> del tuo istituto per compilare automaticamente i dati dal database MIUR.</p>
+                            <p>Inserisci il <strong>Codice Meccanografico</strong> del tuo istituto per compilare
+                                automaticamente i dati dal database MIUR.</p>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="instituteCode" class="form-label">Codice Meccanografico MIUR *</label>
                             <div class="input-group">
                                 <i class="fas fa-barcode input-icon" aria-hidden="true"></i>
-                                <input 
-                                    type="text" 
-                                    id="instituteCode" 
-                                    name="instituteCode" 
-                                    class="form-input"
-                                    placeholder="Es. TNIC82000X"
-                                    autocomplete="off" 
-                                    required
-                                    aria-describedby="instituteCode-error"
-                                    style="text-transform: uppercase;"
-                                >
-                                <button type="button" class="btn-icon" id="searchMiurBtn" title="Cerca nel database MIUR">
+                                <input type="text" id="instituteCode" name="instituteCode" class="form-input"
+                                    placeholder="Es. TNIC82000X" autocomplete="off" required
+                                    aria-describedby="instituteCode-error" style="text-transform: uppercase;">
+                                <button type="button" class="btn-icon" id="searchMiurBtn"
+                                    title="Cerca nel database MIUR">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -662,7 +664,7 @@
                                 <span>Istituto trovato nel database MIUR!</span>
                             </div>
                         </div>
-                        
+
                         <!-- Anteprima Dati MIUR -->
                         <div id="miurPreview" class="miur-preview" style="display: none;">
                             <div class="miur-preview-header">
@@ -673,43 +675,30 @@
                                 <!-- Popolato dinamicamente -->
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="instituteName" class="form-label">Nome Istituto *</label>
                             <div class="input-group">
                                 <i class="fas fa-building input-icon" aria-hidden="true"></i>
-                                <input 
-                                    type="text" 
-                                    id="instituteName" 
-                                    name="instituteName" 
-                                    class="form-input"
-                                    placeholder="Es. Liceo Scientifico Galilei"
-                                    autocomplete="organization" 
-                                    data-validate="instituteName" 
-                                    required
-                                    readonly
-                                    aria-describedby="instituteName-error"
-                                >
+                                <input type="text" id="instituteName" name="instituteName" class="form-input"
+                                    placeholder="Es. Liceo Scientifico Galilei" autocomplete="organization"
+                                    data-validate="instituteName" required readonly
+                                    aria-describedby="instituteName-error">
                             </div>
                             <div id="instituteName-error" class="form-error" role="alert"></div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="instituteType" class="form-label">Tipo Istituto *</label>
                             <div class="input-group">
                                 <i class="fas fa-graduation-cap input-icon" aria-hidden="true"></i>
-                                <select 
-                                    id="instituteType" 
-                                    name="instituteType" 
-                                    class="form-select"
-                                    autocomplete="off" 
-                                    data-validate="instituteType" 
-                                    required
-                                    aria-describedby="instituteType-error"
-                                >
+                                <select id="instituteType" name="instituteType" class="form-select" autocomplete="off"
+                                    data-validate="instituteType" required aria-describedby="instituteType-error">
                                     <option value="">Seleziona tipo istituto</option>
-                                    <option value="Scuola Secondaria di I Grado">Scuola Secondaria di Primo Grado (11-14 anni)</option>
-                                    <option value="Scuola Secondaria di II Grado">Scuola Secondaria di Secondo Grado (14-19 anni)</option>
+                                    <option value="Scuola Secondaria di I Grado">Scuola Secondaria di Primo Grado (11-14
+                                        anni)</option>
+                                    <option value="Scuola Secondaria di II Grado">Scuola Secondaria di Secondo Grado
+                                        (14-19 anni)</option>
                                     <option value="Liceo">Liceo (14-19 anni)</option>
                                     <option value="Istituto Tecnico">Istituto Tecnico (14-19 anni)</option>
                                     <option value="Istituto Professionale">Istituto Professionale (14-19 anni)</option>
@@ -719,42 +708,30 @@
                             </div>
                             <div id="instituteType-error" class="form-error" role="alert"></div>
                         </div>
-                        
+
                         <!-- Sezione Dati Registrante -->
                         <div class="form-section-divider">
                             <span><i class="fas fa-user-tie"></i> Chi sta registrando l'istituto?</span>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="registrantName" class="form-label">Nome e Cognome *</label>
                                 <div class="input-group">
                                     <i class="fas fa-user input-icon" aria-hidden="true"></i>
-                                    <input 
-                                        type="text" 
-                                        id="registrantName" 
-                                        name="registrantName" 
-                                        class="form-input"
-                                        placeholder="Es. Mario Rossi"
-                                        autocomplete="name" 
-                                        required
-                                        aria-describedby="registrantName-error"
-                                    >
+                                    <input type="text" id="registrantName" name="registrantName" class="form-input"
+                                        placeholder="Es. Mario Rossi" autocomplete="name" required
+                                        aria-describedby="registrantName-error">
                                 </div>
                                 <div id="registrantName-error" class="form-error" role="alert"></div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="registrantRole" class="form-label">Ruolo nell'Istituto *</label>
                                 <div class="input-group">
                                     <i class="fas fa-id-badge input-icon" aria-hidden="true"></i>
-                                    <select 
-                                        id="registrantRole" 
-                                        name="registrantRole" 
-                                        class="form-select"
-                                        required
-                                        aria-describedby="registrantRole-error"
-                                    >
+                                    <select id="registrantRole" name="registrantRole" class="form-select" required
+                                        aria-describedby="registrantRole-error">
                                         <option value="">Seleziona il tuo ruolo</option>
                                         <option value="dirigente">Dirigente Scolastico</option>
                                         <option value="vicario">Collaboratore del Dirigente / Vicario</option>
@@ -768,32 +745,25 @@
                                 <div id="registrantRole-error" class="form-error" role="alert"></div>
                             </div>
                         </div>
-                        
+
                         <!-- Sezione Email -->
                         <div class="form-section-divider">
                             <span><i class="fas fa-envelope"></i> Email</span>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="instituteEmail" class="form-label">La tua Email (per accedere) *</label>
                             <div class="input-group">
                                 <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
-                                <input 
-                                    type="email" 
-                                    id="instituteEmail" 
-                                    name="email" 
-                                    class="form-input"
-                                    placeholder="tuaemail@esempio.it"
-                                    autocomplete="email" 
-                                    data-validate="email" 
-                                    required
-                                    aria-describedby="instituteEmail-error"
-                                >
+                                <input type="email" id="instituteEmail" name="email" class="form-input"
+                                    placeholder="tuaemail@esempio.it" autocomplete="email" data-validate="email"
+                                    required aria-describedby="instituteEmail-error">
                             </div>
-                            <small class="form-hint">Questa email sarà usata per accedere al tuo account e ricevere notifiche.</small>
+                            <small class="form-hint">Questa email sarà usata per accedere al tuo account e ricevere
+                                notifiche.</small>
                             <div id="instituteEmail-error" class="form-error" role="alert"></div>
                         </div>
-                        
+
                         <!-- Email MIUR (mostrata solo se diversa, readonly) -->
                         <div class="form-group" id="miurEmailGroup" style="display: none;">
                             <label for="miurEmailDisplay" class="form-label">
@@ -802,13 +772,8 @@
                             </label>
                             <div class="input-group">
                                 <i class="fas fa-university input-icon" aria-hidden="true"></i>
-                                <input 
-                                    type="email" 
-                                    id="miurEmailDisplay" 
-                                    class="form-input"
-                                    readonly
-                                    aria-describedby="miurEmail-info"
-                                >
+                                <input type="email" id="miurEmailDisplay" class="form-input" readonly
+                                    aria-describedby="miurEmail-info">
                             </div>
                             <small id="miurEmail-info" class="form-hint form-hint-success">
                                 <i class="fas fa-info-circle"></i>
@@ -824,71 +789,61 @@
                         <input type="hidden" id="institute-website-hidden" name="instituteWebsite">
                         <input type="hidden" id="institute-phone-hidden" name="institutePhone">
                         <input type="hidden" id="institute-code-hidden" name="instituteCodeMiur">
-                        
+
                         <!-- Sezione Password -->
                         <div class="form-section-divider">
                             <span><i class="fas fa-lock"></i> Sicurezza</span>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="institutePassword" class="form-label">Password *</label>
                                 <div class="input-group">
                                     <i class="fas fa-lock input-icon" aria-hidden="true"></i>
-                                    <input 
-                                        type="password" 
-                                        id="institutePassword" 
-                                        name="password" 
-                                        class="form-input"
-                                        placeholder="Crea una password sicura"
-                                        autocomplete="new-password" 
-                                        data-validate="password" 
-                                        required
-                                        aria-describedby="institutePassword-error"
-                                    >
-                                    <button type="button" class="password-toggle" onclick="togglePassword('institutePassword')" aria-label="Mostra/nascondi password">
+                                    <input type="password" id="institutePassword" name="password" class="form-input"
+                                        placeholder="Crea una password sicura" autocomplete="new-password"
+                                        data-validate="password" required aria-describedby="institutePassword-error">
+                                    <button type="button" class="password-toggle"
+                                        onclick="togglePassword('institutePassword')"
+                                        aria-label="Mostra/nascondi password">
                                         <i class="fas fa-eye" aria-hidden="true"></i>
                                     </button>
                                 </div>
                                 <div id="institutePassword-error" class="form-error" role="alert"></div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="confirmInstitutePassword" class="form-label">Conferma Password *</label>
                                 <div class="input-group">
                                     <i class="fas fa-lock input-icon" aria-hidden="true"></i>
-                                    <input 
-                                        type="password" 
-                                        id="confirmInstitutePassword" 
-                                        name="confirmPassword" 
-                                        class="form-input"
-                                        placeholder="Ripeti la password"
-                                        autocomplete="new-password" 
-                                        data-validate="confirmPassword" 
-                                        required
-                                        aria-describedby="confirmInstitutePassword-error"
-                                    >
-                                    <button type="button" class="password-toggle" onclick="togglePassword('confirmInstitutePassword')" aria-label="Mostra/nascondi password">
+                                    <input type="password" id="confirmInstitutePassword" name="confirmPassword"
+                                        class="form-input" placeholder="Ripeti la password" autocomplete="new-password"
+                                        data-validate="confirmPassword" required
+                                        aria-describedby="confirmInstitutePassword-error">
+                                    <button type="button" class="password-toggle"
+                                        onclick="togglePassword('confirmInstitutePassword')"
+                                        aria-label="Mostra/nascondi password">
                                         <i class="fas fa-eye" aria-hidden="true"></i>
                                     </button>
                                 </div>
                                 <div id="confirmInstitutePassword-error" class="form-error" role="alert"></div>
                             </div>
                         </div>
-                        
+
                         <!-- Info verifica -->
-                        <div class="form-info-box verification-info" style="background: #fff3cd; border-color: #ffc107; margin-top: 1rem;">
+                        <div class="form-info-box verification-info"
+                            style="background: #fff3cd; border-color: #ffc107; margin-top: 1rem;">
                             <i class="fas fa-exclamation-triangle" style="color: #856404;"></i>
                             <div>
                                 <strong>Come funziona la verifica?</strong>
                                 <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">
-                                    Dopo la registrazione, invieremo un'email all'indirizzo ufficiale MIUR dell'istituto 
-                                    per confermare che la registrazione è autorizzata. L'account sarà attivo con 
+                                    Dopo la registrazione, invieremo un'email all'indirizzo ufficiale MIUR dell'istituto
+                                    per confermare che la registrazione è autorizzata. L'account sarà attivo con
                                     funzionalità limitate fino alla verifica.
                                 </p>
                             </div>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary btn-full btn-large">
                             <i class="fas fa-school" aria-hidden="true"></i>
                             <span>Registra Istituto</span>
@@ -903,84 +858,55 @@
                                 Registrazione Utente Privato
                             </h3>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName" class="form-label">Nome *</label>
                                 <div class="input-group">
                                     <i class="fas fa-user input-icon" aria-hidden="true"></i>
-                                    <input 
-                                        type="text" 
-                                        id="firstName" 
-                                        name="firstName" 
-                                        class="form-input"
-                                        placeholder="Il tuo nome"
-                                        autocomplete="given-name" 
-                                        data-validate="firstName" 
-                                        required
-                                        aria-describedby="firstName-error"
-                                    >
+                                    <input type="text" id="firstName" name="firstName" class="form-input"
+                                        placeholder="Il tuo nome" autocomplete="given-name" data-validate="firstName"
+                                        required aria-describedby="firstName-error">
                                 </div>
                                 <div id="firstName-error" class="form-error" role="alert"></div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="lastName" class="form-label">Cognome *</label>
                                 <div class="input-group">
                                     <i class="fas fa-user input-icon" aria-hidden="true"></i>
-                                    <input 
-                                        type="text" 
-                                        id="lastName" 
-                                        name="lastName" 
-                                        class="form-input"
-                                        placeholder="Il tuo cognome"
-                                        autocomplete="family-name" 
-                                        data-validate="lastName" 
-                                        required
-                                        aria-describedby="lastName-error"
-                                    >
+                                    <input type="text" id="lastName" name="lastName" class="form-input"
+                                        placeholder="Il tuo cognome" autocomplete="family-name" data-validate="lastName"
+                                        required aria-describedby="lastName-error">
                                 </div>
                                 <div id="lastName-error" class="form-error" role="alert"></div>
                             </div>
                         </div>
-                        
+
                         <!-- Data di Nascita -->
                         <div class="form-group">
                             <label for="birthDate" class="form-label">Data di Nascita *</label>
                             <div class="input-group">
                                 <i class="fas fa-calendar-alt input-icon" aria-hidden="true"></i>
-                                <input 
-                                    type="date" 
-                                    id="birthDate" 
-                                    name="birthDate" 
-                                    class="form-input"
-                                    required
-                                    aria-describedby="birthDate-error birthDate-info"
-                                >
+                                <input type="date" id="birthDate" name="birthDate" class="form-input" required
+                                    aria-describedby="birthDate-error birthDate-info">
                             </div>
                             <div id="birthDate-info" class="form-hint">
                                 <i class="fas fa-info-circle"></i>
-                                Devi avere almeno 14 anni per registrarti. Per utenti tra 14 e 16 anni è richiesto il consenso di un genitore.
+                                Devi avere almeno 14 anni per registrarti. Per utenti tra 14 e 16 anni è richiesto il
+                                consenso di un genitore.
                             </div>
                             <div id="birthDate-error" class="form-error" role="alert"></div>
                         </div>
-                        
+
                         <!-- Codice Fiscale -->
                         <div class="form-group">
                             <label for="codiceFiscale" class="form-label">Codice Fiscale *</label>
                             <div class="input-group">
                                 <i class="fas fa-id-card input-icon" aria-hidden="true"></i>
-                                <input 
-                                    type="text" 
-                                    id="codiceFiscale" 
-                                    name="codiceFiscale" 
-                                    class="form-input"
-                                    placeholder="RSSMRA85M01H501Z"
-                                    maxlength="16"
-                                    style="text-transform: uppercase;"
-                                    required
-                                    aria-describedby="codiceFiscale-error codiceFiscale-info"
-                                >
+                                <input type="text" id="codiceFiscale" name="codiceFiscale" class="form-input"
+                                    placeholder="RSSMRA85M01H501Z" maxlength="16" style="text-transform: uppercase;"
+                                    required aria-describedby="codiceFiscale-error codiceFiscale-info">
                             </div>
                             <div id="codiceFiscale-info" class="form-hint">
                                 <i class="fas fa-shield-alt"></i>
@@ -988,48 +914,37 @@
                             </div>
                             <div id="codiceFiscale-error" class="form-error" role="alert"></div>
                         </div>
-                        
+
                         <!-- Sezione Consenso Parentale (visibile solo per 14-16 anni) -->
                         <div id="parentalConsentSection" class="parental-consent-section" style="display: none;">
                             <div class="form-info-box" style="background: #fff3e0; border-color: #ff9800;">
                                 <i class="fas fa-exclamation-triangle" style="color: #ff9800;"></i>
                                 <p><strong>Consenso Parentale Richiesto</strong><br>
-                                Hai meno di 16 anni. Per completare la registrazione, un genitore o tutore legale dovrà confermare il consenso via email.</p>
+                                    Hai meno di 16 anni. Per completare la registrazione, un genitore o tutore legale
+                                    dovrà confermare il consenso via email.</p>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="parentEmail" class="form-label">Email Genitore/Tutore *</label>
                                 <div class="input-group">
                                     <i class="fas fa-user-shield input-icon" aria-hidden="true"></i>
-                                    <input 
-                                        type="email" 
-                                        id="parentEmail" 
-                                        name="parentEmail" 
-                                        class="form-input"
-                                        placeholder="email.genitore@esempio.com"
-                                        aria-describedby="parentEmail-error"
-                                    >
+                                    <input type="email" id="parentEmail" name="parentEmail" class="form-input"
+                                        placeholder="email.genitore@esempio.com" aria-describedby="parentEmail-error">
                                 </div>
                                 <div id="parentEmail-error" class="form-error" role="alert"></div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="parentName" class="form-label">Nome Genitore/Tutore *</label>
                                 <div class="input-group">
                                     <i class="fas fa-user input-icon" aria-hidden="true"></i>
-                                    <input 
-                                        type="text" 
-                                        id="parentName" 
-                                        name="parentName" 
-                                        class="form-input"
-                                        placeholder="Nome e cognome del genitore"
-                                        aria-describedby="parentName-error"
-                                    >
+                                    <input type="text" id="parentName" name="parentName" class="form-input"
+                                        placeholder="Nome e cognome del genitore" aria-describedby="parentName-error">
                                 </div>
                                 <div id="parentName-error" class="form-error" role="alert"></div>
                             </div>
                         </div>
-                        
+
                         <!-- Checkbox consenso 16-18 anni -->
                         <div id="minorConsentSection" class="minor-consent-section" style="display: none;">
                             <div class="form-group">
@@ -1037,89 +952,72 @@
                                     <input type="checkbox" id="minorConsent" name="minorConsent">
                                     <span class="checkbox-custom"></span>
                                     <span class="checkbox-text">
-                                        Dichiaro di avere il consenso dei miei genitori/tutori per la registrazione su questa piattaforma, 
-                                        come previsto dall'art. 8 del GDPR e dalla normativa italiana sulla protezione dei minori online.
+                                        Dichiaro di avere il consenso dei miei genitori/tutori per la registrazione su
+                                        questa piattaforma,
+                                        come previsto dall'art. 8 del GDPR e dalla normativa italiana sulla protezione
+                                        dei minori online.
                                     </span>
                                 </label>
                                 <div id="minorConsent-error" class="form-error" role="alert"></div>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="privateEmail" class="form-label">Email *</label>
                             <div class="input-group">
                                 <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
-                                <input 
-                                    type="email" 
-                                    id="privateEmail" 
-                                    name="email" 
-                                    class="form-input"
-                                    placeholder="tuaemail@esempio.com"
-                                    autocomplete="email" 
-                                    data-validate="email" 
-                                    required
-                                    aria-describedby="privateEmail-error"
-                                >
+                                <input type="email" id="privateEmail" name="email" class="form-input"
+                                    placeholder="tuaemail@esempio.com" autocomplete="email" data-validate="email"
+                                    required aria-describedby="privateEmail-error">
                             </div>
                             <div id="privateEmail-error" class="form-error" role="alert"></div>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="privatePassword" class="form-label">Password *</label>
                                 <div class="input-group">
                                     <i class="fas fa-lock input-icon" aria-hidden="true"></i>
-                                    <input 
-                                        type="password" 
-                                        id="privatePassword" 
-                                        name="password" 
-                                        class="form-input"
-                                        placeholder="Crea una password sicura"
-                                        autocomplete="new-password" 
-                                        data-validate="password" 
-                                        required
-                                        aria-describedby="privatePassword-error"
-                                    >
-                                    <button type="button" class="password-toggle" onclick="togglePassword('privatePassword')" aria-label="Mostra/nascondi password">
+                                    <input type="password" id="privatePassword" name="password" class="form-input"
+                                        placeholder="Crea una password sicura" autocomplete="new-password"
+                                        data-validate="password" required aria-describedby="privatePassword-error">
+                                    <button type="button" class="password-toggle"
+                                        onclick="togglePassword('privatePassword')"
+                                        aria-label="Mostra/nascondi password">
                                         <i class="fas fa-eye" aria-hidden="true"></i>
                                     </button>
                                 </div>
                                 <div id="privatePassword-error" class="form-error" role="alert"></div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="confirmPrivatePassword" class="form-label">Conferma Password *</label>
                                 <div class="input-group">
                                     <i class="fas fa-lock input-icon" aria-hidden="true"></i>
-                                    <input 
-                                        type="password" 
-                                        id="confirmPrivatePassword" 
-                                        name="confirmPassword" 
-                                        class="form-input"
-                                        placeholder="Ripeti la password"
-                                        autocomplete="new-password" 
-                                        data-validate="confirmPassword" 
-                                        required
-                                        aria-describedby="confirmPrivatePassword-error"
-                                    >
-                                    <button type="button" class="password-toggle" onclick="togglePassword('confirmPrivatePassword')" aria-label="Mostra/nascondi password">
+                                    <input type="password" id="confirmPrivatePassword" name="confirmPassword"
+                                        class="form-input" placeholder="Ripeti la password" autocomplete="new-password"
+                                        data-validate="confirmPassword" required
+                                        aria-describedby="confirmPrivatePassword-error">
+                                    <button type="button" class="password-toggle"
+                                        onclick="togglePassword('confirmPrivatePassword')"
+                                        aria-label="Mostra/nascondi password">
                                         <i class="fas fa-eye" aria-hidden="true"></i>
                                     </button>
                                 </div>
                                 <div id="confirmPrivatePassword-error" class="form-error" role="alert"></div>
                             </div>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary btn-full btn-large">
                             <i class="fas fa-user-plus" aria-hidden="true"></i>
                             <span>Registra Account</span>
                         </button>
                     </form>
                 </div>
-                
+
                 <footer class="modal-footer">
                     <p class="modal-switch">
-                        Hai già un account? 
+                        Hai già un account?
                         <a href="#" onclick="switchModal('register', 'login')" class="link-primary">
                             Accedi qui
                         </a>
@@ -1128,7 +1026,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Forgot Password Modal -->
     <div id="forgotPasswordModal" class="modal" role="dialog" aria-labelledby="forgot-title" aria-hidden="true">
         <div class="modal-backdrop" onclick="closeForgotPasswordModal()"></div>
@@ -1139,35 +1037,29 @@
                         <i class="fas fa-key" aria-hidden="true"></i>
                         Reset Password
                     </h2>
-                    <button class="modal-close" onclick="closeForgotPasswordModal()" aria-label="Chiudi finestra reset password">
+                    <button class="modal-close" onclick="closeForgotPasswordModal()"
+                        aria-label="Chiudi finestra reset password">
                         <i class="fas fa-times" aria-hidden="true"></i>
                     </button>
                 </header>
-                
+
                 <div class="modal-body">
                     <p class="modal-description">
                         Inserisci il tuo indirizzo email per ricevere le istruzioni per il reset della password.
                     </p>
-                    
+
                     <form id="forgotPasswordForm" class="auth-form" novalidate>
                         <div class="form-group">
                             <label for="forgotEmail" class="form-label">Email</label>
                             <div class="input-group">
                                 <i class="fas fa-envelope input-icon" aria-hidden="true"></i>
-                                <input 
-                                    type="email" 
-                                    id="forgotEmail" 
-                                    name="email" 
-                                    class="form-input"
-                                    placeholder="inserisci@tuaemail.com"
-                                    data-validate="email" 
-                                    required
-                                    aria-describedby="forgotEmail-error"
-                                >
+                                <input type="email" id="forgotEmail" name="email" class="form-input"
+                                    placeholder="inserisci@tuaemail.com" data-validate="email" required
+                                    aria-describedby="forgotEmail-error">
                             </div>
                             <div id="forgotEmail-error" class="form-error" role="alert"></div>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary btn-full">
                             <i class="fas fa-paper-plane" aria-hidden="true"></i>
                             <span>Invia Email di Reset</span>
@@ -1187,7 +1079,7 @@
                         <strong>EduNet19</strong> - Connettendo l'educazione verso il futuro, una scuola alla volta.
                     </p>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4 class="footer-title">Piattaforma</h4>
                     <ul class="footer-links">
@@ -1197,7 +1089,7 @@
                         <li><a href="#" class="footer-link">Prezzi</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4 class="footer-title">Supporto</h4>
                     <ul class="footer-links">
@@ -1207,7 +1099,7 @@
                         <li><a href="#" class="footer-link">FAQ</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4 class="footer-title">Legale</h4>
                     <ul class="footer-links">
@@ -1218,7 +1110,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p class="footer-copyright">
                     &copy; 2024 EduNet19. Tutti i diritti riservati.
@@ -1233,4 +1125,5 @@
     <!-- Notification Container -->
     <div id="notification-container" class="notification-container" aria-live="polite" aria-atomic="true"></div>
 </body>
+
 </html>

@@ -11,12 +11,13 @@ Desktop.ini
 .kiro/
 
 # Project Specific
-config.js
+# config.js - REMOVED: anon key is safe to expose, security is via RLS
 /supabase-client-secrets.js
 .env*
 
-# Data files (scuole DBs)
-/db scuole/*.json
+# Data files (scuole DBs) - REMOVED: needed for production
+# /db scuole/*.json
+
 
 # Logs
 *.log
