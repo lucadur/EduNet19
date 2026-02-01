@@ -1,0 +1,793 @@
+/* ===================================================================
+   DARK THEME FIXES - Global Overrides
+   Solves specific visual bugs where gradients or hardcoded colors
+   persist in dark mode.
+   =================================================================== */
+
+body.dark-theme {
+    /* === PROFILE PAGE FIXES === */
+    
+    /* Profile Tabs Header */
+    .tabs-header {
+        background: linear-gradient(135deg, #111827 0%, #1f2937 100%) !important;
+        border-bottom-color: #374151 !important;
+    }
+
+    /* Profile Tabs Content */
+    .tabs-content {
+        background: linear-gradient(135deg, #111827 0%, #1f2937 100%) !important;
+        border-color: #374151 !important;
+    }
+
+    /* Tab Buttons */
+    .tab-button {
+        background: rgba(255, 255, 255, 0.05) !important;
+        color: #e5e7eb !important;
+        border-color: transparent !important;
+    }
+
+    .tab-button:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .tab-button.active {
+        background: var(--color-primary) !important;
+        color: #ffffff !important;
+        border-color: var(--color-primary) !important;
+    }
+
+    /* Profile Post Cards (Text Only) */
+    .profile-post-card:not(:has(.profile-post-image)) {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+        border-color: #374151 !important;
+    }
+
+    .profile-post-card:not(:has(.profile-post-image)):hover {
+        background: linear-gradient(135deg, #374151 0%, #1f2937 100%) !important;
+    }
+
+    /* Profile Info Items */
+    .info-item {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+        border-color: #374151 !important;
+    }
+
+    .info-item:hover {
+        background: linear-gradient(135deg, #374151 0%, #1f2937 100%) !important;
+    }
+
+    /* Empty States */
+    .empty-state, 
+    .feed-empty,
+    .no-notifications,
+    .no-messages {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+        border-color: #374151 !important;
+    }
+
+    .empty-state h3,
+    .feed-empty h3,
+    .no-notifications p,
+    .no-messages p {
+        color: #e5e7eb !important;
+    }
+
+    .empty-state p,
+    .feed-empty p {
+        color: #9ca3af !important;
+    }
+
+    .feed-empty .empty-state-icon {
+        background: linear-gradient(135deg, rgba(15, 98, 254, 0.2), rgba(69, 137, 255, 0.1)) !important;
+    }
+
+    .feed-empty .empty-state-icon i {
+        color: #4589ff !important;
+    }
+
+    .feed-empty .empty-state-hint {
+        color: #6b7280 !important;
+    }
+
+    /* Review Moderation Panel Fixes */
+    #review-moderation-panel {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+        border-color: #374151 !important;
+        color: #e5e7eb !important;
+    }
+
+    .moderation-empty {
+        color: #4caf50 !important; /* Keep green but ensure visibility */
+    }
+
+    .moderation-empty p {
+        color: #e5e7eb !important;
+    }
+    
+    .moderation-header {
+        border-bottom-color: #374151 !important;
+    }
+    
+    .moderation-header h3 {
+        color: #f9fafb !important;
+    }
+
+    .pending-review-card {
+        background: #374151 !important;
+        border-color: #d97706 !important; /* Darker amber for border */
+        color: #e5e7eb !important;
+    }
+    
+    .pending-review-text {
+        background: #1f2937 !important;
+        color: #d1d5db !important;
+    }
+    
+    .reviewer-name-small {
+        color: #f9fafb !important;
+    }
+    
+    .review-date-small {
+        color: #9ca3af !important;
+    }
+
+    /* === DISCOVER SECTION FIXES === */
+    .discover-card {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+        border-color: #374151 !important;
+    }
+
+    .discover-card-header {
+        background: linear-gradient(135deg, #111827 0%, #1f2937 100%) !important;
+        border-bottom-color: #374151 !important;
+    }
+
+    .discover-card-header h3 {
+        color: #f9fafb !important;
+    }
+
+    /* Trending Topics */
+    .trending-topic {
+        background: #374151 !important;
+        border-color: #4b5563 !important;
+        color: #e5e7eb !important;
+    }
+
+    .trending-topic:hover {
+        background: #4b5563 !important;
+    }
+
+    .topic-name {
+        color: #60a5fa !important; /* Primary light */
+    }
+
+    .topic-count {
+        background: #1f2937 !important;
+        color: #9ca3af !important;
+    }
+
+    .trending-topics .no-trends {
+        color: #9ca3af !important;
+    }
+
+    /* Statistics */
+    .stat-item {
+        background: #374151 !important;
+        border-color: #4b5563 !important;
+    }
+
+    .stat-number {
+        color: #60a5fa !important;
+    }
+
+    .stat-label {
+        color: #9ca3af !important;
+    }
+
+    /* Quick Links */
+    .quick-link {
+        background: #374151 !important;
+        border-color: #4b5563 !important;
+        color: #e5e7eb !important;
+    }
+
+    .quick-link:hover {
+        background: #4b5563 !important;
+        color: #60a5fa !important;
+        border-color: #60a5fa !important;
+    }
+
+    /* Suggested Institutes (in Discover or Sidebar) */
+    .suggested-institute {
+        background: #374151 !important;
+        border-color: #4b5563 !important;
+    }
+
+    .suggested-institute:hover {
+        background: #4b5563 !important;
+    }
+
+    .institute-info h4 {
+        color: #f9fafb !important;
+    }
+
+    .institute-info p {
+        color: #9ca3af !important;
+    }
+    
+    /* Modern Filters Container */
+    .modern-filters-container {
+        background: #1f2937 !important;
+        border-color: #374151 !important;
+    }
+    
+    .primary-tabs {
+        border-bottom-color: #374151 !important;
+    }
+    
+    .primary-tab {
+        background: #374151 !important;
+        border-color: #4b5563 !important;
+        color: #e5e7eb !important;
+    }
+    
+    .primary-tab:hover {
+        background: #4b5563 !important;
+        color: #ffffff !important;
+    }
+    
+    .primary-tab.active {
+        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)) !important;
+        color: #ffffff !important;
+        border-color: var(--color-primary) !important;
+    }
+    
+    .tab-badge {
+        background: rgba(255,255,255,0.2) !important;
+        color: #f9fafb !important;
+    }
+    
+    /* Filter Dropdowns */
+    .filter-dropdown-toggle, 
+    .sort-dropdown-toggle {
+        background: #374151 !important;
+        border-color: #4b5563 !important;
+        color: #e5e7eb !important;
+    }
+    
+    .filter-dropdown-toggle:hover,
+    .sort-dropdown-toggle:hover {
+        background: #4b5563 !important;
+    }
+    
+    .filter-dropdown-toggle.active {
+        background: rgba(15, 98, 254, 0.2) !important;
+        border-color: var(--color-primary) !important;
+        color: var(--color-primary) !important;
+    }
+    
+    .filter-dropdown-menu,
+    .sort-dropdown-menu {
+        background: #1f2937 !important;
+        border-color: #374151 !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+    }
+    
+    .filter-dropdown-header,
+    .filter-dropdown-footer {
+        border-color: #374151 !important;
+    }
+    
+    .filter-dropdown-header h4 {
+        color: #f9fafb !important;
+    }
+    
+    .filter-close-btn {
+        background: #374151 !important;
+        color: #e5e7eb !important;
+    }
+    
+    .filter-close-btn:hover {
+        background: #4b5563 !important;
+        color: #f9fafb !important;
+    }
+    
+    .filter-section h5 {
+        color: #e5e7eb !important;
+    }
+    
+    /* Filter Pills - Unselected State */
+    .filter-pill span {
+        background: #374151 !important;
+        border-color: #4b5563 !important;
+        color: #e5e7eb !important;
+    }
+    
+    .filter-pill:hover span {
+        background: #4b5563 !important;
+        border-color: #6b7280 !important;
+    }
+    
+    /* Filter Pills - Selected State (IMPORTANT!) */
+    .filter-pill input:checked + span {
+        background: var(--color-primary) !important;
+        color: #ffffff !important;
+        border-color: var(--color-primary) !important;
+        box-shadow: 0 2px 8px rgba(15, 98, 254, 0.4) !important;
+    }
+    
+    .filter-pill input:checked + span i {
+        opacity: 1 !important;
+        color: #ffffff !important;
+    }
+    
+    /* Sort Options */
+    .sort-option {
+        color: #e5e7eb !important;
+    }
+    
+    .sort-option:hover {
+        background: #374151 !important;
+    }
+    
+    .sort-option.active {
+        background: rgba(15, 98, 254, 0.2) !important;
+        color: var(--color-primary) !important;
+    }
+    
+    .sort-option.active i:last-child {
+        color: var(--color-primary) !important;
+    }
+    
+    /* Active Filters Summary */
+    .active-filters-summary {
+        background: rgba(15, 98, 254, 0.15) !important;
+        border-left-color: var(--color-primary) !important;
+    }
+    
+    .filters-label {
+        color: #60a5fa !important;
+    }
+    
+    .filter-tag {
+        background: #374151 !important;
+        border-color: #4b5563 !important;
+        color: #e5e7eb !important;
+    }
+    
+    .filter-tag-remove {
+        color: #60a5fa !important;
+    }
+    
+    .filter-tag-remove:hover {
+        background: var(--color-primary) !important;
+        color: #ffffff !important;
+    }
+    
+    /* Clear All Button */
+    .clear-all-btn {
+        color: #ef4444 !important;
+    }
+    
+    .clear-all-btn:hover {
+        background: rgba(239, 68, 68, 0.1) !important;
+    }
+    
+    /* Filter Dropdown Footer Buttons */
+    .filter-dropdown-footer .btn {
+        background: #374151 !important;
+        color: #e5e7eb !important;
+        border-color: #4b5563 !important;
+    }
+    
+    .filter-dropdown-footer .btn:hover {
+        background: #4b5563 !important;
+    }
+    
+    .filter-dropdown-footer .btn-primary {
+        background: var(--color-primary) !important;
+        color: #ffffff !important;
+        border-color: var(--color-primary) !important;
+    }
+    
+    .filter-dropdown-footer .btn-primary:hover {
+        background: var(--color-primary-dark) !important;
+    }
+    
+    .filter-dropdown-footer .btn.disabled {
+        background: #4b5563 !important;
+        color: #6b7280 !important;
+        opacity: 0.5 !important;
+    }
+
+    /* === EDUMATCH FIXES === */
+    .edumatch-section {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+        border-color: #374151 !important;
+    }
+
+    .edumatch-section::after {
+        background: #374151 !important;
+        border-color: #4b5563 !important;
+    }
+
+    .edumatch-section::before {
+        background: linear-gradient(90deg, 
+            transparent 0%, 
+            var(--color-gray-700) 10%, 
+            var(--color-gray-600) 50%, 
+            var(--color-gray-700) 90%, 
+            transparent 100%
+        ) !important;
+    }
+    
+    .edumatch-title {
+        color: #f9fafb !important;
+    }
+    
+    .edumatch-subtitle {
+        color: #9ca3af !important;
+    }
+    
+    .edumatch-mode-toggle {
+        background: #374151 !important;
+    }
+    
+    .mode-btn {
+        color: #9ca3af !important;
+    }
+    
+    .mode-btn:hover {
+        background: #4b5563 !important;
+        color: #f9fafb !important;
+    }
+    
+    .mode-btn.active {
+        background: var(--color-primary) !important;
+        color: #ffffff !important;
+        border-color: var(--color-primary) !important;
+    }
+}
+
+
+/* ===================================================================
+   CREATE PAGE - DARK THEME FIXES
+   Fix per modal e spinner nella pagina crea
+   =================================================================== */
+
+/* Modal Content in tema scuro */
+.dark-theme .creation-modal .modal-content,
+[data-theme="dark"] .creation-modal .modal-content,
+body.dark-theme .creation-modal .modal-content {
+    background: #1f2937 !important;
+    border-color: #374151 !important;
+}
+
+.dark-theme .creation-modal .modal-header,
+[data-theme="dark"] .creation-modal .modal-header,
+body.dark-theme .creation-modal .modal-header {
+    background: #111827 !important;
+    border-bottom-color: #374151 !important;
+}
+
+.dark-theme .creation-modal .modal-header h2,
+[data-theme="dark"] .creation-modal .modal-header h2,
+body.dark-theme .creation-modal .modal-header h2 {
+    color: #f9fafb !important;
+}
+
+.dark-theme .creation-modal .modal-body,
+[data-theme="dark"] .creation-modal .modal-body,
+body.dark-theme .creation-modal .modal-body {
+    background: #1f2937 !important;
+}
+
+/* Form elements in tema scuro */
+.dark-theme .creation-modal .form-group label,
+[data-theme="dark"] .creation-modal .form-group label,
+body.dark-theme .creation-modal .form-group label {
+    color: #d1d5db !important;
+}
+
+.dark-theme .creation-modal .form-group input,
+.dark-theme .creation-modal .form-group textarea,
+.dark-theme .creation-modal .form-group select,
+[data-theme="dark"] .creation-modal .form-group input,
+[data-theme="dark"] .creation-modal .form-group textarea,
+[data-theme="dark"] .creation-modal .form-group select,
+body.dark-theme .creation-modal .form-group input,
+body.dark-theme .creation-modal .form-group textarea,
+body.dark-theme .creation-modal .form-group select {
+    background: #374151 !important;
+    border-color: #4b5563 !important;
+    color: #f9fafb !important;
+}
+
+.dark-theme .creation-modal .form-group input::placeholder,
+.dark-theme .creation-modal .form-group textarea::placeholder,
+[data-theme="dark"] .creation-modal .form-group input::placeholder,
+[data-theme="dark"] .creation-modal .form-group textarea::placeholder,
+body.dark-theme .creation-modal .form-group input::placeholder,
+body.dark-theme .creation-modal .form-group textarea::placeholder {
+    color: #9ca3af !important;
+}
+
+/* Upload Progress Overlay - FORZA tema scuro */
+.dark-theme .upload-progress-overlay,
+[data-theme="dark"] .upload-progress-overlay,
+body.dark-theme .upload-progress-overlay {
+    background: rgba(17, 24, 39, 0.98) !important;
+}
+
+.dark-theme .upload-progress-content,
+[data-theme="dark"] .upload-progress-content,
+body.dark-theme .upload-progress-content {
+    background: transparent !important;
+    color: #f9fafb !important;
+}
+
+.dark-theme #upload-status-title,
+[data-theme="dark"] #upload-status-title,
+body.dark-theme #upload-status-title {
+    color: #a5b4fc !important;
+}
+
+.dark-theme #upload-status-text,
+[data-theme="dark"] #upload-status-text,
+body.dark-theme #upload-status-text {
+    color: #d1d5db !important;
+}
+
+/* Spinner rings - colori vivaci per tema scuro */
+.dark-theme .spinner-ring,
+[data-theme="dark"] .spinner-ring,
+body.dark-theme .spinner-ring {
+    border-top-color: #a5b4fc !important;
+}
+
+.dark-theme .spinner-ring:nth-child(2),
+[data-theme="dark"] .spinner-ring:nth-child(2),
+body.dark-theme .spinner-ring:nth-child(2) {
+    border-top-color: #818cf8 !important;
+}
+
+.dark-theme .spinner-ring:nth-child(3),
+[data-theme="dark"] .spinner-ring:nth-child(3),
+body.dark-theme .spinner-ring:nth-child(3) {
+    border-top-color: #6366f1 !important;
+}
+
+/* Progress bar in tema scuro */
+.dark-theme .upload-progress-bar,
+[data-theme="dark"] .upload-progress-bar,
+body.dark-theme .upload-progress-bar {
+    background: #374151 !important;
+}
+
+.dark-theme .upload-progress-count,
+[data-theme="dark"] .upload-progress-count,
+body.dark-theme .upload-progress-count {
+    color: #a5b4fc !important;
+}
+
+/* Image upload area in tema scuro */
+.dark-theme .image-upload-area,
+[data-theme="dark"] .image-upload-area,
+body.dark-theme .image-upload-area {
+    background: #374151 !important;
+    border-color: #4b5563 !important;
+}
+
+.dark-theme .image-upload-area:hover,
+[data-theme="dark"] .image-upload-area:hover,
+body.dark-theme .image-upload-area:hover {
+    border-color: #6366f1 !important;
+    background: #4b5563 !important;
+}
+
+.dark-theme .image-upload-area i,
+.dark-theme .image-upload-area p,
+[data-theme="dark"] .image-upload-area i,
+[data-theme="dark"] .image-upload-area p,
+body.dark-theme .image-upload-area i,
+body.dark-theme .image-upload-area p {
+    color: #9ca3af !important;
+}
+
+
+/* ===================================================================
+   SPINNER ANIMATION FIX - Forza animazione in tema scuro
+   =================================================================== */
+
+/* Assicura che l'animazione spin sia definita */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Forza animazione sugli spinner rings */
+.dark-theme .spinner-ring,
+[data-theme="dark"] .spinner-ring,
+body.dark-theme .spinner-ring,
+.upload-spinner .spinner-ring {
+    animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite !important;
+}
+
+.dark-theme .spinner-ring:nth-child(2),
+[data-theme="dark"] .spinner-ring:nth-child(2),
+body.dark-theme .spinner-ring:nth-child(2),
+.upload-spinner .spinner-ring:nth-child(2) {
+    animation: spin 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite !important;
+    animation-delay: -0.5s !important;
+}
+
+.dark-theme .spinner-ring:nth-child(3),
+[data-theme="dark"] .spinner-ring:nth-child(3),
+body.dark-theme .spinner-ring:nth-child(3),
+.upload-spinner .spinner-ring:nth-child(3) {
+    animation: spin 2.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite !important;
+    animation-delay: -1s !important;
+}
+
+/* Assicura che lo spinner container abbia position relative */
+.upload-spinner {
+    position: relative !important;
+    width: 120px !important;
+    height: 120px !important;
+}
+
+/* Assicura che i ring siano posizionati correttamente */
+.upload-spinner .spinner-ring {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    border: 4px solid transparent !important;
+    border-radius: 50% !important;
+}
+
+.upload-spinner .spinner-ring:nth-child(2) {
+    width: 80% !important;
+    height: 80% !important;
+    top: 10% !important;
+    left: 10% !important;
+}
+
+.upload-spinner .spinner-ring:nth-child(3) {
+    width: 60% !important;
+    height: 60% !important;
+    top: 20% !important;
+    left: 20% !important;
+}
+
+
+/* ===================================================================
+   EDIT PROFILE PAGE - DARK THEME FIXES
+   Fix per icone e label nella pagina modifica profilo
+   =================================================================== */
+
+/* Icone nelle label del form modifica profilo */
+body.dark-theme .form-group label i,
+body.dark-theme .section-title i,
+[data-theme="dark"] .form-group label i,
+[data-theme="dark"] .section-title i {
+    color: #60a5fa !important;
+}
+
+/* Titoli sezione con icona */
+body.dark-theme .section-title,
+[data-theme="dark"] .section-title {
+    background: rgba(59, 130, 246, 0.12) !important;
+    border-bottom-color: transparent !important;
+    border-radius: var(--radius-lg, 12px) !important;
+    padding: var(--space-4, 16px) var(--space-5, 20px) !important;
+    margin-bottom: var(--space-6, 24px) !important;
+}
+
+body.dark-theme .section-title i,
+[data-theme="dark"] .section-title i {
+    background: rgba(59, 130, 246, 0.25) !important;
+    color: #60a5fa !important;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3) !important;
+    padding: 8px !important;
+    border-radius: var(--radius-md, 8px) !important;
+}
+
+/* Label con icone (Numero Aule, Superficie, etc.) */
+body.dark-theme .form-section label i,
+[data-theme="dark"] .form-section label i {
+    color: #60a5fa !important;
+}
+
+/* Form inputs in tema scuro */
+body.dark-theme .form-group input,
+body.dark-theme .form-group textarea,
+body.dark-theme .form-group select,
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea,
+[data-theme="dark"] .form-group select {
+    background: #374151 !important;
+    border-color: #4b5563 !important;
+    color: #f9fafb !important;
+}
+
+body.dark-theme .form-group input:focus,
+body.dark-theme .form-group textarea:focus,
+body.dark-theme .form-group select:focus,
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group textarea:focus,
+[data-theme="dark"] .form-group select:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Field hints */
+body.dark-theme .field-hint,
+[data-theme="dark"] .field-hint {
+    color: #9ca3af !important;
+}
+
+/* Form section background */
+body.dark-theme .form-section,
+[data-theme="dark"] .form-section {
+    background: #1f2937 !important;
+    border-color: #374151 !important;
+}
+
+/* ===================================================================
+   PROFILE PAGE INFO TAB - DARK THEME FIXES
+   Fix per orari e info nella pagina profilo
+   =================================================================== */
+
+/* Orari di apertura - migliore visibilità */
+body.dark-theme .hours-item,
+[data-theme="dark"] .hours-item {
+    background: rgba(30, 41, 59, 0.95) !important;
+    border-color: rgba(59, 130, 246, 0.4) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-theme .hours-item .day-name,
+[data-theme="dark"] .hours-item .day-name {
+    color: #93c5fd !important;
+    font-weight: 700 !important;
+}
+
+body.dark-theme .hours-item .day-hours,
+[data-theme="dark"] .hours-item .day-hours {
+    color: #f1f5f9 !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+}
+
+/* Opening hours display container */
+body.dark-theme .opening-hours-display,
+[data-theme="dark"] .opening-hours-display {
+    background: rgba(15, 23, 42, 0.8) !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Info item icone nella sezione struttura */
+body.dark-theme #structure-section .info-item label i,
+[data-theme="dark"] #structure-section .info-item label i {
+    color: #60a5fa !important;
+}
+
+body.dark-theme .info-item label,
+[data-theme="dark"] .info-item label {
+    color: #93c5fd !important;
+}
+
+body.dark-theme .info-item p,
+[data-theme="dark"] .info-item p {
+    color: #f1f5f9 !important;
+}
+
+/* Icone ::before nella sezione info istituto */
+body.dark-theme #institute-info-section .info-item p::before,
+[data-theme="dark"] #institute-info-section .info-item p::before {
+    color: #60a5fa !important;
+}

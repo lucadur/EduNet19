@@ -1,0 +1,54 @@
+-- =====================================================
+-- SISTEMA COLLABORATORI ISTITUTI - EduNet19
+-- Documentazione della migrazione applicata
+-- =====================================================
+-- 
+-- Questa migrazione è stata applicata automaticamente.
+-- NON eseguire nuovamente questo script.
+--
+-- TABELLA: institute_collaborators
+-- SCOPO: Gestione collaboratori per istituti scolastici
+-- LIMITE: Max 3 collaboratori per istituto (gratuito)
+--
+-- RUOLI:
+--   - admin: Può gestire tutto inclusi altri collaboratori
+--   - editor: Può modificare profilo e pubblicare contenuti
+--   - viewer: Solo visualizzazione
+--
+-- STATUS:
+--   - pending: Invito inviato, in attesa di accettazione
+--   - active: Collaboratore attivo
+--   - revoked: Accesso revocato
+--
+-- POLICIES RLS:
+--   1. institute_owner_view_collaborators - Proprietario vede tutti
+--   2. collaborator_view_collaborators - Collaboratori vedono altri dello stesso istituto
+--   3. user_view_own_invites - Utente vede i propri inviti
+--   4. institute_owner_invite_collaborators - Solo proprietario può invitare (max 3)
+--   5. institute_owner_update_collaborators - Proprietario può modificare
+--   6. user_accept_own_invite - Utente può accettare il proprio invito
+--   7. institute_owner_delete_collaborators - Solo proprietario può rimuovere
+--
+-- FUNZIONI:
+--   - generate_invite_token() - Genera token sicuro per inviti
+--   - can_edit_institute(institute_id, user_id) - Verifica permessi modifica
+--   - can_manage_collaborators(institute_id, user_id) - Verifica permessi gestione
+--
+-- =====================================================
+
+-- Query utili per debug:
+
+-- Vedere tutti i collaboratori di un istituto
+-- SELECT * FROM institute_collaborators WHERE institute_id = 'UUID_ISTITUTO';
+
+-- Contare collaboratori attivi per istituto
+-- SELECT institute_id, COUNT(*) as count 
+-- FROM institute_collaborators 
+-- WHERE status IN ('pending', 'active') 
+-- GROUP BY institute_id;
+
+-- Trovare invito per token
+-- SELECT * FROM institute_collaborators WHERE invite_token = 'TOKEN';
+
+-- Verificare se utente può modificare istituto
+-- SELECT can_edit_institute('UUID_ISTITUTO', 'UUID_UTENTE');

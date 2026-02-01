@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connessioni - EduNet19</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../css/components/connections.css">
+    <link rel="stylesheet" href="../../css/components/dark-theme-fixes.css">
+    <link rel="stylesheet" href="../../css/components/auth-notifications.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Preference Loader -->
+    <script src="../../js/utils/preference-loader.js"></script>
+    <script src="../../js/utils/console-optimizer.js"></script>
+</head>
+<body class="connections-body">
+    <!-- Back to Home Button -->
+    <a href="../../homepage.html" class="back-to-home-btn" aria-label="Torna alla homepage">
+        <i class="fas fa-arrow-left"></i>
+        <span>Torna alla Home</span>
+    </a>
+
+    <!-- Main Content -->
+    <main class="connections-main">
+        <div class="connections-container">
+            <div class="page-header">
+                <h1><i class="fas fa-users"></i> Le Tue Connessioni</h1>
+                <p>Gestisci i tuoi follower e following</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="following">
+                    <i class="fas fa-user-check"></i>
+                    <span class="tab-label">Seguiti</span>
+                    <span class="tab-count" id="following-count">0</span>
+                </button>
+                <button class="tab-btn" data-tab="followers">
+                    <i class="fas fa-users"></i>
+                    <span class="tab-label">Follower</span>
+                    <span class="tab-count" id="followers-count">0</span>
+                </button>
+            </div>
+
+            <!-- Following Tab -->
+            <div class="tab-content active" id="following-tab">
+                <div id="following-list" class="connections-list">
+                    <div class="loading-state">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Caricamento...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Followers Tab -->
+            <div class="tab-content" id="followers-tab">
+                <div id="followers-list" class="connections-list">
+                    <div class="loading-state">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Caricamento...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../../config.js"></script>
+    <script src="../../supabase-client.js"></script>
+    <script src="../../js/auth/auth.js"></script>
+    <script src="../../js/profile/avatar-manager.js"></script>
+    <script src="../../js/social/connections.js"></script>
+</body>
+</html>

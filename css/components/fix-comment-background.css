@@ -1,0 +1,49 @@
+/* ===================================================================
+   🎨 FIX COMMENT BACKGROUND
+   Previene che l'avatar si espanda all'intero commento
+   =================================================================== */
+
+/* Assicura che solo .comment-avatar abbia il background-image */
+.comment-item {
+  background: none !important;
+  background-image: none !important;
+}
+
+.comment-content {
+  background: none !important;
+  background-image: none !important;
+}
+
+/* Solo .comment-avatar dovrebbe avere il background-image */
+.comment-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-gray-100, #f3f4f6);
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Assicura che l'icona placeholder sia centrata */
+.comment-avatar i {
+  font-size: 1.125rem;
+  color: var(--color-gray-400, #9ca3af);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .comment-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .comment-avatar i {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,56 @@
+-- =====================================================
+-- SECURITY AUDIT FIXES - EduNet19
+-- Data: 2024-12-04
+-- =====================================================
+-- 
+-- Questo file documenta le correzioni di sicurezza applicate al database.
+-- Le migrazioni sono già state eseguite su Supabase.
+--
+-- PROBLEMI RISOLTI:
+-- ================
+--
+-- 1. [CRITICO] auth_users_exposed
+--    - La view parental_consent_requests esponeva auth.users al ruolo anon
+--    - SOLUZIONE: Ricreata la view senza accesso a auth.users, usando i dati
+--      già presenti in parental_consents
+--
+-- 2. [CRITICO] security_definer_view
+--    - La view parental_consent_requests usava SECURITY DEFINER
+--    - SOLUZIONE: Ricreata con security_invoker = true
+--
+-- 3. [IMPORTANTE] Policy RLS troppo permissive
+--    - parental_consents: "Parents can view/update consent by token" con qual="true"
+--    - private_users: "allow_all_authenticated_private" permetteva tutto
+--    - school_institutes: "allow_all_authenticated_institutes" permetteva tutto
+--    - user_profiles: "allow_all_authenticated" permetteva tutto
+--    - SOLUZIONE: Rimosse e sostituite con policy più restrittive
+--
+-- 4. [WARN] function_search_path_mutable
+--    - Molte funzioni senza search_path impostato
+--    - SOLUZIONE: Tutte le funzioni ricreate con SET search_path = ''
+--
+-- 5. [WARN] Storage policies troppo aperte
+--    - "Authenticated users can upload" permetteva upload ovunque
+--    - SOLUZIONE: Policy restrittive per cartella utente
+--
+-- AZIONI MANUALI RICHIESTE (Dashboard Supabase):
+-- ==============================================
+--
+-- 1. Abilitare "Leaked Password Protection"
+--    Dashboard > Authentication > Providers > Email > Password Settings
+--    https://supabase.com/docs/guides/auth/password-security
+--
+-- 2. Abilitare più opzioni MFA
+--    Dashboard > Authentication > Multi-Factor Authentication
+--    https://supabase.com/docs/guides/auth/auth-mfa
+--
+-- =====================================================
+
+-- Le migrazioni applicate sono:
+-- 1. fix_security_issues_parental_consent_view
+-- 2. fix_overly_permissive_rls_policies
+-- 3. fix_function_search_path_security_v3
+-- 4. fix_2fa_functions_search_path
+-- 5. add_secure_parental_consent_rpc
+-- 6. cleanup_duplicate_functions
+-- 7. fix_storage_policies_security

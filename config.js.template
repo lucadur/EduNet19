@@ -1,0 +1,72 @@
+// Configurazione Supabase per EduNet19 - TEMPLATE
+// Rinomina questo file in 'config.js' e inserisci le tue credenziali
+
+const SUPABASE_CONFIG = {
+    // URL del tuo progetto Supabase
+    url: 'YOUR_SUPABASE_URL',
+
+    // Chiave pubblica anonima
+    anonKey: 'YOUR_SUPABASE_ANON_KEY',
+
+    options: {
+        auth: {
+            autoRefreshToken: true,
+            persistSession: true,
+            detectSessionInUrl: true
+        }
+    }
+};
+
+window.SUPABASE_CONFIG = SUPABASE_CONFIG;
+window.SUPABASE_URL = SUPABASE_CONFIG.url;
+window.SUPABASE_ANON_KEY = SUPABASE_CONFIG.anonKey;
+
+// AppConfig logic follows...
+const AppConfig = {
+    getBasePath() {
+        const path = window.location.pathname;
+        if (path.includes('/pages/')) {
+            const pagesIndex = path.indexOf('/pages/');
+            return path.substring(0, pagesIndex + 1);
+        }
+        const lastSlash = path.lastIndexOf('/');
+        if (lastSlash > 0) {
+            return path.substring(0, lastSlash + 1);
+        }
+        return '/';
+    },
+    getPageUrl(page) {
+        const cleanPage = page.startsWith('/') ? page.substring(1) : page;
+        return window.location.origin + this.getBasePath() + cleanPage;
+    },
+    navigateTo(page) {
+        window.location.href = this.getPageUrl(page);
+    },
+    isDev() {
+        const devHosts = ['localhost', '127.0.0.1', '0.0.0.0'];
+        return devHosts.includes(window.location.hostname);
+    }
+};
+
+window.AppConfig = AppConfig;
+
+// Preload preferences
+(function () {
+    function applySettings() {
+        try {
+            const savedSettings = localStorage.getItem('edunet_settings');
+            if (savedSettings && document.body) {
+                const settings = JSON.parse(savedSettings);
+                if (settings.theme === 'dark') document.body.classList.add('dark-theme');
+                else if (settings.theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.classList.add('dark-theme');
+                if (settings.fontSize) document.documentElement.setAttribute('data-font-size', settings.fontSize);
+                if (settings.dataSaver) { document.documentElement.setAttribute('data-saver', 'true'); document.body.classList.add('data-saver-mode'); }
+                if (settings.autoplayVideos !== undefined) document.documentElement.setAttribute('data-autoplay', settings.autoplayVideos);
+            }
+        } catch (e) {
+            console.warn('Error loading global preferences:', e);
+        }
+    }
+    if (document.body) applySettings();
+    else document.addEventListener('DOMContentLoaded', applySettings);
+})();

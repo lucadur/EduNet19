@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Impostazioni EduNet - Gestisci privacy, notifiche, sicurezza e preferenze del tuo account educativo. Personalizza la tua esperienza su EduNet.">
+    <meta name="keywords" content="impostazioni account EduNet, privacy social network scuola, notifiche educative, sicurezza account, gestione profilo">
+    <meta name="author" content="EduNet">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <title>Impostazioni Account - EduNet Social Network Educativo</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="alternate icon" href="../../favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../css/components/homepage-styles.css">
+    <link rel="stylesheet" href="../../css/components/mobile-search.css">
+    <link rel="stylesheet" href="../../css/components/settings-page.css">
+    <link rel="stylesheet" href="../../css/components/2fa-modal.css">
+    <link rel="stylesheet" href="../../css/components/sessions-modal.css">
+    <link rel="stylesheet" href="../../css/components/dark-theme-fixes.css">
+    <link rel="stylesheet" href="../../css/components/auth-notifications.css">
+    
+    <!-- Preference Loader (Must be in HEAD to prevent FOUC) -->
+    <script src="../../js/utils/preference-loader.js"></script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    
+    <!-- App Scripts -->
+    <script src="../../config.js" defer></script>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="top-nav" role="banner">
+        <div class="nav-container">
+            <!-- Logo and Brand -->
+            <div class="nav-brand">
+                <a href="../../homepage.html" class="logo" aria-label="EduNet19">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                    <span>EduNet19</span>
+                </a>
+            </div>
+            
+            <!-- Mobile Search Button (only visible on mobile) -->
+            <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Cerca">
+                <i class="fas fa-search"></i>
+            </button>
+            
+            <!-- Search Bar -->
+            <div class="nav-search">
+                <div class="search-container" role="search">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input 
+                        type="search" 
+                        class="search-input" 
+                        placeholder="Cerca istituti, progetti, metodologie..."
+                        aria-label="Cerca contenuti nella piattaforma"
+                        id="global-search"
+                        name="search"
+                        autocomplete="off"
+                    >
+                    <button class="search-clear" aria-label="Cancella ricerca" style="display: none;" tabindex="-1">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="search-results" style="display: none;"></div>
+            </div>
+            
+            <!-- Navigation Actions -->
+            <div class="nav-actions">
+                <!-- Home Button -->
+                <a href="../../homepage.html" class="nav-button">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                </a>
+                
+                <!-- Notifications -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button" aria-label="Notifiche" id="notifications-btn">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                        <span class="notification-badge" id="notification-count" style="display: none;">0</span>
+                    </button>
+                    <div class="dropdown-menu" id="notifications-dropdown">
+                        <div class="dropdown-header">
+                            <h3>Notifiche</h3>
+                        </div>
+                        <div class="notifications-list">
+                            <div class="no-notifications">
+                                <i class="fas fa-bell-slash" aria-hidden="true"></i>
+                                <p>Nessuna notifica</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Messages -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button" aria-label="Messaggi" id="messages-btn">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span class="message-badge" id="message-count" style="display: none;">0</span>
+                    </button>
+                    <div class="dropdown-menu" id="messages-dropdown">
+                        <div class="dropdown-header">
+                            <h3>Messaggi</h3>
+                        </div>
+                        <div class="messages-list">
+                            <div class="no-messages">
+                                <i class="fas fa-envelope-open" aria-hidden="true"></i>
+                                <p>Nessun messaggio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- User Profile -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button user-avatar" aria-label="Profilo utente" id="user-menu-btn">
+                        <img src="" alt="Avatar utente" class="avatar-img" id="user-avatar" style="display: none;">
+                        <i class="fas fa-user-circle default-avatar" aria-hidden="true"></i>
+                        <span class="user-name" id="user-name">Utente</span>
+                        <i class="fas fa-chevron-down dropdown-arrow" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu user-dropdown" id="user-dropdown">
+                        <div class="user-info">
+                            <div class="user-avatar-large">
+                                <img src="" alt="Avatar utente" class="avatar-img-large" id="user-avatar-large" style="display: none;">
+                                <i class="fas fa-user-circle default-avatar-large" aria-hidden="true"></i>
+                            </div>
+                            <div class="user-details">
+                                <h4 id="user-full-name">Nome Utente</h4>
+                                <p id="user-type-display">Tipo Account</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                            Visualizza Profilo
+                        </a>
+                        <a href="edit-profile.html" class="dropdown-item">
+                            <i class="fas fa-edit" aria-hidden="true"></i>
+                            Modifica Profilo
+                        </a>
+                        <a href="settings.html" class="dropdown-item active">
+                            <i class="fas fa-cog" aria-hidden="true"></i>
+                            Impostazioni
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item logout-btn" id="logout-btn">
+                            <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                            Esci
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Search Overlay -->
+        <div class="mobile-search-overlay" id="mobileSearchOverlay">
+            <div class="mobile-search-content">
+                <div class="mobile-search-header">
+                    <button class="mobile-search-back" id="mobileSearchBack">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="mobile-search-input-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="search" class="mobile-search-input" placeholder="Cerca..." id="mobileSearchInput">
+                        <button class="mobile-search-clear" id="mobileSearchClear" style="display:none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mobile-search-results" id="mobileSearchResults">
+                    <div class="mobile-search-empty">
+                        <div class="quick-suggestions">
+                            <h3>Suggerimenti</h3>
+                            <div class="suggestion-item" data-query="Istituti Roma">
+                                <i class="fas fa-search"></i>
+                                <span>Istituti Roma</span>
+                            </div>
+                            <div class="suggestion-item" data-query="Progetti STEM">
+                                <i class="fas fa-search"></i>
+                                <span>Progetti STEM</span>
+                            </div>
+                            <div class="suggestion-item" data-query="Metodologie innovative">
+                                <i class="fas fa-search"></i>
+                                <span>Metodologie innovative</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="settings-main" role="main">
+        <div class="settings-container">
+            <!-- Page Header -->
+            <header class="page-header">
+                <h1><i class="fas fa-cog" aria-hidden="true"></i> Impostazioni</h1>
+                <p>Gestisci le preferenze e la sicurezza del tuo account</p>
+            </header>
+
+            <!-- Mobile Settings Navigation -->
+            <div class="mobile-settings-nav" id="mobileSettingsNav">
+                <button class="mobile-settings-toggle" id="mobileSettingsToggle">
+                    <div style="display: flex; align-items: center; gap: var(--space-3);">
+                        <i class="fas fa-user-cog" aria-hidden="true"></i>
+                        <span id="currentSectionName">Account</span>
+                    </div>
+                    <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </button>
+                <div class="mobile-settings-dropdown" id="mobileSettingsMenu">
+                    <div class="settings-grid">
+                        <button class="settings-grid-item active" data-section="account">
+                            <div class="settings-icon">
+                                <i class="fas fa-user-cog" aria-hidden="true"></i>
+                            </div>
+                            <span class="settings-label">Account</span>
+                        </button>
+                        <button class="settings-grid-item" data-section="privacy">
+                            <div class="settings-icon">
+                                <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                            </div>
+                            <span class="settings-label">Privacy</span>
+                        </button>
+                        <button class="settings-grid-item" data-section="notifications">
+                            <div class="settings-icon">
+                                <i class="fas fa-bell" aria-hidden="true"></i>
+                            </div>
+                            <span class="settings-label">Notifiche</span>
+                        </button>
+                        <button class="settings-grid-item" data-section="security">
+                            <div class="settings-icon">
+                                <i class="fas fa-lock" aria-hidden="true"></i>
+                            </div>
+                            <span class="settings-label">Sicurezza</span>
+                        </button>
+                        <button class="settings-grid-item" data-section="preferences">
+                            <div class="settings-icon">
+                                <i class="fas fa-sliders-h" aria-hidden="true"></i>
+                            </div>
+                            <span class="settings-label">Preferenze</span>
+                        </button>
+                        <button class="settings-grid-item" data-section="data">
+                            <div class="settings-icon">
+                                <i class="fas fa-database" aria-hidden="true"></i>
+                            </div>
+                            <span class="settings-label">Dati e Backup</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Sidebar (Desktop only) -->
+            <aside class="settings-sidebar">
+                <nav class="settings-nav" role="navigation" aria-label="Impostazioni">
+                    <button class="settings-nav-item active" data-section="account">
+                        <i class="fas fa-user-cog" aria-hidden="true"></i>
+                        <span>Account</span>
+                    </button>
+                    <button class="settings-nav-item" data-section="privacy">
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        <span>Privacy</span>
+                    </button>
+                    <button class="settings-nav-item" data-section="notifications">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                        <span>Notifiche</span>
+                    </button>
+                    <button class="settings-nav-item" data-section="security">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <span>Sicurezza</span>
+                    </button>
+                    <button class="settings-nav-item" data-section="preferences">
+                        <i class="fas fa-sliders-h" aria-hidden="true"></i>
+                        <span>Preferenze</span>
+                    </button>
+                    <button class="settings-nav-item" data-section="data">
+                        <i class="fas fa-database" aria-hidden="true"></i>
+                        <span>Dati e Backup</span>
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Account Section -->
+                <section class="settings-section active" id="account-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-user-cog" aria-hidden="true"></i>
+                        Impostazioni Account
+                    </h2>
+
+                    <div class="settings-group">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Email Account</h3>
+                                <p class="setting-description" id="current-email">email@esempio.it</p>
+                            </div>
+                            <button class="btn-secondary" id="change-email-btn">
+                                <i class="fas fa-edit" aria-hidden="true"></i>
+                                Modifica
+                            </button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Password</h3>
+                                <p class="setting-description">Ultima modifica: Mai</p>
+                            </div>
+                            <button class="btn-secondary" id="change-password-btn">
+                                <i class="fas fa-key" aria-hidden="true"></i>
+                                Cambia Password
+                            </button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Lingua Interfaccia</h3>
+                                <p class="setting-description">Lingua predefinita dell'interfaccia</p>
+                            </div>
+                            <select class="setting-select" id="language-select">
+                                <option value="it" selected>Italiano</option>
+                                <option value="en">English</option>
+                                <option value="es">Español</option>
+                                <option value="fr">Français</option>
+                                <option value="de">Deutsch</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-group danger-zone">
+                        <h3 class="danger-title">
+                            <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                            Zona Pericolosa
+                        </h3>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Disattiva Account</h3>
+                                <p class="setting-description">Disattiva temporaneamente il tuo account</p>
+                            </div>
+                            <button class="btn-danger" id="deactivate-account-btn">
+                                <i class="fas fa-user-slash" aria-hidden="true"></i>
+                                Disattiva
+                            </button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Elimina Account</h3>
+                                <p class="setting-description">Elimina permanentemente il tuo account e tutti i dati</p>
+                            </div>
+                            <button class="btn-danger" id="delete-account-btn">
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                                Elimina
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Privacy Section -->
+                <section class="settings-section" id="privacy-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        Privacy e Visibilità
+                    </h2>
+
+                    <div class="settings-group">
+                        <div class="setting-item toggle-item">
+                            <div class="setting-info">
+                                <h3>Mostra Email</h3>
+                                <p class="setting-description">Rendi visibile il tuo indirizzo email sul profilo pubblico</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="show-email">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Notifications Section -->
+                <section class="settings-section" id="notifications-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                        Preferenze Notifiche
+                    </h2>
+
+                    <div class="settings-group">
+                        <h3>Notifiche Email</h3>
+                        
+                        <div class="setting-item toggle-item">
+                            <div class="setting-info">
+                                <h3>Nuovi Post</h3>
+                                <p class="setting-description">Ricevi email quando qualcuno pubblica contenuti</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="email-new-posts" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="setting-item toggle-item">
+                            <div class="setting-info">
+                                <h3>Nuovi Follower</h3>
+                                <p class="setting-description">Ricevi email quando qualcuno ti segue</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="email-followers" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="setting-item toggle-item">
+                            <div class="setting-info">
+                                <h3>Commenti</h3>
+                                <p class="setting-description">Ricevi email per commenti ai tuoi post</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="email-comments" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="setting-item toggle-item">
+                            <div class="setting-info">
+                                <h3>Match EduNet</h3>
+                                <p class="setting-description">Ricevi suggerimenti di collaborazione</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="email-matches" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>Notifiche Push</h3>
+                        
+                        <div class="setting-item toggle-item">
+                            <div class="setting-info">
+                                <h3>Attiva Notifiche Push</h3>
+                                <p class="setting-description">Ricevi notifiche sul browser</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="push-enabled">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="setting-item toggle-item">
+                            <div class="setting-info">
+                                <h3>Suoni Notifiche</h3>
+                                <p class="setting-description">Riproduci suoni per le notifiche</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="notification-sounds" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Security Section -->
+                <section class="settings-section" id="security-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        Sicurezza
+                    </h2>
+
+                    <div class="settings-group">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Autenticazione a Due Fattori (2FA)</h3>
+                                <p class="setting-description" id="2fa-status-text">Aggiungi un livello extra di sicurezza al tuo account</p>
+                            </div>
+                            <button class="btn-primary" id="setup-2fa-btn">
+                                <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                Attiva 2FA
+                            </button>
+                            <button class="btn-danger" id="disable-2fa-btn" style="display: none;">
+                                <i class="fas fa-times-circle" aria-hidden="true"></i>
+                                Disattiva 2FA
+                            </button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Sessioni Attive</h3>
+                                <p class="setting-description">Gestisci i dispositivi dove hai effettuato l'accesso</p>
+                            </div>
+                            <button class="btn-secondary" id="manage-sessions-btn">
+                                <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                                Gestisci Sessioni
+                            </button>
+                        </div>
+
+                        <div class="setting-item toggle-item">
+                            <div class="setting-info">
+                                <h3>Login tramite Social</h3>
+                                <p class="setting-description">Permetti accesso con Google/Facebook</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="social-login">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Preferences Section -->
+                <section class="settings-section" id="preferences-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-sliders-h" aria-hidden="true"></i>
+                        Preferenze Visualizzazione
+                    </h2>
+
+                    <div class="settings-group">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Tema Interfaccia</h3>
+                                <p class="setting-description">Scegli il tema visivo dell'applicazione</p>
+                            </div>
+                            <select class="setting-select" id="theme-select">
+                                <option value="light" selected>Chiaro</option>
+                                <option value="dark">Scuro</option>
+                                <option value="auto">Automatico</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Dimensione Testo</h3>
+                                <p class="setting-description">Regola la grandezza del testo</p>
+                            </div>
+                            <select class="setting-select" id="font-size-select">
+                                <option value="small">Piccolo</option>
+                                <option value="medium" selected>Medio</option>
+                                <option value="large">Grande</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item toggle-item">
+                            <div class="setting-info">
+                                <h3>Riproduci Video Automaticamente</h3>
+                                <p class="setting-description">I video partono automaticamente nel feed</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="autoplay-videos" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="setting-item toggle-item">
+                            <div class="setting-info">
+                                <h3>Modalità Riduzione Dati</h3>
+                                <p class="setting-description">Carica immagini a bassa risoluzione</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="data-saver">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Section -->
+                <section class="settings-section" id="data-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-database" aria-hidden="true"></i>
+                        Dati e Backup
+                    </h2>
+
+                    <div class="settings-group">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Scarica i Tuoi Dati</h3>
+                                <p class="setting-description">Ottieni una copia di tutti i tuoi dati EduNet</p>
+                            </div>
+                            <button class="btn-primary" id="download-data-btn">
+                                <i class="fas fa-download" aria-hidden="true"></i>
+                                Richiedi Download
+                            </button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Cancella Cache</h3>
+                                <p class="setting-description">Elimina i dati temporanei per liberare spazio</p>
+                            </div>
+                            <button class="btn-secondary" id="clear-cache-btn">
+                                <i class="fas fa-broom" aria-hidden="true"></i>
+                                Cancella Cache
+                            </button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>Spazio Utilizzato</h3>
+                                <p class="setting-description">Media, documenti e altri file caricati</p>
+                            </div>
+                            <div class="storage-info">
+                                <div class="storage-bar">
+                                    <div class="storage-used" style="width: 35%"></div>
+                                </div>
+                                <p class="storage-text"><strong>350 MB</strong> di 1 GB utilizzati</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- 2FA Setup Modal -->
+    <div class="modal" id="2fa-setup-modal" style="display: none;">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-shield-alt"></i> Configura Autenticazione a Due Fattori</h2>
+                <button class="modal-close" id="close-2fa-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Step 1: Scan QR Code -->
+                <div id="2fa-step-1" class="tfa-step">
+                    <h3>1. Scansiona il QR Code</h3>
+                    <p>Usa un'app di autenticazione come Google Authenticator o Microsoft Authenticator per scansionare questo codice:</p>
+                    <div class="qr-code-container" style="text-align: center; margin: 2rem 0;">
+                        <div id="qr-code-loading" style="padding: 2rem;">
+                            <i class="fas fa-spinner fa-spin fa-3x"></i>
+                            <p>Generazione QR Code...</p>
+                        </div>
+                        <img id="qr-code-image" src="" alt="QR Code 2FA" style="display: none; max-width: 250px; border: 2px solid #e5e7eb; border-radius: 8px; padding: 1rem;">
+                    </div>
+                    <div class="secret-manual" style="background: #f3f4f6; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <p style="margin: 0 0 0.5rem 0; font-weight: 600;">Oppure inserisci manualmente:</p>
+                        <code id="secret-code" style="font-size: 1.1rem; word-break: break-all;"></code>
+                    </div>
+                </div>
+
+                <!-- Step 2: Verify Code -->
+                <div id="2fa-step-2" class="tfa-step" style="display: none;">
+                    <h3>2. Verifica il Codice</h3>
+                    <p>Inserisci il codice a 6 cifre generato dall'app:</p>
+                    <div style="margin: 2rem 0;">
+                        <input type="text" id="verification-code-input" placeholder="000000" maxlength="6" pattern="[0-9]{6}" style="width: 100%; padding: 1rem; font-size: 1.5rem; text-align: center; letter-spacing: 0.5rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                        <p id="verification-error" style="color: #ef4444; margin-top: 0.5rem; display: none;"></p>
+                    </div>
+                    <button class="btn-primary" id="verify-2fa-code-btn" style="width: 100%;">
+                        <i class="fas fa-check"></i> Verifica e Attiva
+                    </button>
+                </div>
+
+                <!-- Step 3: Backup Codes -->
+                <div id="2fa-step-3" class="tfa-step" style="display: none;">
+                    <h3>3. Salva i Codici di Backup</h3>
+                    <div style="background: #fef3c7; border: 2px solid #f59e0b; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                        <p style="margin: 0; font-weight: 600;"><i class="fas fa-exclamation-triangle"></i> IMPORTANTE</p>
+                        <p style="margin: 0.5rem 0 0 0;">Conserva questi codici in un luogo sicuro. Ogni codice può essere usato una sola volta per accedere se perdi l'accesso all'app di autenticazione.</p>
+                    </div>
+                    <div id="backup-codes-container" style="background: #f3f4f6; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; font-family: monospace;">
+                        <!-- Backup codes will be inserted here -->
+                    </div>
+                    <button class="btn-primary" id="download-backup-codes-btn" style="width: 100%; margin-bottom: 1rem;">
+                        <i class="fas fa-download"></i> Scarica Codici
+                    </button>
+                    <button class="btn-secondary" id="finish-2fa-setup-btn" style="width: 100%;">
+                        <i class="fas fa-check-circle"></i> Ho Salvato i Codici
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2FA Disable Modal -->
+    <div class="modal" id="2fa-disable-modal" style="display: none;">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-exclamation-triangle"></i> Disattiva 2FA</h2>
+                <button class="modal-close" id="close-disable-2fa-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Sei sicuro di voler disattivare l'autenticazione a due fattori?</p>
+                <p style="color: #ef4444; font-weight: 600;">Questo renderà il tuo account meno sicuro.</p>
+                <form id="disable-2fa-form" onsubmit="return false;" style="margin: 1.5rem 0;" autocomplete="off">
+                    <input type="text" name="username" autocomplete="username" style="display: none;" aria-hidden="true">
+                    <label for="disable-2fa-password" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Inserisci la tua password per confermare:</label>
+                    <input type="password" id="disable-2fa-password" name="password" placeholder="Password" autocomplete="current-password" style="width: 100%; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px;">
+                    <p id="disable-2fa-error" style="color: #ef4444; margin-top: 0.5rem; display: none;"></p>
+                </form>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn-secondary" id="cancel-disable-2fa-btn" style="flex: 1;">Annulla</button>
+                    <button class="btn-danger" id="confirm-disable-2fa-btn" style="flex: 1;">
+                        <i class="fas fa-times-circle"></i> Disattiva
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sessions Management Modal -->
+    <div class="sessions-modal" id="sessions-modal">
+        <div class="sessions-content">
+            <header class="sessions-header">
+                <h2><i class="fas fa-laptop-house"></i> Sessioni Attive</h2>
+                <button class="close-sessions-btn" id="close-sessions-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </header>
+            
+            <div class="sessions-body">
+                <div id="sessions-list" class="sessions-list">
+                    <!-- Sessions will be injected here -->
+                    <div class="empty-sessions">
+                        <i class="fas fa-spinner fa-spin"></i> Caricamento sessioni...
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="sessions-footer">
+                <button class="sign-out-all-btn" id="sign-out-all-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Disconnetti tutti gli altri dispositivi
+                </button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/utils/console-optimizer.js"></script>
+    <script type="module" src="../../supabase-client.js" defer></script>
+    <script src="../../js/utils/mobile-search.js" defer></script>
+    <script src="../../js/profile/avatar-manager.js" defer></script>
+    <script src="../../js/utils/avatar-loader-fix.js" defer></script>
+    <script src="../../js/auth/2fa-totp.js" defer></script>
+    <script src="../../js/utils/miur-validator.js" defer></script>
+    <script src="../../js/utils/global-search.js" defer></script>
+    <script src="../../js/profile/settings-page.js" defer></script>
+</body>
+</html>

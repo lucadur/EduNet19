@@ -1,0 +1,254 @@
+/* ===================================================================
+   IMAGE CAROUSEL FOR POST GALLERIES
+   Responsive carousel that adapts to image aspect ratio
+   =================================================================== */
+
+.post-image-carousel {
+  position: relative;
+  width: 100%;
+  margin: var(--space-4) 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-gray-100);
+}
+
+/* Carousel Container */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Carousel Track */
+.carousel-track {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+/* Carousel Slide */
+.carousel-slide {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-gray-900);
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Navigation Buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  color: white;
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  transition: all 0.3s ease;
+  z-index: 10;
+  opacity: 0;
+}
+
+.post-image-carousel:hover .carousel-btn {
+  opacity: 1;
+}
+
+.carousel-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-btn.prev {
+  left: var(--space-3);
+}
+
+.carousel-btn.next {
+  right: var(--space-3);
+}
+
+/* Dots Indicators */
+.carousel-dots {
+  position: absolute;
+  bottom: var(--space-3);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--space-2);
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
+}
+
+.carousel-dot.active {
+  background: white;
+  width: 24px;
+  border-radius: var(--radius-full);
+}
+
+/* Image Counter */
+.carousel-counter {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  z-index: 10;
+}
+
+/* Loading State */
+.carousel-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  background: var(--color-gray-100);
+}
+
+.carousel-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--color-gray-300);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .carousel-container {
+    max-height: 400px;
+  }
+  
+  .carousel-slide img {
+    max-height: 400px;
+  }
+  
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: var(--font-size-lg);
+    opacity: 0.8;
+  }
+  
+  .carousel-btn.prev {
+    left: var(--space-2);
+  }
+  
+  .carousel-btn.next {
+    right: var(--space-2);
+  }
+  
+  .carousel-dots {
+    bottom: var(--space-2);
+  }
+  
+  .carousel-counter {
+    top: var(--space-2);
+    right: var(--space-2);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* Touch Swipe Support */
+.carousel-track {
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.carousel-track.dragging {
+  transition: none;
+  cursor: grabbing;
+}
+
+/* Accessibility */
+.carousel-btn:focus,
+.carousel-dot:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.carousel-slide {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Single Image (No Carousel Needed) */
+.post-single-image {
+  width: 100%;
+  margin: var(--space-4) 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-gray-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-single-image img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .post-single-image img {
+    max-height: 400px;
+  }
+}

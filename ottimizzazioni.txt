@@ -1,0 +1,111 @@
+Navigated to http://localhost:8000/homepage.html
+console-optimizer.js:92 🎯 Console Optimizer - Initialized
+console-optimizer.js:92 🎯 Console Optimizer - Script loaded successfully
+console-optimizer.js:92 🛡️ Supabase Error Handler - Initialized
+console-optimizer.js:92 🛡️ Supabase Error Handler - Script loaded successfully
+console-optimizer.js:92 ✅ Client Supabase centralizzato inizializzato
+console-optimizer.js:92 🎯 EduNet Social Features - Script loaded successfully
+console-optimizer.js:92 🏠 EduNet19 Homepage - Initializing...
+console-optimizer.js:92 🏠 EduNet19 Homepage - DOM Ready, starting initialization...
+console-optimizer.js:92 Waiting for auth system... (0ms/10000ms)
+console-optimizer.js:92 🏠 EduNet19 Homepage - Script loaded successfully
+console-optimizer.js:92 Auth state changed: SIGNED_IN {access_token: 'eyJhbGciOiJIUzI1NiIsImtpZCI6Ikk4ajE0WlJZanU5aVFran…HNlfQ.-dlShfSYbvI7pCM047yb8qfnJcwXzLWJ0OzUy05p9Ig', token_type: 'bearer', expires_in: 3600, expires_at: 1759180430, refresh_token: 'jqopiskmj76j', …}
+console-optimizer.js:92 Waiting for auth system... (100ms/10000ms)
+console-optimizer.js:92 Auth state changed: INITIAL_SESSION {access_token: 'eyJhbGciOiJIUzI1NiIsImtpZCI6Ikk4ajE0WlJZanU5aVFran…HNlfQ.-dlShfSYbvI7pCM047yb8qfnJcwXzLWJ0OzUy05p9Ig', token_type: 'bearer', expires_in: 3600, expires_at: 1759180430, refresh_token: 'jqopiskmj76j', …}
+console-optimizer.js:92 Utente già processato, skip handleAuthStateChange
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+Fetch finished loading: GET "<URL>".
+console-optimizer.js:92 Waiting for auth system... (200ms/10000ms)
+console-optimizer.js:92 Waiting for auth system... (300ms/10000ms)
+console-optimizer.js:92 Waiting for auth system... (400ms/10000ms)
+console-optimizer.js:92 Waiting for auth system... (500ms/10000ms)
+console-optimizer.js:92 Profilo utente caricato: {id: '813ebb9e-93f0-4f40-90ae-6204e3935fe8', user_type: 'istituto', email_verified: true, profile_completed: false, created_at: '2025-09-26T07:51:27.370807+00:00', …}
+console-optimizer.js:92 Waiting for auth system... (600ms/10000ms)
+console-optimizer.js:92 Profilo utente caricato: {id: '813ebb9e-93f0-4f40-90ae-6204e3935fe8', user_type: 'istituto', email_verified: true, profile_completed: false, created_at: '2025-09-26T07:51:27.370807+00:00', …}
+console-optimizer.js:92 ✅ Supabase inizializzato correttamente
+console-optimizer.js:92 Social Features - Auth system ready
+console-optimizer.js:92 Social Features - Current user: massimilianociconte624@gmail.com
+console-optimizer.js:92 ✅ EduNet Social Features - Initialized successfully
+console-optimizer.js:92 Auth system available and initialized
+console-optimizer.js:92 User authenticated: massimilianociconte624@gmail.com
+console-optimizer.js:92 Loading favorites...
+console-optimizer.js:92 Attempting to fetch user activities...
+console-optimizer.js:92 Loading trending topics...
+console-optimizer.js:92 Loading suggested institutes...
+console-optimizer.js:92 Loading institute statistics...
+console-optimizer.js:92 Attempting to fetch posts from database...
+console-optimizer.js:92 Fetched 9 real posts from database
+console-optimizer.js:92 Fetched 4 activities
+console-optimizer.js:61 Fetch failed loading: HEAD "https://wpimtdpvrgpgmowdsuec.supabase.co/rest/v1/posts?select=*&is_published=eq.true".
+window.fetch @ console-optimizer.js:61
+(anonymous) @ supabase-js@2:7
+(anonymous) @ supabase-js@2:7
+o @ supabase-js@2:7
+Promise.then
+l @ supabase-js@2:7
+(anonymous) @ supabase-js@2:7
+o @ supabase-js@2:7
+(anonymous) @ supabase-js@2:7
+then @ supabase-js@2:7
+setTimeout
+checkAuth @ homepage-script.js:442
+setTimeout
+checkAuth @ homepage-script.js:442
+setTimeout
+checkAuth @ homepage-script.js:442
+setTimeout
+checkAuth @ homepage-script.js:442
+setTimeout
+checkAuth @ homepage-script.js:442
+setTimeout
+checkAuth @ homepage-script.js:442
+setTimeout
+checkAuth @ homepage-script.js:442
+(anonymous) @ homepage-script.js:446
+waitForAuthSystem @ homepage-script.js:430
+handleDOMReady @ homepage-script.js:81
+init @ homepage-script.js:57
+EduNetHomepage @ homepage-script.js:43
+(anonymous) @ homepage-script.js:2410
+(anonymous) @ homepage-script.js:2413
+console-optimizer.js:92 Statistics updated: {posts: 9, likes: 5, comments: 0, shares: 0}
+console-optimizer.js:92 Statistics updated: {posts: 9, likes: 5, comments: 0, shares: 0}
+console-optimizer.js:61 Fetch failed loading: HEAD "https://wpimtdpvrgpgmowdsuec.supabase.co/rest/v1/post_likes?select=*".
+window.fetch @ console-optimizer.js:61
+(anonymous) @ supabase-js@2:7
+(anonymous) @ supabase-js@2:7
+o @ supabase-js@2:7
+Promise.then
+l @ supabase-js@2:7
+(anonymous) @ supabase-js@2:7
+o @ supabase-js@2:7
+(anonymous) @ supabase-js@2:7
+then @ supabase-js@2:7
+console-optimizer.js:92 ✅ EduNet19 Homepage - Initialized successfully

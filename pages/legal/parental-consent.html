@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferma Consenso Parentale - EduNet19</title>
+    
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../css/pages/legal-pages.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../config.js"></script>
+    <script src="../../supabase-client.js"></script>
+    
+    <style>
+        .consent-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        
+        .consent-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .consent-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .consent-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+        
+        .consent-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .consent-icon.success {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .consent-icon.error {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .consent-icon.expired {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        
+        .consent-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .consent-subtitle {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+        
+        .consent-info {
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .consent-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+        
+        .consent-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .consent-info li {
+            padding: 0.5rem 0;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .consent-info li i {
+            color: #3b82f6;
+            width: 20px;
+        }
+        
+        .consent-legal {
+            font-size: 0.85rem;
+            color: #6b7280;
+            line-height: 1.6;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #fef3c7;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .consent-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .consent-actions .btn {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-confirm {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+        }
+        
+        .btn-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-deny {
+            background: white;
+            color: #ef4444;
+            border: 2px solid #ef4444;
+        }
+        
+        .btn-deny:hover {
+            background: #fef2f2;
+        }
+        
+        .loading-state {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e5e7eb;
+            border-top-color: #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .result-message {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .result-message p {
+            color: #4b5563;
+            margin-top: 1rem;
+        }
+        
+        /* Dark theme */
+        body.dark-theme .consent-card {
+            background: #1f2937;
+        }
+        
+        body.dark-theme .consent-title {
+            color: #f9fafb;
+        }
+        
+        body.dark-theme .consent-subtitle {
+            color: #9ca3af;
+        }
+        
+        body.dark-theme .consent-info {
+            background: #374151;
+        }
+        
+        body.dark-theme .consent-info h3 {
+            color: #e5e7eb;
+        }
+        
+        body.dark-theme .consent-info li {
+            color: #d1d5db;
+        }
+        
+        body.dark-theme .consent-legal {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fcd34d;
+        }
+    </style>
+</head>
+<body>
+    <header class="legal-header">
+        <nav class="legal-nav">
+            <a href="../../index.html" class="legal-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>EduNet19</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="consent-container">
+        <div class="consent-card">
+            <!-- Loading State -->
+            <div id="loadingState" class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Verifica in corso...</p>
+            </div>
+
+            <!-- Consent Form -->
+            <div id="consentForm" style="display: none;">
+                <div class="consent-header">
+                    <div class="consent-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h1 class="consent-title">Conferma Consenso Parentale</h1>
+                    <p class="consent-subtitle">Richiesta di autorizzazione per l'iscrizione di un minore</p>
+                </div>
+
+                <div class="consent-info">
+                    <h3><i class="fas fa-child"></i> Informazioni sulla richiesta</h3>
+                    <ul>
+                        <li><i class="fas fa-user"></i> <span id="childName">Nome minore</span></li>
+                        <li><i class="fas fa-envelope"></i> <span id="childEmail">Email minore</span></li>
+                        <li><i class="fas fa-calendar"></i> Richiesta del: <span id="requestDate">Data</span></li>
+                        <li><i class="fas fa-clock"></i> Scadenza: <span id="expiryDate">Data scadenza</span></li>
+                    </ul>
+                </div>
+
+                <div class="consent-legal">
+                    <strong>Informativa legale:</strong><br>
+                    Ai sensi dell'art. 8 del Regolamento UE 2016/679 (GDPR) e della normativa italiana sulla protezione dei minori online, 
+                    il trattamento dei dati personali di un minore di 16 anni è lecito solo se autorizzato dal titolare della responsabilità genitoriale.
+                    <br><br>
+                    Confermando il consenso, autorizzi <span id="childNameLegal">il minore</span> a:
+                    <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                        <li>Creare un account su EduNet19</li>
+                        <li>Interagire con contenuti educativi</li>
+                        <li>Seguire istituti scolastici</li>
+                    </ul>
+                </div>
+
+                <div class="consent-actions">
+                    <button class="btn btn-deny" onclick="denyConsent()">
+                        <i class="fas fa-times"></i> Rifiuta
+                    </button>
+                    <button class="btn btn-confirm" onclick="confirmConsent()">
+                        <i class="fas fa-check"></i> Conferma Consenso
+                    </button>
+                </div>
+            </div>
+
+            <!-- Success State -->
+            <div id="successState" class="result-message" style="display: none;">
+                <div class="consent-icon success">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2 class="consent-title">Consenso Confermato!</h2>
+                <p>L'account del minore è stato attivato con successo. Ora può accedere a EduNet19.</p>
+                <a href="../../index.html" class="btn btn-confirm" style="display: inline-block; margin-top: 1rem; text-decoration: none;">
+                    Vai alla Home
+                </a>
+            </div>
+
+            <!-- Denied State -->
+            <div id="deniedState" class="result-message" style="display: none;">
+                <div class="consent-icon error">
+                    <i class="fas fa-times"></i>
+                </div>
+                <h2 class="consent-title">Consenso Rifiutato</h2>
+                <p>L'account del minore non sarà attivato. Se cambi idea, il minore dovrà registrarsi nuovamente.</p>
+                <a href="../../index.html" class="btn btn-confirm" style="display: inline-block; margin-top: 1rem; text-decoration: none;">
+                    Vai alla Home
+                </a>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="result-message" style="display: none;">
+                <div class="consent-icon error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h2 class="consent-title">Errore</h2>
+                <p id="errorMessage">Si è verificato un errore.</p>
+                <a href="../../index.html" class="btn btn-confirm" style="display: inline-block; margin-top: 1rem; text-decoration: none;">
+                    Vai alla Home
+                </a>
+            </div>
+
+            <!-- Expired State -->
+            <div id="expiredState" class="result-message" style="display: none;">
+                <div class="consent-icon expired">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h2 class="consent-title">Link Scaduto</h2>
+                <p>Questo link di conferma è scaduto. Il minore dovrà registrarsi nuovamente per ricevere un nuovo link.</p>
+                <a href="../../index.html" class="btn btn-confirm" style="display: inline-block; margin-top: 1rem; text-decoration: none;">
+                    Vai alla Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let consentData = null;
+        let supabase = null;
+
+        async function init() {
+            // Wait for Supabase to be ready
+            await waitForSupabase();
+            supabase = window.supabaseClient;
+
+            // Get token from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+
+            if (!token) {
+                showError('Token mancante. Utilizza il link ricevuto via email.');
+                return;
+            }
+
+            await verifyToken(token);
+        }
+
+        function waitForSupabase() {
+            return new Promise((resolve) => {
+                if (window.supabaseClient) {
+                    resolve();
+                } else {
+                    const interval = setInterval(() => {
+                        if (window.supabaseClient) {
+                            clearInterval(interval);
+                            resolve();
+                        }
+                    }, 100);
+                }
+            });
+        }
+
+        async function verifyToken(token) {
+            try {
+                // Query parental_consents table con i nuovi campi
+                const { data, error } = await supabase
+                    .from('parental_consents')
+                    .select('*')
+                    .eq('consent_token', token)
+                    .single();
+
+                if (error || !data) {
+                    showError('Token non valido o già utilizzato.');
+                    return;
+                }
+
+                // Check status
+                if (data.status === 'approved' || data.confirmed_at) {
+                    showSuccess();
+                    return;
+                }
+
+                if (data.status === 'denied') {
+                    showDenied();
+                    return;
+                }
+
+                // Check if expired
+                if (new Date(data.token_expires_at) < new Date()) {
+                    showExpired();
+                    return;
+                }
+
+                // Store data and show form
+                consentData = data;
+                showConsentForm(data);
+
+            } catch (err) {
+                console.error('Error verifying token:', err);
+                showError('Errore durante la verifica. Riprova più tardi.');
+            }
+        }
+
+        function showConsentForm(data) {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('consentForm').style.display = 'block';
+
+            // Usa i nuovi campi minor_first_name, minor_last_name, minor_email
+            const childName = `${data.minor_first_name || ''} ${data.minor_last_name || ''}`.trim() || 'Non disponibile';
+            
+            document.getElementById('childName').textContent = childName;
+            document.getElementById('childNameLegal').textContent = childName;
+            document.getElementById('childEmail').textContent = data.minor_email || 'Non disponibile';
+            document.getElementById('requestDate').textContent = new Date(data.created_at).toLocaleDateString('it-IT');
+            document.getElementById('expiryDate').textContent = new Date(data.token_expires_at).toLocaleDateString('it-IT', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // Mostra età se disponibile
+            if (data.minor_birth_date) {
+                const birth = new Date(data.minor_birth_date);
+                const today = new Date();
+                let age = today.getFullYear() - birth.getFullYear();
+                const monthDiff = today.getMonth() - birth.getMonth();
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+                    age--;
+                }
+                
+                // Aggiungi info età
+                const infoList = document.querySelector('.consent-info ul');
+                if (infoList) {
+                    const ageItem = document.createElement('li');
+                    ageItem.innerHTML = `<i class="fas fa-birthday-cake"></i> Età: <strong>${age} anni</strong>`;
+                    infoList.appendChild(ageItem);
+                }
+            }
+        }
+
+        async function confirmConsent() {
+            if (!consentData) return;
+
+            try {
+                document.getElementById('consentForm').style.display = 'none';
+                document.getElementById('loadingState').style.display = 'block';
+
+                // Update parental_consents con nuovo status
+                const { error: consentError } = await supabase
+                    .from('parental_consents')
+                    .update({ 
+                        status: 'approved',
+                        confirmed_at: new Date().toISOString()
+                    })
+                    .eq('id', consentData.id);
+
+                if (consentError) throw consentError;
+
+                // Update private_users
+                const { error: userError } = await supabase
+                    .from('private_users')
+                    .update({
+                        parental_consent_verified: true,
+                        account_status: 'active'
+                    })
+                    .eq('id', consentData.minor_user_id);
+
+                if (userError) {
+                    console.warn('Could not update private_users:', userError);
+                }
+
+                showSuccess();
+
+            } catch (err) {
+                console.error('Error confirming consent:', err);
+                showError('Errore durante la conferma. Riprova più tardi.');
+            }
+        }
+
+        async function denyConsent() {
+            if (!consentData) return;
+
+            if (!confirm('Sei sicuro di voler rifiutare il consenso? L\'account del minore non sarà attivato.')) {
+                return;
+            }
+
+            try {
+                document.getElementById('consentForm').style.display = 'none';
+                document.getElementById('loadingState').style.display = 'block';
+
+                // Update status invece di eliminare (mantiene storico)
+                const { error: consentError } = await supabase
+                    .from('parental_consents')
+                    .update({ 
+                        status: 'denied',
+                        denied_at: new Date().toISOString()
+                    })
+                    .eq('id', consentData.id);
+
+                if (consentError) {
+                    console.warn('Could not update parental_consents:', consentError);
+                }
+
+                // Update user status to denied
+                await supabase
+                    .from('private_users')
+                    .update({ account_status: 'parental_consent_denied' })
+                    .eq('id', consentData.minor_user_id);
+
+                showDenied();
+
+            } catch (err) {
+                console.error('Error denying consent:', err);
+                showError('Errore durante l\'operazione. Riprova più tardi.');
+            }
+        }
+
+        function showSuccess() {
+            hideAll();
+            document.getElementById('successState').style.display = 'block';
+        }
+
+        function showDenied() {
+            hideAll();
+            document.getElementById('deniedState').style.display = 'block';
+        }
+
+        function showExpired() {
+            hideAll();
+            document.getElementById('expiredState').style.display = 'block';
+        }
+
+        function showError(message) {
+            hideAll();
+            document.getElementById('errorMessage').textContent = message;
+            document.getElementById('errorState').style.display = 'block';
+        }
+
+        function hideAll() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('consentForm').style.display = 'none';
+            document.getElementById('successState').style.display = 'none';
+            document.getElementById('deniedState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'none';
+            document.getElementById('expiredState').style.display = 'none';
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

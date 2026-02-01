@@ -1,0 +1,972 @@
+/* ===================================================================
+   AUTH MODAL DARK THEME FIXES
+   Fixes contrast issues in login/registration modals for dark mode
+   =================================================================== */
+
+/* === MODAL CONTAINER === */
+
+body.dark-theme .modal-content {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+    border: 1px solid #374151 !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-theme .modal-header {
+    background: rgba(17, 24, 39, 0.5) !important;
+    border-bottom-color: #374151 !important;
+}
+
+body.dark-theme .modal-title {
+    color: #f9fafb !important;
+}
+
+body.dark-theme .modal-title i {
+    color: #60a5fa !important;
+}
+
+body.dark-theme .modal-close {
+    color: #9ca3af !important;
+    background: transparent !important;
+}
+
+body.dark-theme .modal-close:hover {
+    color: #f9fafb !important;
+    background: #374151 !important;
+}
+
+body.dark-theme .modal-footer {
+    background: rgba(17, 24, 39, 0.3) !important;
+    border-top-color: #374151 !important;
+}
+
+body.dark-theme .modal-switch {
+    color: #d1d5db !important;
+}
+
+body.dark-theme .modal-description {
+    color: #d1d5db !important;
+}
+
+/* === FORM ELEMENTS === */
+
+/* Form Labels */
+body.dark-theme .auth-form .form-label,
+body.dark-theme .registration-form .form-label {
+    color: #e5e7eb !important;
+    font-weight: 500 !important;
+}
+
+/* Form Title */
+body.dark-theme .form-header .form-title {
+    color: #f9fafb !important;
+}
+
+body.dark-theme .form-header .form-title i {
+    color: #60a5fa !important;
+}
+
+/* Input Groups */
+body.dark-theme .auth-form .input-group,
+body.dark-theme .registration-form .input-group {
+    background: transparent !important;
+}
+
+/* Input Icons */
+body.dark-theme .auth-form .input-icon,
+body.dark-theme .registration-form .input-icon {
+    color: #9ca3af !important;
+}
+
+/* Form Inputs - High Contrast */
+body.dark-theme .auth-form .form-input,
+body.dark-theme .auth-form .form-select,
+body.dark-theme .registration-form .form-input,
+body.dark-theme .registration-form .form-select,
+body.dark-theme #loginModal .form-input,
+body.dark-theme #loginModal .form-select,
+body.dark-theme #registerModal .form-input,
+body.dark-theme #registerModal .form-select,
+body.dark-theme #forgotPasswordModal .form-input {
+    background-color: #111827 !important;
+    color: #f9fafb !important;
+    border: 2px solid #4b5563 !important;
+    caret-color: #60a5fa !important;
+}
+
+body.dark-theme .auth-form .form-input:focus,
+body.dark-theme .auth-form .form-select:focus,
+body.dark-theme .registration-form .form-input:focus,
+body.dark-theme .registration-form .form-select:focus {
+    border-color: #60a5fa !important;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+    outline: none !important;
+}
+
+/* Placeholder Text - Better Contrast */
+body.dark-theme .auth-form .form-input::placeholder,
+body.dark-theme .registration-form .form-input::placeholder {
+    color: #6b7280 !important;
+    opacity: 1 !important;
+}
+
+/* Select Dropdown Options */
+body.dark-theme .auth-form .form-select option,
+body.dark-theme .registration-form .form-select option {
+    background-color: #1f2937 !important;
+    color: #f9fafb !important;
+}
+
+/* Readonly Inputs (MIUR auto-filled) */
+body.dark-theme .auth-form .form-input[readonly],
+body.dark-theme .registration-form .form-input[readonly] {
+    background-color: #1f2937 !important;
+    color: #d1d5db !important;
+    border-color: #374151 !important;
+    cursor: not-allowed !important;
+}
+
+/* Disabled Inputs */
+body.dark-theme .auth-form .form-input:disabled,
+body.dark-theme .registration-form .form-input:disabled,
+body.dark-theme .auth-form .form-select:disabled,
+body.dark-theme .registration-form .form-select:disabled {
+    background-color: #1f2937 !important;
+    color: #6b7280 !important;
+    border-color: #374151 !important;
+    opacity: 0.7 !important;
+}
+
+/* Password Toggle Button */
+body.dark-theme .auth-form .password-toggle,
+body.dark-theme .registration-form .password-toggle {
+    color: #9ca3af !important;
+    background: transparent !important;
+}
+
+body.dark-theme .auth-form .password-toggle:hover,
+body.dark-theme .registration-form .password-toggle:hover {
+    color: #60a5fa !important;
+}
+
+/* Search MIUR Button */
+body.dark-theme .auth-form .btn-icon,
+body.dark-theme .registration-form .btn-icon,
+body.dark-theme #searchMiurBtn {
+    background: #374151 !important;
+    color: #e5e7eb !important;
+    border: 1px solid #4b5563 !important;
+}
+
+body.dark-theme .auth-form .btn-icon:hover,
+body.dark-theme .registration-form .btn-icon:hover,
+body.dark-theme #searchMiurBtn:hover {
+    background: #60a5fa !important;
+    color: #ffffff !important;
+    border-color: #60a5fa !important;
+}
+
+/* === INFO BOX (MIUR Instructions) === */
+
+body.dark-theme .form-info-box {
+    background: rgba(59, 130, 246, 0.15) !important;
+    border: 1px solid rgba(96, 165, 250, 0.4) !important;
+    border-radius: 8px !important;
+    color: #93c5fd !important;
+}
+
+body.dark-theme .form-info-box i {
+    color: #60a5fa !important;
+}
+
+body.dark-theme .form-info-box p {
+    color: #d1d5db !important;
+}
+
+body.dark-theme .form-info-box strong {
+    color: #93c5fd !important;
+}
+
+/* === MIUR PREVIEW BOX === */
+
+body.dark-theme .miur-preview {
+    background: #111827 !important;
+    border: 1px solid #374151 !important;
+    border-radius: 8px !important;
+}
+
+body.dark-theme .miur-preview-header {
+    background: rgba(34, 197, 94, 0.15) !important;
+    border-bottom: 1px solid #374151 !important;
+    color: #86efac !important;
+}
+
+body.dark-theme .miur-preview-header i {
+    color: #22c55e !important;
+}
+
+body.dark-theme .miur-preview-content {
+    color: #e5e7eb !important;
+}
+
+body.dark-theme .miur-preview-item {
+    border-bottom-color: #374151 !important;
+}
+
+body.dark-theme .miur-preview-label {
+    color: #9ca3af !important;
+}
+
+body.dark-theme .miur-preview-value {
+    color: #f9fafb !important;
+}
+
+/* === SUCCESS/ERROR MESSAGES === */
+
+body.dark-theme .form-success {
+    background: rgba(34, 197, 94, 0.15) !important;
+    border: 1px solid rgba(34, 197, 94, 0.4) !important;
+    color: #86efac !important;
+}
+
+body.dark-theme .form-success i {
+    color: #22c55e !important;
+}
+
+body.dark-theme .form-error {
+    color: #fca5a5 !important;
+}
+
+/* === USER TYPE SELECTION === */
+
+body.dark-theme .user-type-selection .selection-title {
+    color: #e5e7eb !important;
+}
+
+body.dark-theme .user-type-card {
+    background: #111827 !important;
+    border: 2px solid #374151 !important;
+    transition: all 0.2s ease !important;
+}
+
+body.dark-theme .user-type-card:hover {
+    background: #1f2937 !important;
+    border-color: #60a5fa !important;
+    transform: translateY(-2px) !important;
+}
+
+body.dark-theme .user-type-card.selected,
+body.dark-theme .user-type-card:focus {
+    background: rgba(96, 165, 250, 0.1) !important;
+    border-color: #60a5fa !important;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+}
+
+body.dark-theme .user-type-icon {
+    background: rgba(96, 165, 250, 0.15) !important;
+    color: #60a5fa !important;
+}
+
+body.dark-theme .user-type-card:hover .user-type-icon {
+    background: rgba(96, 165, 250, 0.25) !important;
+}
+
+body.dark-theme .user-type-title {
+    color: #f9fafb !important;
+}
+
+body.dark-theme .user-type-desc {
+    color: #9ca3af !important;
+}
+
+/* === LINKS === */
+
+body.dark-theme .form-links .link-secondary {
+    color: #9ca3af !important;
+}
+
+body.dark-theme .form-links .link-secondary:hover {
+    color: #60a5fa !important;
+}
+
+body.dark-theme .link-primary {
+    color: #60a5fa !important;
+}
+
+body.dark-theme .link-primary:hover {
+    color: #93c5fd !important;
+    text-decoration: underline !important;
+}
+
+/* === BUTTONS === */
+
+body.dark-theme .auth-form .btn-primary,
+body.dark-theme .registration-form .btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    border: none !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+body.dark-theme .auth-form .btn-primary:hover,
+body.dark-theme .registration-form .btn-primary:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4) !important;
+    transform: translateY(-1px) !important;
+}
+
+body.dark-theme .auth-form .btn-primary:disabled,
+body.dark-theme .registration-form .btn-primary:disabled {
+    background: #374151 !important;
+    color: #6b7280 !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+}
+
+
+/* ===================================================================
+   2FA LOGIN MODAL DARK THEME FIXES
+   =================================================================== */
+
+body.dark-theme #2fa-login-modal .modal-content {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+    border: 1px solid #374151 !important;
+}
+
+body.dark-theme #2fa-login-modal .modal-header {
+    background: rgba(17, 24, 39, 0.5) !important;
+    border-bottom: 1px solid #374151 !important;
+}
+
+body.dark-theme #2fa-login-modal .modal-header h2 {
+    color: #f9fafb !important;
+}
+
+body.dark-theme #2fa-login-modal .modal-header h2 i {
+    color: #60a5fa !important;
+}
+
+body.dark-theme #2fa-login-modal .modal-body p {
+    color: #d1d5db !important;
+}
+
+body.dark-theme #2fa-login-modal #2fa-login-code-input,
+body.dark-theme #2fa-login-modal #backup-code-input {
+    background-color: #111827 !important;
+    color: #f9fafb !important;
+    border: 2px solid #4b5563 !important;
+}
+
+body.dark-theme #2fa-login-modal #2fa-login-code-input:focus,
+body.dark-theme #2fa-login-modal #backup-code-input:focus {
+    border-color: #60a5fa !important;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+    outline: none !important;
+}
+
+body.dark-theme #2fa-login-modal #2fa-login-code-input::placeholder,
+body.dark-theme #2fa-login-modal #backup-code-input::placeholder {
+    color: #6b7280 !important;
+}
+
+body.dark-theme #2fa-login-modal #use-backup-code-btn {
+    color: #9ca3af !important;
+}
+
+body.dark-theme #2fa-login-modal #use-backup-code-btn:hover {
+    color: #60a5fa !important;
+}
+
+/* ===================================================================
+   RESET PASSWORD PAGE DARK THEME FIXES
+   =================================================================== */
+
+body.dark-theme .reset-container {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+    border: 1px solid #374151 !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-theme .reset-header h1 {
+    color: #f9fafb !important;
+}
+
+body.dark-theme .reset-header p {
+    color: #9ca3af !important;
+}
+
+body.dark-theme .password-requirements {
+    background: #111827 !important;
+    border-color: #374151 !important;
+}
+
+body.dark-theme .password-requirements h4 {
+    color: #e5e7eb !important;
+}
+
+body.dark-theme .password-requirements li {
+    color: #9ca3af !important;
+}
+
+body.dark-theme .password-requirements li.valid {
+    color: #86efac !important;
+}
+
+body.dark-theme .password-requirements li.invalid {
+    color: #fca5a5 !important;
+}
+
+body.dark-theme .reset-container .form-group label {
+    color: #e5e7eb !important;
+}
+
+body.dark-theme .reset-container .form-group input {
+    background-color: #111827 !important;
+    color: #f9fafb !important;
+    border: 2px solid #4b5563 !important;
+}
+
+body.dark-theme .reset-container .form-group input:focus {
+    border-color: #60a5fa !important;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+}
+
+body.dark-theme .reset-container .form-group input.error {
+    border-color: #ef4444 !important;
+}
+
+body.dark-theme .reset-container .form-group input.success {
+    border-color: #22c55e !important;
+}
+
+body.dark-theme .reset-container .validation-message.error {
+    color: #fca5a5 !important;
+}
+
+body.dark-theme .reset-container .validation-message.success {
+    color: #86efac !important;
+}
+
+body.dark-theme .reset-container .btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    color: #ffffff !important;
+}
+
+body.dark-theme .reset-container .btn:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+}
+
+body.dark-theme .reset-container .btn:disabled {
+    background: #374151 !important;
+    color: #6b7280 !important;
+}
+
+body.dark-theme .back-link a {
+    color: #60a5fa !important;
+}
+
+body.dark-theme .back-link a:hover {
+    color: #93c5fd !important;
+}
+
+
+/* ===================================================================
+   EDIT PROFILE - PRIVATE USER INFO BOX DARK THEME
+   =================================================================== */
+
+body.dark-theme .info-box {
+    background: rgba(59, 130, 246, 0.15) !important;
+    border-color: rgba(96, 165, 250, 0.4) !important;
+}
+
+body.dark-theme .info-box h3 {
+    color: #93c5fd !important;
+}
+
+body.dark-theme .info-box p {
+    color: #d1d5db !important;
+}
+
+body.dark-theme .info-box i {
+    color: #60a5fa !important;
+}
+
+/* ===================================================================
+   PROFILE PAGE - PRIVATE USER RESTRICTIONS STYLES
+   =================================================================== */
+
+body.dark-theme .profile-stats {
+    transition: all 0.3s ease;
+}
+
+/* Stile per la singola stat card centrata (utenti privati) */
+body.dark-theme #following-stat-card.single-stat {
+    min-width: 200px;
+    max-width: 300px;
+}
+
+
+/* ===================================================================
+   PROFILE PAGE - PRIVATE USER INFO BOX DARK THEME
+   =================================================================== */
+
+body.dark-theme .private-user-info-box {
+    background: rgba(59, 130, 246, 0.15) !important;
+    border-color: rgba(96, 165, 250, 0.4) !important;
+}
+
+body.dark-theme .private-user-info-box h3 {
+    color: #93c5fd !important;
+}
+
+body.dark-theme .private-user-info-box p {
+    color: #d1d5db !important;
+}
+
+body.dark-theme .private-user-info-box i {
+    color: #60a5fa !important;
+}
+
+body.dark-theme .private-about-section .info-item label {
+    color: #9ca3af !important;
+}
+
+body.dark-theme .private-about-section .info-item p {
+    color: #e5e7eb !important;
+}
+
+/* === PARENTAL CONSENT SECTION === */
+
+.parental-consent-section,
+.minor-consent-section {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    background: rgba(255, 152, 0, 0.05);
+    border: 1px solid rgba(255, 152, 0, 0.2);
+}
+
+body.dark-theme .parental-consent-section,
+body.dark-theme .minor-consent-section {
+    background: rgba(255, 152, 0, 0.1) !important;
+    border-color: rgba(255, 152, 0, 0.3) !important;
+}
+
+.form-hint {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.form-hint i {
+    color: #3b82f6;
+    margin-top: 2px;
+}
+
+body.dark-theme .form-hint {
+    color: #9ca3af !important;
+}
+
+body.dark-theme .form-hint i {
+    color: #60a5fa !important;
+}
+
+/* Age warning styles */
+.age-warning {
+    background: #fef3c7;
+    border: 1px solid #f59e0b;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+body.dark-theme .age-warning {
+    background: rgba(245, 158, 11, 0.15) !important;
+    border-color: rgba(245, 158, 11, 0.4) !important;
+}
+
+.age-error {
+    background: #fee2e2;
+    border: 1px solid #ef4444;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    color: #dc2626;
+}
+
+body.dark-theme .age-error {
+    background: rgba(239, 68, 68, 0.15) !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+    color: #f87171 !important;
+}
+
+/* Checkbox styling for consent */
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: #3b82f6;
+}
+
+.checkbox-text {
+    color: #374151;
+}
+
+body.dark-theme .checkbox-text {
+    color: #d1d5db !important;
+}
+
+
+/* ===================================================================
+   CODICE FISCALE VALIDATION ERRORS - ENHANCED STYLES
+   Stili per mostrare chiaramente quando i dati non corrispondono al CF
+   =================================================================== */
+
+/* Container principale errori CF */
+.cf-validation-errors {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.15) 100%);
+    border: 2px solid #ef4444;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 12px;
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Header errore */
+.cf-error-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+    color: #dc2626;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.cf-error-header i {
+    font-size: 1.25rem;
+    color: #ef4444;
+}
+
+/* Descrizione errore */
+.cf-error-description {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #7f1d1d;
+    line-height: 1.5;
+}
+
+/* Lista errori specifici */
+.cf-error-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.cf-error-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    border-left: 4px solid #ef4444;
+    font-size: 0.9rem;
+    color: #991b1b;
+    line-height: 1.4;
+}
+
+.cf-error-list li i {
+    color: #dc2626;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.cf-error-list li strong {
+    color: #7f1d1d;
+}
+
+/* Box suggerimento */
+.cf-error-suggestion {
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+    padding: 12px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 8px;
+}
+
+.cf-error-suggestion > i {
+    color: #3b82f6;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.cf-error-suggestion strong {
+    color: #1e40af;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.cf-error-suggestion ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 0.85rem;
+    color: #1e3a8a;
+}
+
+.cf-error-suggestion ul li {
+    margin-bottom: 4px;
+    background: none;
+    border: none;
+    padding: 0;
+    border-left: none;
+}
+
+/* === DARK THEME === */
+
+body.dark-theme .cf-validation-errors {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(185, 28, 28, 0.25) 100%) !important;
+    border-color: #f87171 !important;
+}
+
+body.dark-theme .cf-error-header {
+    color: #fca5a5 !important;
+    border-bottom-color: rgba(248, 113, 113, 0.3) !important;
+}
+
+body.dark-theme .cf-error-header i {
+    color: #f87171 !important;
+}
+
+body.dark-theme .cf-error-description {
+    background: rgba(0, 0, 0, 0.3) !important;
+    color: #fecaca !important;
+}
+
+body.dark-theme .cf-error-list li {
+    background: rgba(0, 0, 0, 0.25) !important;
+    border-left-color: #f87171 !important;
+    color: #fecaca !important;
+}
+
+body.dark-theme .cf-error-list li i {
+    color: #f87171 !important;
+}
+
+body.dark-theme .cf-error-list li strong {
+    color: #fca5a5 !important;
+}
+
+body.dark-theme .cf-error-suggestion {
+    background: rgba(59, 130, 246, 0.15) !important;
+    border-color: rgba(96, 165, 250, 0.4) !important;
+}
+
+body.dark-theme .cf-error-suggestion > i {
+    color: #60a5fa !important;
+}
+
+body.dark-theme .cf-error-suggestion strong {
+    color: #93c5fd !important;
+}
+
+body.dark-theme .cf-error-suggestion ul {
+    color: #bfdbfe !important;
+}
+
+/* Input con errore CF */
+.form-input.is-invalid {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+}
+
+body.dark-theme .form-input.is-invalid {
+    border-color: #f87171 !important;
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.2) !important;
+}
+
+/* Input valido */
+.form-input.is-valid {
+    border-color: #22c55e !important;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2) !important;
+}
+
+body.dark-theme .form-input.is-valid {
+    border-color: #4ade80 !important;
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2) !important;
+}
+
+
+/* ===================================================================
+   AUTOCOMPLETE DROPDOWN DARK THEME
+   Fix contrasto per dropdown ricerca istituti
+   =================================================================== */
+
+body.dark-theme .autocomplete-dropdown {
+    background-color: #1f2937 !important;
+    border: 1px solid #4b5563 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-theme .autocomplete-item {
+    background-color: #1f2937 !important;
+    color: #f9fafb !important;
+    border-bottom: 1px solid #374151 !important;
+}
+
+body.dark-theme .autocomplete-item:hover,
+body.dark-theme .autocomplete-item.active {
+    background-color: #374151 !important;
+    color: #ffffff !important;
+}
+
+body.dark-theme .autocomplete-item-main {
+    color: #f9fafb !important;
+}
+
+body.dark-theme .autocomplete-item-name {
+    color: #f9fafb !important;
+}
+
+body.dark-theme .autocomplete-item-details {
+    color: #9ca3af !important;
+}
+
+body.dark-theme .autocomplete-item .detail-type {
+    color: #93c5fd !important;
+    background: rgba(96, 165, 250, 0.15) !important;
+}
+
+body.dark-theme .autocomplete-item .detail-location {
+    color: #9ca3af !important;
+}
+
+body.dark-theme .autocomplete-item .detail-location i {
+    color: #60a5fa !important;
+}
+
+body.dark-theme .autocomplete-item .verified-icon {
+    color: #4ade80 !important;
+}
+
+body.dark-theme .autocomplete-item i.fa-school {
+    color: #60a5fa !important;
+}
+
+/* Messaggio "nessun risultato" */
+body.dark-theme .autocomplete-message {
+    background-color: #1f2937 !important;
+    color: #9ca3af !important;
+}
+
+/* Highlight del testo cercato */
+body.dark-theme .autocomplete-item mark,
+body.dark-theme .autocomplete-item .highlight {
+    background-color: rgba(96, 165, 250, 0.3) !important;
+    color: #93c5fd !important;
+}
+
+
+/* ===================================================================
+   SELECT DISABLED/READONLY DARK THEME FIX
+   Fix visibilità campo "Tipo Istituto" disabilitato
+   =================================================================== */
+
+body.dark-theme .form-select[disabled],
+body.dark-theme .form-select:disabled,
+body.dark-theme select.form-select[disabled],
+body.dark-theme select.form-select:disabled {
+    background-color: #1f2937 !important;
+    color: #d1d5db !important;
+    border: 2px solid #374151 !important;
+    opacity: 1 !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: not-allowed !important;
+}
+
+/* Assicura che il testo sia visibile anche con opacity */
+body.dark-theme .form-select[disabled] option,
+body.dark-theme .form-select:disabled option {
+    background-color: #1f2937 !important;
+    color: #d1d5db !important;
+}
+
+/* Fix specifico per il campo tipo istituto */
+body.dark-theme #instituteType:disabled,
+body.dark-theme #instituteType[disabled] {
+    background-color: #1f2937 !important;
+    color: #d1d5db !important;
+    border: 2px solid #374151 !important;
+    opacity: 1 !important;
+}
+
+/* Fix per TUTTI i select in dark mode (anche non disabilitati) */
+body.dark-theme select.form-select,
+body.dark-theme .form-select,
+body.dark-theme #instituteType {
+    background-color: #111827 !important;
+    color: #f9fafb !important;
+    border: 2px solid #4b5563 !important;
+}
+
+/* Assicura che il testo sia sempre visibile */
+body.dark-theme select.form-select option,
+body.dark-theme .form-select option,
+body.dark-theme #instituteType option {
+    background-color: #1f2937 !important;
+    color: #f9fafb !important;
+    padding: 10px !important;
+}
+
+/* Fix per select readonly/disabled con valore precompilato */
+body.dark-theme select.form-select[readonly],
+body.dark-theme select.form-select[disabled],
+body.dark-theme .form-select[readonly],
+body.dark-theme .form-select[disabled] {
+    background-color: #1f2937 !important;
+    color: #d1d5db !important;
+    border: 2px solid #374151 !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: #d1d5db !important;
+}
+
+/* Fix per l'icona input-icon che potrebbe coprire il testo */
+body.dark-theme .input-group .input-icon {
+    color: #9ca3af !important;
+    z-index: 1;
+}
+
+/* Assicura padding sinistro per fare spazio all'icona */
+body.dark-theme .input-group select.form-select,
+body.dark-theme .input-group .form-select {
+    padding-left: 40px !important;
+}

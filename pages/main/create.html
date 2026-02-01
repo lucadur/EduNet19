@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea Contenuto - EduNet19</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../css/components/homepage-styles.css">
+    <link rel="stylesheet" href="../../css/components/mobile-search.css">
+    <link rel="stylesheet" href="../../css/components/create-page.css">
+    <link rel="stylesheet" href="../../css/components/upload-progress.css">
+    <link rel="stylesheet" href="../../css/components/mobile-menu-fix.css">
+    <link rel="stylesheet" href="../../css/components/dark-theme-fixes.css">
+    <link rel="stylesheet" href="../../css/components/auth-notifications.css">
+    
+    <!-- Image Compression Library -->
+    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    
+    <!-- Preference Loader (Must be in HEAD to prevent FOUC) -->
+    <script src="../../js/utils/preference-loader.js"></script>
+    
+    <!-- Scripts -->
+    <script src="../../js/utils/console-optimizer.js"></script>
+    <script src="../../config.js" defer></script>
+    <script src="../../js/utils/error-handling.js" defer></script>
+    <script src="../../js/utils/supabase-error-handler.js" defer></script>
+    <script type="module" src="../../supabase-client.js" defer></script>
+    <script src="../../js/auth/validation.js" defer></script>
+    <script src="../../js/auth/auth.js" defer></script>
+    <script src="../../js/profile/avatar-manager.js" defer></script>
+    <script src="../../js/utils/avatar-loader-fix.js" defer></script>
+    <script src="../../js/profile/profile-management.js" defer></script>
+    <script src="../../js/utils/mobile-search.js" defer></script>
+    <script src="../../js/social/social-features.js" defer></script>
+    <script src="../../js/utils/miur-validator.js" defer></script>
+    <script src="../../js/utils/global-search.js" defer></script>
+    <script src="../../js/utils/create-page.js?v=5.0" defer></script>
+</head>
+
+<body class="homepage-body">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-nav" role="banner">
+        <div class="nav-container">
+            <!-- Logo and Brand -->
+            <div class="nav-brand">
+                <a href="../../homepage.html" class="logo" aria-label="EduNet19 - Torna alla home">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                    <span>EduNet19</span>
+                </a>
+            </div>
+
+            <!-- Mobile Search Button (only visible on mobile) -->
+            <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Cerca">
+                <i class="fas fa-search"></i>
+            </button>
+            
+            <!-- Search Bar -->
+            <div class="nav-search">
+                <div class="search-container" role="search">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input 
+                        type="search" 
+                        class="search-input" 
+                        placeholder="Cerca istituti, progetti, metodologie..."
+                        aria-label="Cerca contenuti nella piattaforma"
+                        id="global-search"
+                        name="search"
+                        autocomplete="off"
+                    >
+                    <button class="search-clear" aria-label="Cancella ricerca" style="display: none;" tabindex="-1">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="search-results" style="display: none;"></div>
+            </div>
+            
+            <!-- Navigation Actions -->
+            <div class="nav-actions">
+                <!-- Create Button -->
+                <a href="pages/main/create.html" class="nav-create-btn active" aria-label="Crea contenuto">
+                    <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                    <span>Crea</span>
+                </a>
+                
+                <!-- Notifications -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button" aria-label="Notifiche" id="notifications-btn" aria-expanded="false" aria-haspopup="true">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                        <span class="notification-badge" id="notification-count" style="display: none;" aria-label="notifiche non lette">0</span>
+                    </button>
+                    <div class="dropdown-menu" id="notifications-dropdown">
+                        <div class="dropdown-header">
+                            <h3>Notifiche</h3>
+                            <button class="mark-all-read" id="mark-all-read">Segna tutte come lette</button>
+                        </div>
+                        <div class="notifications-list" id="notifications-list">
+                            <div class="no-notifications">
+                                <i class="fas fa-bell-slash" aria-hidden="true"></i>
+                                <p>Nessuna notifica</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Messages -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button" aria-label="Messaggi" id="messages-btn">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span class="message-badge" id="message-count" style="display: none;">0</span>
+                    </button>
+                    <div class="dropdown-menu" id="messages-dropdown">
+                        <div class="dropdown-header">
+                            <h3>Messaggi</h3>
+                            <a href="#" class="view-all">Vedi tutti</a>
+                        </div>
+                        <div class="messages-list" id="messages-list">
+                            <div class="no-messages">
+                                <i class="fas fa-envelope-open" aria-hidden="true"></i>
+                                <p>Nessun messaggio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- User Profile -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button user-avatar" aria-label="Profilo utente" id="user-menu-btn">
+                        <img src="" alt="Avatar utente" class="avatar-img" id="user-avatar" style="display: none;">
+                        <i class="fas fa-user-circle default-avatar" aria-hidden="true"></i>
+                        <span class="user-name" id="user-name">Utente</span>
+                        <i class="fas fa-chevron-down dropdown-arrow" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu user-dropdown" id="user-dropdown">
+                        <div class="user-info">
+                            <div class="user-avatar-large">
+                                <img src="" alt="Avatar utente" class="avatar-img-large" id="user-avatar-large" style="display: none;">
+                                <i class="fas fa-user-circle default-avatar-large" aria-hidden="true"></i>
+                            </div>
+                            <div class="user-details">
+                                <h4 id="user-full-name">Nome Utente</h4>
+                                <p id="user-type-display">Tipo Account</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="../profile/profile.html" class="dropdown-item" id="view-profile">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                            Visualizza Profilo
+                        </a>
+                        <a href="../profile/edit-profile.html" class="dropdown-item" id="edit-profile">
+                            <i class="fas fa-edit" aria-hidden="true"></i>
+                            Modifica Profilo
+                        </a>
+                        <a href="../profile/settings.html" class="dropdown-item" id="settings">
+                            <i class="fas fa-cog" aria-hidden="true"></i>
+                            Impostazioni
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item logout-btn" id="logout-btn">
+                            <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                            Esci
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Menu mobile" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+            <div class="mobile-menu-content">
+                <!-- Close Button -->
+                <button class="mobile-menu-close" aria-label="Chiudi menu mobile" id="mobile-menu-close">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+                
+                <!-- User Info Section -->
+                <div class="mobile-user-info">
+                    <div class="mobile-user-avatar">
+                        <img src="" alt="Avatar utente" class="mobile-avatar-img" id="mobile-user-avatar" style="display: none;">
+                        <i class="fas fa-user-circle mobile-default-avatar" aria-hidden="true"></i>
+                    </div>
+                    <div class="mobile-user-details">
+                        <h4 id="mobile-user-name">Nome Utente</h4>
+                        <p id="mobile-user-type">Tipo Account</p>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Items -->
+                <nav class="mobile-menu-nav">
+                    <a href="../../homepage.html" class="mobile-menu-item">
+                        <i class="fas fa-home" aria-hidden="true"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="homepage.html#explore" class="mobile-menu-item">
+                        <i class="fas fa-compass" aria-hidden="true"></i>
+                        <span>Esplora</span>
+                    </a>
+                    
+                    <div class="mobile-menu-divider"></div>
+                    
+                    <a href="#" class="mobile-menu-item" id="mobile-notifications">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                        <span>Notifiche</span>
+                        <span class="mobile-menu-badge" id="mobile-menu-notification-count" style="display: none;">0</span>
+                    </a>
+                    <a href="#" class="mobile-menu-item" id="mobile-messages">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span>Messaggi</span>
+                        <span class="mobile-menu-badge" id="mobile-menu-message-count" style="display: none;">0</span>
+                    </a>
+                    
+                    <div class="mobile-menu-divider"></div>
+                    
+                    <a href="../profile/profile.html" class="mobile-menu-item" id="mobile-profile">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        <span>Il Mio Profilo</span>
+                    </a>
+                    <a href="../profile/settings.html" class="mobile-menu-item" id="mobile-settings">
+                        <i class="fas fa-cog" aria-hidden="true"></i>
+                        <span>Impostazioni</span>
+                    </a>
+                    
+                    <div class="mobile-menu-divider"></div>
+                    
+                    <button class="mobile-menu-item logout" id="mobile-logout">
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                        <span>Esci</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Mobile Search Overlay -->
+        <div class="mobile-search-overlay" id="mobileSearchOverlay">
+            <div class="mobile-search-content">
+                <div class="mobile-search-header">
+                    <button class="mobile-search-back" id="mobileSearchBack">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="mobile-search-input-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="search" class="mobile-search-input" placeholder="Cerca..." id="mobileSearchInput">
+                        <button class="mobile-search-clear" id="mobileSearchClear" style="display:none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mobile-search-results" id="mobileSearchResults">
+                    <!-- Results will be dynamically populated -->
+                    <div class="mobile-search-empty">
+                        <div class="recent-searches" style="display:none;" id="mobileRecentSearches">
+                            <h3>Ricerche Recenti</h3>
+                            <div class="suggestion-item">
+                                <i class="fas fa-history"></i>
+                                <span>Metodologia Montessori</span>
+                            </div>
+                        </div>
+                        <div class="quick-suggestions">
+                            <h3>Suggerimenti</h3>
+                            <div class="suggestion-item" data-query="Istituti Roma">
+                                <i class="fas fa-search"></i>
+                                <span>Istituti Roma</span>
+                            </div>
+                            <div class="suggestion-item" data-query="Progetti STEM">
+                                <i class="fas fa-search"></i>
+                                <span>Progetti STEM</span>
+                            </div>
+                            <div class="suggestion-item" data-query="Metodologie innovative">
+                                <i class="fas fa-search"></i>
+                                <span>Metodologie innovative</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="create-main">
+        <div class="create-container">
+            <!-- Header -->
+            <header class="create-header">
+                <div class="header-content">
+                    <h1 class="page-title">
+                        <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                        Crea Contenuto Educativo
+                    </h1>
+                    <p class="page-subtitle">
+                        Condividi progetti, metodologie e esperienze con la community educativa
+                    </p>
+                </div>
+            </header>
+
+            <!-- Creation Options Grid -->
+            <div class="creation-grid">
+                <!-- Post Testuale -->
+                <div class="creation-card" data-type="post">
+                    <div class="card-icon">
+                        <i class="fas fa-align-left"></i>
+                    </div>
+                    <h3 class="card-title">Post Testuale</h3>
+                    <p class="card-description">
+                        Condividi aggiornamenti, annunci o riflessioni educative con la community
+                    </p>
+                    <button class="card-button" onclick="window.createPage.openCreationModal('post')">
+                        <i class="fas fa-plus"></i>
+                        Crea Post
+                    </button>
+                </div>
+
+                <!-- Progetto Didattico -->
+                <div class="creation-card featured" data-type="project">
+                    <div class="card-badge">Consigliato</div>
+                    <div class="card-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="card-title">Progetto Didattico</h3>
+                    <p class="card-description">
+                        Pubblica un progetto educativo completo con obiettivi, metodologie e risultati
+                    </p>
+                    <button class="card-button primary" onclick="window.createPage.openCreationModal('project')">
+                        <i class="fas fa-plus"></i>
+                        Crea Progetto
+                    </button>
+                </div>
+
+                <!-- Metodologia Educativa -->
+                <div class="creation-card" data-type="methodology">
+                    <div class="card-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="card-title">Metodologia Educativa</h3>
+                    <p class="card-description">
+                        Condividi approcci pedagogici, tecniche didattiche e best practices
+                    </p>
+                    <button class="card-button" onclick="window.createPage.openCreationModal('methodology')">
+                        <i class="fas fa-plus"></i>
+                        Crea Metodologia
+                    </button>
+                </div>
+
+                <!-- Galleria Fotografica -->
+                <div class="creation-card" data-type="gallery">
+                    <div class="card-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3 class="card-title">Galleria Fotografica</h3>
+                    <p class="card-description">
+                        Carica foto di eventi, attività o spazi della tua scuola (max 20 foto)
+                    </p>
+                    <button class="card-button" onclick="window.createPage.openCreationModal('gallery')">
+                        <i class="fas fa-plus"></i>
+                        Crea Galleria
+                    </button>
+                </div>
+
+                <!-- Esperienza Educativa -->
+                <div class="creation-card" data-type="experience">
+                    <div class="card-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="card-title">Esperienza Educativa</h3>
+                    <p class="card-description">
+                        Racconta un'esperienza significativa, un caso studio o una lezione appresa
+                    </p>
+                    <button class="card-button" onclick="window.createPage.openCreationModal('experience')">
+                        <i class="fas fa-plus"></i>
+                        Condividi Esperienza
+                    </button>
+                </div>
+
+                <!-- Collaborazione -->
+                <div class="creation-card" data-type="collaboration">
+                    <div class="card-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="card-title">Richiesta Collaborazione</h3>
+                    <p class="card-description">
+                        Cerca partner per progetti comuni, scambi culturali o iniziative condivise
+                    </p>
+                    <button class="card-button" onclick="window.createPage.openCreationModal('collaboration')">
+                        <i class="fas fa-plus"></i>
+                        Proponi Collaborazione
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Drafts -->
+            <section class="drafts-section" id="drafts-section" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-file-alt"></i>
+                        Bozze Salvate
+                    </h2>
+                    <button class="btn-text" onclick="window.createPage.viewAllDrafts()">
+                        Vedi tutte
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="drafts-grid" id="drafts-grid">
+                    <!-- Drafts will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Quick Tips -->
+            <section class="tips-section">
+                <div class="tips-card">
+                    <div class="tips-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="tips-content">
+                        <h3 class="tips-title">Suggerimenti per contenuti di qualità</h3>
+                        <ul class="tips-list">
+                            <li><i class="fas fa-check"></i> Usa titoli chiari e descrittivi</li>
+                            <li><i class="fas fa-check"></i> Includi obiettivi e risultati misurabili</li>
+                            <li><i class="fas fa-check"></i> Aggiungi immagini per rendere il contenuto più coinvolgente</li>
+                            <li><i class="fas fa-check"></i> Rispetta la privacy: maschera i volti degli studenti</li>
+                            <li><i class="fas fa-check"></i> Condividi risorse e materiali utili</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" role="navigation" aria-label="Navigazione mobile">
+        <a href="../../homepage.html" class="mobile-nav-item">
+            <i class="fas fa-home" aria-hidden="true"></i>
+            <span>Home</span>
+        </a>
+        <a href="homepage.html#saved" class="mobile-nav-item">
+            <i class="fas fa-bookmark" aria-hidden="true"></i>
+            <span>Salvati</span>
+            <span class="mobile-notification-badge" id="mobile-saved-count" style="display: none;">0</span>
+        </a>
+        <a href="pages/main/create.html" class="mobile-nav-item create-btn active">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            <span>Crea</span>
+        </a>
+        <a href="homepage.html#notifications" class="mobile-nav-item">
+            <i class="fas fa-bell" aria-hidden="true"></i>
+            <span>Notifiche</span>
+            <span class="mobile-notification-badge" id="mobile-notification-count" style="display: none;">0</span>
+        </a>
+        <a href="../profile/profile.html" class="mobile-nav-item">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <span>Profilo</span>
+        </a>
+    </nav>
+
+    <!-- Modal: Crea Post Testuale -->
+    <div id="modal-post" class="creation-modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeCreationModal('post')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-align-left"></i> Crea Post Testuale</h2>
+                <button class="modal-close" onclick="closeCreationModal('post')" aria-label="Chiudi">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-post" class="creation-form">
+                    <div class="form-group">
+                        <label for="post-title">Titolo Post *</label>
+                        <input type="text" id="post-title" name="title" required placeholder="Es: Nuova iniziativa didattica">
+                    </div>
+                    <div class="form-group">
+                        <label for="post-content">Contenuto *</label>
+                        <textarea id="post-content" name="content" rows="6" required placeholder="Scrivi il contenuto del tuo post..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-tags">Tag (separati da virgola)</label>
+                        <input type="text" id="post-tags" name="tags" placeholder="Es: didattica, innovazione, STEM">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeCreationModal('post')">Annulla</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Pubblica Post
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Crea Progetto Didattico -->
+    <div id="modal-project" class="creation-modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeCreationModal('project')"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2><i class="fas fa-lightbulb"></i> Crea Progetto Didattico</h2>
+                <button class="modal-close" onclick="closeCreationModal('project')" aria-label="Chiudi">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-project" class="creation-form">
+                    <div class="form-group">
+                        <label for="project-title">Titolo Progetto *</label>
+                        <input type="text" id="project-title" name="title" required placeholder="Es: Laboratorio STEM Innovativo">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-category">Categoria *</label>
+                            <select id="project-category" name="category" required>
+                                <option value="">Seleziona categoria</option>
+                                <option value="stem">STEM</option>
+                                <option value="lingue">Lingue</option>
+                                <option value="arte">Arte e Musica</option>
+                                <option value="sport">Sport</option>
+                                <option value="cittadinanza">Cittadinanza</option>
+                                <option value="altro">Altro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="project-duration">Durata</label>
+                            <input type="text" id="project-duration" name="duration" placeholder="Es: 3 mesi">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-description">Descrizione Progetto *</label>
+                        <textarea id="project-description" name="description" rows="4" required placeholder="Descrivi gli obiettivi e le attività del progetto..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-objectives">Obiettivi Didattici</label>
+                        <textarea id="project-objectives" name="objectives" rows="3" placeholder="Elenca gli obiettivi di apprendimento..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-resources">Risorse Necessarie</label>
+                        <textarea id="project-resources" name="resources" rows="2" placeholder="Materiali, strumenti, spazi..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-tags">Tag (separati da virgola)</label>
+                        <input type="text" id="project-tags" name="tags" placeholder="Es: stem, innovazione, laboratorio">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeCreationModal('project')">Annulla</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i> Pubblica Progetto
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Galleria Fotografica -->
+    <div id="modal-gallery" class="creation-modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeCreationModal('gallery')"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2><i class="fas fa-images"></i> Crea Galleria Fotografica</h2>
+                <button class="modal-close" onclick="closeCreationModal('gallery')" aria-label="Chiudi">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-gallery" class="creation-form">
+                    <div class="form-group">
+                        <label for="gallery-title">Titolo Galleria *</label>
+                        <input type="text" id="gallery-title" name="title" required placeholder="Es: Open Day 2024">
+                    </div>
+                    <div class="form-group">
+                        <label for="gallery-description">Descrizione</label>
+                        <textarea id="gallery-description" name="description" rows="3" placeholder="Descrivi l'evento o l'attività fotografata..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="gallery-images">Carica Foto (max 20) *</label>
+                        <input type="file" id="gallery-images" name="images" accept="image/*" multiple required>
+                        <small class="form-help">Formati supportati: JPG, PNG, WebP. Max 5MB per foto.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="gallery-tags">Tag</label>
+                        <input type="text" id="gallery-tags" name="tags" placeholder="Es: eventi, open-day, scuola">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeCreationModal('gallery')">Annulla</button>
+                        <button type="submit" class="btn btn-primary" id="gallery-submit-btn">
+                            <i class="fas fa-upload"></i> Pubblica Galleria
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Upload Progress Overlay -->
+                <div class="upload-progress-overlay" id="gallery-upload-progress" style="display: none;">
+                    <div class="upload-progress-content">
+                        <div class="upload-spinner">
+                            <div class="spinner-ring"></div>
+                            <div class="spinner-ring"></div>
+                            <div class="spinner-ring"></div>
+                        </div>
+                        <h3 id="upload-status-title">Caricamento in corso...</h3>
+                        <p id="upload-status-text">Compressione e upload delle immagini</p>
+                        <div class="upload-progress-bar">
+                            <div class="upload-progress-fill" id="upload-progress-fill"></div>
+                        </div>
+                        <p class="upload-progress-count" id="upload-progress-count">0 / 0 immagini</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Esperienza Educativa -->
+    <div id="modal-experience" class="creation-modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeCreationModal('experience')"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2><i class="fas fa-star"></i> Condividi Esperienza Educativa</h2>
+                <button class="modal-close" onclick="closeCreationModal('experience')" aria-label="Chiudi">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-experience" class="creation-form">
+                    <div class="form-group">
+                        <label for="experience-title">Titolo Esperienza *</label>
+                        <input type="text" id="experience-title" name="title" required placeholder="Es: Lezione di Coding con Scratch">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="experience-type">Tipo Esperienza *</label>
+                            <select id="experience-type" name="type" required>
+                                <option value="">Seleziona tipo</option>
+                                <option value="caso-studio">Caso Studio</option>
+                                <option value="lezione">Lezione Appresa</option>
+                                <option value="best-practice">Best Practice</option>
+                                <option value="innovazione">Innovazione Didattica</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience-date">Data Esperienza</label>
+                            <input type="date" id="experience-date" name="date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience-context">Contesto *</label>
+                        <textarea id="experience-context" name="context" rows="3" required placeholder="Descrivi il contesto in cui si è svolta l'esperienza..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience-description">Descrizione Esperienza *</label>
+                        <textarea id="experience-description" name="description" rows="4" required placeholder="Racconta cosa è successo, come si è svolta..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience-learnings">Lezioni Apprese</label>
+                        <textarea id="experience-learnings" name="learnings" rows="3" placeholder="Cosa hai imparato da questa esperienza?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience-tags">Tag (separati da virgola)</label>
+                        <input type="text" id="experience-tags" name="tags" placeholder="Es: coding, scratch, innovazione">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeCreationModal('experience')">Annulla</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-share-alt"></i> Condividi Esperienza
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Richiesta Collaborazione -->
+    <div id="modal-collaboration" class="creation-modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeCreationModal('collaboration')"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2><i class="fas fa-handshake"></i> Proponi Collaborazione</h2>
+                <button class="modal-close" onclick="closeCreationModal('collaboration')" aria-label="Chiudi">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-collaboration" class="creation-form">
+                    <div class="form-group">
+                        <label for="collaboration-title">Titolo Collaborazione *</label>
+                        <input type="text" id="collaboration-title" name="title" required placeholder="Es: Scambio Culturale con Scuola Europea">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="collaboration-type">Tipo Collaborazione *</label>
+                            <select id="collaboration-type" name="type" required>
+                                <option value="">Seleziona tipo</option>
+                                <option value="progetto-comune">Progetto Comune</option>
+                                <option value="scambio-culturale">Scambio Culturale</option>
+                                <option value="gemellaggio">Gemellaggio</option>
+                                <option value="condivisione-risorse">Condivisione Risorse</option>
+                                <option value="formazione">Formazione Congiunta</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="collaboration-duration">Durata Prevista</label>
+                            <input type="text" id="collaboration-duration" name="duration" placeholder="Es: 6 mesi">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="collaboration-description">Descrizione *</label>
+                        <textarea id="collaboration-description" name="description" rows="4" required placeholder="Descrivi la collaborazione che proponi..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="collaboration-looking-for">Cerchiamo *</label>
+                        <textarea id="collaboration-looking-for" name="looking_for" rows="3" required placeholder="Che tipo di partner stai cercando? Quali caratteristiche dovrebbe avere?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="collaboration-benefits">Benefici Attesi</label>
+                        <textarea id="collaboration-benefits" name="benefits" rows="2" placeholder="Quali benefici porterà questa collaborazione?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="collaboration-tags">Tag (separati da virgola)</label>
+                        <input type="text" id="collaboration-tags" name="tags" placeholder="Es: collaborazione, scambio, gemellaggio">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeCreationModal('collaboration')">Annulla</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Proponi Collaborazione
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Crea Metodologia Educativa -->
+    <div id="modal-methodology" class="creation-modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeCreationModal('methodology')"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2><i class="fas fa-book-open"></i> Crea Metodologia Educativa</h2>
+                <button class="modal-close" onclick="closeCreationModal('methodology')" aria-label="Chiudi">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-methodology" class="creation-form">
+                    <div class="form-group">
+                        <label for="methodology-title">Nome Metodologia *</label>
+                        <input type="text" id="methodology-title" name="title" required placeholder="Es: Apprendimento Cooperativo">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="methodology-type">Tipo *</label>
+                            <select id="methodology-type" name="type" required>
+                                <option value="">Seleziona tipo</option>
+                                <option value="didattica">Didattica Attiva</option>
+                                <option value="valutazione">Valutazione</option>
+                                <option value="inclusione">Inclusione</option>
+                                <option value="tecnologia">Tecnologia Educativa</option>
+                                <option value="altro">Altro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="methodology-level">Livello Scolastico</label>
+                            <select id="methodology-level" name="level">
+                                <option value="">Tutti i livelli</option>
+                                <option value="infanzia">Infanzia</option>
+                                <option value="primaria">Primaria</option>
+                                <option value="secondaria1">Secondaria I Grado</option>
+                                <option value="secondaria2">Secondaria II Grado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="methodology-description">Descrizione *</label>
+                        <textarea id="methodology-description" name="description" rows="4" required placeholder="Descrivi la metodologia e i suoi principi..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="methodology-application">Modalità di Applicazione</label>
+                        <textarea id="methodology-application" name="application" rows="3" placeholder="Come si applica in classe..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="methodology-benefits">Benefici e Risultati</label>
+                        <textarea id="methodology-benefits" name="benefits" rows="2" placeholder="Quali risultati si possono ottenere..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="methodology-tags">Tag (separati da virgola)</label>
+                        <input type="text" id="methodology-tags" name="tags" placeholder="Es: didattica, inclusione, innovazione">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeCreationModal('methodology')">Annulla</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-check"></i> Pubblica Metodologia
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" role="navigation" aria-label="Navigazione mobile">
+        <a href="../../homepage.html" class="mobile-nav-item">
+            <i class="fas fa-home" aria-hidden="true"></i>
+            <span>Home</span>
+        </a>
+        <a href="homepage.html#saved" class="mobile-nav-item">
+            <i class="fas fa-bookmark" aria-hidden="true"></i>
+            <span>Salvati</span>
+        </a>
+        <a href="pages/main/create.html" class="mobile-nav-item create-btn active">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            <span>Crea</span>
+        </a>
+        <a href="homepage.html#notifications" class="mobile-nav-item">
+            <i class="fas fa-bell" aria-hidden="true"></i>
+            <span>Notifiche</span>
+        </a>
+        <a href="../profile/profile.html" class="mobile-nav-item">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <span>Profilo</span>
+        </a>
+    </nav>
+</body>
+</html>

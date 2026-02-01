@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Modifica il tuo profilo EduNet - Aggiorna informazioni, metodologie educative e progetti didattici. Personalizza il tuo profilo educativo sul social network per scuole.">
+    <meta name="keywords" content="modifica profilo scuola, aggiorna profilo educativo, personalizza profilo EduNet, gestione profilo istituto, informazioni scolastiche">
+    <meta name="author" content="EduNet">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <title>Modifica Profilo - EduNet Social Network Educativo</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="alternate icon" href="../../favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../css/components/homepage-styles.css">
+    <link rel="stylesheet" href="../../css/components/mobile-search.css">
+    <link rel="stylesheet" href="../../css/components/profile-page.css">
+    <link rel="stylesheet" href="../../css/components/dark-theme-fixes.css">
+    <link rel="stylesheet" href="../../css/components/auth-notifications.css">
+    <link rel="stylesheet" href="../../css/components/auth-modal-dark-theme.css">
+    <link rel="stylesheet" href="../../css/components/mobile-menu-fix.css">
+    <link rel="stylesheet" href="../../css/components/miur-preview.css">
+    <link rel="stylesheet" href="../../css/components/collaborators.css">
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    
+    <!-- App Scripts -->
+    <script src="../../config.js" defer></script>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="top-nav" role="banner">
+        <div class="nav-container">
+            <!-- Logo and Brand -->
+            <div class="nav-brand">
+                <a href="../../homepage.html" class="logo" aria-label="EduNet19">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                    <span>EduNet19</span>
+                </a>
+            </div>
+            
+            <!-- Mobile Search Button (only visible on mobile) -->
+            <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Cerca">
+                <i class="fas fa-search"></i>
+            </button>
+            
+            <!-- Search Bar -->
+            <div class="nav-search">
+                <div class="search-container" role="search">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input 
+                        type="search" 
+                        class="search-input" 
+                        placeholder="Cerca istituti, progetti, metodologie..."
+                        aria-label="Cerca contenuti nella piattaforma"
+                        id="global-search"
+                        name="search"
+                        autocomplete="off"
+                    >
+                    <button class="search-clear" aria-label="Cancella ricerca" style="display: none;" tabindex="-1">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="search-results" style="display: none;"></div>
+            </div>
+            
+            <!-- Navigation Actions -->
+            <div class="nav-actions">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" aria-label="Menu mobile" id="mobile-menu-toggle">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+                
+                <!-- Home Button -->
+                <a href="../../homepage.html" class="nav-button">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                </a>
+                
+                <!-- Notifications -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button" aria-label="Notifiche" id="notifications-btn">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                        <span class="notification-badge" id="notification-count" style="display: none;">0</span>
+                    </button>
+                    <div class="dropdown-menu" id="notifications-dropdown">
+                        <div class="dropdown-header">
+                            <h3>Notifiche</h3>
+                        </div>
+                        <div class="notifications-list">
+                            <div class="no-notifications">
+                                <i class="fas fa-bell-slash" aria-hidden="true"></i>
+                                <p>Nessuna notifica</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Messages -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button" aria-label="Messaggi" id="messages-btn">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span class="message-badge" id="message-count" style="display: none;">0</span>
+                    </button>
+                    <div class="dropdown-menu" id="messages-dropdown">
+                        <div class="dropdown-header">
+                            <h3>Messaggi</h3>
+                        </div>
+                        <div class="messages-list">
+                            <div class="no-messages">
+                                <i class="fas fa-envelope-open" aria-hidden="true"></i>
+                                <p>Nessun messaggio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- User Profile -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button user-avatar" aria-label="Profilo utente" id="user-menu-btn">
+                        <img src="" alt="Avatar utente" class="avatar-img" id="user-avatar" style="display: none;">
+                        <i class="fas fa-user-circle default-avatar" aria-hidden="true"></i>
+                        <span class="user-name" id="user-name">Utente</span>
+                        <i class="fas fa-chevron-down dropdown-arrow" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu user-dropdown" id="user-dropdown">
+                        <div class="user-info">
+                            <div class="user-avatar-large">
+                                <img src="" alt="Avatar utente" class="avatar-img-large" id="user-avatar-large" style="display: none;">
+                                <i class="fas fa-user-circle default-avatar-large" aria-hidden="true"></i>
+                            </div>
+                            <div class="user-details">
+                                <h4 id="user-full-name">Nome Utente</h4>
+                                <p id="user-type-display">Tipo Account</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                            Visualizza Profilo
+                        </a>
+                        <a href="edit-profile.html" class="dropdown-item active">
+                            <i class="fas fa-edit" aria-hidden="true"></i>
+                            Modifica Profilo
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="fas fa-cog" aria-hidden="true"></i>
+                            Impostazioni
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item logout-btn" id="logout-btn">
+                            <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                            Esci
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Search Overlay -->
+        <div class="mobile-search-overlay" id="mobileSearchOverlay">
+            <div class="mobile-search-content">
+                <div class="mobile-search-header">
+                    <button class="mobile-search-back" id="mobileSearchBack">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="mobile-search-input-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="search" class="mobile-search-input" placeholder="Cerca..." id="mobileSearchInput">
+                        <button class="mobile-search-clear" id="mobileSearchClear" style="display:none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mobile-search-results" id="mobileSearchResults">
+                    <div class="mobile-search-empty">
+                        <div class="quick-suggestions">
+                            <h3>Suggerimenti</h3>
+                            <div class="suggestion-item" data-query="Istituti Roma">
+                                <i class="fas fa-search"></i>
+                                <span>Istituti Roma</span>
+                            </div>
+                            <div class="suggestion-item" data-query="Progetti STEM">
+                                <i class="fas fa-search"></i>
+                                <span>Progetti STEM</span>
+                            </div>
+                            <div class="suggestion-item" data-query="Metodologie innovative">
+                                <i class="fas fa-search"></i>
+                                <span>Metodologie innovative</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+            <div class="mobile-menu-content">
+                <button class="mobile-menu-close" aria-label="Chiudi menu mobile" id="mobile-menu-close">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+                
+                <div class="mobile-menu-user">
+                    <div class="mobile-user-avatar" id="mobile-user-avatar">
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
+                    </div>
+                    <div class="mobile-user-info">
+                        <h3 id="mobile-user-name">Nome Utente</h3>
+                        <p id="mobile-user-type">Tipo Account</p>
+                    </div>
+                </div>
+                
+                <nav class="mobile-menu-nav">
+                    <a href="../../homepage.html" class="mobile-menu-item">
+                        <i class="fas fa-home" aria-hidden="true"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="profile.html" class="mobile-menu-item">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        <span>Il Mio Profilo</span>
+                    </a>
+                    <a href="edit-profile.html" class="mobile-menu-item active">
+                        <i class="fas fa-edit" aria-hidden="true"></i>
+                        <span>Modifica Profilo</span>
+                    </a>
+                    
+                    <div class="mobile-menu-divider"></div>
+                    
+                    <button class="mobile-menu-item logout" id="mobile-logout">
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                        <span>Esci</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="edit-profile-main" role="main">
+        <div class="edit-profile-container">
+            <!-- Page Header -->
+            <header class="page-header">
+                <div class="header-content">
+                    <h1><i class="fas fa-edit" aria-hidden="true"></i> Modifica Profilo</h1>
+                    <p>Aggiorna le informazioni del tuo profilo educativo</p>
+                </div>
+                <div class="header-actions">
+                    <a href="profile.html" class="btn-secondary">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                        Annulla
+                    </a>
+                    <button type="submit" form="edit-profile-form" class="btn-primary" id="save-profile-btn">
+                        <i class="fas fa-save" aria-hidden="true"></i>
+                        Salva Modifiche
+                    </button>
+                </div>
+            </header>
+
+            <!-- Edit Form -->
+            <form id="edit-profile-form" class="edit-form" novalidate>
+                <!-- Profile Images -->
+                <section class="form-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-image" aria-hidden="true"></i>
+                        Immagini Profilo
+                    </h2>
+                    
+                    <div class="image-uploads">
+                        <!-- Cover Image -->
+                        <div class="image-upload-group">
+                            <label for="cover-upload" class="upload-label">Immagine di Copertina</label>
+                            <div class="cover-preview" id="cover-preview">
+                                <i class="fas fa-image" aria-hidden="true"></i>
+                                <p>Clicca per caricare</p>
+                            </div>
+                            <input type="file" id="cover-upload" accept="image/*" class="file-input">
+                            <button type="button" class="btn-text remove-image" id="remove-cover" style="display: none;">
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                                Rimuovi copertina
+                            </button>
+                        </div>
+
+                        <!-- Avatar Image -->
+                        <div class="image-upload-group">
+                            <label for="avatar-upload" class="upload-label">Immagine Profilo</label>
+                            <div class="avatar-preview" id="avatar-preview">
+                                <i class="fas fa-user" aria-hidden="true"></i>
+                            </div>
+                            <input type="file" id="avatar-upload" accept="image/*" class="file-input">
+                            <button type="button" class="btn-text remove-image" id="remove-avatar" style="display: none;">
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                                Rimuovi avatar
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================== -->
+                <!-- SEZIONE ISTITUTI - Visibile solo per istituti -->
+                <!-- ============================================== -->
+                
+                <!-- Basic Information (Istituti) -->
+                <section class="form-section institute-only" id="institute-basic-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                        Informazioni di Base
+                    </h2>
+                    
+                    <!-- Sezione Aggiornamento MIUR -->
+                    <div class="miur-update-section" id="miurUpdateSection" style="display: none;">
+                        <div class="miur-info-box">
+                            <div class="miur-info-content">
+                                <i class="fas fa-database"></i>
+                                <div>
+                                    <strong>Dati dal Database MIUR</strong>
+                                    <p>Codice: <span id="currentMiurCode">-</span></p>
+                                    <p class="miur-last-update">Ultimo aggiornamento: <span id="lastMiurUpdate">-</span></p>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-miur-update" id="updateFromMiurBtn">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>Aggiorna da MIUR</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="institute-name" class="required">Nome Istituto</label>
+                            <input type="text" id="institute-name" name="institute-name" required maxlength="100"
+                                   placeholder="Es: Liceo Scientifico Leonardo da Vinci">
+                            <span class="field-hint">Nome completo dell'istituto scolastico</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="institute-type">Tipo di Istituto</label>
+                            <select id="institute-type" name="institute-type">
+                                <option value="">Seleziona tipo</option>
+                                <option value="Scuola dell'Infanzia">Scuola dell'Infanzia</option>
+                                <option value="Scuola Primaria">Scuola Primaria</option>
+                                <option value="Scuola Secondaria di I Grado">Scuola Secondaria di I Grado</option>
+                                <option value="Scuola Secondaria di II Grado">Scuola Secondaria di II Grado</option>
+                                <option value="Liceo">Liceo</option>
+                                <option value="Liceo Scientifico">Liceo Scientifico</option>
+                                <option value="Liceo Classico">Liceo Classico</option>
+                                <option value="Liceo Linguistico">Liceo Linguistico</option>
+                                <option value="Liceo Artistico">Liceo Artistico</option>
+                                <option value="Istituto Tecnico">Istituto Tecnico</option>
+                                <option value="Istituto Professionale">Istituto Professionale</option>
+                                <option value="Istituto Comprensivo">Istituto Comprensivo</option>
+                                <option value="Istituto Superiore">Istituto Superiore</option>
+                                <option value="ITS">ITS</option>
+                                <option value="Università">Università</option>
+                                <option value="Politecnico">Politecnico</option>
+                                <option value="Accademia">Accademia</option>
+                                <option value="Conservatorio">Conservatorio</option>
+                                <option value="Ente di Formazione">Ente di Formazione</option>
+                                <option value="Altro">Altro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="bio">Descrizione Istituto</label>
+                            <textarea id="bio" name="bio" rows="4" maxlength="500"
+                                      placeholder="Racconta brevemente la missione e i valori del tuo istituto..."></textarea>
+                            <span class="field-hint char-count"><span id="bio-count">0</span>/500 caratteri</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Information (Istituti) -->
+                <section class="form-section institute-only" id="institute-contact-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-address-book" aria-hidden="true"></i>
+                        Informazioni di Contatto
+                    </h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="email" class="required">Email Istituzionale</label>
+                            <input type="email" id="email" name="email" required
+                                   placeholder="info@istituto.edu.it">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Telefono</label>
+                            <input type="tel" id="phone" name="phone"
+                                   placeholder="+39 012 345 6789">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="website">Sito Web</label>
+                            <input type="url" id="website" name="website"
+                                   placeholder="https://www.istituto.edu.it">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Indirizzo</label>
+                            <input type="text" id="address" name="address"
+                                   placeholder="Via Roma 123, 00100 Città">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">Città</label>
+                            <input type="text" id="city" name="city"
+                                   placeholder="Roma">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="province">Provincia</label>
+                            <input type="text" id="province" name="province" maxlength="2"
+                                   placeholder="RM">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Structure and Spaces (Istituti) -->
+                <section class="form-section institute-only" id="institute-structure-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-building" aria-hidden="true"></i>
+                        Struttura e Spazi
+                    </h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="classroom-count">
+                                <i class="fas fa-door-open" aria-hidden="true"></i>
+                                Numero di Aule
+                            </label>
+                            <input type="number" id="classroom-count" name="classroom-count" min="0" max="500"
+                                   placeholder="Es: 25">
+                            <span class="field-hint">Numero totale di aule dell'istituto</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="internal-area">
+                                <i class="fas fa-ruler-combined" aria-hidden="true"></i>
+                                Superficie Interna (mq)
+                            </label>
+                            <input type="number" id="internal-area" name="internal-area" min="0" max="100000" step="0.01"
+                                   placeholder="Es: 5000">
+                            <span class="field-hint">Superficie interna totale in metri quadri</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="external-spaces">
+                                <i class="fas fa-tree" aria-hidden="true"></i>
+                                Spazi Esterni
+                            </label>
+                            <textarea id="external-spaces" name="external-spaces" rows="3" maxlength="500"
+                                      placeholder="Descrivi gli spazi esterni: cortili, giardini, campi sportivi, aree verdi..."></textarea>
+                            <span class="field-hint">Descrizione degli spazi esterni disponibili</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Opening Hours (Istituti) -->
+                <section class="form-section institute-only" id="institute-hours-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
+                        Orari di Apertura
+                    </h2>
+                    
+                    <div class="form-grid opening-hours-grid">
+                        <div class="form-group">
+                            <label for="hours-monday">Lunedì</label>
+                            <input type="text" id="hours-monday" name="hours-monday"
+                                   placeholder="Es: 08:00 - 14:00">
+                        </div>
+                        <div class="form-group">
+                            <label for="hours-tuesday">Martedì</label>
+                            <input type="text" id="hours-tuesday" name="hours-tuesday"
+                                   placeholder="Es: 08:00 - 14:00">
+                        </div>
+                        <div class="form-group">
+                            <label for="hours-wednesday">Mercoledì</label>
+                            <input type="text" id="hours-wednesday" name="hours-wednesday"
+                                   placeholder="Es: 08:00 - 14:00">
+                        </div>
+                        <div class="form-group">
+                            <label for="hours-thursday">Giovedì</label>
+                            <input type="text" id="hours-thursday" name="hours-thursday"
+                                   placeholder="Es: 08:00 - 14:00">
+                        </div>
+                        <div class="form-group">
+                            <label for="hours-friday">Venerdì</label>
+                            <input type="text" id="hours-friday" name="hours-friday"
+                                   placeholder="Es: 08:00 - 14:00">
+                        </div>
+                        <div class="form-group">
+                            <label for="hours-saturday">Sabato</label>
+                            <input type="text" id="hours-saturday" name="hours-saturday"
+                                   placeholder="Es: Chiuso">
+                        </div>
+                    </div>
+                    <span class="field-hint" style="display: block; margin-top: 0.5rem;">Inserisci gli orari di apertura per ogni giorno della settimana</span>
+                </section>
+
+                <!-- Internal Regulations (Istituti) -->
+                <section class="form-section institute-only" id="institute-regulations-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-file-contract" aria-hidden="true"></i>
+                        Regolamento Interno
+                    </h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="regulations-url">
+                                <i class="fas fa-link" aria-hidden="true"></i>
+                                Link al Regolamento (PDF o pagina web)
+                            </label>
+                            <input type="url" id="regulations-url" name="regulations-url"
+                                   placeholder="https://www.istituto.edu.it/regolamento.pdf">
+                            <span class="field-hint">URL del documento del regolamento interno</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="regulations-text">
+                                <i class="fas fa-file-alt" aria-hidden="true"></i>
+                                Oppure inserisci il testo del regolamento
+                            </label>
+                            <textarea id="regulations-text" name="regulations-text" rows="6" maxlength="5000"
+                                      placeholder="Inserisci qui il testo del regolamento interno dell'istituto..."></textarea>
+                            <span class="field-hint char-count"><span id="regulations-count">0</span>/5000 caratteri</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Educational Information (Istituti) -->
+                <section class="form-section institute-only" id="institute-education-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                        Informazioni Educative
+                    </h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="methodologies">Metodologie Educative</label>
+                            <div class="tags-input-container">
+                                <div class="tags-display" id="methodologies-display"></div>
+                                <input type="text" id="methodologies-input" 
+                                       placeholder="Aggiungi metodologia (es: Montessori, CLIL, ecc.) e premi Invio">
+                            </div>
+                            <span class="field-hint">Metodologie didattiche utilizzate nel tuo istituto</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="interests">Aree di Interesse</label>
+                            <div class="tags-input-container">
+                                <div class="tags-display" id="interests-display"></div>
+                                <input type="text" id="interests-input" 
+                                       placeholder="Aggiungi area (es: STEM, Lingue, Arte, ecc.) e premi Invio">
+                            </div>
+                            <span class="field-hint">Aree tematiche e discipline di interesse</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="specializations">Indirizzi/Specializzazioni</label>
+                            <textarea id="specializations" name="specializations" rows="3"
+                                      placeholder="Descrivi gli indirizzi di studio o le specializzazioni offerte..."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Social Media (Istituti) -->
+                <section class="form-section institute-only" id="institute-social-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-share-alt" aria-hidden="true"></i>
+                        Social Media
+                    </h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="facebook">
+                                <i class="fab fa-facebook" aria-hidden="true"></i>
+                                Facebook
+                            </label>
+                            <input type="url" id="facebook" name="facebook"
+                                   placeholder="https://facebook.com/istituto">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="twitter">
+                                <i class="fab fa-twitter" aria-hidden="true"></i>
+                                Twitter
+                            </label>
+                            <input type="url" id="twitter" name="twitter"
+                                   placeholder="https://twitter.com/istituto">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="instagram">
+                                <i class="fab fa-instagram" aria-hidden="true"></i>
+                                Instagram
+                            </label>
+                            <input type="url" id="instagram" name="instagram"
+                                   placeholder="https://instagram.com/istituto">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="linkedin">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                                LinkedIn
+                            </label>
+                            <input type="url" id="linkedin" name="linkedin"
+                                   placeholder="https://linkedin.com/company/istituto">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================================================= -->
+                <!-- SEZIONE COLLABORATORI - Solo per istituti -->
+                <!-- ================================================= -->
+                
+                <section class="form-section institute-only" id="collaborators-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-users" aria-hidden="true"></i>
+                        Collaboratori
+                        <span class="collaborators-badge" id="collaborators-count">0/3</span>
+                    </h2>
+                    
+                    <div class="collaborators-info">
+                        <p>Invita fino a 3 persone a collaborare nella gestione di questo profilo.</p>
+                    </div>
+                    
+                    <div class="collaborators-list" id="collaborators-list">
+                        <!-- Collaboratori caricati dinamicamente -->
+                        <div class="collaborators-empty">
+                            <i class="fas fa-user-plus"></i>
+                            <p>Nessun collaboratore aggiunto</p>
+                            <span>Invita fino a 3 persone a gestire questo profilo</span>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn-add-collaborator" id="add-collaborator-btn">
+                        <i class="fas fa-plus"></i>
+                        Aggiungi Collaboratore
+                    </button>
+                </section>
+
+                <!-- ================================================= -->
+                <!-- SEZIONE UTENTI PRIVATI - Visibile solo per privati -->
+                <!-- ================================================= -->
+                
+                <!-- Informazioni Personali (Utenti Privati) -->
+                <section class="form-section private-only" id="private-basic-section" style="display: none;">
+                    <h2 class="section-title">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        Informazioni Personali
+                    </h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="first-name" class="required">Nome</label>
+                            <input type="text" id="first-name" name="first-name" required maxlength="50"
+                                   placeholder="Il tuo nome">
+                            <span class="field-hint">Il tuo nome di battesimo</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last-name" class="required">Cognome</label>
+                            <input type="text" id="last-name" name="last-name" required maxlength="50"
+                                   placeholder="Il tuo cognome">
+                            <span class="field-hint">Il tuo cognome</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="private-bio">Presentazione</label>
+                            <textarea id="private-bio" name="bio" rows="4" maxlength="300"
+                                      placeholder="Raccontaci qualcosa di te e dei tuoi interessi nel mondo dell'educazione..."></textarea>
+                            <span class="field-hint char-count"><span id="private-bio-count">0</span>/300 caratteri</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Info Box per Utenti Privati -->
+                <section class="form-section private-only" id="private-info-section" style="display: none;">
+                    <div class="info-box" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
+                        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <i class="fas fa-info-circle" style="color: #3b82f6; font-size: 1.5rem; margin-top: 0.2rem;"></i>
+                            <div>
+                                <h3 style="margin: 0 0 0.5rem 0; color: #1e40af; font-size: 1.1rem;">Account Utente Privato</h3>
+                                <p style="margin: 0; color: #4b5563; line-height: 1.6;">
+                                    Come utente privato puoi seguire gli istituti scolastici, mettere like ai loro contenuti, 
+                                    salvare i post interessanti e lasciare valutazioni con stelle. 
+                                    Per pubblicare contenuti e progetti, è necessario un account istituto.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Form Actions (Mobile) -->
+                <div class="form-actions mobile-only">
+                    <a href="profile.html" class="btn-secondary btn-block">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                        Annulla
+                    </a>
+                    <button type="submit" class="btn-primary btn-block">
+                        <i class="fas fa-save" aria-hidden="true"></i>
+                        Salva Modifiche
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Modal Invito Collaboratore (FUORI dal form principale) -->
+    <div class="modal-overlay" id="invite-modal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> Invita Collaboratore</h3>
+                <button type="button" class="modal-close" id="close-invite-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="invite-collaborator-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="invite-email" class="required">Email</label>
+                        <input type="email" id="invite-email" required 
+                               placeholder="email@esempio.com">
+                        <span class="field-hint">L'utente riceverà un invito via email</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="invite-role">Ruolo</label>
+                        <select id="invite-role">
+                            <option value="editor">Editor - Può modificare profilo e pubblicare</option>
+                            <option value="admin">Admin - Può anche gestire collaboratori</option>
+                            <option value="viewer">Viewer - Solo visualizzazione</option>
+                        </select>
+                        <span class="field-hint">Seleziona i permessi per questo collaboratore</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" id="cancel-invite-btn" onclick="document.getElementById('invite-modal').classList.remove('active')">
+                        Annulla
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Invia Invito
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/utils/console-optimizer.js"></script>
+    <script type="module" src="../../supabase-client.js" defer></script>
+    <script src="../../js/utils/mobile-search.js" defer></script>
+    <script src="../../js/profile/avatar-manager.js" defer></script>
+    <script src="../../js/utils/avatar-loader-fix.js" defer></script>
+    <script src="../../js/utils/miur-autocomplete.js" defer></script>
+    <script src="../../js/utils/miur-validator.js" defer></script>
+    <script src="../../js/utils/global-search.js" defer></script>
+    <script src="../../js/profile/miur-update.js" defer></script>
+    <script src="../../js/profile/collaborators.js" defer></script>
+    <script src="../../js/profile/edit-profile.js" defer></script>
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" role="navigation" aria-label="Navigazione mobile">
+        <a href="../../homepage.html" class="mobile-nav-item">
+            <i class="fas fa-home" aria-hidden="true"></i>
+            <span>Home</span>
+        </a>
+        <a href="homepage.html#saved" class="mobile-nav-item">
+            <i class="fas fa-bookmark" aria-hidden="true"></i>
+            <span>Salvati</span>
+        </a>
+        <a href="pages/main/create.html" class="mobile-nav-item create-btn">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            <span>Crea</span>
+        </a>
+        <a href="homepage.html#notifications" class="mobile-nav-item">
+            <i class="fas fa-bell" aria-hidden="true"></i>
+            <span>Notifiche</span>
+        </a>
+        <a href="profile.html" class="mobile-nav-item active">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <span>Profilo</span>
+        </a>
+    </nav>
+</body>
+</html>

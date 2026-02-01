@@ -1,0 +1,391 @@
+# ═══════════════════════════════════════════════════════════════
+# CONFIGURAZIONE REGOLE SEO - Agente SEO Analyzer
+# ═══════════════════════════════════════════════════════════════
+# 
+# Questo file definisce tutte le regole SEO che l'agente utilizzerà
+# per analizzare e valutare i siti web statici.
+#
+
+# ─────────────────────────────────────────────────────────────────
+# 1. CONTENUTI & META TAG
+# ─────────────────────────────────────────────────────────────────
+content:
+  
+  # Title Tag
+  title:
+    min_length: 30
+    max_length: 60
+    optimal_length: 55
+    require_primary_keyword: true
+    primary_keyword_position: "start"  # start, middle, end
+    unique_per_page: true
+    avoid_stuffing: true
+    weight: 15  # Peso su 100 del score totale
+    
+  # Meta Description
+  meta_description:
+    min_length: 120
+    max_length: 160
+    optimal_length: 155
+    require_primary_keyword: true
+    require_call_to_action: true
+    unique_per_page: true
+    persuasive_words: ['scopri', 'ottieni', 'migliora', 'impara', 'trova']
+    weight: 10
+    
+  # Headings
+  headings:
+    require_h1: true
+    h1_per_page: 1  # Esattamente uno
+    require_primary_keyword_in_h1: true
+    h2_min: 2
+    h2_max: 10
+    h3_max: 15
+    hierarchical_structure: true  # H1 > H2 > H3
+    keywords_in_h2: true  # Secondary keywords
+    weight: 8
+    
+  # Keyword Density
+  keywords:
+    primary_keyword:
+      min_density: 0.8  # Percentuale
+      max_density: 1.5
+      optimal_density: 1.2
+      required_positions:
+        - first_paragraph
+        - title
+        - h1
+        - meta_description
+        - url_slug
+    secondary_keywords:
+      min_count: 3
+      max_density: 1.0
+      natural_distribution: true
+    lsi_keywords:  # Latent Semantic Indexing
+      min_count: 5
+      natural_integration: true
+    avoid_stuffing: true
+    weight: 12
+    
+  # Contenuto Testuale
+  text_content:
+    min_words_per_page: 300
+    optimal_words: 800
+    max_words: 2500
+    readability_score_min: 60  # Flesch Reading Ease
+    paragraph_max_words: 150
+    sentence_max_words: 25
+    original_content: true
+    avoid_duplicate_content: true
+    weight: 10
+
+# ─────────────────────────────────────────────────────────────────
+# 2. IMMAGINI
+# ─────────────────────────────────────────────────────────────────
+images:
+  
+  # Attributi
+  attributes:
+    require_alt: true
+    alt_min_length: 5
+    alt_max_length: 125
+    alt_descriptive: true
+    alt_with_keywords: true
+    require_title: false
+    width_height_specified: true
+    weight: 8
+    
+  # Nomi File
+  filenames:
+    descriptive: true
+    lowercase_only: true
+    use_hyphens: true  # parola-chiave-descrizione.jpg
+    avoid_underscores: true
+    include_keywords: true
+    max_length: 60
+    pattern: "^[a-z0-9-]+\\.(jpg|jpeg|png|webp|avif|svg)$"
+    weight: 3
+    
+  # Ottimizzazione
+  optimization:
+    max_size_kb: 200
+    recommended_size_kb: 100
+    compression_quality_min: 80
+    lazy_loading: true
+    responsive_images: true  # srcset
+    modern_formats: ['webp', 'avif']
+    fallback_formats: ['jpg', 'png']
+    weight: 9
+
+# ─────────────────────────────────────────────────────────────────
+# 3. LINK (INTERNI ED ESTERNI)
+# ─────────────────────────────────────────────────────────────────
+links:
+  
+  # Link Interni
+  internal:
+    min_per_page: 3
+    max_per_page: 50
+    anchor_text_descriptive: true
+    anchor_text_with_keywords: true
+    avoid_generic_anchors: ['clicca qui', 'leggi di più', 'qui']
+    no_broken_links: true
+    proper_hierarchy: true
+    weight: 5
+    
+  # Link Esterni
+  external:
+    authoritative_sources: true
+    relevant_content: true
+    require_rel_attributes: true
+    allowed_rel: ['nofollow', 'noopener', 'noreferrer', 'sponsored']
+    no_broken_links: true
+    max_per_page: 10
+    weight: 3
+    
+  # Anchor Text
+  anchor_text:
+    descriptive: true
+    length_min: 2
+    length_max: 60
+    include_keywords: true
+    varied_anchors: true  # Non tutti uguali
+    weight: 2
+
+# ─────────────────────────────────────────────────────────────────
+# 4. STRUTTURA URL
+# ─────────────────────────────────────────────────────────────────
+urls:
+  
+  structure:
+    clean: true
+    readable: true
+    lowercase_only: true
+    use_hyphens: true
+    max_length: 75
+    optimal_length: 50
+    max_depth: 4  # example.com/cat1/cat2/cat3/page
+    include_primary_keyword: true
+    avoid_special_chars: true
+    avoid_parameters: true
+    trailing_slash_consistent: true
+    pattern: "^[a-z0-9-/]+$"
+    weight: 5
+    
+  canonical:
+    require_canonical_tag: true
+    self_referencing: true
+    weight: 2
+    
+  sitemap:
+    require_sitemap_xml: true
+    sitemap_valid: true
+    all_pages_included: true
+    weight: 3
+
+# ─────────────────────────────────────────────────────────────────
+# 5. PERFORMANCE
+# ─────────────────────────────────────────────────────────────────
+performance:
+  
+  # Velocità Caricamento
+  loading:
+    max_load_time_seconds: 3.0
+    optimal_load_time_seconds: 1.5
+    first_contentful_paint_max_ms: 1800
+    largest_contentful_paint_max_ms: 2500
+    time_to_interactive_max_ms: 3800
+    cumulative_layout_shift_max: 0.1
+    weight: 15
+    
+  # Ottimizzazione Risorse
+  resources:
+    minify_css: true
+    minify_js: true
+    minify_html: false  # Opzionale
+    combine_css_files: true
+    combine_js_files: true
+    compress_resources: true  # Gzip/Brotli
+    weight: 5
+    
+  # Caching
+  caching:
+    leverage_browser_caching: true
+    cache_static_resources: true
+    appropriate_cache_headers: true
+    weight: 3
+    
+  # Lighthouse Scores
+  lighthouse:
+    performance_min: 85
+    performance_target: 95
+    weight: 2
+
+# ─────────────────────────────────────────────────────────────────
+# 6. MOBILE & RESPONSIVE
+# ─────────────────────────────────────────────────────────────────
+mobile:
+  
+  responsive:
+    mobile_friendly: true
+    viewport_meta_tag: true
+    viewport_config: '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+    responsive_images: true
+    no_horizontal_scroll: true
+    weight: 8
+    
+  usability:
+    touch_target_min_size: 48  # pixel
+    readable_font_size: 16  # pixel minimo
+    adequate_contrast: true
+    no_mobile_popup_interstitials: true
+    weight: 5
+    
+  testing:
+    test_multiple_devices: true
+    devices: ['mobile', 'tablet', 'desktop']
+    weight: 2
+
+# ─────────────────────────────────────────────────────────────────
+# 7. ACCESSIBILITÀ
+# ─────────────────────────────────────────────────────────────────
+accessibility:
+  
+  aria:
+    use_aria_labels: true
+    semantic_html: true
+    proper_heading_structure: true
+    weight: 3
+    
+  forms:
+    label_for_inputs: true
+    accessible_forms: true
+    weight: 2
+
+# ─────────────────────────────────────────────────────────────────
+# 8. SCHEMA MARKUP & DATI STRUTTURATI
+# ─────────────────────────────────────────────────────────────────
+schema:
+  
+  structured_data:
+    require_schema_markup: true
+    format: 'json-ld'  # json-ld, microdata, rdfa
+    valid_schema: true
+    appropriate_types:
+      - Organization
+      - WebPage
+      - Article
+      - BreadcrumbList
+      - FAQPage
+    weight: 5
+    
+  rich_snippets:
+    optimize_for_snippets: true
+    weight: 2
+
+# ─────────────────────────────────────────────────────────────────
+# 9. TECHNICAL SEO
+# ─────────────────────────────────────────────────────────────────
+technical:
+  
+  robots:
+    require_robots_txt: true
+    proper_directives: true
+    weight: 2
+    
+  https:
+    require_ssl: true
+    hsts_enabled: false  # Opzionale
+    weight: 3
+    
+  language:
+    hreflang_if_multilingual: true
+    proper_lang_attribute: true
+    weight: 2
+
+# ─────────────────────────────────────────────────────────────────
+# 10. SCORING & THRESHOLDS
+# ─────────────────────────────────────────────────────────────────
+scoring:
+  
+  # Pesi totali (devono sommare a 100)
+  category_weights:
+    content: 25
+    performance: 25
+    mobile: 15
+    images: 15
+    links: 10
+    structure: 10
+    
+  # Livelli di gravità
+  severity_levels:
+    critical:
+      score_impact: -10
+      color: "red"
+      priority: 1
+    important:
+      score_impact: -5
+      color: "yellow"
+      priority: 2
+    minor:
+      score_impact: -2
+      color: "green"
+      priority: 3
+      
+  # Thresholds per valutazione
+  thresholds:
+    excellent: 90
+    good: 75
+    average: 60
+    poor: 40
+    critical: 0
+
+# ─────────────────────────────────────────────────────────────────
+# 11. REPORT SETTINGS
+# ─────────────────────────────────────────────────────────────────
+reporting:
+  
+  output_formats: ['console', 'json', 'html', 'pdf']
+  default_format: 'console'
+  
+  include:
+    - score_breakdown
+    - critical_issues
+    - important_issues
+    - minor_issues
+    - recommendations
+    - before_after_comparison
+    - competitive_analysis
+    
+  language: 'it'  # Italiano
+  
+  recommendations:
+    max_recommendations: 10
+    prioritize_by_impact: true
+    include_how_to_fix: true
+    include_estimated_impact: true
+
+# ─────────────────────────────────────────────────────────────────
+# 12. ADVANCED OPTIONS
+# ─────────────────────────────────────────────────────────────────
+advanced:
+  
+  crawling:
+    max_pages: 100
+    follow_redirects: true
+    respect_robots_txt: true
+    user_agent: "SEO-Analyzer-Bot/1.0"
+    concurrent_requests: 5
+    timeout_seconds: 30
+    
+  monitoring:
+    watch_mode: false
+    check_interval_seconds: 300
+    alert_on_score_drop: 10
+    
+  integrations:
+    google_search_console: false
+    google_analytics: false
+    google_pagespeed: true
+    lighthouse_api: true
+

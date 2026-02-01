@@ -1,0 +1,455 @@
+/**
+ * MOBILE SEARCH - Minimale e sicuro
+ */
+
+/* === MOBILE SEARCH BUTTON === */
+.mobile-search-btn {
+  display: none;
+  /* Nascosto su desktop */
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-lg);
+  color: var(--color-gray-700);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.mobile-search-btn:hover {
+  background: var(--color-gray-100);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.mobile-search-btn i {
+  font-size: 18px;
+}
+
+/* === MOBILE SEARCH OVERLAY === */
+.mobile-search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-white);
+  z-index: 10000;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-out;
+  display: none;
+  overflow: hidden;
+  /* Previene scroll dell'overlay stesso */
+}
+
+.mobile-search-overlay.active {
+  transform: translateY(0);
+}
+
+.mobile-search-content {
+  display: flex;
+  flex-direction: column;
+  height: 100% !important;
+  max-height: 100vh !important;
+  /* Assicura che non superi viewport */
+  overflow: hidden !important;
+  /* Importante: previene overflow */
+}
+
+/* === HEADER === */
+.mobile-search-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid var(--color-gray-200);
+  background: var(--color-white);
+  flex-shrink: 0;
+}
+
+.mobile-search-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-lg);
+  color: var(--color-gray-700);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mobile-search-back:active {
+  background: var(--color-gray-100);
+}
+
+.mobile-search-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  background: var(--color-gray-100);
+  border-radius: var(--radius-lg);
+  padding: 8px 12px;
+}
+
+.mobile-search-input-wrapper i {
+  color: var(--color-gray-500);
+  font-size: 16px;
+}
+
+.mobile-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: var(--color-gray-900);
+}
+
+.mobile-search-input::placeholder {
+  color: var(--color-gray-500);
+}
+
+/* Nascondi il pulsante clear nativo del browser */
+.mobile-search-input::-webkit-search-cancel-button,
+.mobile-search-input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mobile-search-input::-ms-clear {
+  display: none;
+}
+
+.mobile-search-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--color-gray-300);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-white);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* === RESULTS === */
+.mobile-search-results {
+  position: relative;
+  /* Contesto di posizionamento */
+  flex: 1 1 auto !important;
+  /* Grow, shrink, auto basis */
+  min-height: 0 !important;
+  /* CRITICO: Permette scroll in flex child */
+  max-height: 100% !important;
+  /* Non superare parent */
+  overflow-y: scroll !important;
+  /* Sempre scroll per evitare layout shift */
+  overflow-x: hidden !important;
+  background: var(--color-gray-50);
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling iOS */
+  overscroll-behavior: contain;
+  /* Previene scroll della pagina sotto */
+  touch-action: pan-y;
+  /* Permette scroll verticale touch */
+  will-change: scroll-position;
+  /* Ottimizza performance scroll */
+}
+
+/* Custom scrollbar per risultati mobile */
+.mobile-search-results::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mobile-search-results::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mobile-search-results::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.mobile-search-results::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.mobile-search-results-container {
+  padding: 0;
+  margin: 0;
+  min-height: min-content;
+  /* Permette di crescere oltre viewport */
+  width: 100%;
+  /* Assicura larghezza completa */
+}
+
+/* Search result items - Unified format with desktop */
+.search-result-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.search-result-item:active {
+  background: var(--color-gray-100);
+}
+
+/* Avatar styles */
+.search-result-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.search-result-avatar-default {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.search-result-avatar-default i {
+  font-size: 20px;
+  color: var(--color-white);
+}
+
+/* Main content area for posts */
+.search-result-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-result-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Badge styles - Unified with desktop gradients */
+.search-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+.badge-post {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.badge-project {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.badge-methodology {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.badge-gallery {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.badge-collaboration {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+}
+
+.badge-educational {
+  background: linear-gradient(135deg, #ec4899, #db2777);
+}
+
+.search-badge i {
+  font-size: 10px;
+}
+
+/* Content area */
+.result-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.result-content h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.result-author {
+  font-size: 13px;
+  color: var(--color-gray-600);
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Tags */
+.result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.result-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--color-gray-100);
+  color: var(--color-primary);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.result-tag-more {
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--color-gray-200);
+  color: var(--color-gray-600);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* No results state */
+.mobile-search-no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+.mobile-search-no-results i {
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: var(--color-gray-400);
+}
+
+.mobile-search-no-results p {
+  font-size: 15px;
+  margin: 0 0 4px 0;
+  font-weight: 500;
+  color: var(--color-gray-700);
+}
+
+.mobile-search-no-results small {
+  font-size: 13px;
+  color: var(--color-gray-500);
+  margin: 0;
+}
+
+/* Empty state (quando non c'è ancora query) */
+.mobile-search-empty {
+  padding: 24px;
+  min-height: min-content;
+  /* Permette scroll se contenuto supera viewport */
+}
+
+.recent-searches,
+.quick-suggestions {
+  margin-bottom: 24px;
+}
+
+.recent-searches h3,
+.quick-suggestions h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-gray-700);
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.suggestion-item:active {
+  background: var(--color-gray-100);
+  transform: scale(0.98);
+}
+
+.suggestion-item i {
+  font-size: 16px;
+  color: var(--color-gray-500);
+  width: 20px;
+  text-align: center;
+}
+
+.suggestion-item span {
+  flex: 1;
+  font-size: 14px;
+  color: var(--color-gray-700);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 1023px) {
+
+  /* Mostra bottone search su mobile */
+  .mobile-search-btn {
+    display: flex;
+  }
+
+  /* Mostra overlay quando attivo */
+  .mobile-search-overlay {
+    display: block;
+  }
+}
+
+/* Previeni scroll body quando overlay aperto */
+body.mobile-search-active {
+  overflow: hidden !important;
+  /* Rimuovo position: fixed che blocca anche lo scroll interno */
+}

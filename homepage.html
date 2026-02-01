@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="EduNet19 - Homepage della piattaforma educativa per scuole italiane">
+    <meta name="keywords" content="educazione, scuole italiane, progetti didattici, collaborazione, homepage">
+    <meta name="author" content="EduNet19">
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://cdn.jsdelivr.net;">
+
+    <title>EduNet19 - Homepage</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Preconnect per performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/components/homepage-styles.css">
+    <link rel="stylesheet" href="css/components/fix-comment-background.css">
+    <link rel="stylesheet" href="css/components/dark-theme-fixes.css">
+    <link rel="stylesheet" href="css/components/edumatch-styles.css">
+    <link rel="stylesheet" href="css/components/mobile-menu-fix.css">
+    <link rel="stylesheet" href="css/components/edumatch-collapse.css">
+    <link rel="stylesheet" href="css/components/modern-filters.css">
+    <link rel="stylesheet" href="css/components/mobile-search.css">
+    <link rel="stylesheet" href="css/components/saved-posts-styles.css">
+    <link rel="stylesheet" href="css/components/image-carousel.css">
+    <link rel="stylesheet" href="css/components/recommendation-ui.css">
+    <link rel="stylesheet" href="css/components/create-post-modal.css">
+    <link rel="stylesheet" href="css/components/auth-notifications.css">
+    <link rel="stylesheet" href="css/components/tab-transitions.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
+    <!-- Preference Loader (Must be in HEAD to prevent FOUC) -->
+    <script src="js/utils/preference-loader.js"></script>
+
+    <!-- App Scripts -->
+    <script src="config.js" defer></script>
+    <script src="js/utils/console-optimizer.js"></script>
+    <script src="js/utils/logger.js" defer></script>
+    <script src="js/utils/rate-limiter.js" defer></script>
+    <script src="js/utils/sanitizer.js" defer></script>
+    <script src="js/utils/network-utils.js" defer></script>
+    <script src="js/utils/event-manager.js" defer></script>
+    <script src="js/utils/error-handling.js" defer></script>
+    <script src="js/utils/supabase-error-handler.js" defer></script>
+    <script src="supabase-client.js" defer></script>
+    <script src="js/auth/validation.js" defer></script>
+    <script src="js/auth/auth.js?v=20251029-final" defer></script>
+    <script src="js/profile/profile-management.js" defer></script>
+    <script src="js/social/social-features.js" defer></script>
+    <script src="js/moderation/content-report.js" defer></script>
+    <script src="js/moderation/user-notifications.js" defer></script>
+    <script src="js/recommendations/edumatch-ai-algorithm.js" defer></script>
+    <script src="js/recommendations/edumatch.js" defer></script>
+    <script src="js/recommendations/edumatch-collapse.js" defer></script>
+    <script src="js/recommendations/edumatch-visibility-guard.js" defer></script>
+    <script src="js/utils/modern-filters.js" defer></script>
+    <script src="js/utils/mobile-search.js" defer></script>
+    <script src="js/social/saved-posts.js" defer></script>
+    <script src="js/profile/avatar-manager.js" defer></script>
+    <script src="js/utils/avatar-loader-fix.js" defer></script>
+    <script src="js/utils/miur-validator.js" defer></script>
+    <script src="js/recommendations/recommendation-engine.js" defer></script>
+    <script src="js/recommendations/recommendation-integration.js" defer></script>
+    <script src="js/utils/homepage-script.js" defer></script>
+    <script src="js/utils/homepage-recommendation-init.js" defer></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(function (registration) {
+                        console.log('✅ Service Worker registrato:', registration.scope);
+                    })
+                    .catch(function (error) {
+                        console.log('⚠️ Service Worker non registrato:', error);
+                    });
+            });
+        }
+    </script>
+</head>
+
+<body class="homepage-body">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen" aria-hidden="true">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                <span>EduNet19</span>
+            </div>
+            <div class="loading-spinner" aria-label="Caricamento in corso"></div>
+            <p class="loading-text">Caricamento homepage...</p>
+        </div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-nav" role="banner">
+        <div class="nav-container">
+            <!-- Logo and Brand -->
+            <div class="nav-brand">
+                <a href="./homepage.html" class="logo" aria-label="EduNet19 - Torna alla home">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                    <span>EduNet19</span>
+                </a>
+            </div>
+
+            <!-- Mobile Search Button (only visible on mobile) -->
+            <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Cerca">
+                <i class="fas fa-search"></i>
+            </button>
+
+            <!-- Search Bar -->
+            <div class="nav-search">
+                <div class="search-container" role="search">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input type="search" class="search-input" placeholder="Cerca istituti, progetti, metodologie..."
+                        aria-label="Cerca contenuti nella piattaforma" id="global-search" name="search"
+                        autocomplete="off">
+                    <button class="search-clear" aria-label="Cancella ricerca" style="display: none;" tabindex="-1">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="search-results" style="display: none;"></div>
+            </div>
+
+            <!-- Navigation Actions -->
+            <div class="nav-actions">
+                <!-- Create Button -->
+                <a href="pages/main/create.html" class="nav-create-btn" aria-label="Crea contenuto">
+                    <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                    <span>Crea</span>
+                </a>
+
+                <!-- Notifications -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button" aria-label="Notifiche" id="notifications-btn" aria-expanded="false"
+                        aria-haspopup="true">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                        <span class="notification-badge" id="notification-count" style="display: none;"
+                            aria-label="notifiche non lette">0</span>
+                    </button>
+                    <div class="dropdown-menu" id="notifications-dropdown">
+                        <div class="dropdown-header">
+                            <h3>Notifiche</h3>
+                            <button class="mark-all-read" id="mark-all-read">Segna tutte come lette</button>
+                        </div>
+                        <div class="notifications-list" id="notifications-list">
+                            <div class="no-notifications">
+                                <i class="fas fa-bell-slash" aria-hidden="true"></i>
+                                <p>Nessuna notifica</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button" aria-label="Messaggi" id="messages-btn">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span class="message-badge" id="message-count" style="display: none;">0</span>
+                    </button>
+                    <div class="dropdown-menu" id="messages-dropdown">
+                        <div class="dropdown-header">
+                            <h3>Messaggi</h3>
+                            <a href="#" class="view-all">Vedi tutti</a>
+                        </div>
+                        <div class="messages-list" id="messages-list">
+                            <div class="no-messages">
+                                <i class="fas fa-envelope-open" aria-hidden="true"></i>
+                                <p>Nessun messaggio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Profile -->
+                <div class="nav-item dropdown">
+                    <button class="nav-button user-avatar" aria-label="Profilo utente" id="user-menu-btn">
+                        <img src="" alt="Avatar utente" class="avatar-img" id="user-avatar" style="display: none;">
+                        <i class="fas fa-user-circle default-avatar" aria-hidden="true"></i>
+                        <span class="user-name" id="user-name">Utente</span>
+                        <i class="fas fa-chevron-down dropdown-arrow" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu user-dropdown" id="user-dropdown">
+                        <div class="user-info">
+                            <div class="user-avatar-large">
+                                <img src="" alt="Avatar utente" class="avatar-img-large" id="user-avatar-large"
+                                    style="display: none;">
+                                <i class="fas fa-user-circle default-avatar-large" aria-hidden="true"></i>
+                            </div>
+                            <div class="user-details">
+                                <h4 id="user-full-name">Nome Utente</h4>
+                                <p id="user-type-display">Tipo Account</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="pages/profile/profile.html" class="dropdown-item" id="view-profile">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                            Visualizza Profilo
+                        </a>
+                        <a href="pages/profile/edit-profile.html" class="dropdown-item" id="edit-profile">
+                            <i class="fas fa-edit" aria-hidden="true"></i>
+                            Modifica Profilo
+                        </a>
+                        <a href="pages/admin/moderation.html" class="dropdown-item" id="moderation-center"
+                            style="display: none;">
+                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                            Centro Moderazione
+                        </a>
+                        <a href="pages/profile/settings.html" class="dropdown-item" id="settings">
+                            <i class="fas fa-cog" aria-hidden="true"></i>
+                            Impostazioni
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item logout-btn" id="logout-btn">
+                            <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                            Esci
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Menu mobile" id="mobile-menu-toggle">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+            <div class="mobile-menu-content">
+                <!-- Close Button -->
+                <button class="mobile-menu-close" aria-label="Chiudi menu mobile" id="mobile-menu-close">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+
+                <!-- User Info Section -->
+                <div class="mobile-user-info">
+                    <div class="mobile-user-avatar">
+                        <img src="" alt="Avatar utente" class="mobile-avatar-img" id="mobile-user-avatar"
+                            style="display: none;">
+                        <i class="fas fa-user-circle mobile-default-avatar" aria-hidden="true"></i>
+                    </div>
+                    <div class="mobile-user-details">
+                        <h4 id="mobile-user-name">Nome Utente</h4>
+                        <p id="mobile-user-type">Tipo Account</p>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Items -->
+                <nav class="mobile-menu-nav">
+                    <a href="#" class="mobile-menu-item active" data-section="feed">
+                        <i class="fas fa-home" aria-hidden="true"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="#" class="mobile-menu-item" data-section="explore">
+                        <i class="fas fa-compass" aria-hidden="true"></i>
+                        <span>Esplora</span>
+                    </a>
+                    <div class="mobile-menu-divider"></div>
+
+                    <button class="mobile-menu-item create-post" id="mobile-create-post">
+                        <i class="fas fa-plus" aria-hidden="true"></i>
+                        <span>Crea Post</span>
+                    </button>
+                    <button class="mobile-menu-item create-project" id="mobile-create-project">
+                        <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                        <span>Crea Progetto</span>
+                    </button>
+
+                    <div class="mobile-menu-divider"></div>
+
+                    <a href="#" class="mobile-menu-item" id="mobile-notifications">
+                        <i class="fas fa-bell" aria-hidden="true"></i>
+                        <span>Notifiche</span>
+                        <span class="mobile-menu-badge" id="mobile-menu-notification-count"
+                            style="display: none;">0</span>
+                    </a>
+                    <a href="#" class="mobile-menu-item" id="mobile-messages">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span>Messaggi</span>
+                        <span class="mobile-menu-badge" id="mobile-menu-message-count" style="display: none;">0</span>
+                    </a>
+
+                    <div class="mobile-menu-divider"></div>
+
+                    <a href="pages/profile/profile.html" class="mobile-menu-item" id="mobile-profile">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        <span>Il Mio Profilo</span>
+                    </a>
+                    <a href="pages/profile/settings.html" class="mobile-menu-item" id="mobile-settings">
+                        <i class="fas fa-cog" aria-hidden="true"></i>
+                        <span>Impostazioni</span>
+                    </a>
+
+                    <div class="mobile-menu-divider"></div>
+
+                    <button class="mobile-menu-item logout" id="mobile-logout">
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                        <span>Esci</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Mobile Search Overlay -->
+        <div class="mobile-search-overlay" id="mobileSearchOverlay">
+            <div class="mobile-search-content">
+                <div class="mobile-search-header">
+                    <button class="mobile-search-back" id="mobileSearchBack">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="mobile-search-input-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="search" class="mobile-search-input" placeholder="Cerca..." id="mobileSearchInput">
+                        <button class="mobile-search-clear" id="mobileSearchClear" style="display:none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mobile-search-results" id="mobileSearchResults">
+                    <!-- Results will be dynamically populated -->
+                    <div class="mobile-search-empty">
+                        <div class="recent-searches" style="display:none;" id="mobileRecentSearches">
+                            <h3>Ricerche Recenti</h3>
+                            <div class="suggestion-item">
+                                <i class="fas fa-history"></i>
+                                <span>Metodologia Montessori</span>
+                            </div>
+                        </div>
+                        <div class="quick-suggestions">
+                            <h3>Suggerimenti</h3>
+                            <div class="suggestion-item" data-query="Istituti Roma">
+                                <i class="fas fa-search"></i>
+                                <span>Istituti Roma</span>
+                            </div>
+                            <div class="suggestion-item" data-query="Progetti STEM">
+                                <i class="fas fa-search"></i>
+                                <span>Progetti STEM</span>
+                            </div>
+                            <div class="suggestion-item" data-query="Metodologie innovative">
+                                <i class="fas fa-search"></i>
+                                <span>Metodologie innovative</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="main-content" role="main">
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar" role="complementary" aria-label="Menu laterale">
+            <div class="sidebar-content">
+                <!-- Quick Actions -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Azioni Rapide</h3>
+                    <div class="quick-actions">
+                        <a href="pages/main/create.html" class="quick-action-btn primary">
+                            <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                            <span>Crea Contenuto</span>
+                        </a>
+                        <button class="quick-action-btn" id="create-post-btn">
+                            <i class="fas fa-align-left" aria-hidden="true"></i>
+                            <span>Post Rapido</span>
+                        </button>
+                        <button class="quick-action-btn" id="create-project-btn">
+                            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                            <span>Nuovo Progetto</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Connections Summary -->
+                <div class="sidebar-section">
+                    <div class="section-header">
+                        <h3 class="sidebar-title">
+                            <i class="fas fa-users" aria-hidden="true"></i>
+                            Connessioni
+                        </h3>
+                    </div>
+
+                    <div class="connections-summary" onclick="window.location.href='pages/profile/connections.html'"
+                        title="Gestisci connessioni">
+                        <div class="connection-stat" id="following-count">
+                            <span class="count">0</span>
+                            <span class="label">Seguiti</span>
+                        </div>
+                        <div class="connection-stat" id="followers-count">
+                            <span class="count">0</span>
+                            <span class="label">Follower</span>
+                        </div>
+                    </div>
+
+                    <div class="manage-connections-btn-container">
+                        <a href="pages/profile/connections.html" class="manage-connections-btn">
+                            <i class="fas fa-user-friends"></i>
+                            Gestisci Connessioni
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Suggested Institutes -->
+                <div class="sidebar-section suggested-institutes">
+                    <div class="section-header">
+                        <h3 class="sidebar-title">
+                            <i class="fas fa-school" aria-hidden="true"></i>
+                            Istituti Consigliati
+                        </h3>
+                        <a href="#" class="see-all"
+                            onclick="if(window.eduNetHomepage) window.eduNetHomepage.switchFeedTab('discover'); return false;">Vedi
+                            tutto</a>
+                    </div>
+                    <div id="suggested-institutes">
+                        <!-- Populated by js/recommendations/recommendation-integration.js -->
+                    </div>
+                </div>
+
+                <!-- Favorites/Following -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">
+                        <i class="fas fa-heart" aria-hidden="true"></i>
+                        Preferiti
+                    </h3>
+                    <div class="favorites-list" id="favorites-list">
+                        <div class="no-favorites">
+                            <i class="fas fa-heart-broken" aria-hidden="true"></i>
+                            <p>Nessun istituto nei preferiti</p>
+                            <button class="btn-link" id="discover-institutes">Scopri istituti</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Menu -->
+                <nav class="sidebar-nav" role="navigation" aria-label="Menu principale">
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" data-section="feed">
+                                <i class="fas fa-home" aria-hidden="true"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-section="saved">
+                                <i class="fas fa-bookmark" aria-hidden="true"></i>
+                                <span>Salvati</span>
+                                <span class="nav-badge" id="saved-count">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-section="explore">
+                                <i class="fas fa-compass" aria-hidden="true"></i>
+                                <span>Esplora</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Recent Activity -->
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Attività Recente</h3>
+                    <div class="recent-activity" id="recent-activity">
+                        <div class="no-activity">
+                            <i class="fas fa-clock" aria-hidden="true"></i>
+                            <p>Nessuna attività recente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Central Feed -->
+        <section class="central-feed" role="main" aria-label="Feed principale">
+            <!-- Feed Header -->
+            <div class="feed-header">
+                <!-- NEW: Modern Filter System -->
+                <div class="modern-filters-container">
+                    <!-- Primary Tabs - sempre visibili -->
+                    <div class="primary-tabs" role="tablist" aria-label="Filtri principali">
+                        <button class="primary-tab feed-tab active" data-feed="all" role="tab" aria-selected="true">
+                            <i class="fas fa-globe"></i>
+                            <span>Tutti</span>
+                            <span class="tab-badge" id="tab-count-all"></span>
+                        </button>
+                        <button class="primary-tab feed-tab" data-feed="following" role="tab" aria-selected="false">
+                            <i class="fas fa-user-friends"></i>
+                            <span>Seguiti</span>
+                            <span class="tab-badge" id="tab-count-following"></span>
+                        </button>
+                        <button class="primary-tab feed-tab" data-feed="projects" role="tab" aria-selected="false">
+                            <i class="fas fa-rocket"></i>
+                            <span>Progetti</span>
+                            <span class="tab-badge" id="tab-count-projects"></span>
+                        </button>
+                        <button class="primary-tab feed-tab" data-feed="methodologies" role="tab" aria-selected="false">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Metodologie</span>
+                            <span class="tab-badge" id="tab-count-methodologies"></span>
+                        </button>
+                        <button class="primary-tab feed-tab" data-feed="discover" role="tab" aria-selected="false">
+                            <i class="fas fa-compass"></i>
+                            <span>Scopri</span>
+                            <span class="tab-badge">✨</span>
+                        </button>
+                    </div>
+
+                    <!-- Filter Actions Bar -->
+                    <div class="filter-actions-bar">
+                        <!-- Quick Filters Dropdown (Mobile First) -->
+                        <div class="quick-filter-dropdown">
+                            <button class="filter-dropdown-toggle" id="quickFilterToggle">
+                                <i class="fas fa-filter"></i>
+                                <span>Filtri</span>
+                                <span class="active-filters-count">0</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="filter-dropdown-menu" id="quickFilterMenu">
+                                <div class="filter-dropdown-header">
+                                    <button class="filter-close-btn" id="closeFiltersBtn" aria-label="Chiudi filtri">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    <h4>Filtri Rapidi</h4>
+                                    <button class="clear-all-btn" id="clearAllFilters">
+                                        <i class="fas fa-times-circle"></i>
+                                        Cancella tutto
+                                    </button>
+                                </div>
+
+                                <!-- Tipo Contenuto -->
+                                <div class="filter-section">
+                                    <h5>Tipo Contenuto</h5>
+                                    <div class="filter-pills">
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="content-type" value="post" checked>
+                                            <span><i class="fas fa-align-left"></i> Post</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="content-type" value="news" checked>
+                                            <span><i class="fas fa-newspaper"></i> News</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="content-type" value="project" checked>
+                                            <span><i class="fas fa-lightbulb"></i> Progetti</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="content-type" value="methodology" checked>
+                                            <span><i class="fas fa-book-open"></i> Metodologie</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="content-type" value="event" checked>
+                                            <span><i class="fas fa-images"></i> Gallerie</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="content-type" value="educational_experience"
+                                                checked>
+                                            <span><i class="fas fa-graduation-cap"></i> Esperienze</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="content-type" value="collaboration" checked>
+                                            <span><i class="fas fa-handshake"></i> Collaborazioni</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Periodo -->
+                                <div class="filter-section">
+                                    <h5>Periodo</h5>
+                                    <div class="filter-pills">
+                                        <label class="filter-pill">
+                                            <input type="radio" name="period" value="all" checked>
+                                            <span><i class="fas fa-infinity"></i> Tutti</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="radio" name="period" value="today">
+                                            <span><i class="fas fa-calendar-day"></i> Oggi</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="radio" name="period" value="week">
+                                            <span><i class="fas fa-calendar-week"></i> Settimana</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="radio" name="period" value="month">
+                                            <span><i class="fas fa-calendar-alt"></i> Mese</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Tipo Istituto -->
+                                <div class="filter-section">
+                                    <h5>Tipo Istituto</h5>
+                                    <div class="filter-pills vertical">
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="institute-type" value="primaria">
+                                            <span><i class="fas fa-child"></i> Scuola Primaria</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="institute-type" value="media">
+                                            <span><i class="fas fa-user-graduate"></i> Scuola Media</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="institute-type" value="liceo">
+                                            <span><i class="fas fa-school"></i> Liceo</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="institute-type" value="tecnico">
+                                            <span><i class="fas fa-cogs"></i> Istituto Tecnico</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="institute-type" value="professionale">
+                                            <span><i class="fas fa-wrench"></i> Istituto Professionale</span>
+                                        </label>
+                                        <label class="filter-pill">
+                                            <input type="checkbox" name="institute-type" value="universita">
+                                            <span><i class="fas fa-university"></i> Università</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Footer Actions -->
+                                <div class="filter-dropdown-footer">
+                                    <button class="btn btn-outline btn-sm" id="resetFiltersBtn">
+                                        <i class="fas fa-undo"></i>
+                                        Reset
+                                    </button>
+                                    <button class="btn btn-primary btn-sm" id="applyFiltersBtn">
+                                        <i class="fas fa-check"></i>
+                                        Applica Filtri
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sort Dropdown -->
+                        <div class="sort-dropdown">
+                            <button class="sort-dropdown-toggle" id="sortToggle">
+                                <i class="fas fa-sort-amount-down"></i>
+                                <span class="sort-label">Recenti</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="sort-dropdown-menu" id="sortMenu">
+                                <button class="sort-option active" data-sort="recent">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Più Recenti</span>
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="sort-option" data-sort="popular">
+                                    <i class="fas fa-fire"></i>
+                                    <span>Più Popolari</span>
+                                </button>
+                                <button class="sort-option" data-sort="likes">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Più Apprezzati</span>
+                                </button>
+                                <button class="sort-option" data-sort="comments">
+                                    <i class="fas fa-comment"></i>
+                                    <span>Più Commentati</span>
+                                </button>
+                                <button class="sort-option" data-sort="views">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Più Visti</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- View Mode Toggle (Desktop) -->
+                        <div class="view-mode-toggle desktop-only">
+                            <button class="view-mode-btn active" data-view="grid" title="Vista griglia">
+                                <i class="fas fa-th-large"></i>
+                            </button>
+                            <button class="view-mode-btn" data-view="list" title="Vista lista">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+
+                        <!-- Active Filters Summary -->
+                        <div class="active-filters-summary" id="activeFiltersSummary" style="display: none;">
+                            <span class="filters-label">Filtri attivi:</span>
+                            <div class="active-filter-tags" id="activeFilterTags"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OLD SYSTEM - Remove after -->
+                <div class="feed-filters" style="display: none;">
+                    <div class="smart-filters">
+                        <!-- Quick Filter Chips -->
+                        <div class="filter-chips" role="group" aria-label="Filtri rapidi">
+                            <button class="filter-chip active" data-filter="all" aria-pressed="true">
+                                <i class="fas fa-globe" aria-hidden="true"></i>
+                                <span>Tutti</span>
+                            </button>
+                            <button class="filter-chip" data-filter="projects" aria-pressed="false">
+                                <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                                <span>Progetti</span>
+                            </button>
+                            <button class="filter-chip" data-filter="methodologies" aria-pressed="false">
+                                <i class="fas fa-book-open" aria-hidden="true"></i>
+                                <span>Metodologie</span>
+                            </button>
+                            <button class="filter-chip" data-filter="recent" aria-pressed="false">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                                <span>Recenti</span>
+                            </button>
+                            <button class="filter-chip" data-filter="popular" aria-pressed="false">
+                                <i class="fas fa-fire" aria-hidden="true"></i>
+                                <span>Popolari</span>
+                            </button>
+                        </div>
+
+                        <!-- Advanced Filters Toggle -->
+                        <button class="advanced-filters-toggle" id="advanced-filters-toggle" aria-expanded="false"
+                            aria-controls="advanced-filters-panel">
+                            <i class="fas fa-sliders-h" aria-hidden="true"></i>
+                            <span>Filtri Avanzati</span>
+                            <i class="fas fa-chevron-down toggle-arrow" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <!-- Advanced Filters Panel -->
+                    <div class="advanced-filters-panel" id="advanced-filters-panel" aria-hidden="true">
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label for="content-filter">Tipo di Contenuto</label>
+                                <select class="filter-select" id="content-filter"
+                                    aria-describedby="content-filter-help">
+                                    <option value="all">Tutti i contenuti</option>
+                                    <option value="post">Post generali</option>
+                                    <option value="project">Progetti didattici</option>
+                                    <option value="methodology">Metodologie</option>
+                                    <option value="text">Solo testo</option>
+                                    <option value="images">Con immagini</option>
+                                </select>
+                                <div id="content-filter-help" class="sr-only">Filtra i contenuti per tipologia</div>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="institute-type-filter">Tipo di Istituto</label>
+                                <select class="filter-select" id="institute-type-filter"
+                                    aria-describedby="institute-filter-help">
+                                    <option value="all">Tutti gli istituti</option>
+                                    <option value="Scuola Primaria">Scuole Primarie</option>
+                                    <option value="Scuola Secondaria di I Grado">Scuole Medie</option>
+                                    <option value="Liceo">Licei</option>
+                                    <option value="Istituto Tecnico">Istituti Tecnici</option>
+                                    <option value="Istituto Professionale">Istituti Professionali</option>
+                                    <option value="Università">Università</option>
+                                </select>
+                                <div id="institute-filter-help" class="sr-only">Filtra per tipo di istituto scolastico
+                                </div>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="date-filter">Periodo</label>
+                                <select class="filter-select" id="date-filter" aria-describedby="date-filter-help">
+                                    <option value="all">Tutti i periodi</option>
+                                    <option value="today">Oggi</option>
+                                    <option value="week">Ultima settimana</option>
+                                    <option value="month">Ultimo mese</option>
+                                    <option value="year">Ultimo anno</option>
+                                </select>
+                                <div id="date-filter-help" class="sr-only">Filtra per periodo di pubblicazione</div>
+                            </div>
+                        </div>
+
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label for="sort-filter">Ordinamento</label>
+                                <select class="filter-select" id="sort-filter" aria-describedby="sort-filter-help">
+                                    <option value="recent">Più recenti</option>
+                                    <option value="popular">Più popolari</option>
+                                    <option value="likes">Più apprezzati</option>
+                                    <option value="comments">Più commentati</option>
+                                    <option value="alphabetical">Alfabetico</option>
+                                </select>
+                                <div id="sort-filter-help" class="sr-only">Ordina i risultati secondo il criterio
+                                    selezionato</div>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="engagement-filter">Livello di Engagement</label>
+                                <select class="filter-select" id="engagement-filter"
+                                    aria-describedby="engagement-filter-help">
+                                    <option value="all">Tutti i livelli</option>
+                                    <option value="high">Alto (10+ interazioni)</option>
+                                    <option value="medium">Medio (3-9 interazioni)</option>
+                                    <option value="low">Basso (0-2 interazioni)</option>
+                                </select>
+                                <div id="engagement-filter-help" class="sr-only">Filtra per livello di interazione degli
+                                    utenti</div>
+                            </div>
+
+                            <div class="filter-actions">
+                                <button class="btn btn-outline reset-filters" id="reset-filters" type="button">
+                                    <i class="fas fa-undo" aria-hidden="true"></i>
+                                    <span>Reset</span>
+                                </button>
+                                <button class="btn btn-primary apply-filters" id="apply-filters" type="button">
+                                    <i class="fas fa-search" aria-hidden="true"></i>
+                                    <span>Applica</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Post Section (for institutes) -->
+            <div class="create-post-section" id="create-post-section" style="display: none;">
+                <div class="create-post-card">
+                    <div class="create-post-header">
+                        <div class="user-avatar-small">
+                            <i class="fas fa-user-circle" aria-hidden="true"></i>
+                        </div>
+                        <button class="create-post-input" id="create-post-trigger">
+                            Condividi un progetto, una metodologia o un'esperienza...
+                        </button>
+                    </div>
+                    <div class="create-post-actions">
+                        <button class="post-action-btn" data-type="text">
+                            <i class="fas fa-font" aria-hidden="true"></i>
+                            <span>Testo</span>
+                        </button>
+                        <button class="post-action-btn" data-type="image">
+                            <i class="fas fa-image" aria-hidden="true"></i>
+                            <span>Foto</span>
+                        </button>
+                        <button class="post-action-btn" data-type="project">
+                            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                            <span>Progetto</span>
+                        </button>
+                        <button class="post-action-btn" data-type="methodology">
+                            <i class="fas fa-book-open" aria-hidden="true"></i>
+                            <span>Metodologia</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EduMatch Section -->
+            <section class="edumatch-section" id="eduMatchSection">
+                <!-- Collapsible Header -->
+                <div class="edumatch-collapse-header" id="eduMatchCollapseHeader">
+                    <div class="edumatch-collapse-content">
+                        <div class="edumatch-collapse-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="edumatch-collapse-info">
+                            <h3 class="edumatch-collapse-title">EduMatch</h3>
+                            <p class="edumatch-collapse-subtitle">Trova istituti ideali per collaborare</p>
+                        </div>
+                    </div>
+                    <button class="edumatch-collapse-toggle" id="eduMatchToggle" aria-label="Espandi/Chiudi EduMatch"
+                        aria-expanded="true">
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                </div>
+
+                <!-- Expandable Content -->
+                <div class="edumatch-expandable" id="eduMatchExpandable">
+                    <!-- Header Completo con bottone per chiudere -->
+                    <div class="edumatch-header">
+                        <div>
+                            <h2 class="edumatch-title">
+                                <i class="fas fa-fire"></i>
+                                EduMatch
+                            </h2>
+                            <p class="edumatch-subtitle">
+                                Trova l'istituto perfetto per collaborare
+                            </p>
+                        </div>
+
+                        <!-- Collapse Button (rimosso toggle studenti) -->
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                            <button class="edumatch-minimize-btn" id="eduMatchMinimize" aria-label="Riduci EduMatch"
+                                title="Riduci sezione">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div class="edumatch-loading">
+                        <div class="loading-spinner-match"></div>
+                        <p>Stiamo cercando i match perfetti per te...</p>
+                    </div>
+
+                    <!-- Cards Container -->
+                    <div class="edumatch-cards-container">
+                        <!-- Le card vengono caricate dinamicamente via JavaScript -->
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="edumatch-actions">
+                        <button class="match-action-btn nope" aria-label="Passa" title="Passa (← oppure swipe left)">
+                            <i class="fas fa-times"></i>
+                        </button>
+
+                        <button class="match-action-btn info" aria-label="Info"
+                            title="Visualizza info complete (tasto I)">
+                            <i class="fas fa-info"></i>
+                        </button>
+
+                        <button class="match-action-btn super" aria-label="Super Like"
+                            title="Super Like! (↑ oppure swipe up)">
+                            <i class="fas fa-star"></i>
+                        </button>
+
+                        <button class="match-action-btn like" aria-label="Mi piace"
+                            title="Mi piace (→ oppure swipe right)">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="edumatch-empty">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Hai visto tutti i profili!</h3>
+                        <p>Non ci sono altri match al momento. Torna più tardi per scoprire nuovi istituti compatibili
+                            con te.</p>
+                        <button class="btn btn-primary" onclick="window.eduMatch.loadCards()">
+                            <i class="fas fa-redo"></i>
+                            Ricarica Match
+                        </button>
+                    </div>
+            </section>
+
+            <!-- Discover Section (ex Right Sidebar content) -->
+            <section class="discover-section" id="discoverSection" style="display: none;">
+                <div class="discover-grid">
+                    <!-- Trending Topics -->
+                    <div class="discover-card">
+                        <div class="discover-card-header">
+                            <h3>
+                                <i class="fas fa-fire"></i>
+                                Argomenti di Tendenza
+                            </h3>
+                        </div>
+                        <div class="discover-card-body">
+                            <div class="trending-topics" id="trending-topics-discover">
+                                <div class="no-trends">
+                                    <i class="fas fa-chart-line"></i>
+                                    <p>Nessun trend disponibile</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Suggested Institutes section removed - duplicated in sidebar -->
+
+                    <!-- Statistics (for institutes) -->
+                    <div class="discover-card" id="institute-stats-discover" style="display: none;">
+                        <div class="discover-card-header">
+                            <h3>
+                                <i class="fas fa-chart-bar"></i>
+                                Le tue Statistiche
+                            </h3>
+                        </div>
+                        <div class="discover-card-body">
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-number" id="posts-count-discover">0</div>
+                                    <div class="stat-label">Post Pubblicati</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" id="followers-count-discover">0</div>
+                                    <div class="stat-label">Follower</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" id="views-count-discover">0</div>
+                                    <div class="stat-label">Visualizzazioni</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" id="rating-average-discover">0.0</div>
+                                    <div class="stat-label">Valutazione Media</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="discover-card">
+                        <div class="discover-card-header">
+                            <h3>
+                                <i class="fas fa-link"></i>
+                                Link Utili
+                            </h3>
+                        </div>
+                        <div class="discover-card-body">
+                            <div class="quick-links">
+                                <a href="#" class="quick-link">
+                                    <i class="fas fa-question-circle"></i>
+                                    <span>Centro Assistenza</span>
+                                </a>
+                                <a href="#" class="quick-link" id="open-privacy-modal"
+                                    onclick="openLegalModal('privacy'); return false;">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Privacy e Sicurezza</span>
+                                </a>
+                                <a href="#" class="quick-link" id="open-terms-modal"
+                                    onclick="openLegalModal('terms'); return false;">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>Termini di Servizio</span>
+                                </a>
+                                <a href="mailto:edunet19.info@gmail.com" class="quick-link">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Contattaci</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div> <!-- /.edumatch-expandable -->
+            </section>
+
+            <!-- Feed Content -->
+            <div class="feed-content" id="feed-content">
+                <!-- Loading State -->
+                <div class="feed-loading" id="feed-loading">
+                    <div class="loading-spinner-small"></div>
+                    <p>Caricamento contenuti...</p>
+                </div>
+
+                <!-- Empty State -->
+                <div class="feed-empty" id="feed-empty" style="display: none;">
+                    <div class="empty-state">
+                        <i class="fas fa-newspaper" aria-hidden="true"></i>
+                        <h3>Nessun contenuto disponibile</h3>
+                        <p>Non ci sono ancora contenuti da mostrare. Inizia seguendo alcuni istituti o crea il tuo primo
+                            post!</p>
+                        <div class="empty-actions">
+                            <button class="btn btn-primary" id="explore-institutes">
+                                <i class="fas fa-compass" aria-hidden="true"></i>
+                                Esplora Istituti
+                            </button>
+                            <button class="btn btn-outline" id="create-first-post" style="display: none;">
+                                <i class="fas fa-plus" aria-hidden="true"></i>
+                                Crea il tuo primo post
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Posts will be dynamically loaded here -->
+            </div>
+
+            <!-- Load More -->
+            <div class="load-more-section" id="load-more-section" style="display: none;">
+                <button class="btn btn-outline load-more-btn" id="load-more-btn">
+                    <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    Carica altri contenuti
+                </button>
+            </div>
+
+            <!-- Saved Posts Section (hidden by default) -->
+            <div class="saved-posts-section hidden" id="saved-posts-section">
+                <div class="saved-posts-header">
+                    <h2 class="saved-posts-title">
+                        <i class="fas fa-bookmark"></i>
+                        Post Salvati
+                    </h2>
+                    <p class="saved-posts-subtitle">I tuoi contenuti salvati per una lettura successiva</p>
+                </div>
+
+                <!-- Saved Posts Stats -->
+                <div class="saved-stats-grid">
+                    <div class="saved-stat-card">
+                        <div class="saved-stat-icon">
+                            <i class="fas fa-bookmark"></i>
+                        </div>
+                        <div class="saved-stat-content">
+                            <span class="saved-stat-value" id="total-saved-count">0</span>
+                            <span class="saved-stat-label">Post Salvati</span>
+                        </div>
+                    </div>
+                    <div class="saved-stat-card">
+                        <div class="saved-stat-icon">
+                            <i class="fas fa-calendar-week"></i>
+                        </div>
+                        <div class="saved-stat-content">
+                            <span class="saved-stat-value" id="saved-this-week-count">0</span>
+                            <span class="saved-stat-label">Questa Settimana</span>
+                        </div>
+                    </div>
+                    <div class="saved-stat-card">
+                        <div class="saved-stat-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="saved-stat-content">
+                            <span class="saved-stat-value" id="most-saved-category">-</span>
+                            <span class="saved-stat-label">Categoria Preferita</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saved Posts Filter -->
+                <div class="saved-posts-filter">
+                    <button class="saved-filter-btn active" data-saved-filter="all">
+                        <i class="fas fa-globe"></i>
+                        <span>Tutti</span>
+                    </button>
+                    <button class="saved-filter-btn" data-saved-filter="recent">
+                        <i class="fas fa-clock"></i>
+                        <span>Recenti</span>
+                    </button>
+                    <button class="saved-filter-btn" data-saved-filter="oldest">
+                        <i class="fas fa-history"></i>
+                        <span>Meno Recenti</span>
+                    </button>
+                    <button class="saved-filter-btn" data-saved-filter="most-liked">
+                        <i class="fas fa-heart"></i>
+                        <span>Più Apprezzati</span>
+                    </button>
+                </div>
+
+                <!-- Saved Posts Content -->
+                <div class="saved-posts-content" id="saved-posts-content">
+                    <!-- Loading State -->
+                    <div class="saved-loading" id="saved-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Caricamento post salvati...</p>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="saved-empty hidden" id="saved-empty">
+                        <div class="saved-empty-icon">
+                            <i class="far fa-bookmark"></i>
+                        </div>
+                        <h3>Nessun post salvato</h3>
+                        <p>Inizia a salvare i tuoi contenuti preferiti cliccando sull'icona del bookmark nei post</p>
+                        <button class="btn-primary" id="back-to-feed-btn">
+                            <i class="fas fa-home"></i>
+                            Torna al Feed
+                        </button>
+                    </div>
+
+                    <!-- Saved posts will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Sidebar Content moved to Discover Section -->
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" role="navigation" aria-label="Navigazione mobile">
+        <a href="#" class="mobile-nav-item active" data-section="feed">
+            <i class="fas fa-home" aria-hidden="true"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="mobile-nav-item" data-section="saved">
+            <i class="fas fa-bookmark" aria-hidden="true"></i>
+            <span>Salvati</span>
+            <span class="mobile-notification-badge" id="mobile-saved-count" style="display: none;">0</span>
+        </a>
+        <a href="pages/main/create.html" class="mobile-nav-item create-btn">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            <span>Crea</span>
+        </a>
+        <a href="#" class="mobile-nav-item" data-section="notifications">
+            <i class="fas fa-bell" aria-hidden="true"></i>
+            <span>Notifiche</span>
+            <span class="mobile-notification-badge" id="mobile-notification-count" style="display: none;">0</span>
+        </a>
+        <a href="pages/profile/profile.html" class="mobile-nav-item" data-section="profile">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <span>Profilo</span>
+        </a>
+    </nav>
+
+    <!-- Create Post Modal -->
+    <div id="createPostModal" class="modal" role="dialog" aria-labelledby="create-post-title" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container modal-large">
+            <div class="modal-content">
+                <header class="modal-header">
+                    <h2 id="create-post-title" class="modal-title">
+                        <i class="fas fa-plus" aria-hidden="true"></i>
+                        Crea Nuovo Contenuto
+                    </h2>
+                    <button class="modal-close" aria-label="Chiudi finestra creazione post">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </header>
+
+                <div class="modal-body">
+                    <!-- Content will be dynamically loaded based on post type -->
+                    <div id="create-post-content">
+                        <!-- This will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Match Notification Modal -->
+    <div id="matchNotificationModal" class="match-notification-modal" role="dialog" aria-labelledby="match-title"
+        aria-hidden="true">
+        <div class="match-notification-content">
+            <!-- Match Icon -->
+            <div class="match-notification-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+
+            <!-- Match Title -->
+            <h2 id="match-title">È un Match! 🎉</h2>
+
+            <!-- Match Description -->
+            <p>
+                Hai un nuovo match eccezionale! Iniziate a collaborare su progetti straordinari!
+            </p>
+
+            <!-- Match Profiles -->
+            <div class="match-profiles">
+                <div class="match-profile">
+                    <div class="match-profile-avatar">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="match-profile-name">Il Tuo Istituto</div>
+                </div>
+
+                <div class="match-heart-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+
+                <div class="match-profile">
+                    <div class="match-profile-avatar">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="match-profile-name">Match Profile</div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="match-notification-actions">
+                <button class="btn btn-outline" onclick="window.eduMatch.closeMatchNotification()">
+                    <i class="fas fa-times"></i>
+                    Chiudi
+                </button>
+                <button class="btn btn-primary">
+                    <i class="fas fa-comment"></i>
+                    Invia Messaggio
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Legal Modal (Privacy & Terms) -->
+    <div id="legalModal" class="modal legal-modal" role="dialog" aria-labelledby="legal-modal-title" aria-hidden="true">
+        <div class="modal-backdrop" onclick="closeLegalModal()"></div>
+        <div class="modal-container modal-large">
+            <div class="modal-content legal-modal-content">
+                <header class="modal-header">
+                    <h2 id="legal-modal-title" class="modal-title">
+                        <i class="fas fa-shield-alt" id="legal-modal-icon"></i>
+                        <span id="legal-modal-title-text">Privacy e Sicurezza</span>
+                    </h2>
+                    <button class="modal-close" onclick="closeLegalModal()" aria-label="Chiudi">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </header>
+                <div class="modal-body legal-modal-body" id="legal-modal-body">
+                    <!-- Content loaded dynamically -->
+                </div>
+                <footer class="modal-footer legal-modal-footer">
+                    <a href="#" id="legal-full-page-link" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-external-link-alt"></i>
+                        Apri pagina completa
+                    </a>
+                    <button class="btn btn-primary" onclick="closeLegalModal()">
+                        <i class="fas fa-check"></i>
+                        Ho capito
+                    </button>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Legal Modal Functions
+        function openLegalModal(type) {
+            const modal = document.getElementById('legalModal');
+            const titleText = document.getElementById('legal-modal-title-text');
+            const icon = document.getElementById('legal-modal-icon');
+            const body = document.getElementById('legal-modal-body');
+            const fullPageLink = document.getElementById('legal-full-page-link');
+
+            if (type === 'privacy') {
+                titleText.textContent = 'Privacy e Sicurezza';
+                icon.className = 'fas fa-shield-alt';
+                fullPageLink.href = 'pages/legal/privacy-policy.html';
+                body.innerHTML = getPrivacyContent();
+            } else if (type === 'terms') {
+                titleText.textContent = 'Termini di Servizio';
+                icon.className = 'fas fa-file-contract';
+                fullPageLink.href = 'pages/legal/terms-of-service.html';
+                body.innerHTML = getTermsContent();
+            }
+
+            modal.classList.add('show');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLegalModal() {
+            const modal = document.getElementById('legalModal');
+            modal.classList.remove('show');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLegalModal();
+            }
+        });
+
+        function getPrivacyContent() {
+            return `
+            <div class="legal-content">
+                <p class="legal-update">Ultimo aggiornamento: 4 Dicembre 2024 | Versione 2.0</p>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-user-shield"></i> Titolare e DPO</h3>
+                    <p><strong>Titolare:</strong> EduNet19 - Email: <a href="mailto:edunet19.info@gmail.com">edunet19.info@gmail.com</a></p>
+                    <p><strong>DPO (Data Protection Officer):</strong> <a href="mailto:dpo@edunet19.it">dpo@edunet19.it</a></p>
+                    <p><strong>Privacy:</strong> <a href="mailto:privacy@edunet19.it">privacy@edunet19.it</a></p>
+                </section>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-balance-scale"></i> Base Giuridica (GDPR)</h3>
+                    <ul>
+                        <li><strong>Consenso (Art. 6.1.a):</strong> Iscrizione e comunicazioni promozionali</li>
+                        <li><strong>Esecuzione contrattuale (Art. 6.1.b):</strong> Erogazione servizi</li>
+                        <li><strong>Obbligo legale (Art. 6.1.c):</strong> Adempimenti di legge</li>
+                        <li><strong>Legittimo interesse (Art. 6.1.f):</strong> Sicurezza e prevenzione abusi</li>
+                    </ul>
+                </section>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-child"></i> Protezione Minori (Legge 71/2017)</h3>
+                    <ul>
+                        <li><strong>&lt;14 anni:</strong> Registrazione NON consentita</li>
+                        <li><strong>14-16 anni:</strong> Consenso parentale verificato via email</li>
+                        <li><strong>16-18 anni:</strong> Dichiarazione consenso parentale</li>
+                        <li><strong>Cyberbullismo:</strong> <a href="mailto:cyberbullismo@edunet19.it">cyberbullismo@edunet19.it</a> - Risposta 24h</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h3><i class="fas fa-robot"></i> Profilazione (Art. 22 GDPR)</h3>
+                    <p>EduNet19 <strong>NON utilizza</strong> profilazione basata su ML, decisioni automatizzate con effetti legali, scoring comportamentale o pubblicità comportamentale.</p>
+                </section>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-user-check"></i> I Tuoi Diritti (Art. 15-22 GDPR)</h3>
+                    <ul>
+                        <li><strong>Accesso:</strong> Scarica i tuoi dati (JSON/CSV)</li>
+                        <li><strong>Rettifica:</strong> Modifica dal profilo</li>
+                        <li><strong>Cancellazione:</strong> Elimina Account (30gg recupero)</li>
+                        <li><strong>Portabilità:</strong> Esporta dati</li>
+                        <li><strong>Opposizione:</strong> Via email o impostazioni</li>
+                    </ul>
+                    <p><strong>Tempistiche:</strong> Conferma 5gg, risposta 30gg (prorogabili +60gg).</p>
+                </section>
+
+                <section class="legal-section">
+                    <h3><i class="fas fa-shield-alt"></i> Sicurezza e DPIA</h3>
+                    <p><strong>Misure:</strong> TLS 1.2+, bcrypt, AES-256, MFA, RBAC</p>
+                    <p><strong>DPIA:</strong> Completata (Art. 35 GDPR) - Riassunto disponibile su richiesta</p>
+                    <p><strong>Data Breach:</strong> Notifica Garante entro 72h (Art. 33)</p>
+                </section>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-gavel"></i> Reclami</h3>
+                    <p><strong>1. Interno:</strong> <a href="mailto:privacy@edunet19.it">privacy@edunet19.it</a> - Risposta 30gg</p>
+                    <p><strong>2. Garante:</strong> <a href="https://www.garanteprivacy.it" target="_blank">www.garanteprivacy.it</a></p>
+                </section>
+            </div>
+        `;
+        }
+
+        function getTermsContent() {
+            return `
+            <div class="legal-content">
+                <p class="legal-update">Ultimo aggiornamento: 4 Dicembre 2024</p>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-handshake"></i> Accettazione dei Termini</h3>
+                    <p>Utilizzando EduNet19, accetti di essere vincolato dai presenti Termini di Servizio e dalla nostra Privacy Policy.</p>
+                </section>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-info-circle"></i> Descrizione del Servizio</h3>
+                    <p>EduNet19 è una piattaforma social network per:</p>
+                    <ul>
+                        <li>Istituti scolastici italiani (statali e paritarie)</li>
+                        <li>Docenti e personale scolastico</li>
+                        <li>Studenti e famiglie</li>
+                        <li>Professionisti del settore educativo</li>
+                    </ul>
+                </section>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-user-plus"></i> Registrazione</h3>
+                    <ul>
+                        <li>Età minima: 14 anni (con consenso parentale per minori di 18)</li>
+                        <li>Informazioni accurate e veritiere obbligatorie</li>
+                        <li>Account Istituto: verificabile tramite codice MIUR</li>
+                        <li>Responsabilità per la sicurezza delle credenziali</li>
+                    </ul>
+                </section>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-check-circle"></i> Comportamenti Consentiti</h3>
+                    <ul>
+                        <li>Utilizzo rispettoso e costruttivo</li>
+                        <li>Contenuti pertinenti al contesto educativo</li>
+                        <li>Rispetto della proprietà intellettuale</li>
+                        <li>Protezione della privacy propria e altrui</li>
+                    </ul>
+                </section>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-ban"></i> Comportamenti Vietati</h3>
+                    <ul>
+                        <li><strong>Contenuti illegali:</strong> Materiale che viola leggi italiane/europee</li>
+                        <li><strong>Bullismo:</strong> Comportamenti intimidatori o discriminatori</li>
+                        <li><strong>Spam/Phishing:</strong> Messaggi commerciali non richiesti, frodi</li>
+                        <li><strong>Impersonificazione:</strong> Fingersi altra persona o istituto</li>
+                        <li><strong>Violazione privacy:</strong> Condividere dati altrui senza consenso</li>
+                    </ul>
+                </section>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-shield-alt"></i> Moderazione Contenuti</h3>
+                    <p><strong>Tempistiche di intervento:</strong></p>
+                    <ul>
+                        <li><strong>Contenuti illegali:</strong> Rimozione entro 1 ora</li>
+                        <li><strong>Cyberbullismo:</strong> Rimozione entro 24 ore</li>
+                        <li><strong>Altre violazioni:</strong> Rimozione entro 48 ore</li>
+                        <li><strong>Appello:</strong> Possibile entro 7 giorni, risposta in 14gg</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h3><i class="fas fa-child"></i> Protezione Minori (Legge 71/2017)</h3>
+                    <ul>
+                        <li><strong>&lt;14 anni:</strong> Registrazione vietata</li>
+                        <li><strong>14-16 anni:</strong> Consenso parentale via email</li>
+                        <li><strong>16-18 anni:</strong> Dichiarazione consenso</li>
+                        <li><strong>Segnalazione cyberbullismo:</strong> Pulsante su ogni contenuto</li>
+                    </ul>
+                </section>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-gavel"></i> Legge Applicabile</h3>
+                    <p>Legge italiana | Foro: Roma (consumatori: residenza)</p>
+                    <p>ODR: <a href="https://ec.europa.eu/consumers/odr" target="_blank">ec.europa.eu/consumers/odr</a></p>
+                </section>
+                
+                <section class="legal-section">
+                    <h3><i class="fas fa-envelope"></i> Contatti</h3>
+                    <p>Email: <a href="mailto:edunet19.info@gmail.com">edunet19.info@gmail.com</a></p>
+                </section>
+            </div>
+        `;
+        }
+    </script>
+
+    <style>
+        /* Legal Modal Styles */
+        .legal-modal.show {
+            display: flex !important;
+        }
+
+        .legal-modal .modal-container {
+            max-width: 800px;
+            max-height: 90vh;
+        }
+
+        .legal-modal-content {
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+        }
+
+        .legal-modal-body {
+            overflow-y: auto;
+            padding: var(--space-6);
+            flex: 1;
+        }
+
+        .legal-modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-4) var(--space-6);
+            border-top: 1px solid var(--color-gray-200);
+            background: var(--color-gray-50);
+        }
+
+        .legal-content {
+            color: var(--color-gray-700);
+        }
+
+        .legal-update {
+            color: var(--color-gray-500);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-4);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .legal-section {
+            margin-bottom: var(--space-6);
+        }
+
+        .legal-section h3 {
+            font-size: var(--font-size-lg);
+            color: var(--color-primary);
+            margin-bottom: var(--space-3);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .legal-section h3 i {
+            font-size: var(--font-size-base);
+        }
+
+        .legal-section p {
+            margin-bottom: var(--space-2);
+            line-height: 1.6;
+        }
+
+        .legal-section ul {
+            padding-left: var(--space-6);
+            margin-bottom: var(--space-3);
+        }
+
+        .legal-section li {
+            margin-bottom: var(--space-2);
+            line-height: 1.5;
+        }
+
+        .legal-section a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .legal-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Dark theme */
+        [data-theme="dark"] .legal-modal-footer {
+            background: var(--color-gray-800);
+            border-color: var(--color-gray-700);
+        }
+
+        [data-theme="dark"] .legal-content {
+            color: var(--color-gray-300);
+        }
+
+        [data-theme="dark"] .legal-update {
+            color: var(--color-gray-500);
+            border-color: var(--color-gray-700);
+        }
+
+        [data-theme="dark"] .legal-section h3 {
+            color: var(--color-primary-light);
+        }
+    </style>
+</body>
+
+</html>

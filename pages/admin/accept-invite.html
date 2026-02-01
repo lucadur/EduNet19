@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accetta Invito - EduNet19</title>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../css/components/accept-invite.css">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../../config.js"></script>
+  <script src="../../supabase-client.js"></script>
+</head>
+<body>
+  
+  <div class="invite-container">
+    
+    <!-- Loading State -->
+    <div id="loading-state" class="invite-card">
+      <div class="invite-icon">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+      <h1>Verifica invito...</h1>
+      <p>Attendere prego</p>
+    </div>
+
+    <!-- Valid Invite State -->
+    <div id="valid-invite-state" class="invite-card" style="display: none;">
+      <div class="invite-icon success">
+        <i class="fas fa-envelope-open"></i>
+      </div>
+      <h1>Invito Amministratore</h1>
+      <p class="invite-message">Sei stato invitato a diventare amministratore di:</p>
+      
+      <div class="institute-info">
+        <div class="institute-avatar" id="institute-avatar">
+          <i class="fas fa-school"></i>
+        </div>
+        <div class="institute-details">
+          <h2 id="institute-name">Nome Istituto</h2>
+          <p id="institute-type">Tipo Istituto</p>
+        </div>
+      </div>
+      
+      <div class="role-info">
+        <span class="role-label">Ruolo assegnato:</span>
+        <span class="role-badge" id="invite-role">Amministratore</span>
+      </div>
+      
+      <div class="invite-actions">
+        <button class="btn-primary" id="accept-btn" onclick="acceptInvite()">
+          <i class="fas fa-check"></i>
+          Accetta Invito
+        </button>
+        <button class="btn-secondary" onclick="declineInvite()">
+          <i class="fas fa-times"></i>
+          Rifiuta
+        </button>
+      </div>
+      
+      <p class="invite-note">
+        <i class="fas fa-info-circle"></i>
+        Accettando diventerai amministratore dell'istituto e potrai gestire contenuti e profilo.
+      </p>
+    </div>
+
+    <!-- Invalid Invite State -->
+    <div id="invalid-invite-state" class="invite-card" style="display: none;">
+      <div class="invite-icon error">
+        <i class="fas fa-times-circle"></i>
+      </div>
+      <h1>Invito Non Valido</h1>
+      <p id="error-message">L'invito potrebbe essere scaduto o già utilizzato.</p>
+      
+      <div class="invite-actions">
+        <button class="btn-primary" onclick="window.location.href='../../homepage.html'">
+          <i class="fas fa-home"></i>
+          Torna alla Homepage
+        </button>
+      </div>
+    </div>
+
+    <!-- Success State -->
+    <div id="success-state" class="invite-card" style="display: none;">
+      <div class="invite-icon success">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h1>Invito Accettato!</h1>
+      <p>Ora sei amministratore dell'istituto.</p>
+      
+      <div class="invite-actions">
+        <button class="btn-primary" onclick="window.location.href='../../homepage.html'">
+          <i class="fas fa-home"></i>
+          Vai alla Homepage
+        </button>
+        <button class="btn-secondary" onclick="window.location.href=window.AppConfig.getPageUrl('pages/admin/manage-admins.html')">
+          <i class="fas fa-users"></i>
+          Gestisci Amministratori
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../js/auth/auth.js"></script>
+  <script src="../../js/admin/admin-manager.js"></script>
+  <script src="../../js/admin/accept-invite.js"></script>
+  
+</body>
+</html>

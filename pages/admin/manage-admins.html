@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestione Collaboratori - EduNet19</title>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../styles.css?v=20251029-v2">
+  <link rel="stylesheet" href="../../css/components/manage-admins.css?v=20251029-v2">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Config -->
+  <script src="../../config.js"></script>
+</head>
+<body>
+  
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-spinner"></div>
+    <p>Caricamento...</p>
+  </div>
+
+  <!-- Main Container -->
+  <div class="admin-management-container">
+    
+    <!-- Header -->
+    <header class="page-header">
+      <button class="btn-back" onclick="window.location.href='../../homepage.html'">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <h1><i class="fas fa-users-cog"></i> Gestione Collaboratori</h1>
+      <div class="header-actions">
+        <button class="btn-primary" id="add-admin-btn" onclick="showInviteModal()">
+          <i class="fas fa-user-plus"></i>
+          <span>Invita Collaboratore</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Admin Stats -->
+    <div class="admin-stats">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="active-admins-count">0</div>
+          <div class="stat-label">Collaboratori Attivi</div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="pending-invites-count">0</div>
+          <div class="stat-label">Inviti in Sospeso</div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-user-check"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="available-slots">3</div>
+          <div class="stat-label">Posti Disponibili</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Current Admins Section -->
+    <section class="admins-section">
+      <div class="section-header">
+        <h2>
+          <i class="fas fa-users"></i>
+          Collaboratori Attivi
+        </h2>
+        <p class="section-description">
+          Massimo 3 collaboratori per istituto. Ogni collaboratore può gestire il profilo e creare contenuti.
+        </p>
+      </div>
+      
+      <div id="admin-list" class="admin-list">
+        <!-- Populated by JavaScript -->
+        <div class="loading-placeholder">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Caricamento collaboratori...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pending Invites Section -->
+    <section class="invites-section">
+      <div class="section-header">
+        <h2>
+          <i class="fas fa-envelope"></i>
+          Inviti in Sospeso
+        </h2>
+        <p class="section-description">
+          Inviti inviati che non sono ancora stati accettati. Gli inviti scadono dopo 7 giorni.
+        </p>
+      </div>
+      
+      <div id="pending-invites" class="invites-list">
+        <!-- Populated by JavaScript -->
+        <div class="loading-placeholder">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Caricamento inviti...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section">
+      <div class="info-card">
+        <h3>
+          <i class="fas fa-info-circle"></i>
+          Ruoli e Permessi
+        </h3>
+        <div class="roles-info">
+          <div class="role-item">
+            <span class="role-badge role-owner">Proprietario</span>
+            <p>Ha tutti i permessi, inclusa la gestione dei collaboratori. Non può essere rimosso.</p>
+          </div>
+          <div class="role-item">
+            <span class="role-badge role-admin">Admin</span>
+            <p>Può modificare il profilo, creare e gestire post, e gestire altri collaboratori.</p>
+          </div>
+          <div class="role-item">
+            <span class="role-badge role-editor">Editor</span>
+            <p>Può modificare il profilo e creare post, ma non può gestire altri collaboratori.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Invite Modal -->
+  <div id="invite-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-user-plus"></i> Invita Collaboratore</h2>
+        <button class="modal-close" onclick="closeInviteModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <form id="invite-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="invite-email">
+              <i class="fas fa-envelope"></i>
+              Email
+            </label>
+            <input 
+              type="email" 
+              id="invite-email" 
+              name="email" 
+              required 
+              placeholder="collaboratore@esempio.com"
+              autocomplete="email"
+            >
+            <small>L'invito verrà inviato a questo indirizzo email</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="invite-role">
+              <i class="fas fa-user-tag"></i>
+              Ruolo
+            </label>
+            <select id="invite-role" name="role" required>
+              <option value="admin">Admin - Può gestire collaboratori</option>
+              <option value="editor">Editor - Solo creazione contenuti</option>
+            </select>
+            <small>Scegli il livello di accesso per il nuovo collaboratore</small>
+          </div>
+
+          <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i>
+            <p>Il collaboratore riceverà un'email con un link per accettare l'invito. L'invito scade dopo 7 giorni.</p>
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeInviteModal()">
+            <i class="fas fa-times"></i>
+            Annulla
+          </button>
+          <button type="submit" class="btn-primary" id="send-invite-btn">
+            <i class="fas fa-paper-plane"></i>
+            Invia Invito
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirm Remove Modal -->
+  <div id="confirm-remove-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-exclamation-triangle"></i> Conferma Rimozione</h2>
+        <button class="modal-close" onclick="closeConfirmRemoveModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <p>Sei sicuro di voler rimuovere <strong id="remove-admin-name"></strong> dal ruolo di collaboratore?</p>
+        <p style="color: #6b7280; font-size: 0.9rem; margin-top: 12px;">
+          Questa azione non può essere annullata. Il collaboratore perderà immediatamente l'accesso alla gestione dell'istituto.
+        </p>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeConfirmRemoveModal()">
+          <i class="fas fa-times"></i>
+          Annulla
+        </button>
+        <button type="button" class="btn-danger" id="confirm-remove-btn">
+          <i class="fas fa-trash"></i>
+          Rimuovi Collaboratore
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <!-- Console Optimizer (deve essere caricato per primo) -->
+  <script src="../../js/utils/console-optimizer.js?v=20251029-v2"></script>
+  
+  <!-- Supabase Error Handler -->
+  <script src="../../js/utils/supabase-error-handler.js?v=20251029-v2"></script>
+  
+  <!-- Supabase Client Centralizzato -->
+  <script src="../../supabase-client.js?v=20251029-v2"></script>
+  
+  <!-- Auth System -->
+  <script src="../../js/auth/auth.js?v=20251029-v2"></script>
+  
+  <!-- Admin Manager -->
+  <script src="../../js/admin/admin-manager.js?v=20251029-v2"></script>
+  
+  <!-- Page Script -->
+  <script src="../../js/admin/manage-admins-page.js?v=20251029-v2"></script>
+  
+</body>
+</html>

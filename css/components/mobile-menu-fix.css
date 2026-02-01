@@ -1,0 +1,174 @@
+/**
+ * ===================================================================
+ * MOBILE MENU FIX - Visibilità testo su tutti i menu hamburger
+ * ===================================================================
+ */
+
+/* Fix colore testo menu items - Forza colore scuro visibile */
+.mobile-menu-item {
+  color: #374151 !important; /* Gray-700 esplicito */
+}
+
+.mobile-menu-item:hover,
+.mobile-menu-item.active {
+  background: #eff6ff !important; /* Primary-50 */
+  color: #2563eb !important; /* Primary-600 */
+}
+
+/* Eccezioni per pulsanti speciali */
+.mobile-menu-item.create-post,
+.mobile-menu-item.create-project {
+  background: #3b82f6 !important; /* Primary-500 */
+  color: #ffffff !important;
+}
+
+.mobile-menu-item.create-post:hover,
+.mobile-menu-item.create-project:hover {
+  background: #2563eb !important; /* Primary-600 */
+  color: #ffffff !important;
+}
+
+.mobile-menu-item.logout {
+  color: #dc2626 !important; /* Error */
+}
+
+.mobile-menu-item.logout:hover {
+  background: #fef2f2 !important; /* Error-50 */
+  color: #dc2626 !important;
+}
+
+/* Fix icone menu items */
+.mobile-menu-item i {
+  color: inherit !important;
+}
+
+/* Fix testo span dentro menu items */
+.mobile-menu-item span {
+  color: inherit !important;
+}
+
+/* Fix per link dentro menu items */
+.mobile-menu-item a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+
+/* ===================================================================
+   DARK THEME - Mobile Menu
+   =================================================================== */
+
+body.dark-theme .mobile-menu {
+  background: #1f2937 !important;
+  border-color: #374151 !important;
+}
+
+body.dark-theme .mobile-menu-header {
+  background: #111827 !important;
+  border-bottom-color: #374151 !important;
+}
+
+body.dark-theme .mobile-menu-user-info {
+  background: #374151 !important;
+  border-radius: 12px;
+}
+
+body.dark-theme .mobile-menu-user-name,
+body.dark-theme .mobile-user-name {
+  color: #f9fafb !important;
+}
+
+body.dark-theme .mobile-menu-user-type,
+body.dark-theme .mobile-user-type {
+  color: #9ca3af !important;
+}
+
+body.dark-theme .mobile-menu-item {
+  color: #e5e7eb !important;
+}
+
+body.dark-theme .mobile-menu-item:hover,
+body.dark-theme .mobile-menu-item.active {
+  background: rgba(59, 130, 246, 0.15) !important;
+  color: #60a5fa !important;
+}
+
+body.dark-theme .mobile-menu-item i {
+  color: inherit !important;
+}
+
+body.dark-theme .mobile-menu-item span {
+  color: inherit !important;
+}
+
+/* Pulsanti speciali - mantieni colori vivaci */
+body.dark-theme .mobile-menu-item.create-post,
+body.dark-theme .mobile-menu-item.create-project {
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%) !important;
+  color: #ffffff !important;
+}
+
+body.dark-theme .mobile-menu-item.create-post:hover,
+body.dark-theme .mobile-menu-item.create-project:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%) !important;
+}
+
+body.dark-theme .mobile-menu-item.logout {
+  color: #f87171 !important;
+}
+
+body.dark-theme .mobile-menu-item.logout:hover {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #f87171 !important;
+}
+
+/* Separatori */
+body.dark-theme .mobile-menu-divider,
+body.dark-theme .mobile-menu hr {
+  border-color: #374151 !important;
+  background: #374151 !important;
+}
+
+/* Sezioni disabilitate */
+body.dark-theme .mobile-menu-item.disabled,
+body.dark-theme .mobile-menu-item[disabled] {
+  color: #6b7280 !important;
+  opacity: 0.6;
+}
+
+/* Avatar nel menu mobile */
+body.dark-theme .mobile-menu-avatar,
+body.dark-theme .mobile-user-avatar {
+  background: #374151 !important;
+  border-color: #4b5563 !important;
+}
+
+body.dark-theme .mobile-menu-avatar i,
+body.dark-theme .mobile-user-avatar i {
+  color: #9ca3af !important;
+}
+
+/* Bottom navigation bar */
+body.dark-theme .mobile-bottom-nav {
+  background: #1f2937 !important;
+  border-top-color: #374151 !important;
+}
+
+body.dark-theme .mobile-nav-item {
+  color: #9ca3af !important;
+}
+
+body.dark-theme .mobile-nav-item:hover,
+body.dark-theme .mobile-nav-item.active {
+  color: #60a5fa !important;
+}
+
+body.dark-theme .mobile-nav-item.active {
+  background: rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Pulsante centrale "Crea" */
+body.dark-theme .mobile-nav-item.create-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%) !important;
+  color: #ffffff !important;
+}

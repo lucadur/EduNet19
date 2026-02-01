@@ -1,0 +1,494 @@
+/* ===================================================================
+   LANDING PAGE DARK THEME FIXES
+   Fixes contrast and border-radius issues in dark mode
+   Enhanced contrast for better readability
+   =================================================================== */
+
+body.dark-theme {
+    /* === HERO SECTION FIXES === */
+    
+    /* Hero Badge - Increase border radius and contrast */
+    .hero-badge {
+        border-radius: 50px !important;
+        background: rgba(255, 255, 255, 0.2) !important;
+        border: 1px solid rgba(255, 255, 255, 0.35) !important;
+        backdrop-filter: blur(10px) !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+    }
+    
+    .hero-badge i {
+        color: #fbbf24 !important;
+    }
+    
+    /* Hero Title and Subtitle - Better contrast */
+    .hero-title {
+        color: #ffffff !important;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .hero-subtitle {
+        color: rgba(255, 255, 255, 0.95) !important;
+        font-weight: 400 !important;
+    }
+    
+    /* Hero Buttons - Increase border radius and contrast */
+    .hero-actions .btn {
+        border-radius: 50px !important;
+        font-weight: 600 !important;
+    }
+    
+    .btn-primary {
+        background: #3b82f6 !important;
+        border-color: #3b82f6 !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
+    }
+    
+    .btn-primary:hover {
+        background: #2563eb !important;
+        border-color: #2563eb !important;
+        box-shadow: 0 6px 25px rgba(59, 130, 246, 0.5) !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    .btn-secondary {
+        background: rgba(255, 255, 255, 0.2) !important;
+        border: 2px solid rgba(255, 255, 255, 0.5) !important;
+        color: #ffffff !important;
+        backdrop-filter: blur(10px) !important;
+        font-weight: 600 !important;
+    }
+    
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.3) !important;
+        border-color: rgba(255, 255, 255, 0.7) !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    /* Trust badges in hero */
+    .trust-label {
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+    
+    .trust-badge {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        color: #ffffff !important;
+    }
+    
+    /* === HEADER FIXES === */
+    
+    /* Header buttons - More rounded */
+    .nav-actions .btn {
+        border-radius: 50px !important;
+    }
+    
+    .btn-outline {
+        background: transparent !important;
+        color: #f9fafb !important;
+        border: 2px solid rgba(249, 250, 251, 0.4) !important;
+    }
+    
+    .btn-outline:hover {
+        background: rgba(59, 130, 246, 0.15) !important;
+        border-color: #3b82f6 !important;
+        color: #60a5fa !important;
+    }
+    
+    /* === STATS SECTION (Hero) === */
+    
+    .hero-stats .stat-item {
+        background: rgba(31, 41, 55, 0.6) !important;
+        border-radius: 16px !important;
+        padding: 16px !important;
+        backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(55, 65, 81, 0.5) !important;
+    }
+    
+    .stat-number {
+        color: #fbbf24 !important;
+        text-shadow: 0 2px 8px rgba(251, 191, 36, 0.4) !important;
+        font-weight: 800 !important;
+    }
+    
+    .stat-label {
+        color: rgba(255, 255, 255, 0.95) !important;
+        font-weight: 500 !important;
+    }
+    
+    /* === NEW LANDING PAGE SECTIONS (Enhanced Contrast) === */
+    
+    /* Stats Section */
+    .stats-section {
+        background: #111827 !important;
+    }
+    
+    .stat-card {
+        background: #1f2937 !important;
+        border: 1px solid #374151 !important;
+    }
+    
+    .stat-card:hover {
+        background: #283548 !important;
+        border-color: #3b82f6 !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    .stat-icon {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(59, 130, 246, 0.15)) !important;
+    }
+    
+    .stat-icon i {
+        color: #60a5fa !important;
+    }
+    
+    .stat-card .stat-number {
+        color: #60a5fa !important;
+        font-weight: 800 !important;
+    }
+    
+    .stat-card .stat-label {
+        color: #f3f4f6 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stat-sublabel {
+        color: #9ca3af !important;
+    }
+    
+    /* How It Works Section */
+    .how-it-works {
+        background: #0f172a !important;
+    }
+    
+    .section-badge {
+        background: rgba(59, 130, 246, 0.2) !important;
+        color: #60a5fa !important;
+        font-weight: 700 !important;
+        border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    }
+    
+    .section-title {
+        color: #f9fafb !important;
+        font-weight: 800 !important;
+    }
+    
+    .section-subtitle {
+        color: #d1d5db !important;
+        font-weight: 400 !important;
+    }
+    
+    .step-card {
+        background: #1f2937 !important;
+        border: 1px solid #374151 !important;
+    }
+    
+    .step-card:hover {
+        background: #283548 !important;
+        border-color: #3b82f6 !important;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+    }
+    
+    .step-number {
+        background: #3b82f6 !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5) !important;
+    }
+    
+    .step-icon {
+        background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+    }
+    
+    .step-icon i {
+        color: #ffffff !important;
+    }
+    
+    .step-title {
+        color: #f9fafb !important;
+        font-weight: 700 !important;
+    }
+    
+    .step-description {
+        color: #d1d5db !important;
+    }
+    
+    .step-connector {
+        color: #4b5563 !important;
+    }
+    
+    /* Features Section */
+    .features {
+        background: #111827 !important;
+    }
+    
+    .feature-card-large {
+        background: #1f2937 !important;
+        border: 1px solid #374151 !important;
+    }
+    
+    .feature-card-large::before {
+        background: linear-gradient(90deg, #3b82f6, #60a5fa) !important;
+    }
+    
+    .feature-card-large:hover {
+        background: #283548 !important;
+        border-color: #3b82f6 !important;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+    }
+    
+    .feature-badge {
+        background: rgba(59, 130, 246, 0.2) !important;
+        color: #60a5fa !important;
+        font-weight: 700 !important;
+        border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    }
+    
+    .feature-icon {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .feature-card-large .feature-title {
+        color: #f9fafb !important;
+        font-weight: 700 !important;
+    }
+    
+    .feature-card-large .feature-description {
+        color: #d1d5db !important;
+    }
+    
+    .feature-card-large .feature-list li {
+        color: #e5e7eb !important;
+    }
+    
+    .feature-card-large .feature-list li i {
+        color: #10b981 !important;
+    }
+    
+    .feature-card-mini {
+        background: #1f2937 !important;
+        border: 1px solid #374151 !important;
+    }
+    
+    .feature-card-mini:hover {
+        background: #283548 !important;
+        border-color: #3b82f6 !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    .feature-mini-icon {
+        background: rgba(59, 130, 246, 0.2) !important;
+    }
+    
+    .feature-mini-icon i {
+        color: #60a5fa !important;
+    }
+    
+    .feature-mini-title {
+        color: #f9fafb !important;
+        font-weight: 700 !important;
+    }
+    
+    .feature-mini-desc {
+        color: #9ca3af !important;
+    }
+    
+    /* Benefits Section */
+    .benefits {
+        background: #0f172a !important;
+    }
+    
+    .benefits .section-title {
+        color: #f9fafb !important;
+    }
+    
+    .benefits .section-subtitle {
+        color: #d1d5db !important;
+    }
+    
+    .benefit-item {
+        background: #1f2937 !important;
+        border: 1px solid #374151 !important;
+    }
+    
+    .benefit-item:hover {
+        background: #283548 !important;
+        border-color: #3b82f6 !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    .benefit-icon {
+        background: #3b82f6 !important;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
+    }
+    
+    .benefit-icon i {
+        color: #ffffff !important;
+    }
+    
+    .benefit-content h3 {
+        color: #f9fafb !important;
+        font-weight: 700 !important;
+    }
+    
+    .benefit-content p {
+        color: #d1d5db !important;
+    }
+    
+    /* Benefits Visual */
+    .graphic-ring {
+        border-color: #374151 !important;
+    }
+    
+    .graphic-center {
+        background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+        box-shadow: 0 10px 40px rgba(59, 130, 246, 0.4) !important;
+    }
+    
+    .graphic-orbit {
+        background: #1f2937 !important;
+        border: 1px solid #374151 !important;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .graphic-orbit i {
+        color: #60a5fa !important;
+    }
+    
+    /* CTA Section - Better contrast */
+    .cta-section {
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #7c3aed 100%) !important;
+    }
+    
+    .cta-title {
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    .cta-subtitle {
+        color: rgba(255, 255, 255, 0.95) !important;
+    }
+    
+    .cta-icon {
+        background: rgba(255, 255, 255, 0.2) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    }
+    
+    .cta-icon i {
+        color: #fbbf24 !important;
+    }
+    
+    .btn-white {
+        background: #ffffff !important;
+        color: #1e40af !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3) !important;
+    }
+    
+    .btn-white:hover {
+        background: #f3f4f6 !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 25px rgba(255, 255, 255, 0.4) !important;
+    }
+    
+    /* CTA Buttons - Fix contrast */
+    .cta-actions .btn-white,
+    .cta-section .btn-white {
+        background: #ffffff !important;
+        color: #1e40af !important;
+        font-weight: 700 !important;
+        border: none !important;
+    }
+    
+    .cta-actions .btn-white span,
+    .cta-section .btn-white span {
+        color: #1e40af !important;
+    }
+    
+    .cta-actions .btn-white i,
+    .cta-section .btn-white i {
+        color: #1e40af !important;
+    }
+    
+    .cta-actions .btn-white:hover,
+    .cta-section .btn-white:hover {
+        background: #f0f4ff !important;
+        color: #1e3a8a !important;
+    }
+    
+    .cta-actions .btn-white:hover span,
+    .cta-section .btn-white:hover span,
+    .cta-actions .btn-white:hover i,
+    .cta-section .btn-white:hover i {
+        color: #1e3a8a !important;
+    }
+    
+    .btn-outline-white {
+        background: transparent !important;
+        color: #ffffff !important;
+        border: 2px solid rgba(255, 255, 255, 0.6) !important;
+        font-weight: 600 !important;
+    }
+    
+    .btn-outline-white:hover {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-color: #ffffff !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    .cta-note {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+    
+    .cta-note i {
+        color: #34d399 !important;
+    }
+    
+    /* Hero Visual Cards */
+    .illustration-card {
+        background: #1f2937 !important;
+        border: 1px solid #374151 !important;
+        color: #f9fafb !important;
+        font-weight: 600 !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    .illustration-card i {
+        color: #60a5fa !important;
+    }
+    
+    .illustration-center {
+        box-shadow: 0 20px 60px rgba(251, 191, 36, 0.5) !important;
+    }
+    
+    /* Header buttons - Better contrast */
+    .nav-actions .btn {
+        border-radius: 50px !important;
+        font-weight: 600 !important;
+    }
+    
+    .nav-actions .btn-outline {
+        background: transparent !important;
+        color: #ffffff !important;
+        border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    }
+    
+    .nav-actions .btn-outline:hover {
+        background: rgba(59, 130, 246, 0.15) !important;
+        border-color: #3b82f6 !important;
+        color: #60a5fa !important;
+    }
+    
+    .nav-actions .btn-primary {
+        background: #3b82f6 !important;
+        border-color: #3b82f6 !important;
+        color: #ffffff !important;
+    }
+    
+    .nav-actions .btn-primary:hover {
+        background: #2563eb !important;
+        border-color: #2563eb !important;
+    }
+}

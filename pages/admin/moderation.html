@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro Moderazione - EduNet19</title>
+    
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../css/components/dark-theme-fixes.css">
+    <link rel="stylesheet" href="../../css/admin/moderation.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../config.js"></script>
+    <script src="../../supabase-client.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="mod-header">
+        <nav class="mod-nav">
+            <a href="../../homepage.html" class="mod-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>EduNet19</span>
+            </a>
+            <div class="mod-nav-title">
+                <i class="fas fa-shield-alt"></i>
+                Centro Moderazione
+            </div>
+            <div class="mod-nav-actions">
+                <button id="themeToggle" class="mod-btn-icon" title="Cambia tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="../../homepage.html" class="mod-btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Torna alla Home</span>
+                </a>
+                <button id="mobileMenuToggle" class="mod-menu-toggle" title="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Overlay -->
+    <div id="mobileOverlay" class="mod-mobile-overlay"></div>
+
+    <main class="mod-main">
+        <!-- Sidebar -->
+        <aside class="mod-sidebar">
+            <div class="mod-sidebar-section">
+                <h3>Dashboard</h3>
+                <nav class="mod-sidebar-nav">
+                    <a href="#overview" class="mod-nav-item active" data-section="overview">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Panoramica</span>
+                    </a>
+                    <a href="#reports" class="mod-nav-item" data-section="reports">
+                        <i class="fas fa-flag"></i>
+                        <span>Segnalazioni</span>
+                        <span class="mod-badge" id="pendingReportsBadge">0</span>
+                    </a>
+                    <a href="#users" class="mod-nav-item" data-section="users">
+                        <i class="fas fa-users"></i>
+                        <span>Utenti</span>
+                    </a>
+                    <a href="#content" class="mod-nav-item" data-section="content">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Contenuti</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="mod-sidebar-section">
+                <h3>Azioni Rapide</h3>
+                <nav class="mod-sidebar-nav">
+                    <a href="#actions" class="mod-nav-item" data-section="actions">
+                        <i class="fas fa-gavel"></i>
+                        <span>Storico Azioni</span>
+                    </a>
+                    <a href="#appeals" class="mod-nav-item" data-section="appeals">
+                        <i class="fas fa-balance-scale"></i>
+                        <span>Appelli</span>
+                        <span class="mod-badge warning" id="pendingAppealsBadge">0</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="mod-sidebar-section">
+                <h3>GDPR</h3>
+                <nav class="mod-sidebar-nav">
+                    <a href="#gdpr" class="mod-nav-item" data-section="gdpr">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Richieste GDPR</span>
+                        <span class="mod-badge info" id="pendingGdprBadge">0</span>
+                    </a>
+                    <a href="#parental" class="mod-nav-item" data-section="parental">
+                        <i class="fas fa-child"></i>
+                        <span>Consensi Parentali</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="mod-sidebar-section" id="adminManagementSection" style="display: none;">
+                <h3>Amministrazione</h3>
+                <nav class="mod-sidebar-nav">
+                    <a href="#admins" class="mod-nav-item" data-section="admins">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Gestione Admin</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="mod-content">
+            <!-- Overview Section -->
+            <section id="overview" class="mod-section active">
+                <div class="mod-section-header">
+                    <h1>Panoramica Moderazione</h1>
+                    <p>Statistiche e attività recenti</p>
+                </div>
+                
+                <div class="mod-stats-grid">
+                    <div class="mod-stat-card">
+                        <div class="mod-stat-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="mod-stat-info">
+                            <span class="mod-stat-value" id="statPendingReports">0</span>
+                            <span class="mod-stat-label">Segnalazioni in attesa</span>
+                        </div>
+                    </div>
+                    <div class="mod-stat-card">
+                        <div class="mod-stat-icon resolved">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="mod-stat-info">
+                            <span class="mod-stat-value" id="statResolvedToday">0</span>
+                            <span class="mod-stat-label">Risolte oggi</span>
+                        </div>
+                    </div>
+                    <div class="mod-stat-card">
+                        <div class="mod-stat-icon warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="mod-stat-info">
+                            <span class="mod-stat-value" id="statHighPriority">0</span>
+                            <span class="mod-stat-label">Alta priorità</span>
+                        </div>
+                    </div>
+                    <div class="mod-stat-card">
+                        <div class="mod-stat-icon info">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                        <div class="mod-stat-info">
+                            <span class="mod-stat-value" id="statSuspendedUsers">0</span>
+                            <span class="mod-stat-label">Utenti sospesi</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mod-recent-activity">
+                    <h2>Attività Recente</h2>
+                    <div class="mod-activity-list" id="recentActivityList">
+                        <div class="mod-loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            Caricamento...
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="mod-section">
+                <div class="mod-section-header">
+                    <h1>Segnalazioni</h1>
+                    <div class="mod-filters">
+                        <select id="reportStatusFilter" class="mod-select">
+                            <option value="pending">In attesa</option>
+                            <option value="reviewing">In revisione</option>
+                            <option value="resolved">Risolte</option>
+                            <option value="dismissed">Respinte</option>
+                            <option value="all">Tutte</option>
+                        </select>
+                        <select id="reportCategoryFilter" class="mod-select">
+                            <option value="all">Tutte le categorie</option>
+                            <option value="cyberbullying">Cyberbullismo</option>
+                            <option value="inappropriate">Contenuto inappropriato</option>
+                            <option value="spam">Spam</option>
+                            <option value="privacy">Violazione privacy</option>
+                            <option value="harassment">Molestie</option>
+                            <option value="misinformation">Informazioni false</option>
+                            <option value="other">Altro</option>
+                        </select>
+                        <select id="reportPriorityFilter" class="mod-select">
+                            <option value="all">Tutte le priorità</option>
+                            <option value="high">Alta</option>
+                            <option value="normal">Normale</option>
+                            <option value="low">Bassa</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mod-reports-list" id="reportsList">
+                    <div class="mod-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        Caricamento segnalazioni...
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users" class="mod-section">
+                <div class="mod-section-header">
+                    <h1>Gestione Utenti</h1>
+                    <div class="mod-search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="userSearchInput" placeholder="Cerca utente per email o nome...">
+                    </div>
+                </div>
+                
+                <div class="mod-users-list" id="usersList">
+                    <p class="mod-empty-state">Cerca un utente per visualizzare i dettagli</p>
+                </div>
+            </section>
+
+            <!-- Content Section -->
+            <section id="content" class="mod-section">
+                <div class="mod-section-header">
+                    <h1>Gestione Contenuti</h1>
+                    <div class="mod-filters">
+                        <select id="contentTypeFilter" class="mod-select">
+                            <option value="posts">Post</option>
+                            <option value="comments">Commenti</option>
+                        </select>
+                        <select id="contentStatusFilter" class="mod-select">
+                            <option value="all">Tutti</option>
+                            <option value="visible">Visibili</option>
+                            <option value="shadowbanned">Shadowban</option>
+                            <option value="deleted">Eliminati</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mod-content-list" id="contentList">
+                    <div class="mod-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        Caricamento contenuti...
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actions History Section -->
+            <section id="actions" class="mod-section">
+                <div class="mod-section-header">
+                    <h1>Storico Azioni di Moderazione</h1>
+                </div>
+                
+                <div class="mod-actions-list" id="actionsList">
+                    <div class="mod-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        Caricamento storico...
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appeals Section -->
+            <section id="appeals" class="mod-section">
+                <div class="mod-section-header">
+                    <h1>Appelli</h1>
+                    <div class="mod-filters">
+                        <select id="appealStatusFilter" class="mod-select">
+                            <option value="pending">In attesa</option>
+                            <option value="approved">Approvati</option>
+                            <option value="rejected">Respinti</option>
+                            <option value="all">Tutti</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mod-appeals-list" id="appealsList">
+                    <div class="mod-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        Caricamento appelli...
+                    </div>
+                </div>
+            </section>
+
+            <!-- GDPR Section -->
+            <section id="gdpr" class="mod-section">
+                <div class="mod-section-header">
+                    <h1>Richieste GDPR</h1>
+                    <div class="mod-filters">
+                        <select id="gdprStatusFilter" class="mod-select">
+                            <option value="pending">In attesa</option>
+                            <option value="processing">In elaborazione</option>
+                            <option value="completed">Completate</option>
+                            <option value="all">Tutte</option>
+                        </select>
+                        <select id="gdprTypeFilter" class="mod-select">
+                            <option value="all">Tutti i tipi</option>
+                            <option value="access">Accesso dati</option>
+                            <option value="rectification">Rettifica</option>
+                            <option value="erasure">Cancellazione</option>
+                            <option value="portability">Portabilità</option>
+                            <option value="objection">Opposizione</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mod-gdpr-list" id="gdprList">
+                    <div class="mod-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        Caricamento richieste...
+                    </div>
+                </div>
+            </section>
+
+            <!-- Parental Consents Section -->
+            <section id="parental" class="mod-section">
+                <div class="mod-section-header">
+                    <h1><i class="fas fa-child"></i> Consensi Parentali</h1>
+                    <p style="color: #9ca3af; margin-top: 0.5rem;">Gestione richieste di consenso per utenti minorenni (14-15 anni)</p>
+                    <div class="mod-filters" style="margin-top: 1rem;">
+                        <select id="parentalStatusFilter" class="mod-select">
+                            <option value="pending">🕐 In attesa</option>
+                            <option value="approved">✅ Approvati</option>
+                            <option value="denied">❌ Rifiutati</option>
+                            <option value="expired">⏰ Scaduti</option>
+                            <option value="all">📋 Tutti</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mod-info-banner" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: 1.5rem;">
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <i class="fas fa-info-circle" style="color: #3b82f6; font-size: 1.25rem; margin-top: 0.25rem;"></i>
+                        <div>
+                            <h4 style="margin: 0 0 0.5rem; color: #e5e7eb; font-size: 0.95rem;">Come funziona il consenso parentale</h4>
+                            <p style="margin: 0; color: #9ca3af; font-size: 0.85rem; line-height: 1.5;">
+                                Quando un utente tra 14 e 15 anni si registra, viene inviata un'email al genitore/tutore con un link di conferma.
+                                Il genitore ha 48 ore per confermare o rifiutare. L'account del minore rimane in stato "pending" fino alla conferma.
+                                Gli admin possono approvare/rifiutare manualmente o reinviare l'email di conferma.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mod-parental-list" id="parentalList">
+                    <div class="mod-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        Caricamento consensi...
+                    </div>
+                </div>
+            </section>
+
+            <!-- Admin Management Section (Super Admin only) -->
+            <section id="admins" class="mod-section">
+                <div class="mod-section-header">
+                    <h1>Gestione Amministratori</h1>
+                    <p>Aggiungi o rimuovi moderatori e amministratori</p>
+                </div>
+                
+                <div class="mod-add-admin-form" style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h3 style="margin-bottom: 1rem; font-size: 1rem; color: #374151;">Aggiungi nuovo admin/moderatore</h3>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <input type="email" id="newAdminEmail" class="mod-form-input" placeholder="Email utente" style="flex: 1; min-width: 200px;">
+                        <select id="newAdminRole" class="mod-select">
+                            <option value="moderator">Moderatore</option>
+                            <option value="admin">Amministratore</option>
+                            <option value="super_admin">Super Admin</option>
+                        </select>
+                        <button class="mod-btn mod-btn-primary" onclick="moderationCenter.addAdmin()">
+                            <i class="fas fa-plus"></i> Aggiungi
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mod-admins-list" id="adminsList">
+                    <div class="mod-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        Caricamento amministratori...
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Action Modal -->
+    <div id="actionModal" class="mod-modal" aria-hidden="true">
+        <div class="mod-modal-backdrop"></div>
+        <div class="mod-modal-container">
+            <div class="mod-modal-content">
+                <header class="mod-modal-header">
+                    <h2 id="actionModalTitle">Azione di Moderazione</h2>
+                    <button class="mod-modal-close" aria-label="Chiudi">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </header>
+                <div class="mod-modal-body" id="actionModalBody">
+                    <!-- Dynamic content -->
+                </div>
+                <footer class="mod-modal-footer" id="actionModalFooter">
+                    <!-- Dynamic buttons -->
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Preview Modal -->
+    <div id="contentPreviewModal" class="mod-modal" aria-hidden="true">
+        <div class="mod-modal-backdrop"></div>
+        <div class="mod-modal-container mod-modal-large">
+            <div class="mod-modal-content">
+                <header class="mod-modal-header">
+                    <h2>Anteprima Contenuto</h2>
+                    <button class="mod-modal-close" aria-label="Chiudi">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </header>
+                <div class="mod-modal-body" id="contentPreviewBody">
+                    <!-- Content preview -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/admin/moderation-center.js"></script>
+</body>
+</html>

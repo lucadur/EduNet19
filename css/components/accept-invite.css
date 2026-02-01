@@ -1,0 +1,249 @@
+/**
+ * ===================================================================
+ * ACCEPT INVITE PAGE STYLES
+ * ===================================================================
+ */
+
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.invite-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.invite-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-xl);
+  text-align: center;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.invite-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--space-4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+}
+
+.invite-icon.success {
+  background: linear-gradient(135deg, #10B981, #059669);
+}
+
+.invite-icon.error {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+}
+
+.invite-card h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.invite-message {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+}
+
+/* Institute Info */
+.institute-info {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.institute-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.institute-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.institute-details {
+  flex: 1;
+  text-align: left;
+}
+
+.institute-details h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.institute-details p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Role Info */
+.role-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  padding: var(--space-4);
+  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  border-radius: var(--radius-lg);
+}
+
+.role-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+}
+
+/* Actions */
+.invite-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.btn-primary,
+.btn-secondary {
+  width: 100%;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-hover);
+}
+
+/* Note */
+.invite-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: #FEF3C7;
+  border-radius: var(--radius-lg);
+  color: #92400E;
+  font-size: 0.875rem;
+  text-align: left;
+  margin: 0;
+}
+
+.invite-note i {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Error Message */
+#error-message {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .invite-card {
+    padding: var(--space-6);
+  }
+
+  .invite-card h1 {
+    font-size: 1.5rem;
+  }
+
+  .institute-info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .institute-details {
+    text-align: center;
+  }
+
+  .role-info {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+}
