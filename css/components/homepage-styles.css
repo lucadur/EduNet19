@@ -5530,16 +5530,18 @@ body.dark-theme .post-educational .experience-section .section-header i {
    =================================================================== */
 
 .verification-warning-banner {
-  background: linear-gradient(135deg, #fef3c7, #fde68a);
-  border-bottom: 2px solid #f59e0b;
-  padding: 0.875rem 1rem;
+  max-width: 800px;
+  margin: 1.25rem auto;
+  padding: 1.125rem 1.5rem;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.12);
   position: relative;
   z-index: 100;
 }
 
 .verification-warning-banner .banner-content {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -5549,6 +5551,13 @@ body.dark-theme .post-educational .experience-section .section-header i {
   font-size: 1.5rem;
   color: #d97706;
   flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(217, 119, 6, 0.12);
+  border-radius: 12px;
 }
 
 .verification-warning-banner .banner-text {
@@ -5559,14 +5568,15 @@ body.dark-theme .post-educational .experience-section .section-header i {
   display: block;
   color: #92400e;
   font-size: 0.95rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.01em;
 }
 
 .verification-warning-banner .banner-text p {
   margin: 0;
   color: #a16207;
   font-size: 0.85rem;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .verification-warning-banner .banner-close {
@@ -5575,9 +5585,14 @@ body.dark-theme .post-educational .experience-section .section-header i {
   color: #92400e;
   cursor: pointer;
   padding: 0.5rem;
-  border-radius: 50%;
+  border-radius: 10px;
   transition: all 0.2s;
   flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .verification-warning-banner .banner-close:hover {
@@ -5586,34 +5601,47 @@ body.dark-theme .post-educational .experience-section .section-header i {
 
 /* Dark theme */
 body.dark-theme .verification-warning-banner {
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.15));
-  border-color: rgba(251, 191, 36, 0.4);
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.14) 100%);
+  border-color: rgba(251, 191, 36, 0.3);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-theme .verification-warning-banner .banner-content > i {
   color: #fbbf24;
+  background: rgba(251, 191, 36, 0.15);
 }
 
 body.dark-theme .verification-warning-banner .banner-text strong {
-  color: #fcd34d;
+  color: #fde68a;
 }
 
 body.dark-theme .verification-warning-banner .banner-text p {
-  color: #fbbf24;
+  color: #fcd34d;
 }
 
 body.dark-theme .verification-warning-banner .banner-close {
-  color: #fcd34d;
+  color: #fde68a;
 }
 
 body.dark-theme .verification-warning-banner .banner-close:hover {
   background: rgba(251, 191, 36, 0.2);
 }
 
-/* Responsive */
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .verification-warning-banner {
+    max-width: 90%;
+    margin: 1rem auto;
+  }
+}
+
+/* Responsive - Mobile */
 @media (max-width: 768px) {
   .verification-warning-banner {
-    padding: 0.75rem;
+    max-width: calc(100% - 2rem);
+    margin: 0.875rem auto;
+    padding: 1rem 1.125rem;
+    border-radius: 14px;
   }
 
   .verification-warning-banner .banner-content {
@@ -5622,6 +5650,9 @@ body.dark-theme .verification-warning-banner .banner-close:hover {
 
   .verification-warning-banner .banner-content > i {
     font-size: 1.25rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
   }
 
   .verification-warning-banner .banner-text strong {
@@ -5630,5 +5661,19 @@ body.dark-theme .verification-warning-banner .banner-close:hover {
 
   .verification-warning-banner .banner-text p {
     font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .verification-warning-banner {
+    max-width: calc(100% - 1.5rem);
+    padding: 0.875rem 1rem;
+    border-radius: 12px;
+  }
+
+  .verification-warning-banner .banner-content > i {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
   }
 }

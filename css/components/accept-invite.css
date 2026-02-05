@@ -247,3 +247,17 @@ body {
     gap: var(--space-2);
   }
 }
+
+/* Dark Theme Overrides */
+.dark-theme .invite-card {
+  background: #1e293b;
+}
+
+.dark-theme .role-info {
+  background: linear-gradient(135deg, #1e3a5f, #1e2d4a);
+}
+
+.dark-theme .invite-note {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+}

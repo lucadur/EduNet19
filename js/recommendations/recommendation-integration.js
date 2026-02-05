@@ -71,6 +71,47 @@ class RecommendationUI {
 
       this.recommendations = await this.engine.getRecommendations(limit);
 
+      // Fallback: if engine returned nothing, try a direct fetch with scoring
+      if (this.recommendations.length === 0 && window.eduNetAuth?.supabase) {
+        console.log('📊 Engine returned empty, trying direct fallback...');
+        try {
+          const supabase = window.eduNetAuth.supabase;
+          const currentUser = window.eduNetAuth.getCurrentUser();
+          const followedIds = await this.engine.getFollowedInstituteIds();
+          const excludeIds = [...followedIds, currentUser?.id];
+
+          const { data } = await supabase
+            .from('school_institutes')
+            .select('id, institute_name, institute_type, city, province, region, description, specializations, logo_url')
+            .limit(20);
+
+          if (data && data.length > 0) {
+            // Build minimal user context
+            let userCtx = { id: currentUser?.id, userType: 'studente', instituteType: null, city: null, province: null, region: null, specializations: [], interests: [] };
+            try {
+              const { data: prof } = await supabase.from('user_profiles').select('user_type').eq('id', currentUser?.id).maybeSingle();
+              if (prof) userCtx.userType = prof.user_type || 'studente';
+              const { data: inst } = await supabase.from('school_institutes').select('institute_type, city, province, region, specializations').eq('id', currentUser?.id).maybeSingle();
+              if (inst) {
+                userCtx.instituteType = inst.institute_type || null;
+                userCtx.city = inst.city || null;
+                userCtx.province = inst.province || null;
+                userCtx.region = inst.region || null;
+                userCtx.specializations = inst.specializations || [];
+              }
+            } catch (_) { /* use defaults */ }
+
+            this.recommendations = data
+              .filter(inst => !excludeIds.includes(inst.id))
+              .map(inst => this.engine.scoreInstitute(inst, userCtx))
+              .sort((a, b) => b.score - a.score)
+              .slice(0, limit);
+          }
+        } catch (fallbackErr) {
+          console.warn('⚠️ Sidebar fallback also failed:', fallbackErr);
+        }
+      }
+
       console.log(`✅ Loaded ${this.recommendations.length} recommendations`);
 
       await this.renderRecommendations();
@@ -147,48 +188,44 @@ class RecommendationUI {
   }
 
   /**
-   * Get main reason for match
+   * Get main reason for match based on the highest-scoring dimension.
+   * Breakdown keys: type, geographic, completeness, interests, engagement
    */
   getMatchReason(breakdown) {
-    if (!breakdown) return 'Consigliato';
+    if (!breakdown) return 'Consigliato per te';
 
-    // Determine user type from auth (approximate, since we don't have user obj here directly, 
-    // but we can infer or better yet, store it in the class instance on init)
-    // For now, we rely on the breakdown values which are universal.
+    // Build candidates: [score, threshold, label]
+    const candidates = [
+      { score: breakdown.type || 0,         threshold: 60, label: 'Affinità Didattica' },
+      { score: breakdown.geographic || 0,   threshold: 60, label: 'Vicino a te' },
+      { score: breakdown.interests || 0,    threshold: 40, label: 'Interessi Comuni' },
+      { score: breakdown.engagement || 0,   threshold: 50, label: 'Molto Attivo' },
+      { score: breakdown.completeness || 0, threshold: 70, label: 'Profilo Completo' }
+    ];
 
-    let maxScore = 0;
-    let reason = 'Consigliato';
-
-    // Prioritize specific strong matches
-    if (breakdown.type > 15 && breakdown.type > maxScore) {
-      maxScore = breakdown.type;
-      reason = 'Affinità Didattica'; // Default
-
-      // Try to be more specific if we could detect context
-      // But "Affinità Didattica" covers both "Similar School" and "Next School Step" well.
+    // Pick the candidate with the highest score that exceeds its threshold
+    let best = null;
+    for (const c of candidates) {
+      if (c.score >= c.threshold && (!best || c.score > best.score)) {
+        best = c;
+      }
     }
 
-    if (breakdown.geographic > 15 && breakdown.geographic > maxScore) {
-      maxScore = breakdown.geographic;
-      reason = 'Vicino a te';
+    // Composite reasons for very high combined scores
+    if (best) {
+      if (best.label === 'Affinità Didattica' && (breakdown.geographic || 0) >= 60) {
+        return 'Stesso ambito e vicino a te';
+      }
+      if (best.label === 'Vicino a te' && (breakdown.type || 0) >= 60) {
+        return 'Stesso ambito e vicino a te';
+      }
+      if (best.label === 'Interessi Comuni' && (breakdown.type || 0) >= 60) {
+        return 'Affinità Didattica';
+      }
+      return best.label;
     }
 
-    if (breakdown.interests > 10 && breakdown.interests > maxScore) {
-      maxScore = breakdown.interests;
-      reason = 'Interessi Comuni';
-    }
-
-    if (breakdown.mutual > 5 && breakdown.mutual > maxScore) {
-      maxScore = breakdown.mutual;
-      reason = 'Network Comune';
-    }
-
-    if (breakdown.engagement > 10 && breakdown.engagement > maxScore) {
-      maxScore = breakdown.engagement;
-      reason = 'Molto Attivo';
-    }
-
-    return reason;
+    return 'Consigliato per te';
   }
 
   /**

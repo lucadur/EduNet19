@@ -535,9 +535,26 @@ class EduMatchAI {
 
   areNeighborRegions(region1, region2) {
     const neighbors = {
-      'Lombardia': ['Piemonte', 'Emilia-Romagna', 'Veneto', 'Trentino-Alto Adige'],
-      'Lazio': ['Toscana', 'Umbria', 'Abruzzo', 'Campania'],
-      // ... completare mappa
+      'Lombardia': ['Piemonte', 'Emilia-Romagna', 'Veneto', 'Trentino-Alto Adige', 'Liguria'],
+      'Piemonte': ['Lombardia', 'Liguria', 'Emilia-Romagna', 'Valle d\'Aosta'],
+      'Veneto': ['Lombardia', 'Trentino-Alto Adige', 'Friuli-Venezia Giulia', 'Emilia-Romagna'],
+      'Emilia-Romagna': ['Lombardia', 'Piemonte', 'Veneto', 'Liguria', 'Toscana', 'Marche'],
+      'Liguria': ['Piemonte', 'Lombardia', 'Emilia-Romagna', 'Toscana'],
+      'Trentino-Alto Adige': ['Lombardia', 'Veneto'],
+      'Friuli-Venezia Giulia': ['Veneto'],
+      'Valle d\'Aosta': ['Piemonte'],
+      'Toscana': ['Liguria', 'Emilia-Romagna', 'Marche', 'Umbria', 'Lazio'],
+      'Lazio': ['Toscana', 'Umbria', 'Marche', 'Abruzzo', 'Molise', 'Campania'],
+      'Umbria': ['Toscana', 'Marche', 'Lazio'],
+      'Marche': ['Emilia-Romagna', 'Toscana', 'Umbria', 'Lazio', 'Abruzzo'],
+      'Abruzzo': ['Marche', 'Lazio', 'Molise'],
+      'Molise': ['Abruzzo', 'Lazio', 'Campania', 'Puglia'],
+      'Campania': ['Lazio', 'Molise', 'Puglia', 'Basilicata', 'Calabria'],
+      'Puglia': ['Molise', 'Campania', 'Basilicata'],
+      'Basilicata': ['Campania', 'Puglia', 'Calabria'],
+      'Calabria': ['Basilicata', 'Campania'],
+      'Sicilia': [],
+      'Sardegna': []
     };
 
     return neighbors[region1]?.includes(region2) || 

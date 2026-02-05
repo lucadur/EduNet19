@@ -1,0 +1,30 @@
+{
+  "name": "edunet19_2",
+  "version": "1.0.0",
+  "description": "EduNet19 è una piattaforma web moderna che connette istituti scolastici e utenti privati in un ambiente educativo sociale sicuro e interattivo.",
+  "main": "build-minify.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "node build-minify.js",
+    "build:dry": "node build-minify.js --dry",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://lucadur@github.com/lucadur/EduNet19.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lucadur/EduNet19/issues"
+  },
+  "homepage": "https://github.com/lucadur/EduNet19#readme",
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "terser": "^5.46.0"
+  }
+}

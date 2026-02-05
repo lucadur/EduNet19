@@ -9,7 +9,7 @@
     
     // Valori di default
     const defaults = {
-        theme: 'light',
+        theme: 'dark',
         fontSize: 'medium',
         autoplayVideos: true,
         dataSaver: false

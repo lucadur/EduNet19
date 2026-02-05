@@ -1676,8 +1676,10 @@ class ProfilePage {
       ? post.image_urls[0]
       : null;
 
-    // Crea URL del post (assumendo che ci sia una pagina post-detail.html)
-    const postUrl = `homepage.html#post-${post.id}`;
+    // Crea URL del post — usa AppConfig per risolvere il path corretto dalla root
+    const postUrl = window.AppConfig && typeof window.AppConfig.getPageUrl === 'function'
+      ? window.AppConfig.getPageUrl(`homepage.html#post-${post.id}`)
+      : `../../homepage.html#post-${post.id}`;
 
     return `
       <article class="profile-post-card" onclick="window.location.href='${postUrl}'" style="cursor: pointer;">

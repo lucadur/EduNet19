@@ -511,17 +511,35 @@ class ModerationCenter {
     }
 
     setupTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
+        // Read from unified edunet_settings (default: dark)
+        let currentTheme = 'dark';
+        try {
+            const saved = localStorage.getItem('edunet_settings');
+            if (saved) {
+                const settings = JSON.parse(saved);
+                currentTheme = settings.theme || 'dark';
+            }
+        } catch (e) { /* use default */ }
+
+        if (currentTheme === 'dark' || (currentTheme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.body.classList.add('dark-theme');
         }
+
+        const icon = document.querySelector('#themeToggle i');
+        if (icon) icon.className = document.body.classList.contains('dark-theme') ? 'fas fa-sun' : 'fas fa-moon';
 
         document.getElementById('themeToggle')?.addEventListener('click', () => {
             document.body.classList.toggle('dark-theme');
             const isDark = document.body.classList.contains('dark-theme');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            const icon = document.querySelector('#themeToggle i');
-            if (icon) icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            // Save to unified edunet_settings
+            try {
+                const saved = localStorage.getItem('edunet_settings');
+                const settings = saved ? JSON.parse(saved) : {};
+                settings.theme = isDark ? 'dark' : 'light';
+                localStorage.setItem('edunet_settings', JSON.stringify(settings));
+            } catch (e) { /* ignore */ }
+            const toggleIcon = document.querySelector('#themeToggle i');
+            if (toggleIcon) toggleIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
         });
     }
 

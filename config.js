@@ -88,50 +88,7 @@ const AppConfig = {
 // Make AppConfig globally available
 window.AppConfig = AppConfig;
 
-// === GLOBAL PREFERENCES LOADER ===
-// Applies stored theme, font size, and other preferences immediately on page load
-// to prevent "flash of unstyled content" or theme flickering.
-(function () {
-    function applySettings() {
-        try {
-            const savedSettings = localStorage.getItem('edunet_settings');
-            if (savedSettings && document.body) {
-                const settings = JSON.parse(savedSettings);
-
-                // Apply Theme
-                if (settings.theme === 'dark') {
-                    document.body.classList.add('dark-theme');
-                } else if (settings.theme === 'auto') {
-                    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                        document.body.classList.add('dark-theme');
-                    }
-                }
-
-                // Apply Font Size
-                if (settings.fontSize) {
-                    document.documentElement.setAttribute('data-font-size', settings.fontSize);
-                }
-
-                // Apply Data Saver
-                if (settings.dataSaver) {
-                    document.documentElement.setAttribute('data-saver', 'true');
-                    document.body.classList.add('data-saver-mode');
-                }
-
-                // Apply Autoplay (Data attribute only, logic handled in specific components)
-                if (settings.autoplayVideos !== undefined) {
-                    document.documentElement.setAttribute('data-autoplay', settings.autoplayVideos);
-                }
-            }
-        } catch (e) {
-            console.warn('Error loading global preferences:', e);
-        }
-    }
-
-    // Try immediately if body exists, otherwise wait for DOMContentLoaded
-    if (document.body) {
-        applySettings();
-    } else {
-        document.addEventListener('DOMContentLoaded', applySettings);
-    }
-})();
+// === GLOBAL PREFERENCES ===
+// Theme, font size, and other preferences are now handled exclusively by
+// js/utils/preference-loader.js (loaded synchronously in <head> of every page).
+// Do NOT duplicate that logic here to avoid inconsistencies.

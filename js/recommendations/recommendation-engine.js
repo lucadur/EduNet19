@@ -1,7 +1,9 @@
 /**
  * ===================================================================
  * EDUNET19 - RECOMMENDATION ENGINE
- * Simple recommendation engine for suggesting institutes
+ * Multi-dimensional recommendation engine for suggesting institutes
+ * Scores on: type affinity, geographic proximity, profile quality,
+ *            specialization overlap, and engagement signals.
  * ===================================================================
  */
 
@@ -18,6 +20,67 @@ class RecommendationEngine {
     this.cache = null;
     this.cacheExpiry = null;
     this.cacheDuration = 5 * 60 * 1000; // 5 minutes
+
+    // === SCORING WEIGHTS (total = 100) ===
+    this.weights = {
+      type: 30,           // Institute type affinity
+      geographic: 25,     // Geographic proximity
+      completeness: 15,   // Profile completeness
+      interests: 20,      // Specialization / interest overlap
+      engagement: 10      // Content activity & popularity
+    };
+
+    // === INSTITUTE TYPE AFFINITY MAP ===
+    // Groups of institute types that are educationally related.
+    // same_exact = 1.0, same_category = 0.8, educational_chain = 0.6,
+    // related_area = 0.4, different = 0.15
+    this.typeCategories = {
+      'liceo': ['Liceo Classico', 'Liceo Scientifico', 'Liceo Linguistico',
+                'Liceo Artistico', 'Liceo delle Scienze Umane',
+                'Liceo Musicale e Coreutico', 'Liceo Scientifico - Scienze Applicate',
+                'Liceo Europeo', 'Liceo Internazionale', 'Liceo'],
+      'tecnico': ['Istituto Tecnico', 'Istituto Tecnico Industriale',
+                  'Istituto Tecnico Commerciale', 'Istituto Tecnico Agrario',
+                  'Istituto Tecnico Nautico', 'Istituto Tecnico per il Turismo',
+                  'Istituto Tecnico Tecnologico', 'Istituto Tecnico Economico'],
+      'professionale': ['Istituto Professionale', 'Istituto Professionale Alberghiero',
+                        'Istituto Professionale Industria e Artigianato',
+                        'Istituto Professionale per i Servizi Sociali'],
+      'primo_ciclo': ['Scuola Primaria', 'Scuola Secondaria di I Grado',
+                      'Scuola dell\'Infanzia', 'Istituto Comprensivo'],
+      'universita': ['Università', 'Politecnico', 'Accademia', 'Conservatorio'],
+      'formazione': ['Centro di Formazione Professionale', 'ITS',
+                     'Istituto Tecnico Superiore', 'AFAM']
+    };
+
+    // Educational chain: natural progression paths
+    this.educationalChains = [
+      ['primo_ciclo', 'liceo'],
+      ['primo_ciclo', 'tecnico'],
+      ['primo_ciclo', 'professionale'],
+      ['liceo', 'universita'],
+      ['tecnico', 'universita'],
+      ['tecnico', 'formazione'],
+      ['professionale', 'formazione']
+    ];
+
+    // Related areas (STEM, humanities, arts, etc.)
+    this.relatedTypes = {
+      'liceo': ['tecnico', 'universita'],
+      'tecnico': ['liceo', 'professionale', 'formazione'],
+      'professionale': ['tecnico', 'formazione'],
+      'universita': ['liceo', 'tecnico', 'formazione'],
+      'formazione': ['tecnico', 'professionale', 'universita']
+    };
+
+    // Italian geographic macro-areas
+    this.macroAreas = {
+      nord: ['Lombardia', 'Piemonte', 'Veneto', 'Liguria', 'Emilia-Romagna',
+             'Trentino-Alto Adige', 'Friuli-Venezia Giulia', 'Valle d\'Aosta'],
+      centro: ['Toscana', 'Lazio', 'Umbria', 'Marche', 'Abruzzo'],
+      sud: ['Campania', 'Puglia', 'Basilicata', 'Calabria', 'Molise'],
+      isole: ['Sicilia', 'Sardegna']
+    };
   }
 
   /**
@@ -33,21 +96,45 @@ class RecommendationEngine {
 
       console.log('🔄 Fetching fresh recommendations...');
 
-      // Get current user's profile to exclude self
-      const { data: userProfile } = await this.supabase
+      // Get current user's type from user_profiles (only columns that exist)
+      let userProfile = null;
+      const { data: profileData } = await this.supabase
         .from('user_profiles')
         .select('user_type')
         .eq('id', this.userId)
         .maybeSingle();
+      userProfile = profileData;
+
+      // Always try school_institutes for geographic/type context
+      // (works for institute accounts; returns null for private users)
+      let userInstituteData = null;
+      const { data: instData } = await this.supabase
+        .from('school_institutes')
+        .select('institute_type, city, province, region, specializations')
+        .eq('id', this.userId)
+        .maybeSingle();
+      if (instData) userInstituteData = instData;
+
+      // Build unified user context for scoring
+      const userContext = {
+        id: this.userId,
+        userType: userProfile?.user_type || 'studente',
+        instituteType: userInstituteData?.institute_type || null,
+        city: userInstituteData?.city || null,
+        province: userInstituteData?.province || null,
+        region: userInstituteData?.region || null,
+        specializations: userInstituteData?.specializations || [],
+        interests: []
+      };
 
       // Get institutes the user already follows
       const followedIds = await this.getFollowedInstituteIds();
-      
+
       // Add self to exclusion list
       const excludeIds = [...followedIds, this.userId];
 
-      // Fetch all institutes (excluding self and already followed)
-      let query = this.supabase
+      // Fetch candidate institutes (only columns that exist in the table)
+      const { data: institutes, error: fetchError } = await this.supabase
         .from('school_institutes')
         .select(`
           id,
@@ -60,24 +147,21 @@ class RecommendationEngine {
           specializations,
           logo_url
         `)
-        .limit(50);
+        .limit(80);
 
-      const { data: institutes, error } = await query;
-
-      if (error) {
-        console.error('❌ Error fetching institutes:', error);
-        return [];
+      if (fetchError) {
+        console.error('❌ Error fetching institutes:', fetchError);
       }
 
-      if (!institutes || institutes.length === 0) {
+      if (fetchError || !institutes || institutes.length === 0) {
         console.log('📋 No institutes found');
         return [];
       }
 
-      // Filter out self and already followed institutes, then score the rest
+      // Filter out self and already followed, then score with full context
       const recommendations = institutes
         .filter(inst => !excludeIds.includes(inst.id))
-        .map(institute => this.scoreInstitute(institute))
+        .map(institute => this.scoreInstitute(institute, userContext))
         .sort((a, b) => b.score - a.score)
         .slice(0, limit * 2); // Get more than needed for variety
 
@@ -127,49 +211,237 @@ class RecommendationEngine {
     }
   }
 
+  // =====================================================================
+  //  SCORING ENGINE — Multi-dimensional institute scoring
+  // =====================================================================
+
   /**
-   * Score an institute for recommendation
+   * Score an institute for recommendation against the current user context.
+   * Returns the institute object enriched with score + breakdown.
    */
-  scoreInstitute(institute) {
-    let score = 50; // Base score
-    const breakdown = {};
+  scoreInstitute(institute, userContext) {
+    const breakdown = {
+      type: 0,
+      geographic: 0,
+      completeness: 0,
+      interests: 0,
+      engagement: 0
+    };
 
-    // Bonus for having a description
-    if (institute.description && institute.description.length > 50) {
-      score += 10;
-      breakdown.hasDescription = true;
-    }
+    // --- 1. TYPE AFFINITY (0–100) ---
+    breakdown.type = this.calcTypeAffinity(userContext, institute);
 
-    // Bonus for having specializations
-    if (institute.specializations && institute.specializations.length > 0) {
-      score += 15;
-      breakdown.hasSpecializations = true;
-    }
+    // --- 2. GEOGRAPHIC PROXIMITY (0–100) ---
+    breakdown.geographic = this.calcGeographicScore(userContext, institute);
 
-    // Bonus for having location info
-    if (institute.city) {
-      score += 5;
-      breakdown.hasLocation = true;
-    }
+    // --- 3. PROFILE COMPLETENESS (0–100) ---
+    breakdown.completeness = this.calcCompletenessScore(institute);
 
-    // Bonus for having avatar
-    if (institute.avatar_url) {
-      score += 10;
-      breakdown.hasAvatar = true;
-    }
+    // --- 4. SPECIALIZATION / INTEREST OVERLAP (0–100) ---
+    breakdown.interests = this.calcInterestOverlap(userContext, institute);
 
-    // Add some randomness for variety (±10 points)
-    const randomBonus = Math.floor(Math.random() * 21) - 10;
-    score += randomBonus;
+    // --- 5. ENGAGEMENT / POPULARITY (0–100) ---
+    breakdown.engagement = this.calcEngagementScore(institute);
 
-    // Ensure score is between 0 and 100
-    score = Math.max(0, Math.min(100, score));
+    // --- WEIGHTED TOTAL ---
+    const weightedScore =
+      (breakdown.type        * this.weights.type +
+       breakdown.geographic   * this.weights.geographic +
+       breakdown.completeness * this.weights.completeness +
+       breakdown.interests    * this.weights.interests +
+       breakdown.engagement   * this.weights.engagement) / 100;
+
+    // Deterministic tiebreaker (±3) — same user+institute pair always gets the same value
+    const tiebreaker = this.deterministicTiebreaker(userContext.id, institute.id);
+    const finalScore = Math.max(5, Math.min(99, Math.round(weightedScore + tiebreaker)));
 
     return {
       ...institute,
-      score,
+      score: finalScore,
       breakdown
     };
+  }
+
+  // --- Dimension 1: Type Affinity ---
+  calcTypeAffinity(userCtx, institute) {
+    const userType = (userCtx.instituteType || '').trim();
+    const instType = (institute.institute_type || '').trim();
+
+    // If we don't know user's type, give a neutral mid-score
+    if (!userType || !instType) return 40;
+
+    // Exact same type
+    if (userType.toLowerCase() === instType.toLowerCase()) return 100;
+
+    // Determine categories
+    const userCat = this.getCategoryForType(userType);
+    const instCat = this.getCategoryForType(instType);
+
+    if (!userCat || !instCat) {
+      // Unknown type — fuzzy string match as last resort
+      return this.fuzzyTypeMatch(userType, instType);
+    }
+
+    // Same category (e.g. both Licei)
+    if (userCat === instCat) return 85;
+
+    // Educational chain (e.g. primo_ciclo → liceo)
+    const isChain = this.educationalChains.some(
+      ([a, b]) => (userCat === a && instCat === b) || (userCat === b && instCat === a)
+    );
+    if (isChain) return 65;
+
+    // Related area
+    if (this.relatedTypes[userCat]?.includes(instCat)) return 45;
+
+    // Unrelated
+    return 15;
+  }
+
+  getCategoryForType(typeName) {
+    const lower = typeName.toLowerCase();
+    for (const [category, types] of Object.entries(this.typeCategories)) {
+      if (types.some(t => lower.includes(t.toLowerCase()) || t.toLowerCase().includes(lower))) {
+        return category;
+      }
+    }
+    return null;
+  }
+
+  fuzzyTypeMatch(typeA, typeB) {
+    const wordsA = typeA.toLowerCase().split(/\s+/);
+    const wordsB = typeB.toLowerCase().split(/\s+/);
+    const common = wordsA.filter(w => w.length > 3 && wordsB.includes(w));
+    if (common.length >= 2) return 70;
+    if (common.length === 1) return 45;
+    return 20;
+  }
+
+  // --- Dimension 2: Geographic Proximity ---
+  calcGeographicScore(userCtx, institute) {
+    // If user has no location, give neutral score
+    if (!userCtx.city && !userCtx.province && !userCtx.region) return 35;
+
+    const uCity = (userCtx.city || '').toLowerCase().trim();
+    const uProv = (userCtx.province || '').toLowerCase().trim();
+    const uReg  = (userCtx.region || '').toLowerCase().trim();
+    const iCity = (institute.city || '').toLowerCase().trim();
+    const iProv = (institute.province || '').toLowerCase().trim();
+    const iReg  = (institute.region || '').toLowerCase().trim();
+
+    // Same city
+    if (uCity && iCity && uCity === iCity) return 100;
+
+    // Same province
+    if (uProv && iProv && uProv === iProv) return 80;
+
+    // Same region
+    if (uReg && iReg && uReg === iReg) return 60;
+
+    // Same macro-area (Nord / Centro / Sud / Isole)
+    if (uReg && iReg && this.sameMacroArea(uReg, iReg)) return 35;
+
+    // Italy but distant
+    if (iCity || iProv || iReg) return 15;
+
+    // No location data for institute
+    return 10;
+  }
+
+  sameMacroArea(regionA, regionB) {
+    const a = regionA.toLowerCase();
+    const b = regionB.toLowerCase();
+    for (const regions of Object.values(this.macroAreas)) {
+      const lower = regions.map(r => r.toLowerCase());
+      if (lower.includes(a) && lower.includes(b)) return true;
+    }
+    return false;
+  }
+
+  // --- Dimension 3: Profile Completeness ---
+  calcCompletenessScore(institute) {
+    let score = 0;
+    const checks = [
+      [!!institute.description && institute.description.length > 30, 25],
+      [!!institute.description && institute.description.length > 150, 10],
+      [!!institute.specializations && institute.specializations.length > 0, 20],
+      [!!institute.city, 15],
+      [!!institute.province, 5],
+      [!!institute.region, 5],
+      [!!institute.logo_url, 10],
+      [!!institute.institute_type, 10]
+    ];
+    for (const [condition, points] of checks) {
+      if (condition) score += points;
+    }
+    return Math.min(100, score);
+  }
+
+  // --- Dimension 4: Specialization / Interest Overlap ---
+  calcInterestOverlap(userCtx, institute) {
+    const userSpecs = this.normalizeArray(userCtx.specializations);
+    const userInterests = this.normalizeArray(userCtx.interests);
+    const instSpecs = this.normalizeArray(institute.specializations);
+
+    // Combine user signals
+    const userSignals = new Set([...userSpecs, ...userInterests]);
+    const instSignals = new Set(instSpecs);
+
+    if (userSignals.size === 0 || instSignals.size === 0) return 30; // Neutral when no data
+
+    // Jaccard similarity
+    const intersection = [...userSignals].filter(s => instSignals.has(s));
+    const union = new Set([...userSignals, ...instSignals]);
+    const jaccard = intersection.length / union.size;
+
+    // Also check partial / fuzzy matches
+    let fuzzyMatches = 0;
+    for (const us of userSignals) {
+      for (const is of instSignals) {
+        if (us !== is && (us.includes(is) || is.includes(us))) {
+          fuzzyMatches++;
+        }
+      }
+    }
+    const fuzzyBonus = Math.min(20, fuzzyMatches * 5);
+
+    return Math.min(100, Math.round(jaccard * 80 + fuzzyBonus));
+  }
+
+  normalizeArray(arr) {
+    if (!arr || !Array.isArray(arr)) return [];
+    return arr.map(s => String(s).toLowerCase().trim()).filter(s => s.length > 0);
+  }
+
+  // --- Deterministic tiebreaker: same inputs → same output ---
+  deterministicTiebreaker(userId, instituteId) {
+    // Simple string hash of the concatenated IDs → stable ±3 value
+    const str = (userId || '') + ':' + (instituteId || '');
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) - hash + str.charCodeAt(i)) | 0;
+    }
+    // Map to range -3 to +3
+    return (Math.abs(hash) % 7) - 3;
+  }
+
+  // --- Dimension 5: Engagement / Popularity ---
+  calcEngagementScore(institute) {
+    let score = 20; // Base — even quiet institutes get some score
+
+    // Followers signal (logarithmic scale to avoid huge institutes dominating)
+    const followers = institute.followers_count || 0;
+    if (followers > 0) {
+      score += Math.min(40, Math.round(Math.log2(followers + 1) * 8));
+    }
+
+    // Posts signal (has the institute published content?)
+    const posts = institute.posts_count || 0;
+    if (posts > 0) {
+      score += Math.min(40, Math.round(Math.log2(posts + 1) * 7));
+    }
+
+    return Math.min(100, score);
   }
 
   /**
@@ -386,15 +658,36 @@ class DiscoverManager {
       }
 
       if (institutes.length === 0) {
-        // Try to fetch institutes directly
+        // Fallback: fetch institutes directly and score them with the engine
         if (supabase) {
           const { data } = await supabase
             .from('school_institutes')
-            .select('id, institute_name, institute_type, city, province, description')
+            .select('id, institute_name, institute_type, city, province, region, description, specializations, logo_url')
             .limit(15);
           
-          if (data) {
-            institutes = data.map(inst => ({ ...inst, score: Math.floor(Math.random() * 30) + 70 }));
+          if (data && data.length > 0) {
+            // Use engine scoring if available, otherwise neutral scores
+            if (this.recommendationUI && this.recommendationUI.engine) {
+              const engine = this.recommendationUI.engine;
+              // Build a minimal user context
+              let userCtx = { id: currentUserId, userType: 'studente', instituteType: null, city: null, province: null, region: null, specializations: [], interests: [] };
+              try {
+                const { data: prof } = await supabase.from('user_profiles').select('user_type').eq('id', currentUserId).maybeSingle();
+                if (prof) userCtx.userType = prof.user_type || 'studente';
+                const { data: inst } = await supabase.from('school_institutes').select('institute_type, city, province, region, specializations').eq('id', currentUserId).maybeSingle();
+                if (inst) {
+                  userCtx.instituteType = inst.institute_type || null;
+                  userCtx.city = inst.city || null;
+                  userCtx.province = inst.province || null;
+                  userCtx.region = inst.region || null;
+                  userCtx.specializations = inst.specializations || [];
+                }
+              } catch (_) { /* use defaults */ }
+              institutes = data.map(inst => engine.scoreInstitute(inst, userCtx));
+              institutes.sort((a, b) => b.score - a.score);
+            } else {
+              institutes = data.map(inst => ({ ...inst, score: Math.floor(Math.random() * 20) + 40, breakdown: {} }));
+            }
           }
         }
       }

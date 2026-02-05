@@ -18,8 +18,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../styles.min.css">
     
+    <!-- Preference Loader (Must be in HEAD to prevent FOUC) -->
+    <script src="../../js/utils/preference-loader.min.js"></script>
+
     <style>
         body {
             min-height: 100vh;
@@ -252,11 +255,71 @@
             color: #0f62fe;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
+
+        /* Dark Theme Overrides */
+        .dark-theme .invite-container {
+            background: #1e293b;
+        }
+        .dark-theme #invite-status {
+            color: #e2e8f0;
+        }
+        .dark-theme .invite-loading {
+            color: #94a3b8;
+        }
+        .dark-theme .invite-error h2,
+        .dark-theme .invite-success h2 {
+            color: #f1f5f9;
+        }
+        .dark-theme .invite-error p,
+        .dark-theme .invite-success p {
+            color: #94a3b8;
+        }
+        .dark-theme .invite-info-box {
+            background: #1e3a5f;
+            border-color: #3b82f6;
+        }
+        .dark-theme .invite-info-box p {
+            color: #93c5fd;
+        }
+        .dark-theme .invite-info-box strong {
+            color: #bfdbfe;
+        }
+        .dark-theme .invite-form h2 {
+            color: #f1f5f9;
+        }
+        .dark-theme .invite-form .invite-subtitle {
+            color: #94a3b8;
+        }
+        .dark-theme .form-group label {
+            color: #e2e8f0;
+        }
+        .dark-theme .form-group input {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        .dark-theme .form-group input:focus {
+            border-color: #0f62fe;
+            box-shadow: 0 0 0 3px rgba(15, 98, 254, 0.2);
+        }
+        .dark-theme .auth-tabs {
+            background: #0f172a;
+        }
+        .dark-theme .auth-tab {
+            color: #94a3b8;
+        }
+        .dark-theme .auth-tab:hover {
+            color: #e2e8f0;
+        }
+        .dark-theme .auth-tab.active {
+            background: #334155;
+            color: #60a5fa;
+        }
     </style>
     
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../../config.js"></script>
+    <script src="../../config.min.js"></script>
 </head>
 <body>
     <div class="invite-container">
@@ -273,7 +336,7 @@
         </div>
     </div>
     
-    <script type="module" src="../../supabase-client.js"></script>
-    <script src="../../js/profile/collaborators.js"></script>
+    <script type="module" src="../../supabase-client.min.js"></script>
+    <script src="../../js/profile/collaborators.min.js"></script>
 </body>
 </html>

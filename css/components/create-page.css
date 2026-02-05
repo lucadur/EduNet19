@@ -214,30 +214,32 @@ body[style*="overflow: hidden"] {
 }
 
 .tips-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0a1628 0%, #132240 50%, #0f62fe08 100%);
+  border: 1px solid rgba(15, 98, 254, 0.25);
   border-radius: var(--radius-xl);
-  padding: var(--space-8);
+  padding: var(--space-6) var(--space-8);
   color: var(--color-white);
   display: flex;
-  gap: var(--space-6);
-  box-shadow: var(--shadow-lg);
+  align-items: flex-start;
+  gap: var(--space-5);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(15, 98, 254, 0.08);
 }
 
 .tips-icon {
   flex-shrink: 0;
-  width: 60px;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-full);
+  width: 48px;
+  height: 48px;
+  background: rgba(15, 98, 254, 0.15);
+  border: 1px solid rgba(15, 98, 254, 0.3);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(10px);
 }
 
 .tips-icon i {
-  font-size: 28px;
-  color: var(--color-white);
+  font-size: 22px;
+  color: #4589ff;
 }
 
 .tips-content {
@@ -245,10 +247,11 @@ body[style*="overflow: hidden"] {
 }
 
 .tips-title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
   margin-bottom: var(--space-4);
-  color: var(--color-white);
+  color: #f0f4f8;
+  letter-spacing: -0.01em;
 }
 
 .tips-list {
@@ -256,21 +259,24 @@ body[style*="overflow: hidden"] {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px 24px;
 }
 
 .tips-list li {
   display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.95);
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(224, 232, 242, 0.85);
 }
 
-.tips-list i {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: var(--font-size-xs);
+.tips-list li i {
+  color: #4589ff;
+  font-size: 11px;
+  margin-top: 4px;
+  flex-shrink: 0;
 }
 
 /* === RESPONSIVE === */

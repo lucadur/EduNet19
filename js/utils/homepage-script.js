@@ -4757,20 +4757,32 @@ class EduNetHomepage {
    * Check if we need to scroll to a specific post (from profile page)
    */
   checkScrollToPost() {
-    const postId = sessionStorage.getItem('scrollToPost');
+    // Source 1: sessionStorage (from internal navigation)
+    let postId = sessionStorage.getItem('scrollToPost');
     if (postId) {
       sessionStorage.removeItem('scrollToPost');
-      setTimeout(() => {
-        const postElement = document.querySelector(`[data-post-id="${postId}"]`);
-        if (postElement) {
-          postElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          // Highlight animation
-          postElement.style.animation = 'highlightPost 2s ease-out';
-          setTimeout(() => {
-            postElement.style.animation = '';
-          }, 2000);
+    }
+
+    // Source 2: URL hash (from profile page links like homepage.html#post-{id})
+    if (!postId) {
+      const hash = window.location.hash;
+      if (hash) {
+        // Support both #post-{id} and #post/{id} formats
+        const match = hash.match(/^#post[-\/](.+)$/);
+        if (match) {
+          postId = match[1];
+          // Clean the hash from URL without triggering navigation
+          history.replaceState(null, '', window.location.pathname + window.location.search);
         }
-      }, 800);
+      }
+    }
+
+    if (postId) {
+      console.log('📌 Scroll-to-post requested:', postId);
+      // Use navigateToPost which has retry logic and highlight
+      setTimeout(() => {
+        this.navigateToPost(postId);
+      }, 1200);
     }
   }
 
