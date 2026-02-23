@@ -4,9 +4,9 @@
  * Carica e applica le preferenze (Tema, Font) immediatamente per evitare "flash" di contenuto non stilizzato.
  */
 
-(function() {
+(function () {
     const PREF_KEY = 'edunet_settings';
-    
+
     // Valori di default
     const defaults = {
         theme: 'dark',
@@ -32,32 +32,37 @@
     // 1. Applica Tema - IMMEDIATAMENTE su <html> per evitare flash
     function applyTheme(theme) {
         const root = document.documentElement;
-        
-        // Applica su <html> immediatamente (funziona anche prima che body esista)
-        if (theme === 'dark') {
+
+        const prefersDarkAuto = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = theme === 'dark' || (theme === 'auto' && prefersDarkAuto);
+
+        // Applica su <html> immediatamente
+        if (isDark) {
             root.classList.add('dark-theme');
             root.style.setProperty('color-scheme', 'dark');
-        } else if (theme === 'light') {
+        } else {
             root.classList.remove('dark-theme');
             root.style.setProperty('color-scheme', 'light');
-        } else if (theme === 'auto') {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (prefersDark) {
-                root.classList.add('dark-theme');
-                root.style.setProperty('color-scheme', 'dark');
-            } else {
-                root.classList.remove('dark-theme');
-                root.style.setProperty('color-scheme', 'light');
-            }
         }
-        
-        // Applica anche su body quando disponibile
+
+        // Logica per il body: le pagine avranno <body class="dark-theme"> di default 
+        // per evitare FOUC chiaro. Se l'utente vuole light, togliamo la classe appena
+        // il body viene creato nel DOM.
         if (document.body) {
-            if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            if (isDark) {
                 document.body.classList.add('dark-theme');
             } else {
                 document.body.classList.remove('dark-theme');
             }
+        } else if (!isDark) {
+            // Usa un MutationObserver per intercettare il body prima del render
+            const observer = new MutationObserver((mutations, obs) => {
+                if (document.body) {
+                    document.body.classList.remove('dark-theme');
+                    obs.disconnect();
+                }
+            });
+            observer.observe(document.documentElement, { childList: true });
         }
     }
 
@@ -79,7 +84,7 @@
     applyTheme(prefs.theme);
     applyFontSize(prefs.fontSize);
     applyDataSaver(prefs.dataSaver);
-    
+
     // Riapplica su body quando DOM è pronto
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => applyTheme(prefs.theme));
@@ -95,7 +100,7 @@
             const current = loadPreferences();
             const updated = { ...current, ...newPrefs };
             localStorage.setItem(PREF_KEY, JSON.stringify(updated));
-            
+
             // Riapplica subito
             if (newPrefs.theme) applyTheme(newPrefs.theme);
             if (newPrefs.fontSize) applyFontSize(newPrefs.fontSize);

@@ -1064,17 +1064,35 @@ function setupMobileMenu() {
   const mobileMenuClose = document.getElementById('mobile-menu-close');
   const mobileLogout = document.getElementById('mobile-logout');
 
+  let savedScrollY = 0;
+  function lockBodyScroll() {
+    savedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.overflow = 'hidden';
+  }
+  function unlockBodyScroll() {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.overflow = '';
+    window.scrollTo(0, savedScrollY);
+  }
+
   if (mobileMenuToggle && mobileMenuOverlay) {
     mobileMenuToggle.addEventListener('click', () => {
       mobileMenuOverlay.classList.toggle('show');
-      document.body.style.overflow = mobileMenuOverlay.classList.contains('show') ? 'hidden' : '';
+      if (mobileMenuOverlay.classList.contains('show')) { lockBodyScroll(); } else { unlockBodyScroll(); }
     });
   }
 
   if (mobileMenuClose) {
     mobileMenuClose.addEventListener('click', () => {
       mobileMenuOverlay.classList.remove('show');
-      document.body.style.overflow = '';
+      unlockBodyScroll();
     });
   }
 
@@ -1082,7 +1100,7 @@ function setupMobileMenu() {
     mobileMenuOverlay.addEventListener('click', (e) => {
       if (e.target === mobileMenuOverlay) {
         mobileMenuOverlay.classList.remove('show');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
       }
     });
   }

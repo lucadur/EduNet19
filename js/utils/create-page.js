@@ -236,11 +236,29 @@ class CreatePage {
     const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
     const mobileMenuClose = document.getElementById('mobile-menu-close');
 
+    let savedScrollY = 0;
+    const lockBodyScroll = () => {
+      savedScrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${savedScrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.overflow = 'hidden';
+    };
+    const unlockBodyScroll = () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, savedScrollY);
+    };
+
     if (mobileMenuToggle && mobileMenuOverlay) {
       mobileMenuToggle.addEventListener('click', () => {
         mobileMenuOverlay.classList.toggle('show');
         mobileMenuToggle.classList.toggle('active');
-        document.body.style.overflow = mobileMenuOverlay.classList.contains('show') ? 'hidden' : '';
+        if (mobileMenuOverlay.classList.contains('show')) { lockBodyScroll(); } else { unlockBodyScroll(); }
       });
     }
 
@@ -248,7 +266,7 @@ class CreatePage {
       mobileMenuClose.addEventListener('click', () => {
         mobileMenuOverlay.classList.remove('show');
         mobileMenuToggle.classList.remove('active');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
       });
     }
 
@@ -258,7 +276,7 @@ class CreatePage {
         if (e.target === mobileMenuOverlay) {
           mobileMenuOverlay.classList.remove('show');
           mobileMenuToggle.classList.remove('active');
-          document.body.style.overflow = '';
+          unlockBodyScroll();
         }
       });
     }

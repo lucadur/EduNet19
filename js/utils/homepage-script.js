@@ -3456,12 +3456,22 @@ class EduNetHomepage {
       this.elements.mobileMenuToggle.classList.toggle('active');
       this.elements.mobileMenuOverlay.classList.toggle('show');
 
-      // Prevent body scroll when menu is open
+      // Lock body scroll when menu is open (position:fixed needed for iOS)
       if (this.elements.mobileMenuOverlay.classList.contains('show')) {
+        this._savedScrollY = window.scrollY;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${this._savedScrollY}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
         document.body.style.overflow = 'hidden';
         this.updateMobileUserInfo();
       } else {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
         document.body.style.overflow = '';
+        window.scrollTo(0, this._savedScrollY || 0);
       }
     }
   }

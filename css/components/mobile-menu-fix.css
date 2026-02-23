@@ -6,34 +6,34 @@
 
 /* Fix colore testo menu items - Forza colore scuro visibile */
 .mobile-menu-item {
-  color: #374151 !important; /* Gray-700 esplicito */
+  color: #374151 !important;
 }
 
 .mobile-menu-item:hover,
 .mobile-menu-item.active {
-  background: #eff6ff !important; /* Primary-50 */
-  color: #2563eb !important; /* Primary-600 */
+  background: #eff6ff !important;
+  color: #2563eb !important;
 }
 
 /* Eccezioni per pulsanti speciali */
 .mobile-menu-item.create-post,
 .mobile-menu-item.create-project {
-  background: #3b82f6 !important; /* Primary-500 */
+  background: #3b82f6 !important;
   color: #ffffff !important;
 }
 
 .mobile-menu-item.create-post:hover,
 .mobile-menu-item.create-project:hover {
-  background: #2563eb !important; /* Primary-600 */
+  background: #2563eb !important;
   color: #ffffff !important;
 }
 
 .mobile-menu-item.logout {
-  color: #dc2626 !important; /* Error */
+  color: #dc2626 !important;
 }
 
 .mobile-menu-item.logout:hover {
-  background: #fef2f2 !important; /* Error-50 */
+  background: #fef2f2 !important;
   color: #dc2626 !important;
 }
 
@@ -55,107 +55,167 @@
 
 
 /* ===================================================================
-   DARK THEME - Mobile Menu
+   DARK THEME - Mobile Menu Panel
    =================================================================== */
 
-body.dark-theme .mobile-menu {
+/* --- Panel background & top spacing --- */
+body.dark-theme .mobile-menu-content {
+  background: #111827 !important;
+  padding-top: 56px !important;
+  padding-bottom: 90px !important; /* 60px bottom-nav + 30px breathing room */
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* --- Close button --- */
+body.dark-theme .mobile-menu-close {
   background: #1f2937 !important;
   border-color: #374151 !important;
 }
 
-body.dark-theme .mobile-menu-header {
-  background: #111827 !important;
-  border-bottom-color: #374151 !important;
+body.dark-theme .mobile-menu-close i {
+  color: #d1d5db !important;
 }
 
-body.dark-theme .mobile-menu-user-info {
-  background: #374151 !important;
-  border-radius: 12px;
+/* --- Profile card --- */
+body.dark-theme .mobile-user-info {
+  background: #1f2937 !important;
+  border: 1px solid #2d3748 !important;
+  border-radius: 14px !important;
+  margin-top: 8px !important;
+  margin-bottom: 16px !important;
+  padding: 16px !important;
 }
 
-body.dark-theme .mobile-menu-user-name,
-body.dark-theme .mobile-user-name {
-  color: #f9fafb !important;
+body.dark-theme .mobile-user-details h4 {
+  color: #f0f4f8 !important;
+  font-size: 15px !important;
 }
 
-body.dark-theme .mobile-menu-user-type,
-body.dark-theme .mobile-user-type {
-  color: #9ca3af !important;
+body.dark-theme .mobile-user-details p {
+  color: #8899a6 !important;
+  font-size: 13px !important;
+}
+
+body.dark-theme .mobile-user-avatar {
+  background: transparent !important;
+}
+
+body.dark-theme .mobile-user-avatar .mobile-avatar-img {
+  border: 2px solid #2d3748 !important;
+}
+
+body.dark-theme .mobile-user-avatar .mobile-default-avatar {
+  color: #6b7280 !important;
+}
+
+/* --- Nav items: consistent card-like rows --- */
+body.dark-theme .mobile-menu-nav {
+  gap: 4px !important;
 }
 
 body.dark-theme .mobile-menu-item {
-  color: #e5e7eb !important;
+  color: #d1d5db !important;
+  background: #1a2332 !important;
+  border: 1px solid #1e293b !important;
+  border-radius: 12px !important;
+  padding: 14px 16px !important;
+  font-size: 15px !important;
+  transition: background 0.15s ease, border-color 0.15s ease !important;
+}
+
+body.dark-theme .mobile-menu-item i {
+  color: #8899a6 !important;
+  width: 22px !important;
+  text-align: center !important;
 }
 
 body.dark-theme .mobile-menu-item:hover,
 body.dark-theme .mobile-menu-item.active {
-  background: rgba(59, 130, 246, 0.15) !important;
+  background: rgba(15, 98, 254, 0.12) !important;
+  border-color: rgba(15, 98, 254, 0.25) !important;
   color: #60a5fa !important;
 }
 
-body.dark-theme .mobile-menu-item i {
-  color: inherit !important;
+body.dark-theme .mobile-menu-item:hover i,
+body.dark-theme .mobile-menu-item.active i {
+  color: #60a5fa !important;
 }
 
 body.dark-theme .mobile-menu-item span {
   color: inherit !important;
 }
 
-/* Pulsanti speciali - mantieni colori vivaci */
+/* --- Create buttons: softer blue, not bright gradient --- */
 body.dark-theme .mobile-menu-item.create-post,
 body.dark-theme .mobile-menu-item.create-project {
-  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%) !important;
-  color: #ffffff !important;
+  background: rgba(15, 98, 254, 0.15) !important;
+  border: 1px solid rgba(15, 98, 254, 0.3) !important;
+  color: #60a5fa !important;
+}
+
+body.dark-theme .mobile-menu-item.create-post i,
+body.dark-theme .mobile-menu-item.create-project i {
+  color: #4589ff !important;
 }
 
 body.dark-theme .mobile-menu-item.create-post:hover,
 body.dark-theme .mobile-menu-item.create-project:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%) !important;
+  background: rgba(15, 98, 254, 0.22) !important;
+  border-color: rgba(15, 98, 254, 0.4) !important;
+  color: #93bbff !important;
 }
 
+/* --- Logout --- */
 body.dark-theme .mobile-menu-item.logout {
+  color: #f87171 !important;
+  background: rgba(239, 68, 68, 0.08) !important;
+  border-color: rgba(239, 68, 68, 0.15) !important;
+}
+
+body.dark-theme .mobile-menu-item.logout i {
   color: #f87171 !important;
 }
 
 body.dark-theme .mobile-menu-item.logout:hover {
-  background: rgba(239, 68, 68, 0.15) !important;
-  color: #f87171 !important;
+  background: rgba(239, 68, 68, 0.18) !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+  color: #fca5a5 !important;
 }
 
-/* Separatori */
+/* --- Dividers: subtle and thin --- */
 body.dark-theme .mobile-menu-divider,
 body.dark-theme .mobile-menu hr {
-  border-color: #374151 !important;
-  background: #374151 !important;
+  border: none !important;
+  background: #1e293b !important;
+  height: 1px !important;
+  margin: 8px 0 !important;
 }
 
-/* Sezioni disabilitate */
+/* --- Disabled items --- */
 body.dark-theme .mobile-menu-item.disabled,
 body.dark-theme .mobile-menu-item[disabled] {
-  color: #6b7280 !important;
-  opacity: 0.6;
+  color: #4b5563 !important;
+  opacity: 0.5;
 }
 
-/* Avatar nel menu mobile */
-body.dark-theme .mobile-menu-avatar,
-body.dark-theme .mobile-user-avatar {
-  background: #374151 !important;
-  border-color: #4b5563 !important;
+/* --- Badge (notification count) --- */
+body.dark-theme .mobile-menu-badge {
+  background: #ef4444 !important;
+  color: #fff !important;
 }
 
-body.dark-theme .mobile-menu-avatar i,
-body.dark-theme .mobile-user-avatar i {
-  color: #9ca3af !important;
-}
 
-/* Bottom navigation bar */
+/* ===================================================================
+   DARK THEME - Bottom Navigation Bar
+   =================================================================== */
+
 body.dark-theme .mobile-bottom-nav {
-  background: #1f2937 !important;
-  border-top-color: #374151 !important;
+  background: #111827 !important;
+  border-top: 1px solid #1e293b !important;
 }
 
 body.dark-theme .mobile-nav-item {
-  color: #9ca3af !important;
+  color: #6b7280 !important;
 }
 
 body.dark-theme .mobile-nav-item:hover,
@@ -164,11 +224,163 @@ body.dark-theme .mobile-nav-item.active {
 }
 
 body.dark-theme .mobile-nav-item.active {
-  background: rgba(59, 130, 246, 0.15) !important;
+  background: rgba(59, 130, 246, 0.1) !important;
 }
 
 /* Pulsante centrale "Crea" */
 body.dark-theme .mobile-nav-item.create-btn {
-  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%) !important;
+  background: linear-gradient(135deg, #0f62fe 0%, #4589ff 100%) !important;
   color: #ffffff !important;
+}
+
+/* Bottom nav label text */
+body.dark-theme .mobile-nav-item span {
+  color: inherit !important;
+}
+
+
+/* ===================================================================
+   DARK THEME - Mobile Search Overlay
+   =================================================================== */
+
+body.dark-theme .mobile-search-overlay {
+  background: #111827 !important;
+}
+
+body.dark-theme .mobile-search-header {
+  background: #1f2937 !important;
+  border-bottom-color: #1e293b !important;
+}
+
+body.dark-theme .mobile-search-back {
+  color: #d1d5db !important;
+}
+
+body.dark-theme .mobile-search-back:active {
+  background: #374151 !important;
+}
+
+body.dark-theme .mobile-search-input-wrapper {
+  background: #111827 !important;
+  border: 1px solid #1e293b !important;
+}
+
+body.dark-theme .mobile-search-input-wrapper i {
+  color: #6b7280 !important;
+}
+
+body.dark-theme .mobile-search-input {
+  color: #f0f4f8 !important;
+}
+
+body.dark-theme .mobile-search-input::placeholder {
+  color: #6b7280 !important;
+}
+
+body.dark-theme .mobile-search-clear {
+  background: #374151 !important;
+  color: #d1d5db !important;
+}
+
+body.dark-theme .mobile-search-results {
+  background: #111827 !important;
+}
+
+body.dark-theme .search-result-item {
+  background: #1a2332 !important;
+  border-bottom-color: #1e293b !important;
+}
+
+body.dark-theme .search-result-item:active {
+  background: #1f2937 !important;
+}
+
+body.dark-theme .result-content h4 {
+  color: #f0f4f8 !important;
+}
+
+body.dark-theme .result-author {
+  color: #8899a6 !important;
+}
+
+body.dark-theme .result-tag {
+  background: rgba(15, 98, 254, 0.12) !important;
+  color: #60a5fa !important;
+}
+
+body.dark-theme .result-tag-more {
+  background: #374151 !important;
+  color: #9ca3af !important;
+}
+
+body.dark-theme .mobile-search-no-results i {
+  color: #4b5563 !important;
+}
+
+body.dark-theme .mobile-search-no-results p {
+  color: #d1d5db !important;
+}
+
+body.dark-theme .mobile-search-no-results small {
+  color: #6b7280 !important;
+}
+
+body.dark-theme .mobile-search-empty {
+  background: #111827 !important;
+}
+
+body.dark-theme .recent-searches h3,
+body.dark-theme .quick-suggestions h3 {
+  color: #8899a6 !important;
+}
+
+body.dark-theme .suggestion-item {
+  background: #1a2332 !important;
+  border: 1px solid #1e293b !important;
+  border-radius: 12px !important;
+}
+
+body.dark-theme .suggestion-item:active {
+  background: #1f2937 !important;
+}
+
+body.dark-theme .suggestion-item i {
+  color: #6b7280 !important;
+}
+
+body.dark-theme .suggestion-item span {
+  color: #d1d5db !important;
+}
+
+/* Mobile search button in top nav */
+body.dark-theme .mobile-search-btn {
+  border-color: #374151 !important;
+  color: #d1d5db !important;
+}
+
+body.dark-theme .mobile-search-btn:hover {
+  background: #1f2937 !important;
+  border-color: #0f62fe !important;
+  color: #60a5fa !important;
+}
+
+
+/* ===================================================================
+   DARK THEME - Mobile Top Nav Bar
+   =================================================================== */
+
+body.dark-theme .top-nav {
+  background: #111827 !important;
+  border-bottom-color: #1e293b !important;
+}
+
+
+/* ===================================================================
+   DARK THEME - Mobile Notifications (dropdown/inline)
+   =================================================================== */
+
+body.dark-theme .notification {
+  background: #1f2937 !important;
+  border-color: #374151 !important;
+  color: #f0f4f8 !important;
 }
