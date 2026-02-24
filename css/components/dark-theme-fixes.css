@@ -22,7 +22,7 @@ body.dark-theme {
     /* Tab Buttons */
     .tab-button {
         background: rgba(255, 255, 255, 0.05) !important;
-        color: #e5e7eb !important;
+        color: #188756 !important;
         border-color: transparent !important;
     }
 
@@ -69,7 +69,7 @@ body.dark-theme {
     .feed-empty h3,
     .no-notifications p,
     .no-messages p {
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
 
     .empty-state p,
@@ -78,11 +78,11 @@ body.dark-theme {
     }
 
     .feed-empty .empty-state-icon {
-        background: linear-gradient(135deg, rgba(15, 98, 254, 0.2), rgba(69, 137, 255, 0.1)) !important;
+        background: linear-gradient(135deg, rgba(26, 107, 80, 0.2), rgba(69, 137, 255, 0.1)) !important;
     }
 
     .feed-empty .empty-state-icon i {
-        color: #4589ff !important;
+        color: #3dba85 !important;
     }
 
     .feed-empty .empty-state-hint {
@@ -93,7 +93,7 @@ body.dark-theme {
     #review-moderation-panel {
         background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
         border-color: #374151 !important;
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
 
     .moderation-empty {
@@ -101,7 +101,7 @@ body.dark-theme {
     }
 
     .moderation-empty p {
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
     
     .moderation-header {
@@ -115,7 +115,7 @@ body.dark-theme {
     .pending-review-card {
         background: #374151 !important;
         border-color: #d97706 !important; /* Darker amber for border */
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
     
     .pending-review-text {
@@ -150,7 +150,7 @@ body.dark-theme {
     .trending-topic {
         background: #374151 !important;
         border-color: #4b5563 !important;
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
 
     .trending-topic:hover {
@@ -158,7 +158,7 @@ body.dark-theme {
     }
 
     .topic-name {
-        color: #60a5fa !important; /* Primary light */
+        color: #3dba85 !important; /* Primary light */
     }
 
     .topic-count {
@@ -177,7 +177,7 @@ body.dark-theme {
     }
 
     .stat-number {
-        color: #60a5fa !important;
+        color: #3dba85 !important;
     }
 
     .stat-label {
@@ -188,13 +188,13 @@ body.dark-theme {
     .quick-link {
         background: #374151 !important;
         border-color: #4b5563 !important;
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
 
     .quick-link:hover {
         background: #4b5563 !important;
-        color: #60a5fa !important;
-        border-color: #60a5fa !important;
+        color: #3dba85 !important;
+        border-color: #3dba85 !important;
     }
 
     /* Suggested Institutes (in Discover or Sidebar) */
@@ -228,7 +228,7 @@ body.dark-theme {
     .primary-tab {
         background: #374151 !important;
         border-color: #4b5563 !important;
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
     
     .primary-tab:hover {
@@ -252,7 +252,7 @@ body.dark-theme {
     .sort-dropdown-toggle {
         background: #374151 !important;
         border-color: #4b5563 !important;
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
     
     .filter-dropdown-toggle:hover,
@@ -261,7 +261,7 @@ body.dark-theme {
     }
     
     .filter-dropdown-toggle.active {
-        background: rgba(15, 98, 254, 0.2) !important;
+        background: rgba(26, 107, 80, 0.2) !important;
         border-color: var(--color-primary) !important;
         color: var(--color-primary) !important;
     }
@@ -284,7 +284,7 @@ body.dark-theme {
     
     .filter-close-btn {
         background: #374151 !important;
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
     
     .filter-close-btn:hover {
@@ -293,14 +293,14 @@ body.dark-theme {
     }
     
     .filter-section h5 {
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
     
     /* Filter Pills - Unselected State */
     .filter-pill span {
         background: #374151 !important;
         border-color: #4b5563 !important;
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
     
     .filter-pill:hover span {
@@ -313,7 +313,7 @@ body.dark-theme {
         background: var(--color-primary) !important;
         color: #ffffff !important;
         border-color: var(--color-primary) !important;
-        box-shadow: 0 2px 8px rgba(15, 98, 254, 0.4) !important;
+        box-shadow: 0 2px 8px rgba(26, 107, 80, 0.4) !important;
     }
     
     .filter-pill input:checked + span i {
@@ -323,7 +323,7 @@ body.dark-theme {
     
     /* Sort Options */
     .sort-option {
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
     
     .sort-option:hover {
@@ -331,7 +331,7 @@ body.dark-theme {
     }
     
     .sort-option.active {
-        background: rgba(15, 98, 254, 0.2) !important;
+        background: rgba(26, 107, 80, 0.2) !important;
         color: var(--color-primary) !important;
     }
     
@@ -341,22 +341,22 @@ body.dark-theme {
     
     /* Active Filters Summary */
     .active-filters-summary {
-        background: rgba(15, 98, 254, 0.15) !important;
+        background: rgba(26, 107, 80, 0.15) !important;
         border-left-color: var(--color-primary) !important;
     }
     
     .filters-label {
-        color: #60a5fa !important;
+        color: #3dba85 !important;
     }
     
     .filter-tag {
         background: #374151 !important;
         border-color: #4b5563 !important;
-        color: #e5e7eb !important;
+        color: #188756 !important;
     }
     
     .filter-tag-remove {
-        color: #60a5fa !important;
+        color: #3dba85 !important;
     }
     
     .filter-tag-remove:hover {
@@ -376,7 +376,7 @@ body.dark-theme {
     /* Filter Dropdown Footer Buttons */
     .filter-dropdown-footer .btn {
         background: #374151 !important;
-        color: #e5e7eb !important;
+        color: #188756 !important;
         border-color: #4b5563 !important;
     }
     
@@ -674,13 +674,13 @@ body.dark-theme .form-group label i,
 body.dark-theme .section-title i,
 [data-theme="dark"] .form-group label i,
 [data-theme="dark"] .section-title i {
-    color: #60a5fa !important;
+    color: #3dba85 !important;
 }
 
 /* Titoli sezione con icona */
 body.dark-theme .section-title,
 [data-theme="dark"] .section-title {
-    background: rgba(59, 130, 246, 0.12) !important;
+    background: rgba(34, 145, 106, 0.12) !important;
     border-bottom-color: transparent !important;
     border-radius: var(--radius-lg, 12px) !important;
     padding: var(--space-4, 16px) var(--space-5, 20px) !important;
@@ -689,9 +689,9 @@ body.dark-theme .section-title,
 
 body.dark-theme .section-title i,
 [data-theme="dark"] .section-title i {
-    background: rgba(59, 130, 246, 0.25) !important;
-    color: #60a5fa !important;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3) !important;
+    background: rgba(34, 145, 106, 0.25) !important;
+    color: #3dba85 !important;
+    box-shadow: 0 2px 8px rgba(34, 145, 106, 0.3) !important;
     padding: 8px !important;
     border-radius: var(--radius-md, 8px) !important;
 }
@@ -699,7 +699,7 @@ body.dark-theme .section-title i,
 /* Label con icone (Numero Aule, Superficie, etc.) */
 body.dark-theme .form-section label i,
 [data-theme="dark"] .form-section label i {
-    color: #60a5fa !important;
+    color: #3dba85 !important;
 }
 
 /* Form inputs in tema scuro */
@@ -720,8 +720,8 @@ body.dark-theme .form-group select:focus,
 [data-theme="dark"] .form-group input:focus,
 [data-theme="dark"] .form-group textarea:focus,
 [data-theme="dark"] .form-group select:focus {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+    border-color: #22916a !important;
+    box-shadow: 0 0 0 3px rgba(34, 145, 106, 0.2) !important;
 }
 
 /* Field hints */
@@ -746,7 +746,7 @@ body.dark-theme .form-section,
 body.dark-theme .hours-item,
 [data-theme="dark"] .hours-item {
     background: rgba(30, 41, 59, 0.95) !important;
-    border-color: rgba(59, 130, 246, 0.4) !important;
+    border-color: rgba(34, 145, 106, 0.4) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
 }
 
@@ -767,13 +767,13 @@ body.dark-theme .hours-item .day-hours,
 body.dark-theme .opening-hours-display,
 [data-theme="dark"] .opening-hours-display {
     background: rgba(15, 23, 42, 0.8) !important;
-    border-color: rgba(59, 130, 246, 0.3) !important;
+    border-color: rgba(34, 145, 106, 0.3) !important;
 }
 
 /* Info item icone nella sezione struttura */
 body.dark-theme #structure-section .info-item label i,
 [data-theme="dark"] #structure-section .info-item label i {
-    color: #60a5fa !important;
+    color: #3dba85 !important;
 }
 
 body.dark-theme .info-item label,
@@ -789,5 +789,5 @@ body.dark-theme .info-item p,
 /* Icone ::before nella sezione info istituto */
 body.dark-theme #institute-info-section .info-item p::before,
 [data-theme="dark"] #institute-info-section .info-item p::before {
-    color: #60a5fa !important;
+    color: #3dba85 !important;
 }

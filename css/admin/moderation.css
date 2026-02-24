@@ -10,8 +10,8 @@
     left: 0;
     right: 0;
     height: 60px;
-    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #f8fafc 0%, #0f172a 100%);
+    border-bottom: 1px solid rgba(26, 107, 80, 0.1);
     z-index: 1000;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .mod-logo i {
-    color: #60a5fa;
+    color: #3dba85;
 }
 
 .mod-nav-title {
@@ -62,14 +62,14 @@
     height: 40px;
     border-radius: 8px;
     border: none;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(26, 107, 80, 0.1);
     color: white;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .mod-btn-icon:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(26, 107, 80, 0.2);
 }
 
 .mod-btn-secondary {
@@ -78,7 +78,7 @@
     gap: 0.5rem;
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(26, 107, 80, 0.1);
     color: white;
     text-decoration: none;
     font-weight: 500;
@@ -86,7 +86,7 @@
 }
 
 .mod-btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(26, 107, 80, 0.2);
 }
 
 .mod-main {
@@ -170,7 +170,7 @@
 }
 
 .mod-badge.info {
-    background: #3b82f6;
+    background: #22916a;
 }
 
 /* === MAIN CONTENT === */
@@ -223,7 +223,7 @@
 
 .mod-select:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: #22916a;
 }
 
 .mod-search-bar {
@@ -294,7 +294,7 @@
 
 .mod-stat-icon.info {
     background: #dbeafe;
-    color: #2563eb;
+    color: #188756;
 }
 
 .mod-stat-info {
@@ -483,12 +483,12 @@
 }
 
 .mod-btn-primary {
-    background: #3b82f6;
+    background: #22916a;
     color: white;
 }
 
 .mod-btn-primary:hover {
-    background: #2563eb;
+    background: #188756;
 }
 
 .mod-btn-success {
@@ -566,7 +566,7 @@
 
 .mod-activity-icon.action {
     background: #dbeafe;
-    color: #2563eb;
+    color: #188756;
 }
 
 .mod-activity-icon.resolved {
@@ -704,7 +704,7 @@
 .mod-form-input:focus,
 .mod-form-textarea:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: #22916a;
 }
 
 .mod-form-textarea {
@@ -748,9 +748,9 @@ body.dark-theme .mod-nav-item:hover {
 }
 
 body.dark-theme .mod-nav-item.active {
-    background: rgba(59, 130, 246, 0.2);
-    color: #60a5fa;
-    border-left-color: #60a5fa;
+    background: rgba(34, 145, 106, 0.2);
+    color: #3dba85;
+    border-left-color: #3dba85;
 }
 
 body.dark-theme .mod-content {
@@ -1171,7 +1171,7 @@ body.dark-theme .mod-status-badge.pending {
 }
 
 body.dark-theme .mod-status-badge.reviewing {
-    background: rgba(59, 130, 246, 0.2);
+    background: rgba(34, 145, 106, 0.2);
     color: #93c5fd;
 }
 
@@ -1202,7 +1202,7 @@ body.dark-theme .mod-stat-icon.warning {
 }
 
 body.dark-theme .mod-stat-icon.info {
-    background: rgba(59, 130, 246, 0.2);
+    background: rgba(34, 145, 106, 0.2);
     color: #93c5fd;
 }
 
@@ -1218,7 +1218,7 @@ body.dark-theme .mod-activity-icon.report {
 }
 
 body.dark-theme .mod-activity-icon.action {
-    background: rgba(59, 130, 246, 0.2);
+    background: rgba(34, 145, 106, 0.2);
     color: #93c5fd;
 }
 
@@ -1392,7 +1392,7 @@ body.dark-theme .mod-badge.warning {
 }
 
 body.dark-theme .mod-badge.info {
-    background: #2563eb;
+    background: #188756;
 }
 
 /* Recent activity section title */

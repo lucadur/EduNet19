@@ -12,19 +12,19 @@
 .mobile-menu-item:hover,
 .mobile-menu-item.active {
   background: #eff6ff !important;
-  color: #2563eb !important;
+  color: #188756 !important;
 }
 
 /* Eccezioni per pulsanti speciali */
 .mobile-menu-item.create-post,
 .mobile-menu-item.create-project {
-  background: #3b82f6 !important;
+  background: #22916a !important;
   color: #ffffff !important;
 }
 
 .mobile-menu-item.create-post:hover,
 .mobile-menu-item.create-project:hover {
-  background: #2563eb !important;
+  background: #188756 !important;
   color: #ffffff !important;
 }
 
@@ -131,14 +131,14 @@ body.dark-theme .mobile-menu-item i {
 
 body.dark-theme .mobile-menu-item:hover,
 body.dark-theme .mobile-menu-item.active {
-  background: rgba(15, 98, 254, 0.12) !important;
-  border-color: rgba(15, 98, 254, 0.25) !important;
-  color: #60a5fa !important;
+  background: rgba(26, 107, 80, 0.12) !important;
+  border-color: rgba(26, 107, 80, 0.25) !important;
+  color: #3dba85 !important;
 }
 
 body.dark-theme .mobile-menu-item:hover i,
 body.dark-theme .mobile-menu-item.active i {
-  color: #60a5fa !important;
+  color: #3dba85 !important;
 }
 
 body.dark-theme .mobile-menu-item span {
@@ -148,20 +148,20 @@ body.dark-theme .mobile-menu-item span {
 /* --- Create buttons: softer blue, not bright gradient --- */
 body.dark-theme .mobile-menu-item.create-post,
 body.dark-theme .mobile-menu-item.create-project {
-  background: rgba(15, 98, 254, 0.15) !important;
-  border: 1px solid rgba(15, 98, 254, 0.3) !important;
-  color: #60a5fa !important;
+  background: rgba(26, 107, 80, 0.15) !important;
+  border: 1px solid rgba(26, 107, 80, 0.3) !important;
+  color: #3dba85 !important;
 }
 
 body.dark-theme .mobile-menu-item.create-post i,
 body.dark-theme .mobile-menu-item.create-project i {
-  color: #4589ff !important;
+  color: #248c64 !important;
 }
 
 body.dark-theme .mobile-menu-item.create-post:hover,
 body.dark-theme .mobile-menu-item.create-project:hover {
-  background: rgba(15, 98, 254, 0.22) !important;
-  border-color: rgba(15, 98, 254, 0.4) !important;
+  background: rgba(26, 107, 80, 0.22) !important;
+  border-color: rgba(26, 107, 80, 0.4) !important;
   color: #93bbff !important;
 }
 
@@ -220,16 +220,16 @@ body.dark-theme .mobile-nav-item {
 
 body.dark-theme .mobile-nav-item:hover,
 body.dark-theme .mobile-nav-item.active {
-  color: #60a5fa !important;
+  color: #3dba85 !important;
 }
 
 body.dark-theme .mobile-nav-item.active {
-  background: rgba(59, 130, 246, 0.1) !important;
+  background: rgba(34, 145, 106, 0.1) !important;
 }
 
 /* Pulsante centrale "Crea" */
 body.dark-theme .mobile-nav-item.create-btn {
-  background: linear-gradient(135deg, #0f62fe 0%, #4589ff 100%) !important;
+  background: linear-gradient(135deg, #1a6b50 0%, #248c64 100%) !important;
   color: #ffffff !important;
 }
 
@@ -304,8 +304,8 @@ body.dark-theme .result-author {
 }
 
 body.dark-theme .result-tag {
-  background: rgba(15, 98, 254, 0.12) !important;
-  color: #60a5fa !important;
+  background: rgba(26, 107, 80, 0.12) !important;
+  color: #3dba85 !important;
 }
 
 body.dark-theme .result-tag-more {
@@ -360,8 +360,8 @@ body.dark-theme .mobile-search-btn {
 
 body.dark-theme .mobile-search-btn:hover {
   background: #1f2937 !important;
-  border-color: #0f62fe !important;
-  color: #60a5fa !important;
+  border-color: #1a6b50 !important;
+  color: #3dba85 !important;
 }
 
 

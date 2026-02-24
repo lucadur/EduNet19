@@ -97,7 +97,7 @@ body[style*="overflow: hidden"] {
 
 .creation-card.featured {
   border-color: var(--color-primary);
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+  background: linear-gradient(135deg, rgba(34, 145, 106, 0.03), rgba(139, 92, 246, 0.03));
 }
 
 .card-badge {
@@ -121,7 +121,7 @@ body[style*="overflow: hidden"] {
   align-items: center;
   justify-content: center;
   margin-bottom: var(--space-5);
-  box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 8px 16px rgba(34, 145, 106, 0.2);
 }
 
 .card-icon i {
@@ -214,7 +214,7 @@ body[style*="overflow: hidden"] {
 }
 
 .tips-card {
-  background: linear-gradient(135deg, #0a1628 0%, #132240 50%, #0f62fe08 100%);
+  background: linear-gradient(135deg, #0f1628 0%, #132240 50%, #1a6b5008 100%);
   border: 1px solid rgba(15, 98, 254, 0.25);
   border-radius: var(--radius-xl);
   padding: var(--space-6) var(--space-8);
@@ -595,7 +595,7 @@ body[style*="overflow: hidden"] {
 .btn-primary:hover {
   background: var(--color-primary-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 12px rgba(34, 145, 106, 0.3);
 }
 
 .btn-primary:active {
@@ -714,7 +714,7 @@ body[style*="overflow: hidden"] {
 
 /* Badge colors - Identico Homepage */
 .badge-post {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: linear-gradient(135deg, #22916a, #188756);
 }
 
 .badge-project {

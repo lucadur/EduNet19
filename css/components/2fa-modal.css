@@ -47,7 +47,7 @@
 }
 
 .modal-header h2 i {
-  color: #2563eb;
+  color: #3dba85;
 }
 
 .modal-close {
@@ -93,7 +93,7 @@
 }
 
 #qr-code-loading i {
-  color: #2563eb;
+  color: #188756;
   margin-bottom: 1rem;
 }
 
@@ -121,7 +121,7 @@
 .secret-manual code {
   font-size: 1.1rem;
   word-break: break-all;
-  color: #2563eb;
+  color: #188756;
   font-family: 'Courier New', monospace;
 }
 
@@ -139,7 +139,7 @@
 
 #verification-code-input:focus {
   outline: none;
-  border-color: #2563eb;
+  border-color: #188756;
 }
 
 #verification-error,
@@ -169,7 +169,7 @@
 }
 
 #backup-codes-container strong {
-  color: #2563eb;
+  color: #188756;
   font-size: 1.1rem;
 }
 
@@ -244,7 +244,7 @@ body.dark-theme .modal-header h2,
 
 body.dark-theme .modal-header h2 i,
 .dark-theme .modal-header h2 i {
-  color: #60a5fa !important;
+  color: #3dba85 !important;
 }
 
 body.dark-theme .modal-close,
@@ -312,14 +312,14 @@ body.dark-theme .secret-manual code,
 body.dark-theme #secret-code,
 .dark-theme #secret-code {
   color: #93c5fd !important;
-  background: rgba(59, 130, 246, 0.2) !important;
+  background: rgba(34, 145, 106, 0.2) !important;
   padding: 0.75rem 1rem !important;
   border-radius: 8px !important;
   display: inline-block !important;
   font-size: 1.15rem !important;
   letter-spacing: 0.2em !important;
   font-weight: 600 !important;
-  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  border: 1px solid rgba(34, 145, 106, 0.3) !important;
 }
 
 /* Verification code input */
@@ -337,8 +337,8 @@ body.dark-theme #verification-code-input::placeholder,
 
 body.dark-theme #verification-code-input:focus,
 .dark-theme #verification-code-input:focus {
-  border-color: #3b82f6 !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25) !important;
+  border-color: #22916a !important;
+  box-shadow: 0 0 0 3px rgba(34, 145, 106, 0.25) !important;
 }
 
 /* Error messages */
@@ -423,7 +423,7 @@ body.dark-theme .modal-content .btn-primary,
 .dark-theme .modal-content .btn-primary,
 body.dark-theme #2fa-setup-modal .btn-primary,
 .dark-theme #2fa-setup-modal .btn-primary {
-  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+  background: linear-gradient(135deg, #22916a, #188756) !important;
   color: #ffffff !important;
   border: none !important;
   padding: 0.875rem 1.5rem !important;
@@ -434,9 +434,9 @@ body.dark-theme .modal-content .btn-primary:hover,
 .dark-theme .modal-content .btn-primary:hover,
 body.dark-theme #2fa-setup-modal .btn-primary:hover,
 .dark-theme #2fa-setup-modal .btn-primary:hover {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+  background: linear-gradient(135deg, #188756, #1d4ed8) !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4) !important;
+  box-shadow: 0 4px 12px rgba(26, 107, 80, 0.4) !important;
 }
 
 body.dark-theme .modal-content .btn-secondary,

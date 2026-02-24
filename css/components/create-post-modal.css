@@ -59,7 +59,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 24px;
-  background: linear-gradient(135deg, #0f62fe 0%, #4589ff 100%);
+  background: linear-gradient(135deg, #22916a 0%, #34c759 100%);
   color: white;
 }
 
@@ -115,7 +115,7 @@
 .create-post-form select {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #188756;
   border-radius: 10px;
   font-size: 15px;
   font-family: inherit;
@@ -127,8 +127,8 @@
 .create-post-form textarea:focus,
 .create-post-form select:focus {
   outline: none;
-  border-color: #0f62fe;
-  box-shadow: 0 0 0 3px rgba(15, 98, 254, 0.1);
+  border-color: #22916a;
+  box-shadow: 0 0 0 3px rgba(34, 145, 106, 0.1);
 }
 
 .create-post-form textarea {
@@ -150,7 +150,7 @@
   justify-content: flex-end;
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid #188756;
 }
 
 .create-post-form .btn {
@@ -168,7 +168,7 @@
 .create-post-form .btn-outline {
   background: white;
   color: #6b7280;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #188756;
 }
 
 .create-post-form .btn-outline:hover {
@@ -177,14 +177,14 @@
 }
 
 .create-post-form .btn-primary {
-  background: linear-gradient(135deg, #0f62fe 0%, #4589ff 100%);
+  background: linear-gradient(135deg, #22916a 0%, #34c759 100%);
   color: white;
   border: none;
 }
 
 .create-post-form .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(15, 98, 254, 0.3);
+  box-shadow: 0 4px 12px rgba(34, 145, 106, 0.3);
 }
 
 .create-post-form .btn-primary:disabled {
@@ -200,7 +200,7 @@ body.dark-theme .create-post-modal-content {
 }
 
 body.dark-theme .create-post-form label {
-  color: #e5e7eb;
+  color: #188756;
 }
 
 body.dark-theme .create-post-form input[type="text"],
@@ -214,8 +214,8 @@ body.dark-theme .create-post-form select {
 body.dark-theme .create-post-form input[type="text"]:focus,
 body.dark-theme .create-post-form textarea:focus,
 body.dark-theme .create-post-form select:focus {
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+  border-color: #3dba85;
+  box-shadow: 0 0 0 3px rgba(34, 145, 106, 0.2);
 }
 
 body.dark-theme .create-post-form .char-counter {

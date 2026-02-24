@@ -166,12 +166,12 @@ class EduNetSocialFeatures {
       console.error('Error toggling like:', error);
       this.showNotification('Errore nell\'aggiornamento del like', 'error');
 
-      // Remove loading state and restore original icon
+      // Remove loading state and restore original emoji
       this.setLikeButtonLoading(likeButton, false);
-      const icon = likeButton.querySelector('i');
-      if (icon && likeButton.dataset.originalIcon) {
-        icon.className = likeButton.dataset.originalIcon;
-        delete likeButton.dataset.originalIcon;
+      const emoji = likeButton.querySelector('.like-emoji');
+      if (emoji && likeButton.dataset.originalEmoji) {
+        emoji.textContent = likeButton.dataset.originalEmoji;
+        delete likeButton.dataset.originalEmoji;
       }
     }
   }
@@ -243,8 +243,8 @@ class EduNetSocialFeatures {
    * Animate like button
    */
   animateLikeButton(button, isLiked) {
-    const icon = button.querySelector('i');
-    const countSpan = button.querySelector('span');
+    const emoji = button.querySelector('.like-emoji');
+    const countSpan = button.querySelector('span:last-child');
 
     // Remove any existing animation class first to ensure clean state
     button.classList.remove('like-animating');
@@ -255,18 +255,19 @@ class EduNetSocialFeatures {
     // Add animation class
     button.classList.add('like-animating');
 
-    // Update icon and state
+    // Update emoji and state
     if (isLiked) {
-      icon.classList.remove('far');
-      icon.classList.add('fas');
       button.classList.add('liked');
-      icon.style.color = '#e53e3e';
-
+      if (emoji) {
+        emoji.style.filter = 'none';
+        emoji.style.opacity = '1';
+      }
     } else {
-      icon.classList.remove('fas');
-      icon.classList.add('far');
       button.classList.remove('liked');
-      icon.style.color = '';
+      if (emoji) {
+        emoji.style.filter = 'grayscale(1)';
+        emoji.style.opacity = '0.5';
+      }
     }
 
     // Remove animation class after animation completes (600ms for heartBeat animation)
@@ -297,19 +298,21 @@ class EduNetSocialFeatures {
    * Set like button loading state
    */
   setLikeButtonLoading(button, isLoading) {
-    const icon = button.querySelector('i');
+    const emoji = button.querySelector('.like-emoji');
 
     if (isLoading) {
       button.disabled = true;
-      // Store original icon classes before changing to spinner
-      button.dataset.originalIcon = icon.className;
-      icon.className = 'fas fa-spinner fa-spin';
+      if (emoji) {
+        button.dataset.originalEmoji = emoji.textContent;
+        emoji.textContent = '⏳';
+        emoji.style.filter = 'none';
+        emoji.style.opacity = '0.6';
+      }
     } else {
       button.disabled = false;
-      // Restore original icon if stored
-      if (button.dataset.originalIcon) {
-        icon.className = button.dataset.originalIcon;
-        delete button.dataset.originalIcon;
+      if (emoji && button.dataset.originalEmoji) {
+        emoji.textContent = button.dataset.originalEmoji;
+        delete button.dataset.originalEmoji;
       }
     }
   }
@@ -376,7 +379,7 @@ class EduNetSocialFeatures {
     if (commentsToggle && count > 0) {
       const toggleText = commentsToggle.childNodes[1]; // Text node after icon
       if (toggleText && toggleText.nodeType === Node.TEXT_NODE) {
-        toggleText.textContent = ` Mostra commenti (${count})`;
+        toggleText.textContent = ` Mostra interazioni (${count})`;
       }
     }
   }
@@ -1204,7 +1207,7 @@ class EduNetSocialFeatures {
       <div class="share-modal-backdrop"></div>
       <div class="share-modal-content">
         <div class="share-modal-header">
-          <h3>Condividi questo post</h3>
+          <h3>Promuovi questo post</h3>
           <button class="share-modal-close">
             <i class="fas fa-times"></i>
           </button>
@@ -1338,7 +1341,7 @@ class EduNetSocialFeatures {
   updateSharesCount(postId, increment) {
     const shareButtons = document.querySelectorAll(`[data-post-id="${postId}"] .share-btn span`);
     shareButtons.forEach(span => {
-      if (span.textContent !== 'Condividi') {
+      if (span.textContent !== 'Promuovi') {
         const currentCount = parseInt(span.textContent) || 0;
         const newCount = Math.max(0, currentCount + increment);
         span.textContent = newCount;

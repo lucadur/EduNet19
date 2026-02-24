@@ -74,7 +74,7 @@
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #0f62fe 0%, #4589ff 100%);
+  background: linear-gradient(135deg, #1a6b50 0%, #248c64 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -585,7 +585,7 @@
 }
 
 .discover-header h2 i {
-  color: #0f62fe;
+  color: #1a6b50;
 }
 
 .discover-header p {
@@ -602,7 +602,7 @@
 
 .discover-loading i {
   font-size: 2.5rem;
-  color: #0f62fe;
+  color: #1a6b50;
   margin-bottom: 16px;
 }
 
@@ -651,8 +651,8 @@
 }
 
 .discover-card:hover {
-  border-color: #0f62fe;
-  box-shadow: 0 8px 24px rgba(15, 98, 254, 0.12);
+  border-color: #1a6b50;
+  box-shadow: 0 8px 24px rgba(26, 107, 80, 0.12);
   transform: translateY(-4px);
 }
 
@@ -667,7 +667,7 @@
   width: 64px;
   height: 64px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #0f62fe 0%, #4589ff 100%);
+  background: linear-gradient(135deg, #1a6b50 0%, #248c64 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -767,7 +767,7 @@
   justify-content: center;
   gap: 8px;
   padding: 10px 16px;
-  background: linear-gradient(135deg, #0f62fe 0%, #4589ff 100%);
+  background: linear-gradient(135deg, #1a6b50 0%, #248c64 100%);
   color: white;
   border: none;
   border-radius: 10px;
@@ -779,7 +779,7 @@
 
 .btn-follow:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(15, 98, 254, 0.3);
+  box-shadow: 0 4px 12px rgba(26, 107, 80, 0.3);
 }
 
 .btn-follow.following {
@@ -837,7 +837,7 @@ body.dark-theme .discover-card {
 }
 
 body.dark-theme .discover-card:hover {
-  border-color: #4589ff;
+  border-color: #248c64;
 }
 
 body.dark-theme .discover-card .institute-name {
@@ -874,11 +874,11 @@ body.dark-theme .sidebar-title {
 }
 
 body.dark-theme .suggested-institutes h3 i {
-  color: #60a5fa;
+  color: #3dba85;
 }
 
 body.dark-theme .suggested-institutes .see-all {
-  color: #60a5fa;
+  color: #3dba85;
 }
 
 body.dark-theme .suggested-institutes .see-all:hover {
@@ -979,12 +979,12 @@ body.dark-theme .manage-connections-btn:hover i {
 
 /* Follow Button - Dark Theme */
 body.dark-theme .follow-btn {
-  background: #3b82f6;
+  background: #22916a;
   color: #ffffff;
 }
 
 body.dark-theme .follow-btn:hover {
-  background: #2563eb;
+  background: #188756;
 }
 
 body.dark-theme .follow-btn.following {
@@ -1015,7 +1015,7 @@ body.dark-theme .sidebar-section {
 }
 
 body.dark-theme .sidebar-title::before {
-  background: #3b82f6;
+  background: #22916a;
 }
 
 /* Favorites List - Dark Theme */
@@ -1032,7 +1032,7 @@ body.dark-theme .no-favorites i {
 }
 
 body.dark-theme .no-favorites .btn-link {
-  color: #60a5fa;
+  color: #3dba85;
 }
 
 body.dark-theme .no-favorites .btn-link:hover {
@@ -1063,12 +1063,12 @@ body.dark-theme .sidebar-nav .nav-link:hover {
 }
 
 body.dark-theme .sidebar-nav .nav-link.active {
-  background: rgba(59, 130, 246, 0.15);
-  color: #60a5fa;
+  background: rgba(34, 145, 106, 0.15);
+  color: #3dba85;
 }
 
 body.dark-theme .sidebar-nav .nav-badge {
-  background: #3b82f6;
+  background: #22916a;
   color: #ffffff;
 }
 
@@ -1095,7 +1095,7 @@ body.dark-theme .sidebar-nav .nav-badge {
   border-bottom: 2px solid #e2e8f0;
 }
 
-.discover-institutes-section h3 i { color: #3b82f6; }
+.discover-institutes-section h3 i { color: #22916a; }
 .discover-trending-section h3 i { color: #f59e0b; }
 .discover-links-section h3 i { color: #10b981; }
 

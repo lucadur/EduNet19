@@ -6,12 +6,12 @@
 /* === CSS CUSTOM PROPERTIES (DESIGN TOKENS) === */
 :root {
   /* Colors - Primary Palette (Pantone Blue) */
-  --color-primary: #0f62fe;
-  --color-primary-light: #4589ff;
-  --color-primary-dark: #0043ce;
-  --color-primary-50: rgba(15, 98, 254, 0.05);
-  --color-primary-100: rgba(15, 98, 254, 0.1);
-  --color-primary-200: rgba(15, 98, 254, 0.2);
+  --color-primary: #1a6b50;
+  --color-primary-light: #248c64;
+  --color-primary-dark: #104d39;
+  --color-primary-50: rgba(26, 107, 80, 0.05);
+  --color-primary-100: rgba(26, 107, 80, 0.1);
+  --color-primary-200: rgba(26, 107, 80, 0.2);
   
   /* Colors - Secondary Palette */
   --color-secondary: #ffd700;
@@ -157,8 +157,8 @@ body.dark-theme {
   --color-border-light: var(--color-gray-200);
   
   /* Primary Color Adjustment */
-  --color-primary: #0f62fe; /* Pantone Blue (Same as light mode) */
-  --color-primary-dark: #0043ce; /* Darker blue for hover states */
+  --color-primary: #1a6b50; /* Pantone Blue (Same as light mode) */
+  --color-primary-dark: #104d39; /* Darker blue for hover states */
   
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
@@ -578,7 +578,7 @@ body {
 
 .feature-circle:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 60px rgba(15, 98, 254, 0.15);
+  box-shadow: 0 20px 60px rgba(26, 107, 80, 0.15);
 }
 
 .feature-circle:hover::before {

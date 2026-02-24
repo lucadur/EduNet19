@@ -1554,7 +1554,7 @@ class EduNetHomepage {
           <button class="stat-btn like-btn ${isMock ? 'disabled' : ''} ${post.isLikedByUser ? 'liked' : ''}" 
                   data-post-id="${post.id}" 
                   ${isMock ? 'disabled title="Funzionalità non disponibile in modalità demo"' : ''}>
-            <i class="${post.isLikedByUser ? 'fas' : 'far'} fa-heart" aria-hidden="true" style="${post.isLikedByUser ? 'color: #e53e3e;' : ''}"></i>
+            <span class="like-emoji" aria-hidden="true" style="font-size: 1.2em; ${post.isLikedByUser ? 'filter: none;' : 'filter: grayscale(1); opacity: 0.5;'}">👌</span>
             <span>${post.likes || 0}</span>
           </button>
           <button class="stat-btn comment-btn ${isMock ? 'disabled' : ''}" 
@@ -1567,7 +1567,7 @@ class EduNetHomepage {
                   data-post-id="${post.id}"
                   ${isMock ? 'disabled title="Funzionalità non disponibile in modalità demo"' : ''}>
             <i class="fas fa-share" aria-hidden="true"></i>
-            <span>Condividi</span>
+            <span>Promuovi</span>
           </button>
         </div>
       </div>
@@ -1577,7 +1577,7 @@ class EduNetHomepage {
                 data-post-id="${post.id}"
                 ${isMock ? 'disabled title="Funzionalità non disponibile in modalità demo"' : ''}>
           <i class="fas fa-chevron-down" aria-hidden="true"></i>
-          ${isMock ? 'Commenti non disponibili in demo' : 'Mostra commenti'}
+          ${isMock ? 'Commenti non disponibili in demo' : 'Mostra interazioni'}
         </button>
         <div class="comments-container" id="comments-${post.id}">
           ${this.renderCommentForm(post.id, isMock)}
@@ -1794,7 +1794,7 @@ class EduNetHomepage {
         </button>
         <button class="post-dropdown-item" data-action="share">
           <i class="fas fa-share-alt"></i>
-          <span>Condividi</span>
+          <span>Promuovi</span>
         </button>
         <div class="post-dropdown-divider"></div>
         <button class="post-dropdown-item" data-action="mute-author">
@@ -2411,7 +2411,7 @@ class EduNetHomepage {
       // Hide comments
       commentsContainer.classList.remove('show');
       toggleIcon.className = 'fas fa-chevron-down';
-      commentsToggle.innerHTML = '<i class="fas fa-chevron-down" aria-hidden="true"></i> Mostra commenti';
+      commentsToggle.innerHTML = '<i class="fas fa-chevron-down" aria-hidden="true"></i> Mostra interazioni';
     } else {
       // Show comments
       commentsContainer.classList.add('show');

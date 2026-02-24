@@ -39,16 +39,16 @@ body.dark-theme {
     }
     
     .btn-primary {
-        background: #3b82f6 !important;
-        border-color: #3b82f6 !important;
+        background: #22916a !important;
+        border-color: #22916a !important;
         color: #ffffff !important;
-        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
+        box-shadow: 0 4px 15px rgba(34, 145, 106, 0.4) !important;
     }
     
     .btn-primary:hover {
-        background: #2563eb !important;
-        border-color: #2563eb !important;
-        box-shadow: 0 6px 25px rgba(59, 130, 246, 0.5) !important;
+        background: #188756 !important;
+        border-color: #188756 !important;
+        box-shadow: 0 6px 25px rgba(34, 145, 106, 0.5) !important;
         transform: translateY(-2px) !important;
     }
     
@@ -91,9 +91,9 @@ body.dark-theme {
     }
     
     .btn-outline:hover {
-        background: rgba(59, 130, 246, 0.15) !important;
-        border-color: #3b82f6 !important;
-        color: #60a5fa !important;
+        background: rgba(34, 145, 106, 0.15) !important;
+        border-color: #22916a !important;
+        color: #3dba85 !important;
     }
     
     /* === STATS SECTION (Hero) === */
@@ -131,20 +131,20 @@ body.dark-theme {
     
     .stat-card:hover {
         background: #283548 !important;
-        border-color: #3b82f6 !important;
+        border-color: #22916a !important;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
     }
     
     .stat-icon {
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(59, 130, 246, 0.15)) !important;
+        background: linear-gradient(135deg, rgba(34, 145, 106, 0.25), rgba(34, 145, 106, 0.15)) !important;
     }
     
     .stat-icon i {
-        color: #60a5fa !important;
+        color: #3dba85 !important;
     }
     
     .stat-card .stat-number {
-        color: #60a5fa !important;
+        color: #3dba85 !important;
         font-weight: 800 !important;
     }
     
@@ -163,10 +163,10 @@ body.dark-theme {
     }
     
     .section-badge {
-        background: rgba(59, 130, 246, 0.2) !important;
-        color: #60a5fa !important;
+        background: rgba(34, 145, 106, 0.2) !important;
+        color: #3dba85 !important;
         font-weight: 700 !important;
-        border: 1px solid rgba(59, 130, 246, 0.3) !important;
+        border: 1px solid rgba(34, 145, 106, 0.3) !important;
     }
     
     .section-title {
@@ -186,19 +186,19 @@ body.dark-theme {
     
     .step-card:hover {
         background: #283548 !important;
-        border-color: #3b82f6 !important;
+        border-color: #22916a !important;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
     }
     
     .step-number {
-        background: #3b82f6 !important;
+        background: #22916a !important;
         color: #ffffff !important;
         font-weight: 700 !important;
-        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5) !important;
+        box-shadow: 0 4px 15px rgba(34, 145, 106, 0.5) !important;
     }
     
     .step-icon {
-        background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+        background: linear-gradient(135deg, #22916a, #188756) !important;
     }
     
     .step-icon i {
@@ -229,20 +229,20 @@ body.dark-theme {
     }
     
     .feature-card-large::before {
-        background: linear-gradient(90deg, #3b82f6, #60a5fa) !important;
+        background: linear-gradient(90deg, #22916a, #3dba85) !important;
     }
     
     .feature-card-large:hover {
         background: #283548 !important;
-        border-color: #3b82f6 !important;
+        border-color: #22916a !important;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
     }
     
     .feature-badge {
-        background: rgba(59, 130, 246, 0.2) !important;
-        color: #60a5fa !important;
+        background: rgba(34, 145, 106, 0.2) !important;
+        color: #3dba85 !important;
         font-weight: 700 !important;
-        border: 1px solid rgba(59, 130, 246, 0.3) !important;
+        border: 1px solid rgba(34, 145, 106, 0.3) !important;
     }
     
     .feature-icon {
@@ -273,16 +273,16 @@ body.dark-theme {
     
     .feature-card-mini:hover {
         background: #283548 !important;
-        border-color: #3b82f6 !important;
+        border-color: #22916a !important;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
     }
     
     .feature-mini-icon {
-        background: rgba(59, 130, 246, 0.2) !important;
+        background: rgba(34, 145, 106, 0.2) !important;
     }
     
     .feature-mini-icon i {
-        color: #60a5fa !important;
+        color: #3dba85 !important;
     }
     
     .feature-mini-title {
@@ -314,13 +314,13 @@ body.dark-theme {
     
     .benefit-item:hover {
         background: #283548 !important;
-        border-color: #3b82f6 !important;
+        border-color: #22916a !important;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
     }
     
     .benefit-icon {
-        background: #3b82f6 !important;
-        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
+        background: #22916a !important;
+        box-shadow: 0 4px 15px rgba(34, 145, 106, 0.4) !important;
     }
     
     .benefit-icon i {
@@ -342,8 +342,8 @@ body.dark-theme {
     }
     
     .graphic-center {
-        background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-        box-shadow: 0 10px 40px rgba(59, 130, 246, 0.4) !important;
+        background: linear-gradient(135deg, #22916a, #188756) !important;
+        box-shadow: 0 10px 40px rgba(34, 145, 106, 0.4) !important;
     }
     
     .graphic-orbit {
@@ -353,12 +353,12 @@ body.dark-theme {
     }
     
     .graphic-orbit i {
-        color: #60a5fa !important;
+        color: #3dba85 !important;
     }
     
     /* CTA Section - Better contrast */
     .cta-section {
-        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #7c3aed 100%) !important;
+        background: linear-gradient(135deg, #0e5c3a 0%, #22916a 50%, #34d399 100%) !important;
     }
     
     .cta-title {
@@ -382,7 +382,7 @@ body.dark-theme {
     
     .btn-white {
         background: #ffffff !important;
-        color: #1e40af !important;
+        color: #0e5c3a !important;
         font-weight: 700 !important;
         box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3) !important;
     }
@@ -397,32 +397,32 @@ body.dark-theme {
     .cta-actions .btn-white,
     .cta-section .btn-white {
         background: #ffffff !important;
-        color: #1e40af !important;
+        color: #0e5c3a !important;
         font-weight: 700 !important;
         border: none !important;
     }
     
     .cta-actions .btn-white span,
     .cta-section .btn-white span {
-        color: #1e40af !important;
+        color: #0e5c3a !important;
     }
     
     .cta-actions .btn-white i,
     .cta-section .btn-white i {
-        color: #1e40af !important;
+        color: #0e5c3a !important;
     }
     
     .cta-actions .btn-white:hover,
     .cta-section .btn-white:hover {
         background: #f0f4ff !important;
-        color: #1e3a8a !important;
+        color: #0b4d31 !important;
     }
     
     .cta-actions .btn-white:hover span,
     .cta-section .btn-white:hover span,
     .cta-actions .btn-white:hover i,
     .cta-section .btn-white:hover i {
-        color: #1e3a8a !important;
+        color: #0b4d31 !important;
     }
     
     .btn-outline-white {
@@ -456,7 +456,7 @@ body.dark-theme {
     }
     
     .illustration-card i {
-        color: #60a5fa !important;
+        color: #3dba85 !important;
     }
     
     .illustration-center {
@@ -476,19 +476,19 @@ body.dark-theme {
     }
     
     .nav-actions .btn-outline:hover {
-        background: rgba(59, 130, 246, 0.15) !important;
-        border-color: #3b82f6 !important;
-        color: #60a5fa !important;
+        background: rgba(34, 145, 106, 0.15) !important;
+        border-color: #22916a !important;
+        color: #3dba85 !important;
     }
     
     .nav-actions .btn-primary {
-        background: #3b82f6 !important;
-        border-color: #3b82f6 !important;
+        background: #22916a !important;
+        border-color: #22916a !important;
         color: #ffffff !important;
     }
     
     .nav-actions .btn-primary:hover {
-        background: #2563eb !important;
-        border-color: #2563eb !important;
+        background: #188756 !important;
+        border-color: #188756 !important;
     }
 }
