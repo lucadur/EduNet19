@@ -886,7 +886,7 @@ class SettingsPage {
             <div class="session-info" style="flex: 1;">
               <div class="session-name" style="font-weight: 600; color: #111827; margin-bottom: 0.25rem;">
                 ${session.device_name}
-                ${isCurrent ? '<span class="current-badge" style="display: inline-block; background: #dbeafe; color: #2563eb; font-size: 0.75rem; padding: 0.125rem 0.5rem; border-radius: 9999px; margin-left: 0.5rem;">Attuale</span>' : ''}
+                ${isCurrent ? '<span class="current-badge" style="display: inline-block; background: #d1f5e8; color: #1a6b50; font-size: 0.75rem; padding: 0.125rem 0.5rem; border-radius: 9999px; margin-left: 0.5rem;">Attuale</span>' : ''}
               </div>
               <div class="session-details" style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.25rem;">
                 ${session.ip_address !== 'N/A' ? session.ip_address + ' • ' : ''} ${session.location || 'Posizione sconosciuta'}
@@ -1239,7 +1239,7 @@ class SettingsPage {
       // Change color based on usage
       if (percentage > 90) storageBar.style.backgroundColor = '#ef4444'; // Red
       else if (percentage > 70) storageBar.style.backgroundColor = '#f59e0b'; // Orange
-      else storageBar.style.backgroundColor = '#2563eb'; // Blue
+      else storageBar.style.backgroundColor = '#1a6b50'; // Green
     }
 
     if (storageText) {
@@ -1436,7 +1436,7 @@ class SettingsPage {
       width: 50px;
       height: 50px;
       border: 4px solid #f3f3f3;
-      border-top: 4px solid #2563eb;
+      border-top: 4px solid #1a6b50;
       border-radius: 50%;
       animation: spin 1s linear infinite;
       margin: 0 auto 1rem;

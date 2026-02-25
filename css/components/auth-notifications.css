@@ -137,7 +137,7 @@
 
 /* === INFO NOTIFICATION === */
 .auth-notification-info {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    background: linear-gradient(135deg, #248c64 0%, #1a6b50 100%);
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -208,7 +208,7 @@ body.dark-theme .auth-notification-warning {
 }
 
 body.dark-theme .auth-notification-info {
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    background: linear-gradient(135deg, #1a6b50 0%, #104d39 100%);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 

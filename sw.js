@@ -180,7 +180,7 @@ async function networkFirst(request) {
           h1 { margin: 0 0 1rem; font-size: 1.5rem; }
           p { margin: 0 0 2rem; opacity: 0.8; }
           button {
-            background: #3b82f6;
+            background: #248c64;
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
@@ -188,7 +188,7 @@ async function networkFirst(request) {
             font-size: 1rem;
             cursor: pointer;
           }
-          button:hover { background: #2563eb; }
+          button:hover { background: #1a6b50; }
         </style>
       </head>
       <body>

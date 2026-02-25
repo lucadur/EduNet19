@@ -526,7 +526,7 @@ body.dark-theme .stat-card:hover {
 }
 
 body.dark-theme .stat-icon {
-  background: linear-gradient(135deg, #22916a 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #22916a 0%, #104d39 100%);
   box-shadow: 0 4px 12px rgba(34, 145, 106, 0.3);
 }
 
@@ -1940,7 +1940,7 @@ body.dark-theme {
   --profile-primary: #22916a;
   --profile-primary-light: #3dba85;
   --profile-primary-dark: #188756;
-  --profile-gradient: linear-gradient(135deg, #22916a 0%, #3dba85 50%, #93c5fd 100%);
+  --profile-gradient: linear-gradient(135deg, #22916a 0%, #3dba85 50%, #188756 100%);
   --profile-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   --profile-shadow-hover: 0 16px 48px rgba(34, 145, 106, 0.2);
 }
@@ -2161,12 +2161,12 @@ body.dark-theme .hours-item {
 
 body.dark-theme .hours-item:hover {
   background: rgba(51, 65, 85, 0.9);
-  border-color: rgba(96, 165, 250, 0.5);
+  border-color: rgba(61, 186, 133, 0.5);
   box-shadow: 0 4px 16px rgba(34, 145, 106, 0.2);
 }
 
 body.dark-theme .hours-item .day-name {
-  color: #93c5fd;
+  color: #3dba85;
   font-weight: 700;
 }
 
@@ -2219,7 +2219,7 @@ body.dark-theme #structure-section .info-item label i {
 }
 
 body.dark-theme .info-item label {
-  color: #93c5fd;
+  color: #3dba85;
   border-bottom-color: rgba(34, 145, 106, 0.2);
 }
 

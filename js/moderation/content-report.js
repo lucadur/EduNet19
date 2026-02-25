@@ -275,7 +275,7 @@ class ContentReportManager {
                 
                 .report-textarea:focus {
                     outline: none;
-                    border-color: #3b82f6;
+                    border-color: #248c64;
                 }
                 
                 .report-char-count {

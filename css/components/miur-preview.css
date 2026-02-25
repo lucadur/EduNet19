@@ -4,12 +4,12 @@
 
 /* Anteprima dati MIUR */
 .miur-preview {
-  background: linear-gradient(135deg, #0f62fe 0%, #4589ff 100%);
+  background: linear-gradient(135deg, #1a6b50 0%, #248c64 100%);
   border-radius: 12px;
   padding: 1.5rem;
   margin: 1.5rem 0;
   color: white;
-  box-shadow: 0 4px 12px rgba(15, 98, 254, 0.3);
+  box-shadow: 0 4px 12px rgba(26, 107, 80, 0.3);
 }
 
 .miur-preview-header {
@@ -215,8 +215,8 @@
 }
 
 .miur-info-box:hover {
-  border-color: #0f62fe;
-  box-shadow: 0 4px 12px rgba(15, 98, 254, 0.15);
+  border-color: #1a6b50;
+  box-shadow: 0 4px 12px rgba(26, 107, 80, 0.15);
 }
 
 .miur-info-content {
@@ -228,8 +228,8 @@
 
 .miur-info-content i {
   font-size: 1.5rem;
-  color: #0f62fe;
-  background: rgba(15, 98, 254, 0.1);
+  color: #1a6b50;
+  background: rgba(26, 107, 80, 0.1);
   padding: 0.75rem;
   border-radius: 50%;
   flex-shrink: 0;
@@ -255,7 +255,7 @@
 
 /* Bottone aggiorna MIUR */
 .btn-miur-update {
-  background: linear-gradient(135deg, #0f62fe 0%, #4589ff 100%);
+  background: linear-gradient(135deg, #1a6b50 0%, #248c64 100%);
   color: white;
   border: none;
   border-radius: 10px;
@@ -267,13 +267,13 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 2px 8px rgba(15, 98, 254, 0.3);
+  box-shadow: 0 2px 8px rgba(26, 107, 80, 0.3);
   flex-shrink: 0;
 }
 
 .btn-miur-update:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(15, 98, 254, 0.4);
+  box-shadow: 0 4px 16px rgba(26, 107, 80, 0.4);
 }
 
 .btn-miur-update:active {
@@ -348,8 +348,8 @@
 
 .miur-update-modal-header i {
   font-size: 1.5rem;
-  color: #0f62fe;
-  background: rgba(15, 98, 254, 0.1);
+  color: #1a6b50;
+  background: rgba(26, 107, 80, 0.1);
   padding: 0.75rem;
   border-radius: 50%;
 }
@@ -507,7 +507,7 @@
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  background: linear-gradient(135deg, #0f62fe 0%, #4589ff 100%);
+  background: linear-gradient(135deg, #1a6b50 0%, #248c64 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -519,12 +519,12 @@
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 2;
-  box-shadow: 0 2px 6px rgba(15, 98, 254, 0.3);
+  box-shadow: 0 2px 6px rgba(26, 107, 80, 0.3);
 }
 
 .input-group .btn-icon:hover {
   transform: translateY(-50%) scale(1.05);
-  box-shadow: 0 4px 12px rgba(15, 98, 254, 0.4);
+  box-shadow: 0 4px 12px rgba(26, 107, 80, 0.4);
 }
 
 .input-group .btn-icon:active {
@@ -708,7 +708,7 @@
 }
 
 .form-section-divider span i {
-  color: #0f62fe;
+  color: #1a6b50;
   font-size: 0.9rem;
 }
 

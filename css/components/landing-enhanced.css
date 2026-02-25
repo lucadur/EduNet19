@@ -24,8 +24,8 @@
   inset: 0;
   background: linear-gradient(135deg, 
     var(--color-primary) 0%, 
-    #1e40af 50%, 
-    #7c3aed 100%
+    #104d39 50%, 
+    #3dba85 100%
   );
 }
 
@@ -457,7 +457,7 @@
   justify-content: center;
   font-weight: 700;
   font-size: 1.125rem;
-  box-shadow: 0 4px 15px rgba(15, 98, 254, 0.4);
+  box-shadow: 0 4px 15px rgba(26, 107, 80, 0.4);
 }
 
 .step-icon {
@@ -818,7 +818,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 40px rgba(15, 98, 254, 0.3);
+  box-shadow: 0 10px 40px rgba(26, 107, 80, 0.3);
   z-index: 2;
 }
 
@@ -872,7 +872,7 @@
 /* === CTA SECTION === */
 .cta-section {
   padding: 6rem 0;
-  background: linear-gradient(135deg, var(--color-primary) 0%, #1e40af 50%, #7c3aed 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, #104d39 50%, #3dba85 100%);
   position: relative;
   overflow: hidden;
 }
@@ -937,13 +937,13 @@
 
 .btn-white {
   background: white;
-  color: #1e40af;
+  color: #104d39;
   border: none;
 }
 
 .btn-white span,
 .btn-white i {
-  color: #1e40af;
+  color: #104d39;
 }
 
 .btn-white:hover {

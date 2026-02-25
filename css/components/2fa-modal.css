@@ -311,7 +311,7 @@ body.dark-theme .secret-manual code,
 .dark-theme .secret-manual code,
 body.dark-theme #secret-code,
 .dark-theme #secret-code {
-  color: #93c5fd !important;
+  color: #3dba85 !important;
   background: rgba(34, 145, 106, 0.2) !important;
   padding: 0.75rem 1rem !important;
   border-radius: 8px !important;
@@ -374,7 +374,7 @@ body.dark-theme #backup-codes-container div:last-child,
 
 body.dark-theme #backup-codes-container strong,
 .dark-theme #backup-codes-container strong {
-  color: #93c5fd !important;
+  color: #3dba85 !important;
   font-size: 1.1rem !important;
   letter-spacing: 0.1em !important;
 }
@@ -434,7 +434,7 @@ body.dark-theme .modal-content .btn-primary:hover,
 .dark-theme .modal-content .btn-primary:hover,
 body.dark-theme #2fa-setup-modal .btn-primary:hover,
 .dark-theme #2fa-setup-modal .btn-primary:hover {
-  background: linear-gradient(135deg, #188756, #1d4ed8) !important;
+  background: linear-gradient(135deg, #188756, #104d39) !important;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(26, 107, 80, 0.4) !important;
 }

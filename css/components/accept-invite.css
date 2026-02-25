@@ -128,7 +128,7 @@ body {
   gap: var(--space-3);
   margin-bottom: var(--space-5);
   padding: var(--space-4);
-  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  background: linear-gradient(135deg, #ecfdf5, #d1f5e8);
   border-radius: var(--radius-lg);
 }
 

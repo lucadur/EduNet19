@@ -145,9 +145,9 @@
 }
 
 .mod-nav-item.active {
-    background: #dbeafe;
-    color: #1d4ed8;
-    border-left-color: #1d4ed8;
+    background: #d1f5e8;
+    color: #104d39;
+    border-left-color: #104d39;
 }
 
 .mod-nav-item i {
@@ -293,7 +293,7 @@
 }
 
 .mod-stat-icon.info {
-    background: #dbeafe;
+    background: #d1f5e8;
     color: #188756;
 }
 
@@ -373,8 +373,8 @@
 }
 
 .mod-priority-badge.low {
-    background: #e0e7ff;
-    color: #4f46e5;
+    background: #d1f5e8;
+    color: #1a6b50;
 }
 
 .mod-category-badge {
@@ -401,8 +401,8 @@
 }
 
 .mod-status-badge.reviewing {
-    background: #dbeafe;
-    color: #1e40af;
+    background: #d1f5e8;
+    color: #104d39;
 }
 
 .mod-status-badge.resolved {
@@ -565,7 +565,7 @@
 }
 
 .mod-activity-icon.action {
-    background: #dbeafe;
+    background: #d1f5e8;
     color: #188756;
 }
 
@@ -1172,7 +1172,7 @@ body.dark-theme .mod-status-badge.pending {
 
 body.dark-theme .mod-status-badge.reviewing {
     background: rgba(34, 145, 106, 0.2);
-    color: #93c5fd;
+    color: #3dba85;
 }
 
 body.dark-theme .mod-status-badge.resolved {
@@ -1203,7 +1203,7 @@ body.dark-theme .mod-stat-icon.warning {
 
 body.dark-theme .mod-stat-icon.info {
     background: rgba(34, 145, 106, 0.2);
-    color: #93c5fd;
+    color: #3dba85;
 }
 
 /* Stat label in dark theme */
@@ -1219,7 +1219,7 @@ body.dark-theme .mod-activity-icon.report {
 
 body.dark-theme .mod-activity-icon.action {
     background: rgba(34, 145, 106, 0.2);
-    color: #93c5fd;
+    color: #3dba85;
 }
 
 body.dark-theme .mod-activity-icon.resolved {

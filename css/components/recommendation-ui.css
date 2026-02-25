@@ -882,7 +882,7 @@ body.dark-theme .suggested-institutes .see-all {
 }
 
 body.dark-theme .suggested-institutes .see-all:hover {
-  color: #93c5fd;
+  color: #3dba85;
 }
 
 /* Institute Suggestion Card - Dark Theme */
@@ -1036,7 +1036,7 @@ body.dark-theme .no-favorites .btn-link {
 }
 
 body.dark-theme .no-favorites .btn-link:hover {
-  color: #93c5fd;
+  color: #3dba85;
 }
 
 /* Recent Activity - Dark Theme */

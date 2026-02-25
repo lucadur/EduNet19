@@ -52,7 +52,7 @@
 
 .gallery-upload-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(15, 98, 254, 0.3);
+  box-shadow: 0 4px 12px rgba(26, 107, 80, 0.3);
 }
 
 /* === GALLERY GRID - Stile Bacheca === */
@@ -262,7 +262,7 @@
   justify-content: center;
   gap: 10px;
   padding: 14px 28px;
-  background: linear-gradient(135deg, #0f62fe 0%, #0353e9 100%);
+  background: linear-gradient(135deg, #1a6b50 0%, #104d39 100%);
   color: #ffffff !important;
   border: none;
   border-radius: 50px;
@@ -270,18 +270,18 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 14px rgba(15, 98, 254, 0.35);
+  box-shadow: 0 4px 14px rgba(26, 107, 80, 0.35);
 }
 
 .gallery-empty-state .btn-primary:hover {
-  background: linear-gradient(135deg, #0353e9 0%, #0043ce 100%);
+  background: linear-gradient(135deg, #104d39 0%, #0a3626 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(15, 98, 254, 0.45);
+  box-shadow: 0 6px 20px rgba(26, 107, 80, 0.45);
 }
 
 .gallery-empty-state .btn-primary:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(15, 98, 254, 0.3);
+  box-shadow: 0 2px 8px rgba(26, 107, 80, 0.3);
 }
 
 .gallery-empty-state .btn-primary i,
@@ -319,13 +319,13 @@ body.dark-theme .gallery-empty-state p {
 }
 
 body.dark-theme .gallery-empty-state .btn-primary {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  background: linear-gradient(135deg, #1a6b50 0%, #104d39 100%);
+  box-shadow: 0 4px 14px rgba(26, 107, 80, 0.4);
 }
 
 body.dark-theme .gallery-empty-state .btn-primary:hover {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+  background: linear-gradient(135deg, #104d39 0%, #0a3626 100%);
+  box-shadow: 0 6px 20px rgba(26, 107, 80, 0.5);
 }
 
 /* === GALLERY UPLOAD MODAL === */
@@ -849,7 +849,7 @@ body.dark-theme .gallery-empty-state .btn-primary:hover {
   justify-content: center;
   gap: 8px;
   padding: 12px 24px;
-  background: linear-gradient(135deg, #0f62fe 0%, #0353e9 100%);
+  background: linear-gradient(135deg, #1a6b50 0%, #104d39 100%);
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -857,14 +857,14 @@ body.dark-theme .gallery-empty-state .btn-primary:hover {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 14px rgba(15, 98, 254, 0.3);
+  box-shadow: 0 4px 14px rgba(26, 107, 80, 0.3);
 }
 
 .gallery-upload-actions .btn-primary:hover,
 .gallery-upload-actions button[type="submit"]:hover {
-  background: linear-gradient(135deg, #0353e9 0%, #0043ce 100%);
+  background: linear-gradient(135deg, #104d39 0%, #0a3626 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(15, 98, 254, 0.4);
+  box-shadow: 0 6px 20px rgba(26, 107, 80, 0.4);
 }
 
 .gallery-upload-actions .btn-primary:disabled,
@@ -905,13 +905,13 @@ body.dark-theme .gallery-empty-state p {
 }
 
 body.dark-theme .gallery-empty-state .btn-primary {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  background: linear-gradient(135deg, #1a6b50 0%, #104d39 100%);
+  box-shadow: 0 4px 14px rgba(26, 107, 80, 0.4);
 }
 
 body.dark-theme .gallery-empty-state .btn-primary:hover {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+  background: linear-gradient(135deg, #104d39 0%, #0a3626 100%);
+  box-shadow: 0 6px 20px rgba(26, 107, 80, 0.5);
 }
 
 /* Gallery Item Card - Dark Theme */
@@ -993,8 +993,8 @@ body.dark-theme .gallery-dropzone {
 
 body.dark-theme .gallery-dropzone:hover,
 body.dark-theme .gallery-dropzone.dragover {
-  background: rgba(37, 99, 235, 0.1);
-  border-color: #3b82f6;
+  background: rgba(26, 107, 80, 0.1);
+  border-color: #248c64;
 }
 
 body.dark-theme .gallery-dropzone p {
@@ -1024,8 +1024,8 @@ body.dark-theme .gallery-form-group textarea::placeholder {
 
 body.dark-theme .gallery-form-group input:focus,
 body.dark-theme .gallery-form-group textarea:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  border-color: #248c64;
+  box-shadow: 0 0 0 3px rgba(36, 140, 100, 0.2);
 }
 
 /* Modal Buttons - Dark Theme */
@@ -1045,14 +1045,14 @@ body.dark-theme .gallery-upload-actions button[type="button"]:not(.btn-primary):
 
 body.dark-theme .gallery-upload-actions .btn-primary,
 body.dark-theme .gallery-upload-actions button[type="submit"] {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  background: linear-gradient(135deg, #1a6b50 0%, #104d39 100%);
+  box-shadow: 0 4px 14px rgba(26, 107, 80, 0.35);
 }
 
 body.dark-theme .gallery-upload-actions .btn-primary:hover,
 body.dark-theme .gallery-upload-actions button[type="submit"]:hover {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+  background: linear-gradient(135deg, #104d39 0%, #0a3626 100%);
+  box-shadow: 0 6px 20px rgba(26, 107, 80, 0.45);
 }
 
 /* Gallery Counter - Dark Theme */
@@ -1067,11 +1067,11 @@ body.dark-theme .gallery-preview-item {
 }
 
 body.dark-theme .gallery-preview-item:hover {
-  border-color: #3b82f6;
+  border-color: #248c64;
 }
 
 body.dark-theme .gallery-upload-count {
-  color: #60a5fa;
+  color: #3dba85;
 }
 
 /* Lightbox - Dark Theme */

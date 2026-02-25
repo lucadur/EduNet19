@@ -146,7 +146,7 @@ class ModerationNotifications {
         const actionType = action.action_type || 'warning';
         const label = actionLabels[actionType] || 'Azione di Moderazione';
         const icon = actionIcons[actionType] || 'fa-info-circle';
-        const color = actionColors[actionType] || '#3b82f6';
+        const color = actionColors[actionType] || '#248c64';
         const contentType = contentTypeLabels[action.content_type] || 'contenuto';
         const canAppeal = action.appeal_status !== 'rejected' && action.appeal_status !== 'approved';
 
@@ -518,14 +518,14 @@ class ModerationNotifications {
                 display: flex;
                 gap: 0.75rem;
                 padding: 1rem;
-                background: rgba(59, 130, 246, 0.1);
-                border: 1px solid rgba(59, 130, 246, 0.2);
+                background: rgba(26, 107, 80, 0.1);
+                border: 1px solid rgba(26, 107, 80, 0.2);
                 border-radius: 8px;
                 margin-bottom: 1rem;
             }
             
             .mod-notif-info i {
-                color: #60a5fa;
+                color: #3dba85;
                 font-size: 1rem;
                 margin-top: 0.125rem;
             }
@@ -549,9 +549,9 @@ class ModerationNotifications {
                 gap: 0.5rem;
                 padding: 0.875rem;
                 background: transparent;
-                border: 2px solid #3b82f6;
+                border: 2px solid #248c64;
                 border-radius: 8px;
-                color: #3b82f6;
+                color: #248c64;
                 font-size: 0.95rem;
                 font-weight: 500;
                 cursor: pointer;
@@ -559,7 +559,7 @@ class ModerationNotifications {
             }
             
             .mod-notif-btn-appeal:hover {
-                background: #3b82f6;
+                background: #248c64;
                 color: white;
             }
             
@@ -589,7 +589,7 @@ class ModerationNotifications {
             
             .mod-notif-appeal-form textarea:focus {
                 outline: none;
-                border-color: #3b82f6;
+                border-color: #248c64;
             }
             
             .mod-notif-appeal-actions {
@@ -621,7 +621,7 @@ class ModerationNotifications {
                 justify-content: center;
                 gap: 0.5rem;
                 padding: 0.75rem;
-                background: #3b82f6;
+                background: #248c64;
                 border: none;
                 border-radius: 8px;
                 color: white;
@@ -632,7 +632,7 @@ class ModerationNotifications {
             }
             
             .mod-notif-btn-submit:hover:not(:disabled) {
-                background: #2563eb;
+                background: #1a6b50;
             }
             
             .mod-notif-btn-submit:disabled {

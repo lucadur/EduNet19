@@ -181,7 +181,7 @@ html {
   width: 32px;
   height: 32px;
   border: 3px solid #e2e8f0;
-  border-top-color: #3b82f6;
+  border-top-color: #248c64;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -231,7 +231,7 @@ html {
 
 .discover-loading i {
   font-size: 2rem;
-  color: #3b82f6;
+  color: #248c64;
 }
 
 /* === EDUMATCH SECTION STABILITY === */
@@ -301,7 +301,7 @@ body.dark-theme .discover-loading {
 }
 
 body.dark-theme .discover-loading i {
-  color: #60a5fa;
+  color: #3dba85;
 }
 
 body.dark-theme .feed-loading {
@@ -310,7 +310,7 @@ body.dark-theme .feed-loading {
 
 body.dark-theme .feed-loading .loading-spinner-small {
   border-color: #334155;
-  border-top-color: #60a5fa;
+  border-top-color: #3dba85;
 }
 
 /* === PREVENT LAYOUT SHIFT === */

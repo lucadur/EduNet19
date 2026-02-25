@@ -114,7 +114,7 @@ class ModerationCenter {
                 </div>
                 <h1 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem;">Errore</h1>
                 <p style="color: #94a3b8; margin-bottom: 2rem; max-width: 400px;">${message}</p>
-                <button onclick="location.reload()" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: #3b82f6; color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer;">
+                <button onclick="location.reload()" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: #248c64; color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer;">
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                     </svg>
@@ -130,7 +130,7 @@ class ModerationCenter {
         overlay.id = 'authLoadingOverlay';
         overlay.innerHTML = `
             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #0f172a; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;">
-                <div style="width: 50px; height: 50px; border: 4px solid #1e3a5f; border-top-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                <div style="width: 50px; height: 50px; border: 4px solid #1e3a5f; border-top-color: #248c64; border-radius: 50%; animation: spin 1s linear infinite;"></div>
                 <p style="color: #94a3b8; margin-top: 1rem;">Verifica autorizzazioni...</p>
                 <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
             </div>
@@ -158,7 +158,7 @@ class ModerationCenter {
                     Non hai i permessi necessari per accedere al Centro Moderazione. 
                     Questa area è riservata agli amministratori e moderatori della piattaforma.
                 </p>
-                <a href="../../homepage.html" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: #3b82f6; color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">
+                <a href="../../homepage.html" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: #248c64; color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>
@@ -173,7 +173,7 @@ class ModerationCenter {
             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background: #0f172a; color: white; padding: 2rem;">
                 <div style="width: 100%; max-width: 400px; background: #1e293b; border-radius: 16px; padding: 2rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
                     <div style="text-align: center; margin-bottom: 2rem;">
-                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #248c64, #1a6b50); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
                             <svg width="32" height="32" fill="none" stroke="white" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                             </svg>
@@ -188,7 +188,7 @@ class ModerationCenter {
                             <input type="email" id="adminEmail" required 
                                 style="width: 100%; padding: 0.75rem 1rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: white; font-size: 1rem; outline: none; transition: border-color 0.2s;"
                                 placeholder="admin@example.com"
-                                onfocus="this.style.borderColor='#3b82f6'" 
+                                onfocus="this.style.borderColor='#248c64'" 
                                 onblur="this.style.borderColor='#334155'">
                         </div>
                         
@@ -197,15 +197,15 @@ class ModerationCenter {
                             <input type="password" id="adminPassword" required 
                                 style="width: 100%; padding: 0.75rem 1rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: white; font-size: 1rem; outline: none; transition: border-color 0.2s;"
                                 placeholder="••••••••"
-                                onfocus="this.style.borderColor='#3b82f6'" 
+                                onfocus="this.style.borderColor='#248c64'" 
                                 onblur="this.style.borderColor='#334155'">
                         </div>
                         
                         <div id="adminLoginError" style="display: none; padding: 0.75rem; background: rgba(220, 38, 38, 0.2); border: 1px solid #dc2626; border-radius: 8px; color: #fca5a5; font-size: 0.875rem;"></div>
                         
                         <button type="submit" id="adminLoginBtn"
-                            style="width: 100%; padding: 0.875rem; background: linear-gradient(135deg, #3b82f6, #2563eb); border: none; border-radius: 8px; color: white; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-top: 0.5rem;"
-                            onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(59, 130, 246, 0.4)'"
+                            style="width: 100%; padding: 0.875rem; background: linear-gradient(135deg, #248c64, #1a6b50); border: none; border-radius: 8px; color: white; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-top: 0.5rem;"
+                            onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(36, 140, 100, 0.4)'"
                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                             <span id="loginBtnText">Accedi</span>
                             <span id="loginBtnSpinner" style="display: none;">
@@ -797,7 +797,7 @@ class ModerationCenter {
                             <i class="fas fa-eye"></i> Visualizza Contenuto
                         </button>
                         ${report.status === 'pending' ? `
-                            <button class="mod-btn mod-btn-outline" data-action="review" data-report-id="${report.id}" style="color: #3b82f6; border-color: #3b82f6;">
+                            <button class="mod-btn mod-btn-outline" data-action="review" data-report-id="${report.id}" style="color: #248c64; border-color: #248c64;">
                                 <i class="fas fa-hand-paper"></i> Prendi in carico
                             </button>
                         ` : ''}
@@ -1277,7 +1277,7 @@ class ModerationCenter {
             const authorDisplay = contentType === 'post' 
                 ? `
                     <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; padding: 0.75rem; background: #f1f5f9; border-radius: 8px;">
-                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #3b82f6, #8b5cf6); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #248c64, #1a6b50); display: flex; align-items: center; justify-content: center; overflow: hidden;">
                             ${authorInfo?.logo_url 
                                 ? `<img src="${authorInfo.logo_url}" style="width: 100%; height: 100%; object-fit: cover;">`
                                 : `<i class="fas fa-school" style="color: white;"></i>`
@@ -1679,7 +1679,7 @@ class ModerationCenter {
                             <i class="fas fa-child"></i>
                             Consenso Parentale
                         </span>
-                        ${minorAge ? `<span class="mod-age-badge" style="background: rgba(59, 130, 246, 0.2); color: #3b82f6; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">${minorAge} anni</span>` : ''}
+                        ${minorAge ? `<span class="mod-age-badge" style="background: rgba(36, 140, 100, 0.2); color: #248c64; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">${minorAge} anni</span>` : ''}
                     </div>
                     <span class="mod-status-badge ${statusInfo.class}">
                         <i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.label}
@@ -2598,7 +2598,7 @@ class ModerationCenter {
             top: 80px;
             right: 20px;
             padding: 1rem 1.5rem;
-            background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : type === 'warning' ? '#f59e0b' : '#3b82f6'};
+            background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : type === 'warning' ? '#f59e0b' : '#248c64'};
             color: white;
             border-radius: 8px;
             display: flex;
@@ -2779,7 +2779,7 @@ class ModerationCenter {
 
         const roleColors = {
             super_admin: '#dc2626',
-            admin: '#2563eb',
+            admin: '#1a6b50',
             moderator: '#059669'
         };
 

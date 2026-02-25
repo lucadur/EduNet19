@@ -9,12 +9,12 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--space-4) var(--space-5);
-  background: linear-gradient(135deg, #0f62fe 0%, #0043ce 100%);
+  background: linear-gradient(135deg, #1a6b50 0%, #104d39 100%);
   border-radius: var(--radius-xl);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
-  box-shadow: 0 2px 8px rgba(15, 98, 254, 0.2);
+  box-shadow: 0 2px 8px rgba(26, 107, 80, 0.2);
   margin-bottom: var(--space-4);
 }
 
@@ -25,7 +25,7 @@
 
 .edumatch-collapse-header:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(15, 98, 254, 0.3);
+  box-shadow: 0 4px 12px rgba(26, 107, 80, 0.3);
 }
 
 .edumatch-collapse-header:active {
@@ -220,8 +220,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(15, 98, 254, 0.1);
-  border: 1px solid rgba(15, 98, 254, 0.2);
+  background: rgba(26, 107, 80, 0.1);
+  border: 1px solid rgba(26, 107, 80, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -232,8 +232,8 @@
 }
 
 .edumatch-minimize-btn:hover {
-  background: rgba(15, 98, 254, 0.2);
-  border-color: rgba(15, 98, 254, 0.4);
+  background: rgba(26, 107, 80, 0.2);
+  border-color: rgba(26, 107, 80, 0.4);
   transform: scale(1.05);
 }
 
@@ -254,12 +254,12 @@
 /* === FOCUS STATES === */
 .edumatch-collapse-toggle:focus,
 .edumatch-minimize-btn:focus {
-  outline: 2px solid rgba(15, 98, 254, 0.6);
+  outline: 2px solid rgba(26, 107, 80, 0.6);
   outline-offset: 2px;
 }
 
 .edumatch-collapse-header:focus-within {
-  box-shadow: 0 0 0 3px rgba(15, 98, 254, 0.4);
+  box-shadow: 0 0 0 3px rgba(26, 107, 80, 0.4);
 }
 
 /* === SMOOTH TRANSITIONS === */

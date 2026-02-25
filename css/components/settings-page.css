@@ -260,7 +260,7 @@
   color: var(--color-text);
   margin-bottom: var(--space-6);
   padding: var(--space-4) var(--space-5);
-  background: var(--color-primary-50, rgba(15, 98, 254, 0.08));
+  background: var(--color-primary-50, rgba(26, 107, 80, 0.08));
   border-radius: var(--radius-lg);
   border-bottom: none;
   display: flex;
@@ -270,7 +270,7 @@
 
 .section-title i {
   color: var(--color-primary);
-  background: rgba(15, 98, 254, 0.15);
+  background: rgba(26, 107, 80, 0.15);
   padding: 8px;
   border-radius: var(--radius-md);
   display: flex;

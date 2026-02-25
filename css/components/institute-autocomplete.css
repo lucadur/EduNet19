@@ -151,17 +151,17 @@
   justify-content: flex-start;
   gap: 8px;
   padding: 8px 14px;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
   border-radius: 8px;
-  color: #1e40af;
+  color: #104d39;
   font-size: 14px;
   margin-top: 8px;
   line-height: 1.4;
 }
 
 .autocomplete-loading .fa-spinner {
-  color: #3b82f6;
+  color: #248c64;
   font-size: 16px;
   flex-shrink: 0;
 }
@@ -270,8 +270,8 @@ body.dark-theme .autocomplete-item-name {
 }
 
 body.dark-theme .autocomplete-item-name mark {
-  background-color: rgba(96, 165, 250, 0.3);
-  color: #93c5fd;
+  background-color: rgba(61, 186, 133, 0.3);
+  color: #3dba85;
 }
 
 body.dark-theme .verified-icon {
@@ -301,13 +301,13 @@ body.dark-theme .verification-badge.verified .fa-check-circle {
 }
 
 body.dark-theme .autocomplete-loading {
-  background: rgba(59, 130, 246, 0.15);
-  border-color: rgba(59, 130, 246, 0.3);
-  color: #93c5fd;
+  background: rgba(26, 107, 80, 0.15);
+  border-color: rgba(26, 107, 80, 0.3);
+  color: #3dba85;
 }
 
 body.dark-theme .autocomplete-loading .fa-spinner {
-  color: #60a5fa;
+  color: #3dba85;
 }
 
 body.dark-theme .autocomplete-loading .fa-check {

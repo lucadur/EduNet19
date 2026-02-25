@@ -87,7 +87,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  background: linear-gradient(135deg, #d1f5e8 0%, #a7f3d0 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,7 +96,7 @@
 
 .collaborator-avatar i {
   font-size: 24px;
-  color: #4f46e5;
+  color: #1a6b50;
 }
 
 .collaborator-info {
@@ -130,8 +130,8 @@
 }
 
 .collaborator-role {
-  background: #e0e7ff;
-  color: #4338ca;
+  background: #d1f5e8;
+  color: #1a6b50;
 }
 
 .collaborator-status {
@@ -198,7 +198,7 @@
 }
 
 .btn-add-collaborator:hover {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  background: linear-gradient(135deg, #d1f5e8 0%, #a7f3d0 100%);
   border-style: solid;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(34, 145, 106, 0.2);
@@ -461,7 +461,7 @@ body.dark-theme .modal-footer {
 
 /* ===== PULSANTE COPIA LINK ===== */
 .btn-copy-link:hover {
-  background: #dbeafe;
+  background: #d1f5e8;
   color: #188756;
 }
 

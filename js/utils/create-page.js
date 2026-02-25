@@ -1015,7 +1015,7 @@ class CreatePage {
       position: fixed;
       top: calc(var(--top-nav-height) + var(--space-4));
       right: var(--space-4);
-      background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+      background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#248c64'};
       color: white;
       padding: var(--space-4) var(--space-6);
       border-radius: var(--radius-lg);

@@ -1715,20 +1715,20 @@ class ProfilePage {
 
   getPostTypeInfo(type) {
     const types = {
-      'project': { label: 'Progetto', icon: '📊', color: '#0f62fe' },
-      'methodology': { label: 'Metodologia', icon: '🎓', color: '#4589ff' },
-      'event': { label: 'Evento', icon: '📅', color: '#78a9ff' },
-      'news': { label: 'Notizia', icon: '📰', color: '#0f62fe' },
-      'gallery': { label: 'Galleria', icon: '🖼️', color: '#4589ff' },
-      'collaboration': { label: 'Collaborazione', icon: '🤝', color: '#78a9ff' },
-      'educational_experience': { label: 'Esperienza Educativa', icon: '✨', color: '#0f62fe' },
+      'project': { label: 'Progetto', icon: '📊', color: '#1a6b50' },
+      'methodology': { label: 'Metodologia', icon: '🎓', color: '#248c64' },
+      'event': { label: 'Evento', icon: '📅', color: '#3dba85' },
+      'news': { label: 'Notizia', icon: '📰', color: '#1a6b50' },
+      'gallery': { label: 'Galleria', icon: '🖼️', color: '#248c64' },
+      'collaboration': { label: 'Collaborazione', icon: '🤝', color: '#3dba85' },
+      'educational_experience': { label: 'Esperienza Educativa', icon: '✨', color: '#1a6b50' },
       // Legacy support
-      'progetto': { label: 'Progetto', icon: '📊', color: '#0f62fe' },
-      'metodologia': { label: 'Metodologia', icon: '🎓', color: '#4589ff' },
-      'evento': { label: 'Evento', icon: '📅', color: '#78a9ff' },
-      'notizia': { label: 'Notizia', icon: '📰', color: '#0f62fe' }
+      'progetto': { label: 'Progetto', icon: '📊', color: '#1a6b50' },
+      'metodologia': { label: 'Metodologia', icon: '🎓', color: '#248c64' },
+      'evento': { label: 'Evento', icon: '📅', color: '#3dba85' },
+      'notizia': { label: 'Notizia', icon: '📰', color: '#1a6b50' }
     };
-    return types[type] || { label: 'Post', icon: '📝', color: '#0f62fe' };
+    return types[type] || { label: 'Post', icon: '📝', color: '#1a6b50' };
   }
 
   stripHtml(html) {

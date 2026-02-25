@@ -49,7 +49,7 @@
 }
 
 .sessions-header h2 i {
-    color: #2563eb;
+    color: #1a6b50;
 }
 
 .close-sessions-btn {
@@ -92,9 +92,9 @@
 }
 
 .session-card.current {
-    border-color: #2563eb;
-    background-color: #eff6ff;
-    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1);
+    border-color: #1a6b50;
+    background-color: #f0faf6;
+    box-shadow: 0 4px 6px -1px rgba(26, 107, 80, 0.1);
 }
 
 .session-icon {
@@ -111,8 +111,8 @@
 }
 
 .session-card.current .session-icon {
-    background-color: #dbeafe;
-    color: #2563eb;
+    background-color: #d1f5e8;
+    color: #1a6b50;
 }
 
 .session-info {
@@ -130,7 +130,7 @@
 
 .current-badge {
     font-size: 0.75rem;
-    background-color: #2563eb;
+    background-color: #1a6b50;
     color: white;
     padding: 0.125rem 0.5rem;
     border-radius: 9999px;
@@ -233,8 +233,8 @@ body.dark-theme .session-card {
 }
 
 body.dark-theme .session-card.current {
-    background-color: rgba(37, 99, 235, 0.1);
-    border-color: #2563eb;
+    background-color: rgba(26, 107, 80, 0.1);
+    border-color: #1a6b50;
 }
 
 body.dark-theme .session-name {
@@ -252,7 +252,7 @@ body.dark-theme .session-icon {
 }
 
 body.dark-theme .session-card.current .session-icon {
-    background-color: rgba(37, 99, 235, 0.2);
+    background-color: rgba(26, 107, 80, 0.2);
 }
 
 body.dark-theme .revoke-btn {

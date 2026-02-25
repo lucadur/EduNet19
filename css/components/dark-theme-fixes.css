@@ -752,7 +752,7 @@ body.dark-theme .hours-item,
 
 body.dark-theme .hours-item .day-name,
 [data-theme="dark"] .hours-item .day-name {
-    color: #93c5fd !important;
+    color: #3dba85 !important;
     font-weight: 700 !important;
 }
 
@@ -778,7 +778,7 @@ body.dark-theme #structure-section .info-item label i,
 
 body.dark-theme .info-item label,
 [data-theme="dark"] .info-item label {
-    color: #93c5fd !important;
+    color: #3dba85 !important;
 }
 
 body.dark-theme .info-item p,
